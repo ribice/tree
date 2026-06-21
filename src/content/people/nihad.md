@@ -6,4 +6,4 @@ spouses: [nadira]
 tagline: Sin Enesov
 ---
 
-Nihad, sin Enesa i Džemile, rođen je 15. marta 1966. Sa ženom Nadirom ima kćerku Džanu.
+Nihad, sin Enesa i Džemile, rođen je 15. marta 1966. Sa ženom Nadirom ima tri kćeri: Džanu, Zerinu i Enidu.

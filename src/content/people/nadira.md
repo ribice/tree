@@ -5,4 +5,4 @@ spouses: [nihad]
 tagline: Žena Nihadova
 ---
 
-Nadira, rođena Šaranović, žena je Nihada Ribića. S Nihadom ima kćerku Džanu.
+Nadira, rođena Šaranović, žena je Nihada Ribića. S Nihadom ima tri kćeri: Džanu, Zerinu i Enidu.

@@ -1,5 +1,5 @@
 ---
-tagline: Physician, gynecologist
+tagline: "Nihad's daughter"
 ---
 
-Zerina, daughter of Enes and Džemila, was born on 12 October 1965. She is a physician, a gynecologist.
+Zerina, daughter of Nihad and Nadira, was born in 1995.
