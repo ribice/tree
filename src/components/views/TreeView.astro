@@ -1,0 +1,43 @@
+---
+import FamilyTree from "../FamilyTree.tsx";
+import { getPeople, getTranslations, toTreeData } from "../../lib/people";
+import { useTranslations, localize, type Locale } from "../../i18n/ui";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const people = await getPeople();
+const translations = await getTranslations();
+const treeData = toTreeData(people, translations, lang);
+
+const labels = {
+  hint: t("tree.hint"),
+  zoomIn: t("tree.zoomIn"),
+  zoomOut: t("tree.zoomOut"),
+  reset: t("tree.reset"),
+  expandAll: t("tree.expandAll"),
+  collapseAll: t("tree.collapseAll"),
+  living: t("tree.living"),
+  deceased: t("tree.deceased"),
+  showMore: t("tree.showMore"),
+};
+---
+
+<section class="mx-auto max-w-[1600px] px-5 pt-10 pb-3">
+  <h1 class="text-3xl font-semibold tracking-tight text-ink">
+    {t("tree.title")}
+  </h1>
+  <p class="mt-2 max-w-2xl text-muted">{t("tree.subtitle")}</p>
+</section>
+
+<section class="mx-auto max-w-[1600px] px-5 pb-12">
+  <FamilyTree
+    client:load
+    people={treeData}
+    labels={labels}
+    basePath={localize("/people", lang)}
+  />
+</section>

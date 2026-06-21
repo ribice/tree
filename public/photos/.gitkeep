@@ -1,0 +1,3 @@
+# Put person photos in this folder.
+# Name them after the person's id, e.g. john-smith.jpg, then reference them
+# from that person's file:  photo: /photos/john-smith.jpg

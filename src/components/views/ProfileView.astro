@@ -1,0 +1,118 @@
+---
+import { render } from "astro:content";
+import Avatar from "../Avatar.astro";
+import {
+  getPeople,
+  getTranslations,
+  relationships,
+  lifespan,
+  initials,
+  isLiving,
+  taglineFor,
+  type Person,
+} from "../../lib/people";
+import { useTranslations, localize, type Locale } from "../../i18n/ui";
+
+interface Props {
+  lang: Locale;
+  person: Person;
+}
+const { lang, person } = Astro.props;
+const t = useTranslations(lang);
+
+const people = await getPeople();
+const translations = await getTranslations();
+const rels = relationships(person, people);
+
+// English bio comes from the translation entry when present.
+const translation = translations.get(person.id);
+const bioEntry = lang === "en" && translation ? translation : person;
+const { Content } = await render(bioEntry as Person);
+
+const tagline = taglineFor(person, translations, lang);
+const peoplePath = localize("/people", lang);
+
+const groups = [
+  { label: t("person.parents"), people: rels.parents },
+  { label: t("person.spouse"), people: rels.spouses },
+  { label: t("person.children"), people: rels.children },
+  { label: t("person.siblings"), people: rels.siblings },
+].filter((g) => g.people.length > 0);
+
+const span = lifespan(person, lang);
+const { data } = person;
+const living = isLiving(person);
+---
+
+<article class="mx-auto max-w-3xl px-5 py-10">
+  <a href={peoplePath} class="text-sm text-muted hover:text-accent">
+    ← {t("person.back")}
+  </a>
+
+  <header class="mt-6 flex flex-col gap-5 sm:flex-row sm:items-center">
+    <Avatar
+      name={data.name}
+      photo={data.photo}
+      initials={initials(data.name)}
+      size="lg"
+    />
+    <div>
+      <div class="flex flex-wrap items-center gap-3">
+        <h1 class="text-3xl font-semibold tracking-tight text-ink">
+          {data.name}
+        </h1>
+        {
+          living && (
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-700 ring-1 ring-emerald-500/20">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              {t("person.living")}
+            </span>
+          )
+        }
+      </div>
+      {data.maidenName && <p class="text-muted">{t("person.nee")} {data.maidenName}</p>}
+      {data.nickname && <p class="text-muted">“{data.nickname}”</p>}
+      <p class="mt-1 flex flex-wrap gap-x-3 text-sm text-muted">
+        {span && <span>{span}</span>}
+        {data.birthplace && <span>{data.birthplace}</span>}
+      </p>
+      {tagline && <p class="mt-2 font-medium text-accent">{tagline}</p>}
+    </div>
+  </header>
+
+  <div class="prose mt-8 max-w-none text-ink">
+    <Content />
+  </div>
+
+  {
+    groups.length > 0 && (
+      <section class="mt-10 space-y-5 border-t border-line pt-8">
+        {groups.map((group) => (
+          <div class="flex flex-col gap-2 sm:flex-row sm:items-baseline">
+            <h2 class="w-32 shrink-0 text-sm font-semibold tracking-wide text-muted uppercase">
+              {group.label}
+            </h2>
+            <ul class="flex flex-wrap gap-2">
+              {group.people.map((rel) => (
+                <li>
+                  <a
+                    href={`${peoplePath}/${rel.id}`}
+                    class="inline-flex items-center gap-2 rounded-full border border-line bg-surface py-1 pr-3 pl-1 text-sm shadow-sm transition hover:border-accent hover:text-accent"
+                  >
+                    <Avatar
+                      name={rel.data.name}
+                      photo={rel.data.photo}
+                      initials={initials(rel.data.name)}
+                      size="xs"
+                    />
+                    {rel.data.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+    )
+  }
+</article>

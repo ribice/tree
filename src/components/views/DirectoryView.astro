@@ -1,0 +1,89 @@
+---
+import Avatar from "../Avatar.astro";
+import {
+  getPeople,
+  getTranslations,
+  taglineFor,
+  lifespan,
+  initials,
+} from "../../lib/people";
+import { useTranslations, localize, type Locale } from "../../i18n/ui";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const people = await getPeople();
+const translations = await getTranslations();
+const peoplePath = localize("/people", lang);
+---
+
+<section class="mx-auto max-w-6xl px-5 py-12">
+  <h1 class="text-3xl font-semibold tracking-tight text-ink">{t("dir.title")}</h1>
+  <p class="mt-2 text-muted">{t("dir.subtitle")}</p>
+
+  <label class="relative mt-6 block max-w-md">
+    <input
+      id="search"
+      type="search"
+      placeholder={t("dir.search")}
+      autocomplete="off"
+      class="w-full rounded-xl border border-line bg-surface px-4 py-2.5 text-ink shadow-sm outline-none transition focus:border-accent"
+    />
+  </label>
+
+  <ul id="people-grid" class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      people.map((p) => (
+        <li
+          class="person-item"
+          data-name={`${p.data.name} ${p.data.maidenName ?? ""} ${p.data.nickname ?? ""}`.toLowerCase()}
+        >
+          <a
+            href={`${peoplePath}/${p.id}`}
+            class="flex items-center gap-3 rounded-xl border border-line bg-surface p-3 shadow-sm transition hover:border-accent hover:shadow-md"
+          >
+            <Avatar
+              name={p.data.name}
+              photo={p.data.photo}
+              initials={initials(p.data.name)}
+            />
+            <span class="min-w-0">
+              <span class="block truncate font-medium text-ink">
+                {p.data.name}
+              </span>
+              <span class="block truncate text-sm text-muted">
+                {[lifespan(p, lang), taglineFor(p, translations, lang)]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </span>
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p id="no-results" class="mt-8 hidden text-muted">{t("dir.empty")}</p>
+</section>
+
+<script>
+  const input = document.getElementById("search") as HTMLInputElement;
+  const items = Array.from(
+    document.querySelectorAll<HTMLElement>(".person-item"),
+  );
+  const empty = document.getElementById("no-results")!;
+
+  input?.addEventListener("input", () => {
+    const q = input.value.trim().toLowerCase();
+    let shown = 0;
+    for (const item of items) {
+      const match = (item.dataset.name ?? "").includes(q);
+      item.hidden = !match;
+      if (match) shown++;
+    }
+    empty.classList.toggle("hidden", shown !== 0);
+  });
+</script>

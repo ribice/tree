@@ -1,0 +1,78 @@
+---
+import { useTranslations, type Locale } from "../../i18n/ui";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<article class="mx-auto max-w-2xl px-5 py-12">
+  <h1 class="text-3xl font-semibold tracking-tight text-ink">
+    {t("about.title")}
+  </h1>
+
+  {
+    lang === "bs" ? (
+      <div class="prose mt-6 max-w-none text-ink">
+        <p>
+          Ovo je živi zapis o porodici Ribić – Kifić iz Jezera, koji svi zajedno
+          čuvamo. Loza seže od jezerskog kadije Avde »Avdikadije« (1775–1852) pa
+          sve do danas.
+        </p>
+        <p>
+          Najveći dio ove građe zabilježili su Rasim Ribić i njegov sin Enes —
+          tekstove o Avdikadiji, Akifu, Avdi Kifinu, amidži Esedu i drugima.
+          Ovdje su sačuvani u izvornom obliku.
+        </p>
+        <p>
+          Svaka osoba je jedan tekstualni fajl, a cijela stranica — stablo,
+          profili, veze — gradi se iz tih fajlova. Ako znaš nešto što mi ne znamo
+          — datum, priču, rođaka kojeg smo propustili, fotografiju — možeš to i
+          sam dodati.
+        </p>
+        <h2 class="mt-8 text-xl font-semibold text-ink">Kako dopuniti stablo</h2>
+        <ol class="ml-5 list-decimal space-y-1.5">
+          <li>Kopiraj postojeći fajl osobe i izmijeni podatke.</li>
+          <li>Dodaj fotografiju ako je imaš.</li>
+          <li>Otvori pull request — stranica se ponovo izgradi automatski.</li>
+        </ol>
+        <p>
+          Ne brini da ćeš nešto pokvariti: svaka izmjena se automatski
+          provjerava, a ništa ne ide na stranicu dok se ne pregleda i prihvati.
+        </p>
+      </div>
+    ) : (
+      <div class="prose mt-6 max-w-none text-ink">
+        <p>
+          This is a living record of the Ribić – Kifić family from Jezero, kept
+          by all of us. The line reaches from Avdo »Avdikadija«, the kadi of
+          Jezero (1775–1852), all the way to today.
+        </p>
+        <p>
+          Most of this material was recorded by Rasim Ribić and his son Enes —
+          the texts about Avdikadija, Akif, Avdo Kifin, uncle Esed and others.
+          They are preserved here in their original form (translated into
+          English alongside the Bosnian).
+        </p>
+        <p>
+          Each person is a single text file, and the whole site — tree, profiles,
+          relationships — is generated from those files. If you know something we
+          don't — a date, a story, a relative we've missed, a photo — you can add
+          it yourself.
+        </p>
+        <h2 class="mt-8 text-xl font-semibold text-ink">How to add to it</h2>
+        <ol class="ml-5 list-decimal space-y-1.5">
+          <li>Copy an existing person file and edit the details.</li>
+          <li>Add a photo if you have one.</li>
+          <li>Open a pull request — the site rebuilds automatically.</li>
+        </ol>
+        <p>
+          Don't worry about breaking anything: every change is checked
+          automatically, and nothing goes live until it's reviewed and merged.
+        </p>
+      </div>
+    )
+  }
+</article>

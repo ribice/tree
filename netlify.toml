@@ -1,0 +1,9 @@
+[build]
+  command = "npm run validate && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Deploy previews for pull requests are enabled by default on Netlify,
+# so each contribution gets its own preview URL before it is merged.

@@ -1,0 +1,128 @@
+---
+import "../styles/global.css";
+import {
+  useTranslations,
+  localize,
+  switchLocalePath,
+  type Locale,
+} from "../i18n/ui";
+
+interface Props {
+  lang?: Locale;
+  title?: string;
+  description?: string;
+}
+
+const { lang = "bs", title, description } = Astro.props;
+const t = useTranslations(lang);
+
+const pageTitle = title ?? t("site.title");
+const pageDesc = description ?? t("site.description");
+
+const nav = [
+  { href: localize("/", lang), label: t("nav.home") },
+  { href: localize("/tree", lang), label: t("nav.tree") },
+  { href: localize("/people", lang), label: t("nav.directory") },
+  { href: localize("/about", lang), label: t("nav.about") },
+];
+
+const bsPath = switchLocalePath(Astro.url.pathname, "bs");
+const enPath = switchLocalePath(Astro.url.pathname, "en");
+const altPath = lang === "bs" ? enPath : bsPath;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={pageDesc} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <title>{pageTitle}</title>
+    <script is:inline>
+      // Keep each domain on its language: stablo.* → Bosnian, tree.* → English.
+      (function () {
+        try {
+          var h = location.hostname,
+            p = location.pathname,
+            isEn = p === "/en" || p.indexOf("/en/") === 0;
+          if (h.indexOf("tree.") === 0 && !isEn)
+            location.replace("/en" + (p === "/" ? "/" : p) + location.hash);
+          else if (h.indexOf("stablo.") === 0 && isEn)
+            location.replace((p.replace(/^\/en/, "") || "/") + location.hash);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <header class="sticky top-0 z-10 border-b border-line bg-surface/80 backdrop-blur">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
+        <a
+          href={localize("/", lang)}
+          class="flex items-center gap-2 font-semibold text-ink"
+        >
+          <span
+            class="flex h-7 w-7 items-center justify-center rounded-lg bg-accent text-surface"
+            >❦</span
+          >
+          <span>{t("site.short")}</span>
+        </a>
+        <nav class="flex items-center gap-1 text-sm">
+          {
+            nav.map((item) => (
+              <a
+                href={item.href}
+                class="rounded-lg px-3 py-1.5 text-muted transition hover:bg-accent-soft hover:text-accent"
+              >
+                {item.label}
+              </a>
+            ))
+          }
+          <a
+            id="lang-switch"
+            href={altPath}
+            data-bs={bsPath}
+            data-en={enPath}
+            class="ml-1 rounded-lg border border-line px-3 py-1.5 text-muted transition hover:border-accent hover:text-accent"
+            >{t("nav.langName")}</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <script is:inline>
+      // The two domains are single-language, so the switcher hops domains.
+      // On localhost / preview it falls back to the path-based href.
+      (function () {
+        var ls = document.getElementById("lang-switch");
+        if (!ls) return;
+        var h = location.hostname;
+        if (h === "stablo.ribic.ba")
+          ls.href = "https://tree.ribic.ba" + ls.getAttribute("data-en");
+        else if (h === "tree.ribic.ba")
+          ls.href = "https://stablo.ribic.ba" + ls.getAttribute("data-bs");
+      })();
+    </script>
+
+    <footer class="border-t border-line">
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between"
+      >
+        <p>{t("footer.tagline")}</p>
+        <p>
+          {t("footer.cta")}
+          <a
+            href="https://github.com/"
+            class="font-medium text-accent hover:underline">{t("footer.ctaLink")}</a
+          >
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

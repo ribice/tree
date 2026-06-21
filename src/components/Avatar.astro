@@ -1,0 +1,29 @@
+---
+interface Props {
+  name: string;
+  photo?: string;
+  initials: string;
+  size?: "xs" | "sm" | "lg";
+  class?: string;
+}
+
+const { name, photo, initials, size = "sm", class: klass = "" } = Astro.props;
+const sizes = {
+  xs: "h-7 w-7 text-xs",
+  sm: "h-12 w-12 text-base",
+  lg: "h-28 w-28 text-2xl",
+};
+const dims = sizes[size];
+---
+
+<span
+  class={`flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent-soft font-semibold text-accent ${dims} ${klass}`}
+>
+  {
+    photo ? (
+      <img src={photo} alt={name} class="h-full w-full object-cover" />
+    ) : (
+      initials
+    )
+  }
+</span>

@@ -1,0 +1,10 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import TreeView from "../../components/views/TreeView.astro";
+import { useTranslations } from "../../i18n/ui";
+const t = useTranslations("en");
+---
+
+<Layout lang="en" title={`${t("tree.title")} · ${t("site.title")}`}>
+  <TreeView lang="en" />
+</Layout>
