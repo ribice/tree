@@ -1,5 +1,6 @@
 ---
 name: Sajd Hasić — Sajdaga
+sex: m
 nickname: Sajdaga
 parents: [pasa, mehaga-hasic]
 tagline: Sin Pašin; kupio jezerski han

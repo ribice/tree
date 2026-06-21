@@ -1,5 +1,6 @@
 ---
 name: Niza Ribić
+sex: f
 spouses: [himzo]
 tagline: Žena Himzina
 ---

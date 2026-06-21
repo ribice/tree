@@ -1,5 +1,6 @@
 ---
 name: Avdo Ribić — Avdikadija
+sex: m
 nickname: Avdikadija
 born: "1775"
 died: "1852"

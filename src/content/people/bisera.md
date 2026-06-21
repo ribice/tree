@@ -1,5 +1,6 @@
 ---
 name: Bisera Dizdar
+sex: f
 maidenName: Ribić
 parents: [akif, hanumica]
 tagline: Kćerka Akifova; udala se u Varcar Vakuf

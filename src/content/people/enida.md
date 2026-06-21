@@ -1,5 +1,6 @@
 ---
 name: Enida Ribić
+sex: f
 born: "2001"
 parents: [nihad, nadira]
 tagline: Kćerka Nihadova

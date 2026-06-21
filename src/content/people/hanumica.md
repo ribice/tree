@@ -1,5 +1,6 @@
 ---
 name: Hanumica Ribić
+sex: f
 maidenName: Ganibegović
 died: "1906"
 birthplace: Vražić

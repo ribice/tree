@@ -9,6 +9,8 @@ const people = defineCollection({
   schema: z.object({
     // Display name, e.g. "Jane Smith"
     name: z.string(),
+    // "m" or "f" (used for relationship wording / future features)
+    sex: z.enum(["m", "f"]).optional(),
     // Optional maiden name, shown in profile and search
     maidenName: z.string().optional(),
     // Optional nickname

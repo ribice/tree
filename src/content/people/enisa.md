@@ -1,5 +1,6 @@
 ---
 name: Enisa Šehić
+sex: f
 parents: [nazifa]
 tagline: Kćerka Nazifina
 ---

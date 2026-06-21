@@ -1,5 +1,6 @@
 ---
 name: Šefika Ribić
+sex: f
 parents: [omer-himzin]
 tagline: Kćerka Omerova
 ---

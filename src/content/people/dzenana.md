@@ -1,5 +1,6 @@
 ---
 name: Dženana Ribić
+sex: f
 spouses: [esad]
 tagline: Žena Esadova
 ---

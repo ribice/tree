@@ -1,5 +1,6 @@
 ---
 name: Selma Ribić
+sex: f
 maidenName: Paldum
 born: "1979"
 spouses: [mersid]

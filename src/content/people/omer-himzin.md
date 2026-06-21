@@ -1,5 +1,6 @@
 ---
 name: Omer Ribić
+sex: m
 parents: [himzo, niza]
 tagline: Sin Himzin
 ---

@@ -1,5 +1,6 @@
 ---
 name: Mujo Hasić
+sex: m
 parents: [pasa, mehaga-hasic]
 tagline: Sin Pašin
 ---

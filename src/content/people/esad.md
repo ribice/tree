@@ -1,9 +1,12 @@
 ---
 name: Esad Ribić
+sex: m
 born: "1958"
+died: "09.08.1992"
 parents: [halim]
 spouses: [dzenana]
 tagline: Sin Halimov
 ---
 
-Esad, sin Halimov, rođen je 1958. godine. Sa ženom Dženanom ima sina Emira i kćerku Eminu.
+Esad, sin Halimov, rođen je 1958., a preminuo 9. augusta 1992. Sa ženom Dženanom imao je sina Emira i kćerku Eminu.
+

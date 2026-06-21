@@ -1,5 +1,6 @@
 ---
 name: Senad Alić
+sex: m
 spouses: [sajma]
 tagline: Muž Sajmin
 ---

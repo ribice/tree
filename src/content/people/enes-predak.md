@@ -1,5 +1,6 @@
 ---
 name: Enes Ribić
+sex: m
 tagline: Najstariji predak kojeg znamo po imenu
 ---
 

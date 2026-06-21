@@ -1,5 +1,6 @@
 ---
 name: Esed Ribić — Eso
+sex: m
 nickname: Ico
 parents: [izo-mladji]
 tagline: Nadareni fudbaler

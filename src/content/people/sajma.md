@@ -1,5 +1,6 @@
 ---
 name: Sajma Alić
+sex: f
 maidenName: Ribić
 parents: [enes, dzemila]
 spouses: [senad-alic]

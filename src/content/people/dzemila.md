@@ -1,5 +1,6 @@
 ---
 name: Džemila Ribić
+sex: f
 maidenName: Keca
 born: "20.11.1944"
 birthplace: Gostivar, Makedonija

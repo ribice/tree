@@ -1,5 +1,6 @@
 ---
 name: Šemso Ribić
+sex: m
 parents: [avdikadija]
 tagline: Najstariji sin Avdikadijin; odselio u Sarajevo
 ---

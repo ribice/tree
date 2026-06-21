@@ -1,5 +1,6 @@
 ---
 name: Tarik Hamza Ribić
+sex: m
 born: "2001"
 parents: [mersid, selma-paldum]
 tagline: Sin Mersidov

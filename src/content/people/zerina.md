@@ -1,5 +1,6 @@
 ---
 name: Zerina Ribić
+sex: f
 born: "1995"
 parents: [nihad, nadira]
 tagline: Kćerka Nihadova

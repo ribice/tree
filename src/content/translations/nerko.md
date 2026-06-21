@@ -1,5 +1,6 @@
 ---
-tagline: "Mirza's child"
+tagline: Mirza's son
 ---
 
-Mirza's child.
+Nermin, known as Nerko, Mirza's son.
+

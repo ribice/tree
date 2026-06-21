@@ -1,5 +1,6 @@
 ---
 name: Jakub Ribić
+sex: m
 parents: [himzo, niza]
 spouses: [sefka]
 tagline: Sin Himzin

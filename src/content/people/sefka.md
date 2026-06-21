@@ -1,5 +1,6 @@
 ---
 name: Šefka Ribić
+sex: f
 spouses: [jakub]
 tagline: Žena Jakubova
 ---

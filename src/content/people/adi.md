@@ -1,7 +1,9 @@
 ---
-name: Adi Ribić
+name: Adi
+sex: m
 parents: [dzenisa]
 tagline: Dijete Dženisino
 ---
 
 Dijete Dženisino.
+

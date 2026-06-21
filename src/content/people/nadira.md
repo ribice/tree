@@ -1,5 +1,6 @@
 ---
 name: Nadira Ribić
+sex: f
 maidenName: Šaranović
 spouses: [nihad]
 tagline: Žena Nihadova

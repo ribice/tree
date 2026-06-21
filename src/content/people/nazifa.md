@@ -1,5 +1,6 @@
 ---
 name: Nazifa Šehić
+sex: f
 maidenName: Ribić
 parents: [himzo, niza]
 tagline: Kćerka Himzina; udala se u Mrkonjić Grad

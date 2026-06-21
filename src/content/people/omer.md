@@ -1,5 +1,6 @@
 ---
 name: Omer Ribić
+sex: m
 parents: [enes-predak]
 tagline: Sin Enesov, otac Avdikadijin
 ---

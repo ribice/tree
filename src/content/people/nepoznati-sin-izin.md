@@ -1,5 +1,6 @@
 ---
 name: Nepoznati sin Izin
+sex: m
 parents: [izo-stariji]
 tagline: Ime nije sačuvano
 ---

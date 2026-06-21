@@ -1,5 +1,6 @@
 ---
 name: Naida Gradečak
+sex: f
 maidenName: Ribić
 born: "1962"
 parents: [halim]

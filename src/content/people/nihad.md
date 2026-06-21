@@ -1,5 +1,6 @@
 ---
 name: Nihad Ribić
+sex: m
 born: "15.03.1966"
 parents: [enes, dzemila]
 spouses: [nadira]

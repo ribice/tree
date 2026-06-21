@@ -1,5 +1,6 @@
 ---
 name: Paša Hasić
+sex: f
 maidenName: Ribić
 born: "1843"
 died: "1939"

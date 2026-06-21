@@ -1,5 +1,6 @@
 ---
 name: Hava Ribić
+sex: f
 maidenName: Šuškić
 birthplace: Duljci
 spouses: [avdo-kifin]

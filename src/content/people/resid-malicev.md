@@ -1,5 +1,6 @@
 ---
 name: Rešid Ribić
+sex: m
 parents: [malic]
 tagline: Sin Malićev
 ---

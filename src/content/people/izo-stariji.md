@@ -1,5 +1,6 @@
 ---
 name: Izo Ribić
+sex: m
 parents: [avdikadija]
 tagline: Sin Avdikadijin
 ---

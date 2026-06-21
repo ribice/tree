@@ -1,5 +1,6 @@
 ---
 name: Akif Ribić — Kifo
+sex: m
 nickname: Kifo
 born: "1797"
 died: "1867"

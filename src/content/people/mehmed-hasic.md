@@ -1,5 +1,6 @@
 ---
 name: Mehmed Hasić — efendija
+sex: m
 nickname: Efendija
 parents: [pasa, mehaga-hasic]
 tagline: Učitelj i učevan čovjek

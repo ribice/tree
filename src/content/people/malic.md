@@ -1,5 +1,6 @@
 ---
 name: Malić Ribić
+sex: m
 parents: [resid]
 tagline: Sin Rešidov
 ---

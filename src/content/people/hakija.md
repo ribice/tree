@@ -1,5 +1,6 @@
 ---
 name: Hakija Ribić
+sex: m
 parents: [izo-mladji]
 tagline: Sin Ize svjetskog putnika
 ---

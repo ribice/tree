@@ -1,5 +1,6 @@
 ---
 name: Avdo Ribić — Kifin
+sex: m
 nickname: Avdo Kifin
 born: "1848"
 died: "1919"

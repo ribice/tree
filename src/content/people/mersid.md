@@ -1,5 +1,6 @@
 ---
 name: Mersid Ribić
+sex: m
 born: "1966"
 parents: [halim]
 spouses: [selma-paldum]

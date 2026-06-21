@@ -1,5 +1,6 @@
 ---
 name: Himzo Ribić — Kifin
+sex: m
 nickname: Himzo Kifin
 parents: [akif, hanumica]
 spouses: [niza]

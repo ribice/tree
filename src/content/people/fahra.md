@@ -1,5 +1,6 @@
 ---
 name: Fahra Ribić
+sex: f
 spouses: [rasim]
 tagline: Žena Rasimova
 ---

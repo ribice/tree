@@ -1,5 +1,6 @@
 ---
 name: Izo Ribić — svjetski putnik
+sex: m
 nickname: Izo prdo
 parents: [nepoznati-sin-izin]
 tagline: Svjetski putnik i prevodilac

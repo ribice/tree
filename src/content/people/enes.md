@@ -1,5 +1,6 @@
 ---
 name: Enes Ribić
+sex: m
 born: "20.05.1937"
 birthplace: Jezero
 parents: [rasim, fahra]

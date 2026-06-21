@@ -1,5 +1,6 @@
 ---
 name: Rezak Ribić
+sex: m
 parents: [jakub]
 tagline: Sin Jakubov
 ---

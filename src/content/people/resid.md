@@ -1,5 +1,6 @@
 ---
 name: Rešid Ribić
+sex: m
 parents: [avdikadija]
 tagline: Sin Avdikadijin
 ---

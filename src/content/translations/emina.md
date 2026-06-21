@@ -2,4 +2,5 @@
 tagline: Daughter of Esad and Dženana
 ---
 
-Emina, daughter of Esad and Dženana, was born in 1992. Emir's sister.
+Emina, daughter of Esad and Dženana, born 1992. Married to Amir Musić; their children are Esma and Emin.
+

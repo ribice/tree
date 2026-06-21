@@ -1,5 +1,6 @@
 ---
 name: Remzo Hasić
+sex: m
 parents: [smajo-hasic]
 tagline: Sin Smajin
 ---

@@ -1,5 +1,6 @@
 ---
 name: Džana Ribić
+sex: f
 born: "27.08.1992"
 parents: [nihad, nadira]
 tagline: Kćerka Nihada i Nadire

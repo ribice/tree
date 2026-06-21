@@ -1,7 +1,10 @@
 ---
-name: Nerko Ribić
+name: Nermin Ribić
+sex: m
+nickname: Nerko
 parents: [mirza]
-tagline: Dijete Mirzino
+tagline: Sin Mirzin
 ---
 
-Dijete Mirzino.
+Nermin, zvani Nerko, sin Mirzin.
+

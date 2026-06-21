@@ -1,5 +1,6 @@
 ---
 name: Esed Ribić
+sex: m
 born: "1892"
 died: "1942"
 birthplace: Jezero

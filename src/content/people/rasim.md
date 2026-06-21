@@ -1,5 +1,6 @@
 ---
 name: Rasim Ribić — Kifić
+sex: m
 born: "1900"
 died: "1986"
 birthplace: Jezero

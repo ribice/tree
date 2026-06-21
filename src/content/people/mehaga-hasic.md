@@ -1,5 +1,6 @@
 ---
 name: Mehmed Hasić — Mehaga
+sex: m
 nickname: Mehaga
 born: "1838"
 died: "1882"

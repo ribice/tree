@@ -1,5 +1,6 @@
 ---
 name: Halim Ribić
+sex: m
 parents: [rasim, fahra]
 tagline: Sin Rasimov
 ---
