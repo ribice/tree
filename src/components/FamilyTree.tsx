@@ -29,6 +29,24 @@ interface Props {
 // Side branches collapsed by default to keep the main lineage readable.
 const DEFAULT_COLLAPSED = ["izo-stariji", "resid", "himzo", "pasa"];
 
+/** All transitive ancestors of a person (to expand a path to a focused node). */
+function ancestorsOf(id: string, people: TreeNodePerson[]): string[] {
+  const byId = new Map(people.map((p) => [p.id, p]));
+  const out = new Set<string>();
+  const walk = (pid: string) => {
+    const p = byId.get(pid);
+    if (!p) return;
+    for (const parent of p.parents) {
+      if (!out.has(parent)) {
+        out.add(parent);
+        walk(parent);
+      }
+    }
+  };
+  walk(id);
+  return [...out];
+}
+
 interface Transform {
   x: number;
   y: number;
@@ -63,6 +81,10 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
   const tRef = useRef(transform);
   tRef.current = transform;
 
+  const [ready, setReady] = useState(false);
+  const [highlight, setHighlight] = useState<string | null>(null);
+  const [focusTarget, setFocusTarget] = useState<string | null>(null);
+
   const fit = () => {
     const el = containerRef.current;
     if (!el) return;
@@ -85,6 +107,20 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
   // view stays put when the user opens/closes a branch).
   useEffect(() => {
     fit();
+    setReady(true);
+    // Deep-link: ?focus=<id> reveals, centers and highlights a person.
+    try {
+      const id = new URLSearchParams(window.location.search).get("focus");
+      if (id && people.some((p) => p.id === id)) {
+        const anc = ancestorsOf(id, people);
+        setCollapsed((prev) => {
+          const next = new Set(prev);
+          for (const a of anc) next.delete(a);
+          return next;
+        });
+        setFocusTarget(id);
+      }
+    } catch {}
     const el = containerRef.current;
     if (!el) return;
     const ro = new ResizeObserver(() => fit());
@@ -92,6 +128,23 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
     return () => ro.disconnect();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Center + highlight the focused node once the layout has revealed it.
+  useEffect(() => {
+    if (!focusTarget) return;
+    const el = containerRef.current;
+    if (!el) return;
+    const n = layout.nodes.find((nd) => nd.person.id === focusTarget);
+    if (!n) return; // path still expanding — re-runs when layout updates
+    const k = 0.95;
+    const cx = n.x + BOX_W / 2;
+    const cy = n.y + BOX_H / 2;
+    setTransform({ k, x: el.clientWidth / 2 - cx * k, y: el.clientHeight / 2 - cy * k });
+    setHighlight(focusTarget);
+    setFocusTarget(null);
+    const tmr = setTimeout(() => setHighlight(null), 3000);
+    return () => clearTimeout(tmr);
+  }, [focusTarget, layout]);
 
   const toggle = (id: string) =>
     setCollapsed((prev) => {
@@ -167,7 +220,11 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
     >
       <svg
         className="h-full w-full touch-none select-none"
-        style={{ cursor: drag.current.active ? "grabbing" : "grab" }}
+        style={{
+          cursor: drag.current.active ? "grabbing" : "grab",
+          opacity: ready ? 1 : 0,
+          transition: "opacity 0.25s ease",
+        }}
         onWheel={onWheel}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
@@ -200,7 +257,13 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
             />
           ))}
           {layout.nodes.map((n) => (
-            <PersonCard key={n.person.id} node={n} basePath={basePath} />
+            <PersonCard
+              key={n.person.id}
+              node={n}
+              basePath={basePath}
+              livingLabel={labels.living}
+              highlighted={highlight === n.person.id}
+            />
           ))}
           {layout.toggles.map((tg) => (
             <foreignObject
@@ -306,9 +369,13 @@ function ControlButton({
 function PersonCard({
   node,
   basePath,
+  livingLabel,
+  highlighted,
 }: {
   node: PositionedPerson;
   basePath: string;
+  livingLabel: string;
+  highlighted: boolean;
 }) {
   const p = node.person;
   const living = p.living;
@@ -316,12 +383,16 @@ function PersonCard({
     <foreignObject x={node.x} y={node.y} width={BOX_W} height={BOX_H}>
       <a
         href={`${basePath}/${p.id}`}
-        className="group relative flex h-full w-full items-center gap-3 rounded-2xl border border-line bg-surface px-3 py-2.5 shadow-sm transition duration-150 hover:-translate-y-0.5 hover:border-accent hover:shadow-lg"
+        className={`group relative flex h-full w-full items-center gap-3 rounded-2xl border bg-surface px-3 py-2.5 shadow-sm transition duration-150 hover:-translate-y-0.5 hover:border-accent hover:shadow-lg ${
+          highlighted
+            ? "border-accent ring-2 ring-accent ring-offset-2 ring-offset-paper"
+            : "border-line"
+        }`}
       >
         {living && (
           <span
             className="absolute top-2.5 right-2.5 h-2 w-2 rounded-full bg-emerald-500 ring-2 ring-surface"
-            title="Living"
+            title={livingLabel}
           />
         )}
         <span

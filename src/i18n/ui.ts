@@ -62,6 +62,8 @@ export const ui = {
     "person.children": "Djeca",
     "person.siblings": "Braća i sestre",
     "person.living": "Živ/živa",
+    "person.generation": "{n}. koljeno",
+    "person.viewInTree": "Prikaži u stablu →",
 
     "footer.tagline": "Porodicu zajedno bilježimo i dopunjavamo.",
     "footer.cta": "Nešto nedostaje ili nije tačno?",
@@ -125,6 +127,8 @@ export const ui = {
     "person.children": "Children",
     "person.siblings": "Siblings",
     "person.living": "Living",
+    "person.generation": "Generation {n}",
+    "person.viewInTree": "Show in tree →",
 
     "footer.tagline": "We record and grow the family together.",
     "footer.cta": "Something missing or wrong?",

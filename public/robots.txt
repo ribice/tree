@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://stablo.ribic.ba/sitemap.xml
+Sitemap: https://tree.ribic.ba/sitemap.xml

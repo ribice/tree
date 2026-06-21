@@ -7,7 +7,7 @@ import {
   lifespan,
   initials,
   birthYear,
-  isLiving,
+  generation,
 } from "../../lib/people";
 import { useTranslations, localize, type Locale } from "../../i18n/ui";
 
@@ -24,9 +24,12 @@ const byYearAsc = [...people].sort(
   (a, b) => (birthYear(a) ?? Infinity) - (birthYear(b) ?? Infinity),
 );
 const oldest = byYearAsc.filter((p) => birthYear(p) !== null).slice(0, 4);
-const youngest = people
-  .filter((p) => isLiving(p))
-  .sort((a, b) => (birthYear(b) ?? 0) - (birthYear(a) ?? 0))
+const youngest = [...people]
+  .sort(
+    (a, b) =>
+      generation(b, people) - generation(a, people) ||
+      (birthYear(b) ?? 0) - (birthYear(a) ?? 0),
+  )
   .slice(0, 4);
 
 const peoplePath = localize("/people", lang);

@@ -78,6 +78,19 @@ function byBirth(a: Person, b: Person): number {
   return a.data.name.localeCompare(b.data.name);
 }
 
+/** 1-based generation depth, counting up to the earliest known ancestor. */
+export function generation(p: Person, people: Person[]): number {
+  const byId = indexById(people);
+  let cur: Person | undefined = p;
+  let depth = 1;
+  let guard = 0;
+  while (cur && cur.data.parents.length && guard++ < 50) {
+    cur = cur.data.parents.map((id) => byId.get(id)).find(Boolean);
+    if (cur) depth++;
+  }
+  return depth;
+}
+
 /** Best-effort numeric birth year for sorting ("c. 1890" -> 1890). */
 export function birthYear(p: Person): number | null {
   const match = p.data.born?.match(/\d{4}/);

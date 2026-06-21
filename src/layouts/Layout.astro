@@ -19,16 +19,28 @@ const t = useTranslations(lang);
 const pageTitle = title ?? t("site.title");
 const pageDesc = description ?? t("site.description");
 
+// Each language lives on its own domain.
+const ORIGIN = { bs: "https://stablo.ribic.ba", en: "https://tree.ribic.ba" };
+const bsPath = switchLocalePath(Astro.url.pathname, "bs");
+const enPath = switchLocalePath(Astro.url.pathname, "en");
+const altPath = lang === "bs" ? enPath : bsPath;
+
+const canonical = ORIGIN[lang] + (lang === "bs" ? bsPath : enPath);
+const ogImage = ORIGIN[lang] + "/og.png";
+const ogLocale = lang === "bs" ? "bs_BA" : "en_US";
+
+const alternates = [
+  { hreflang: "bs", href: ORIGIN.bs + bsPath },
+  { hreflang: "en", href: ORIGIN.en + enPath },
+  { hreflang: "x-default", href: ORIGIN.bs + bsPath },
+];
+
 const nav = [
   { href: localize("/", lang), label: t("nav.home") },
   { href: localize("/tree", lang), label: t("nav.tree") },
   { href: localize("/people", lang), label: t("nav.directory") },
   { href: localize("/about", lang), label: t("nav.about") },
 ];
-
-const bsPath = switchLocalePath(Astro.url.pathname, "bs");
-const enPath = switchLocalePath(Astro.url.pathname, "en");
-const altPath = lang === "bs" ? enPath : bsPath;
 ---
 
 <!doctype html>
@@ -38,8 +50,25 @@ const altPath = lang === "bs" ? enPath : bsPath;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={pageDesc} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://rsms.me/" />
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="canonical" href={canonical} />
+    {
+      alternates.map((a) => (
+        <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+      ))
+    }
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={t("site.title")} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDesc} />
+    <meta name="twitter:image" content={ogImage} />
+
     <title>{pageTitle}</title>
     <script is:inline>
       // Keep each domain on its language: stablo.* → Bosnian, tree.* → English.
@@ -57,7 +86,7 @@ const altPath = lang === "bs" ? enPath : bsPath;
     </script>
   </head>
   <body class="flex min-h-screen flex-col">
-    <header class="sticky top-0 z-10 border-b border-line bg-surface/80 backdrop-blur">
+    <header class="sticky top-0 z-20 border-b border-line bg-surface/80 backdrop-blur">
       <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
         <a
           href={localize("/", lang)}
@@ -69,7 +98,8 @@ const altPath = lang === "bs" ? enPath : bsPath;
           >
           <span>{t("site.short")}</span>
         </a>
-        <nav class="flex items-center gap-1 text-sm">
+
+        <nav class="hidden items-center gap-1 text-sm sm:flex">
           {
             nav.map((item) => (
               <a
@@ -81,34 +111,53 @@ const altPath = lang === "bs" ? enPath : bsPath;
             ))
           }
           <a
-            id="lang-switch"
             href={altPath}
             data-bs={bsPath}
             data-en={enPath}
-            class="ml-1 rounded-lg border border-line px-3 py-1.5 text-muted transition hover:border-accent hover:text-accent"
+            class="lang-switch ml-1 rounded-lg border border-line px-3 py-1.5 text-muted transition hover:border-accent hover:text-accent"
             >{t("nav.langName")}</a
           >
         </nav>
+
+        <button
+          id="menu-btn"
+          type="button"
+          aria-label="Menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          class="flex h-9 w-9 items-center justify-center rounded-lg border border-line text-ink sm:hidden"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
       </div>
+
+      <nav
+        id="mobile-menu"
+        class="hidden flex-col gap-1 border-t border-line px-5 py-3 text-sm sm:hidden"
+      >
+        {
+          nav.map((item) => (
+            <a
+              href={item.href}
+              class="rounded-lg px-3 py-2 text-muted transition hover:bg-accent-soft hover:text-accent"
+            >
+              {item.label}
+            </a>
+          ))
+        }
+        <a
+          href={altPath}
+          data-bs={bsPath}
+          data-en={enPath}
+          class="lang-switch mt-1 rounded-lg border border-line px-3 py-2 text-center text-muted transition hover:border-accent hover:text-accent"
+          >{t("nav.langName")}</a
+        >
+      </nav>
     </header>
 
     <main class="flex-1">
       <slot />
     </main>
-
-    <script is:inline>
-      // The two domains are single-language, so the switcher hops domains.
-      // On localhost / preview it falls back to the path-based href.
-      (function () {
-        var ls = document.getElementById("lang-switch");
-        if (!ls) return;
-        var h = location.hostname;
-        if (h === "stablo.ribic.ba")
-          ls.href = "https://tree.ribic.ba" + ls.getAttribute("data-en");
-        else if (h === "tree.ribic.ba")
-          ls.href = "https://stablo.ribic.ba" + ls.getAttribute("data-bs");
-      })();
-    </script>
 
     <footer class="border-t border-line">
       <div
@@ -118,11 +167,41 @@ const altPath = lang === "bs" ? enPath : bsPath;
         <p>
           {t("footer.cta")}
           <a
-            href="https://github.com/"
+            href="https://github.com/ribice/tree"
             class="font-medium text-accent hover:underline">{t("footer.ctaLink")}</a
           >
         </p>
       </div>
     </footer>
+
+    <script is:inline>
+      // Mobile menu toggle.
+      (function () {
+        var btn = document.getElementById("menu-btn");
+        var menu = document.getElementById("mobile-menu");
+        if (btn && menu)
+          btn.addEventListener("click", function () {
+            var open = menu.classList.toggle("hidden") === false;
+            menu.classList.toggle("flex", open);
+            btn.setAttribute("aria-expanded", String(open));
+          });
+      })();
+
+      // Single-language domains: the switcher hops domains (path-based on localhost).
+      (function () {
+        var h = location.hostname;
+        var to =
+          h === "stablo.ribic.ba"
+            ? "https://tree.ribic.ba"
+            : h === "tree.ribic.ba"
+              ? "https://stablo.ribic.ba"
+              : null;
+        if (!to) return;
+        var attr = h === "stablo.ribic.ba" ? "data-en" : "data-bs";
+        document.querySelectorAll(".lang-switch").forEach(function (el) {
+          el.href = to + el.getAttribute(attr);
+        });
+      })();
+    </script>
   </body>
 </html>

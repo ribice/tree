@@ -5,4 +5,4 @@ spouses: [dzenana]
 tagline: Sin Halimov
 ---
 
-Esad, sin Halimov i unuk Rasimov. Sa ženom Dzenanom ima sina Emira.
+Esad, sin Halimov i unuk Rasimov. Sa ženom Dženanom ima sina Emira.

@@ -8,6 +8,7 @@ import {
   lifespan,
   initials,
   isLiving,
+  generation,
   taglineFor,
   type Person,
 } from "../../lib/people";
@@ -42,12 +43,19 @@ const groups = [
 const span = lifespan(person, lang);
 const { data } = person;
 const living = isLiving(person);
+const gen = generation(person, people);
+const treeHref = `${localize("/tree", lang)}?focus=${person.id}`;
 ---
 
 <article class="mx-auto max-w-3xl px-5 py-10">
-  <a href={peoplePath} class="text-sm text-muted hover:text-accent">
-    ← {t("person.back")}
-  </a>
+  <div class="flex items-center justify-between gap-3">
+    <a href={peoplePath} class="text-sm text-muted hover:text-accent">
+      ← {t("person.back")}
+    </a>
+    <a href={treeHref} class="text-sm font-medium text-accent hover:underline">
+      {t("person.viewInTree")}
+    </a>
+  </div>
 
   <header class="mt-6 flex flex-col gap-5 sm:flex-row sm:items-center">
     <Avatar
@@ -75,6 +83,7 @@ const living = isLiving(person);
       <p class="mt-1 flex flex-wrap gap-x-3 text-sm text-muted">
         {span && <span>{span}</span>}
         {data.birthplace && <span>{data.birthplace}</span>}
+        <span>{t("person.generation", { n: gen })}</span>
       </p>
       {tagline && <p class="mt-2 font-medium text-accent">{tagline}</p>}
     </div>

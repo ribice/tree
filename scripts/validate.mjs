@@ -74,6 +74,52 @@ for (const [id, { file, data }] of people) {
       errors.push(`${file}: photo file "${data.photo}" not found in ${PUBLIC_DIR}`);
     }
   }
+
+  // Dates should contain a recognizable 4-digit year.
+  for (const key of ["born", "died"]) {
+    const v = data[key];
+    if (v != null && !/\d{4}/.test(String(v))) {
+      warnings.push(`${file}: ${key} "${v}" has no recognizable year`);
+    }
+  }
+}
+
+// Detect cycles in the parent graph (would otherwise break the tree layout).
+const WHITE = 0,
+  GRAY = 1,
+  BLACK = 2;
+const color = new Map([...people.keys()].map((k) => [k, WHITE]));
+let cycleFound = false;
+function dfs(u) {
+  color.set(u, GRAY);
+  const parents = people.get(u)?.data.parents;
+  for (const par of Array.isArray(parents) ? parents : []) {
+    if (!people.has(par)) continue;
+    if (color.get(par) === GRAY) {
+      errors.push(`parent cycle detected (e.g. "${u}" → "${par}")`);
+      cycleFound = true;
+      return;
+    }
+    if (color.get(par) === WHITE) {
+      dfs(par);
+      if (cycleFound) return;
+    }
+  }
+  color.set(u, BLACK);
+}
+for (const id of people.keys()) {
+  if (color.get(id) === WHITE && !cycleFound) dfs(id);
+}
+
+// Warn about translation files with no matching person.
+const TRANS_DIR = "src/content/translations";
+if (existsSync(TRANS_DIR)) {
+  for (const f of readdirSync(TRANS_DIR).filter((f) => f.endsWith(".md"))) {
+    const id = f.replace(/\.md$/, "");
+    if (!people.has(id)) {
+      warnings.push(`translations/${f}: no matching person "${id}.md"`);
+    }
+  }
 }
 
 for (const w of warnings) console.warn(`⚠️  ${w}`);
