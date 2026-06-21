@@ -48,7 +48,19 @@ for (const [id, { file, data }] of people) {
     warnings.push(`${file}: has more than 2 parents — is that intended?`);
   }
 
-  for (const sid of refList("spouses")) {
+  // Spouses may be a plain id or { id, married?, divorced? }.
+  const spouseId = (s) => (typeof s === "string" ? s : s && s.id);
+  for (const entry of refList("spouses")) {
+    const sid = spouseId(entry);
+    if (!sid) {
+      errors.push(`${file}: a spouse entry is missing an "id"`);
+      continue;
+    }
+    for (const yr of ["married", "divorced"]) {
+      if (entry && typeof entry === "object" && entry[yr] != null && !/\d{4}/.test(String(entry[yr]))) {
+        warnings.push(`${file}: spouse "${sid}" ${yr} "${entry[yr]}" has no recognizable year`);
+      }
+    }
     if (sid === id) {
       errors.push(`${file}: "${id}" is listed as their own spouse`);
     } else if (!has(sid)) {
@@ -56,9 +68,9 @@ for (const [id, { file, data }] of people) {
     } else {
       // reciprocity is a soft check
       const partner = people.get(sid).data;
-      const partnerSpouses = Array.isArray(partner.spouses)
-        ? partner.spouses
-        : [];
+      const partnerSpouses = (
+        Array.isArray(partner.spouses) ? partner.spouses : []
+      ).map(spouseId);
       if (!partnerSpouses.includes(id)) {
         warnings.push(
           `${file}: lists spouse "${sid}", but ${sid}.md does not list "${id}" back`,

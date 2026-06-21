@@ -111,6 +111,11 @@ const nav = [
             ))
           }
           <a
+            href={localize("/add", lang)}
+            class="ml-1 rounded-lg bg-accent px-3 py-1.5 font-medium text-surface transition hover:opacity-90"
+            >{t("nav.add")}</a
+          >
+          <a
             href={altPath}
             data-bs={bsPath}
             data-en={enPath}
@@ -146,6 +151,11 @@ const nav = [
           ))
         }
         <a
+          href={localize("/add", lang)}
+          class="mt-1 rounded-lg bg-accent px-3 py-2 text-center font-medium text-surface transition hover:opacity-90"
+          >{t("nav.add")}</a
+        >
+        <a
           href={altPath}
           data-bs={bsPath}
           data-en={enPath}
@@ -161,16 +171,26 @@ const nav = [
 
     <footer class="border-t border-line">
       <div
-        class="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between"
+        class="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-6 text-sm text-muted"
       >
-        <p>{t("footer.tagline")}</p>
-        <p>
-          {t("footer.cta")}
-          <a
-            href="https://github.com/ribice/tree"
-            class="font-medium text-accent hover:underline">{t("footer.ctaLink")}</a
+        <nav class="flex flex-wrap gap-x-5 gap-y-2">
+          <a href={localize("/stats", lang)} class="transition hover:text-accent"
+            >{t("stats.title")}</a
           >
-        </p>
+          <a href={localize("/about", lang)} class="transition hover:text-accent"
+            >{t("nav.about")}</a
+          >
+        </nav>
+        <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+          <p>{t("footer.tagline")}</p>
+          <p>
+            {t("footer.cta")}
+            <a
+              href="https://github.com/ribice/tree"
+              class="font-medium text-accent hover:underline">{t("footer.ctaLink")}</a
+            >
+          </p>
+        </div>
       </div>
     </footer>
 

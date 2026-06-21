@@ -10,6 +10,7 @@ import {
   isLiving,
   generation,
   taglineFor,
+  spouseLinks,
   type Person,
 } from "../../lib/people";
 import { useTranslations, localize, type Locale } from "../../i18n/ui";
@@ -33,12 +34,25 @@ const { Content } = await render(bioEntry as Person);
 const tagline = taglineFor(person, translations, lang);
 const peoplePath = localize("/people", lang);
 
+const sMeta = new Map(spouseLinks(person).map((l) => [l.id, l]));
+const marriageNote = (id: string): string | undefined => {
+  const l = sMeta.get(id);
+  if (!l) return undefined;
+  const parts = [];
+  if (l.married) parts.push(`${t("person.married")} ${l.married}`);
+  if (l.divorced) parts.push(`${t("person.divorced")} ${l.divorced}`);
+  return parts.length ? parts.join(" · ") : undefined;
+};
+
 const groups = [
-  { label: t("person.parents"), people: rels.parents },
-  { label: t("person.spouse"), people: rels.spouses },
-  { label: t("person.children"), people: rels.children },
-  { label: t("person.siblings"), people: rels.siblings },
-].filter((g) => g.people.length > 0);
+  { label: t("person.parents"), items: rels.parents.map((p) => ({ p })) },
+  {
+    label: t("person.spouse"),
+    items: rels.spouses.map((p) => ({ p, note: marriageNote(p.id) })),
+  },
+  { label: t("person.children"), items: rels.children.map((p) => ({ p })) },
+  { label: t("person.siblings"), items: rels.siblings.map((p) => ({ p })) },
+].filter((g) => g.items.length > 0);
 
 const span = lifespan(person, lang);
 const { data } = person;
@@ -102,7 +116,7 @@ const treeHref = `${localize("/tree", lang)}?focus=${person.id}`;
               {group.label}
             </h2>
             <ul class="flex flex-wrap gap-2">
-              {group.people.map((rel) => (
+              {group.items.map(({ p: rel, note }) => (
                 <li>
                   <a
                     href={`${peoplePath}/${rel.id}`}
@@ -115,6 +129,7 @@ const treeHref = `${localize("/tree", lang)}?focus=${person.id}`;
                       size="xs"
                     />
                     {rel.data.name}
+                    {note && <span class="text-xs text-muted">· {note}</span>}
                   </a>
                 </li>
               ))}

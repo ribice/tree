@@ -4,6 +4,23 @@ import type { Locale } from "../i18n/ui";
 export type Person = CollectionEntry<"people">;
 export type Translation = CollectionEntry<"translations">;
 
+export interface SpouseLink {
+  id: string;
+  married?: string;
+  divorced?: string;
+}
+
+/** Normalize the spouses field (strings or objects) to SpouseLink objects. */
+export function spouseLinks(p: Person): SpouseLink[] {
+  return (p.data.spouses ?? []).map((s) =>
+    typeof s === "string" ? { id: s } : s,
+  );
+}
+
+export function spouseIds(p: Person): string[] {
+  return spouseLinks(p).map((s) => s.id);
+}
+
 /** All people, sorted by name. */
 export async function getPeople(): Promise<Person[]> {
   const people = await getCollection("people");
@@ -54,7 +71,7 @@ export function relationships(person: Person, people: Person[]): Relationships {
     ids.map((id) => byId.get(id)).filter((p): p is Person => Boolean(p));
 
   const parents = resolve(person.data.parents);
-  const spouses = resolve(person.data.spouses);
+  const spouses = resolve(spouseIds(person));
   const children = people
     .filter((p) => p.data.parents.includes(person.id))
     .sort(byBirth);
@@ -126,6 +143,7 @@ export interface TreeNodePerson {
   living: boolean;
   parents: string[];
   spouses: string[];
+  spouseLinks: SpouseLink[];
 }
 
 export function toTreeData(
@@ -142,6 +160,7 @@ export function toTreeData(
     initials: initials(p.data.name),
     living: isLiving(p),
     parents: p.data.parents,
-    spouses: p.data.spouses,
+    spouses: spouseIds(p),
+    spouseLinks: spouseLinks(p),
   }));
 }

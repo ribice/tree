@@ -1,0 +1,10 @@
+---
+import Layout from "../layouts/Layout.astro";
+import StatsView from "../components/views/StatsView.astro";
+import { useTranslations } from "../i18n/ui";
+const t = useTranslations("bs");
+---
+
+<Layout lang="bs" title={`${t("stats.title")} · ${t("site.title")}`}>
+  <StatsView lang="bs" />
+</Layout>

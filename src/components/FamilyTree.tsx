@@ -168,18 +168,68 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
   };
 
   const drag = useRef({ active: false, sx: 0, sy: 0, ox: 0, oy: 0, moved: 0 });
+  const pointers = useRef(new Map<number, { x: number; y: number }>());
+  const pinch = useRef<{
+    dist: number;
+    k: number;
+    x: number;
+    y: number;
+    mx: number;
+    my: number;
+  } | null>(null);
+
+  const localPoint = (clientX: number, clientY: number) => {
+    const r = containerRef.current!.getBoundingClientRect();
+    return { x: clientX - r.left, y: clientY - r.top };
+  };
+
   const onPointerDown = (e: React.PointerEvent) => {
     (e.target as Element).setPointerCapture?.(e.pointerId);
-    drag.current = {
-      active: true,
-      sx: e.clientX,
-      sy: e.clientY,
-      ox: tRef.current.x,
-      oy: tRef.current.y,
-      moved: 0,
+    pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointers.current.size === 1) {
+      drag.current = {
+        active: true,
+        sx: e.clientX,
+        sy: e.clientY,
+        ox: tRef.current.x,
+        oy: tRef.current.y,
+        moved: 0,
+      };
+    } else if (pointers.current.size === 2) {
+      drag.current.active = false;
+      startPinch();
+    }
+  };
+
+  const startPinch = () => {
+    const [p1, p2] = [...pointers.current.values()];
+    const mid = localPoint((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
+    pinch.current = {
+      dist: Math.hypot(p2.x - p1.x, p2.y - p1.y),
+      k: tRef.current.k,
+      x: tRef.current.x,
+      y: tRef.current.y,
+      mx: mid.x,
+      my: mid.y,
     };
   };
+
   const onPointerMove = (e: React.PointerEvent) => {
+    if (pointers.current.has(e.pointerId))
+      pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+    if (pointers.current.size >= 2 && pinch.current) {
+      const [p1, p2] = [...pointers.current.values()];
+      const dist = Math.hypot(p2.x - p1.x, p2.y - p1.y);
+      const mid = localPoint((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
+      const s = pinch.current;
+      const nk = clamp((s.k * dist) / s.dist, MIN_K, MAX_K);
+      const wx = (s.mx - s.x) / s.k;
+      const wy = (s.my - s.y) / s.k;
+      setTransform({ k: nk, x: mid.x - wx * nk, y: mid.y - wy * nk });
+      return;
+    }
+
     const d = drag.current;
     if (!d.active) return;
     const dx = e.clientX - d.sx;
@@ -187,8 +237,24 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
     d.moved = Math.max(d.moved, Math.abs(dx) + Math.abs(dy));
     setTransform((t) => ({ ...t, x: d.ox + dx, y: d.oy + dy }));
   };
-  const onPointerUp = () => {
-    drag.current.active = false;
+
+  const onPointerUp = (e: React.PointerEvent) => {
+    pointers.current.delete(e.pointerId);
+    pinch.current = null;
+    if (pointers.current.size === 1) {
+      // resume single-finger pan from the remaining pointer
+      const [p] = [...pointers.current.values()];
+      drag.current = {
+        active: true,
+        sx: p.x,
+        sy: p.y,
+        ox: tRef.current.x,
+        oy: tRef.current.y,
+        moved: 999,
+      };
+    } else if (pointers.current.size === 0) {
+      drag.current.active = false;
+    }
   };
   const onClickCapture = (e: React.MouseEvent) => {
     if (drag.current.moved > 6) {
@@ -229,7 +295,7 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
-        onPointerLeave={onPointerUp}
+        onPointerCancel={onPointerUp}
         onClickCapture={onClickCapture}
       >
         <g
@@ -254,6 +320,7 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
               y2={m.y}
               stroke="var(--color-branch)"
               strokeWidth={2.5}
+              strokeDasharray={m.divorced ? "5 5" : undefined}
             />
           ))}
           {layout.nodes.map((n) => (

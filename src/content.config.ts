@@ -21,8 +21,20 @@ const people = defineCollection({
     birthplace: z.string().optional(),
     // List of parent ids (the file name without .md of each parent)
     parents: z.array(z.string()).default([]),
-    // Spouse / partner ids
-    spouses: z.array(z.string()).default([]),
+    // Spouse / partner relations. Either a plain id, or an object with optional
+    // marriage and divorce years: { id: "hava", married: "1971", divorced: "1990" }
+    spouses: z
+      .array(
+        z.union([
+          z.string(),
+          z.object({
+            id: z.string(),
+            married: z.string().optional(),
+            divorced: z.string().optional(),
+          }),
+        ]),
+      )
+      .default([]),
     // Path to a photo under /public, e.g. "/photos/jane-smith.jpg"
     photo: z.string().optional(),
     // Short one-line descriptor shown under the name, e.g. "Carpenter, gardener"

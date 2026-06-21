@@ -12,6 +12,7 @@ const SIBLING_MARGIN = 32; // extra space between adjacent units
 interface Unit {
   anchor: TreeNodePerson;
   spouse?: TreeNodePerson;
+  divorced: boolean;
   children: Unit[];
   /** has children in the full data (even when currently collapsed) */
   hasChildren: boolean;
@@ -40,6 +41,7 @@ export interface MarriageLink {
   x1: number;
   x2: number;
   y: number;
+  divorced: boolean;
 }
 
 export interface ParentChildLink {
@@ -115,21 +117,37 @@ function buildForest(people: TreeNodePerson[], collapsed: Set<string>): Unit[] {
     return n;
   };
 
+  const isDivorced = (a: TreeNodePerson, s: TreeNodePerson): boolean =>
+    Boolean(
+      a.spouseLinks.find((l) => l.id === s.id)?.divorced ||
+        s.spouseLinks.find((l) => l.id === a.id)?.divorced,
+    );
+
   function build(person: TreeNodePerson): Unit {
     visited.add(person.id);
     const spouse = pickSpouse(person);
+    const divorced = spouse ? isDivorced(person, spouse) : false;
     const kids = collectKids(person, spouse);
     const hasChildren = kids.length > 0;
 
     if (hasChildren && collapsed.has(person.id)) {
       let hiddenCount = 0;
       for (const c of kids) hiddenCount += swallow(c);
-      return { anchor: person, spouse, children: [], hasChildren, collapsed: true, hiddenCount };
+      return {
+        anchor: person,
+        spouse,
+        divorced,
+        children: [],
+        hasChildren,
+        collapsed: true,
+        hiddenCount,
+      };
     }
 
     return {
       anchor: person,
       spouse,
+      divorced,
       children: kids.map(build),
       hasChildren,
       collapsed: false,
@@ -180,6 +198,7 @@ export function computeLayout(
   // A synthetic root lets d3 lay out multiple family roots in one pass.
   const synthetic: Unit = {
     anchor: { id: "__root__" } as TreeNodePerson,
+    divorced: false,
     children: forest,
     hasChildren: true,
     collapsed: false,
@@ -229,6 +248,7 @@ export function computeLayout(
         x1: anchorCx + BOX_W / 2,
         x2: spouseCx - BOX_W / 2,
         y: y + BOX_H / 2,
+        divorced: node.data.divorced,
       });
     } else {
       nodes.push({ person: anchor, x: ux - BOX_W / 2, y });

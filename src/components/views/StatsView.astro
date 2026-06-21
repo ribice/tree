@@ -1,0 +1,89 @@
+---
+import { getPeople, birthYear, generation, isLiving } from "../../lib/people";
+import { useTranslations, type Locale } from "../../i18n/ui";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const people = await getPeople();
+
+const years: number[] = [];
+for (const p of people) {
+  for (const v of [p.data.born, p.data.died]) {
+    const m = v?.match(/\d{4}/);
+    if (m) years.push(Number(m[0]));
+  }
+}
+const minYear = years.length ? Math.min(...years) : null;
+const maxYear = years.length ? Math.max(...years) : null;
+
+const generations = Math.max(...people.map((p) => generation(p, people)));
+const livingCount = people.filter((p) => isLiving(p)).length;
+
+const surname = (name: string) =>
+  name.split("—")[0].trim().split(/\s+/).pop() ?? "";
+const tally = (vals: (string | undefined)[]) => {
+  const m = new Map<string, number>();
+  for (const v of vals) if (v) m.set(v, (m.get(v) ?? 0) + 1);
+  return [...m.entries()].sort((a, b) => b[1] - a[1]);
+};
+
+const surnames = tally(people.map((p) => surname(p.data.name)));
+const places = tally(people.map((p) => p.data.birthplace));
+
+const cards = [
+  { label: t("stats.people"), value: String(people.length) },
+  { label: t("stats.generations"), value: String(generations) },
+  { label: t("stats.living"), value: String(livingCount) },
+  {
+    label: t("stats.span"),
+    value: minYear && maxYear ? `${minYear}–${maxYear}` : "—",
+  },
+];
+
+const lists = [
+  { title: t("stats.surnames"), rows: surnames },
+  { title: t("stats.places"), rows: places },
+];
+---
+
+<section class="mx-auto max-w-4xl px-5 py-12">
+  <h1 class="text-3xl font-semibold tracking-tight text-ink">{t("stats.title")}</h1>
+  <p class="mt-2 text-muted">{t("stats.subtitle")}</p>
+
+  <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+    {
+      cards.map((c) => (
+        <div class="rounded-2xl border border-line bg-surface p-5 shadow-sm">
+          <div class="text-3xl font-semibold tracking-tight text-accent">
+            {c.value}
+          </div>
+          <div class="mt-1 text-sm text-muted">{c.label}</div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="mt-10 grid gap-8 sm:grid-cols-2">
+    {
+      lists.map((list) => (
+        <div>
+          <h2 class="text-sm font-semibold tracking-wide text-muted uppercase">
+            {list.title}
+          </h2>
+          <ul class="mt-3 space-y-1.5">
+            {list.rows.map(([name, n]) => (
+              <li class="flex items-center justify-between gap-3 border-b border-line py-1.5 text-sm">
+                <span class="text-ink">{name}</span>
+                <span class="font-medium text-muted">{n}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</section>
