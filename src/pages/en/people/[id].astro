@@ -18,6 +18,7 @@ const translations = await getTranslations();
   lang="en"
   title={`${person.data.name} · ${t("site.title")}`}
   description={taglineFor(person, translations, "en")}
+  ogImagePath={`/og/${person.id}.png`}
 >
   <ProfileView lang="en" person={person} />
 </Layout>

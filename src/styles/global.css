@@ -36,3 +36,13 @@ body {
 .prose p:first-child {
   margin-top: 0;
 }
+.prose a,
+.person-link {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+.prose a:hover {
+  text-decoration-thickness: 2px;
+}

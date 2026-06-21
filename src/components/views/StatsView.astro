@@ -1,6 +1,7 @@
 ---
 import { getPeople, birthYear, generation, isLiving } from "../../lib/people";
 import { useTranslations, type Locale } from "../../i18n/ui";
+import BirthplaceMap from "../BirthplaceMap.tsx";
 
 interface Props {
   lang: Locale;
@@ -48,6 +49,22 @@ const lists = [
   { title: t("stats.surnames"), rows: surnames },
   { title: t("stats.places"), rows: places },
 ];
+
+// Approximate coordinates for known birthplaces (others simply aren't plotted).
+const COORDS: Record<string, [number, number]> = {
+  Jezero: [44.2667, 17.2167],
+  Jajce: [44.3419, 17.2706],
+  Zenica: [44.2017, 17.9072],
+  "Gostivar, Makedonija": [41.7967, 20.9089],
+};
+const mapPoints = places
+  .filter(([place]) => COORDS[place])
+  .map(([place, count]) => ({
+    place,
+    count,
+    lat: COORDS[place][0],
+    lng: COORDS[place][1],
+  }));
 ---
 
 <section class="mx-auto max-w-4xl px-5 py-12">
@@ -86,4 +103,15 @@ const lists = [
       ))
     }
   </div>
+
+  {
+    mapPoints.length > 0 && (
+      <div class="mt-10">
+        <h2 class="mb-3 text-sm font-semibold tracking-wide text-muted uppercase">
+          {t("stats.map")}
+        </h2>
+        <BirthplaceMap client:only="react" points={mapPoints} />
+      </div>
+    )
+  }
 </section>

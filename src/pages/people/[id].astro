@@ -17,6 +17,7 @@ const t = useTranslations("bs");
   lang="bs"
   title={`${person.data.name} · ${t("site.title")}`}
   description={person.data.tagline}
+  ogImagePath={`/og/${person.id}.png`}
 >
   <ProfileView lang="bs" person={person} />
 </Layout>

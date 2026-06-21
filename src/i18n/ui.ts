@@ -73,6 +73,7 @@ export const ui = {
     "tree.living": "Živi",
     "tree.deceased": "Preminuli",
     "tree.showMore": "još {n}",
+    "tree.poster": "Preuzmi poster (SVG)",
 
     "dir.title": "Imenik",
     "dir.subtitle": "Svi članovi stabla, po abecedi.",
@@ -105,6 +106,7 @@ export const ui = {
     "stats.span": "Raspon godina",
     "stats.surnames": "Prezimena",
     "stats.places": "Mjesta rođenja",
+    "stats.map": "Mjesta na karti",
   },
   en: {
     "site.title": "Ribić – Kifić Family Tree",
@@ -173,6 +175,7 @@ export const ui = {
     "tree.living": "Living",
     "tree.deceased": "Deceased",
     "tree.showMore": "+{n} more",
+    "tree.poster": "Download poster (SVG)",
 
     "dir.title": "Directory",
     "dir.subtitle": "Everyone in the tree, A to Z.",
@@ -205,6 +208,7 @@ export const ui = {
     "stats.span": "Year span",
     "stats.surnames": "Surnames",
     "stats.places": "Birthplaces",
+    "stats.map": "Places on the map",
   },
 } as const;
 

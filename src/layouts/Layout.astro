@@ -11,9 +11,10 @@ interface Props {
   lang?: Locale;
   title?: string;
   description?: string;
+  ogImagePath?: string;
 }
 
-const { lang = "bs", title, description } = Astro.props;
+const { lang = "bs", title, description, ogImagePath } = Astro.props;
 const t = useTranslations(lang);
 
 const pageTitle = title ?? t("site.title");
@@ -26,7 +27,7 @@ const enPath = switchLocalePath(Astro.url.pathname, "en");
 const altPath = lang === "bs" ? enPath : bsPath;
 
 const canonical = ORIGIN[lang] + (lang === "bs" ? bsPath : enPath);
-const ogImage = ORIGIN[lang] + "/og.png";
+const ogImage = ORIGIN[lang] + (ogImagePath ?? "/og.png");
 const ogLocale = lang === "bs" ? "bs_BA" : "en_US";
 
 const alternates = [

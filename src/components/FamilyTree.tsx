@@ -47,6 +47,21 @@ function ancestorsOf(id: string, people: TreeNodePerson[]): string[] {
   return [...out];
 }
 
+/** All transitive descendants of a person. */
+function descendantsOf(id: string, people: TreeNodePerson[]): string[] {
+  const out = new Set<string>();
+  const walk = (pid: string) => {
+    for (const p of people) {
+      if (p.parents.includes(pid) && !out.has(p.id)) {
+        out.add(p.id);
+        walk(p.id);
+      }
+    }
+  };
+  walk(id);
+  return [...out];
+}
+
 interface Transform {
   x: number;
   y: number;
@@ -84,6 +99,23 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
   const [ready, setReady] = useState(false);
   const [highlight, setHighlight] = useState<string | null>(null);
   const [focusTarget, setFocusTarget] = useState<string | null>(null);
+  const [hovered, setHovered] = useState<string | null>(null);
+
+  // The hovered person's bloodline (ancestors + descendants + self), or null.
+  const lineage = useMemo(() => {
+    if (!hovered) return null;
+    return new Set([
+      hovered,
+      ...ancestorsOf(hovered, people),
+      ...descendantsOf(hovered, people),
+    ]);
+  }, [hovered, people]);
+
+  const nodeDim = (id: string) => (lineage && !lineage.has(id) ? 0.22 : 1);
+  const linkDim = (a: string, b: string) =>
+    lineage && !(lineage.has(a) && lineage.has(b)) ? 0.12 : 1;
+  const marriageDim = (a: string, b: string) =>
+    lineage && !(lineage.has(a) || lineage.has(b)) ? 0.12 : 1;
 
   const fit = () => {
     const el = containerRef.current;
@@ -309,6 +341,8 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
               stroke="var(--color-branch)"
               strokeWidth={2}
               strokeLinejoin="round"
+              opacity={linkDim(l.fromId, l.toId)}
+              style={{ transition: "opacity 0.2s ease" }}
             />
           ))}
           {layout.marriages.map((m, i) => (
@@ -321,6 +355,8 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
               stroke="var(--color-branch)"
               strokeWidth={2.5}
               strokeDasharray={m.divorced ? "5 5" : undefined}
+              opacity={marriageDim(m.aId, m.bId)}
+              style={{ transition: "opacity 0.2s ease" }}
             />
           ))}
           {layout.nodes.map((n) => (
@@ -330,6 +366,8 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
               basePath={basePath}
               livingLabel={labels.living}
               highlighted={highlight === n.person.id}
+              dim={nodeDim(n.person.id)}
+              onHoverChange={(on) => setHovered(on ? n.person.id : null)}
             />
           ))}
           {layout.toggles.map((tg) => (
@@ -438,18 +476,31 @@ function PersonCard({
   basePath,
   livingLabel,
   highlighted,
+  dim,
+  onHoverChange,
 }: {
   node: PositionedPerson;
   basePath: string;
   livingLabel: string;
   highlighted: boolean;
+  dim: number;
+  onHoverChange: (hovering: boolean) => void;
 }) {
   const p = node.person;
   const living = p.living;
   return (
-    <foreignObject x={node.x} y={node.y} width={BOX_W} height={BOX_H}>
+    <foreignObject
+      x={node.x}
+      y={node.y}
+      width={BOX_W}
+      height={BOX_H}
+      opacity={dim}
+      style={{ transition: "opacity 0.2s ease" }}
+    >
       <a
         href={`${basePath}/${p.id}`}
+        onMouseEnter={() => onHoverChange(true)}
+        onMouseLeave={() => onHoverChange(false)}
         className={`group relative flex h-full w-full items-center gap-3 rounded-2xl border bg-surface px-3 py-2.5 shadow-sm transition duration-150 hover:-translate-y-0.5 hover:border-accent hover:shadow-lg ${
           highlighted
             ? "border-accent ring-2 ring-accent ring-offset-2 ring-offset-paper"

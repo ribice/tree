@@ -42,6 +42,8 @@ export interface MarriageLink {
   x2: number;
   y: number;
   divorced: boolean;
+  aId: string;
+  bId: string;
 }
 
 export interface ParentChildLink {
@@ -49,6 +51,8 @@ export interface ParentChildLink {
   parentY: number;
   childX: number;
   childY: number;
+  fromId: string;
+  toId: string;
 }
 
 export interface Layout {
@@ -249,6 +253,8 @@ export function computeLayout(
         x2: spouseCx - BOX_W / 2,
         y: y + BOX_H / 2,
         divorced: node.data.divorced,
+        aId: anchor.id,
+        bId: spouse.id,
       });
     } else {
       nodes.push({ person: anchor, x: ux - BOX_W / 2, y });
@@ -260,6 +266,8 @@ export function computeLayout(
         parentY: y + BOX_H,
         childX: centerX(child),
         childY: rowY(child.depth),
+        fromId: anchor.id,
+        toId: child.data.anchor.id,
       });
     }
   }
