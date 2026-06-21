@@ -53,7 +53,7 @@ export const ui = {
 
     "home.f1.title": "Svako može doprinijeti",
     "home.f1.body":
-      "Dodaj rođaka, ispravi datum ili zapiši priču otvaranjem pull requesta. Nije potreban poseban pristup.",
+      "Dodaj rođaka, ispravi datum ili zapiši priču putem jednostavne forme „Dodaj osobu“. Nije potreban poseban pristup.",
     "home.f2.title": "Jedan fajl po osobi",
     "home.f2.body":
       "Svaki član porodice je jednostavan tekstualni fajl s podacima i kratkom biografijom. Dodati nekoga znači dodati jedan fajl.",
@@ -93,8 +93,7 @@ export const ui = {
     "person.divorced": "razv.",
 
     "footer.tagline": "Porodicu zajedno bilježimo i dopunjavamo.",
-    "footer.cta": "Nešto nedostaje ili nije tačno?",
-    "footer.ctaLink": "Otvori pull request →",
+    "footer.github": "Cijelo stablo i svi podaci dostupni su na GitHubu →",
 
     "about.title": "O ovom stablu",
 
@@ -155,7 +154,7 @@ export const ui = {
 
     "home.f1.title": "Everyone can contribute",
     "home.f1.body":
-      "Add a relative, fix a date, or write a story by opening a pull request. No special access needed.",
+      "Add a relative, fix a date, or write a story through the simple “Add a person” form. No special access needed.",
     "home.f2.title": "One file per person",
     "home.f2.body":
       "Each relative is a simple text file with their details and a short bio. Adding someone is adding one file.",
@@ -195,8 +194,7 @@ export const ui = {
     "person.divorced": "div.",
 
     "footer.tagline": "We record and grow the family together.",
-    "footer.cta": "Something missing or wrong?",
-    "footer.ctaLink": "Open a pull request →",
+    "footer.github": "The whole tree and all its data are on GitHub →",
 
     "about.title": "About this tree",
 

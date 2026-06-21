@@ -29,18 +29,14 @@ const t = useTranslations(lang);
         <p>
           Svaka osoba je jedan tekstualni fajl, a cijela stranica — stablo,
           profili, veze — gradi se iz tih fajlova. Ako znaš nešto što mi ne znamo
-          — datum, priču, rođaka kojeg smo propustili, fotografiju — možeš to i
-          sam dodati.
+          — datum, priču, rođaka kojeg smo propustili — najlakše je popuniti
+          formu <a href="/add">Dodaj osobu</a>. Pregledat ćemo i uvrstiti u
+          stablo.
         </p>
-        <h2 class="mt-8 text-xl font-semibold text-ink">Kako dopuniti stablo</h2>
-        <ol class="ml-5 list-decimal space-y-1.5">
-          <li>Kopiraj postojeći fajl osobe i izmijeni podatke.</li>
-          <li>Dodaj fotografiju ako je imaš.</li>
-          <li>Otvori pull request — stranica se ponovo izgradi automatski.</li>
-        </ol>
         <p>
-          Ne brini da ćeš nešto pokvariti: svaka izmjena se automatski
-          provjerava, a ništa ne ide na stranicu dok se ne pregleda i prihvati.
+          Cijelo stablo i svi podaci dostupni su otvoreno na <a
+            href="https://github.com/ribice/tree">GitHubu</a
+          >.
         </p>
       </div>
     ) : (
@@ -59,18 +55,14 @@ const t = useTranslations(lang);
         <p>
           Each person is a single text file, and the whole site — tree, profiles,
           relationships — is generated from those files. If you know something we
-          don't — a date, a story, a relative we've missed, a photo — you can add
-          it yourself.
+          don't — a date, a story, a relative we've missed — the easiest way is to
+          fill in the <a href="/en/add">Add a person</a> form. We'll review it and
+          add it to the tree.
         </p>
-        <h2 class="mt-8 text-xl font-semibold text-ink">How to add to it</h2>
-        <ol class="ml-5 list-decimal space-y-1.5">
-          <li>Copy an existing person file and edit the details.</li>
-          <li>Add a photo if you have one.</li>
-          <li>Open a pull request — the site rebuilds automatically.</li>
-        </ol>
         <p>
-          Don't worry about breaking anything: every change is checked
-          automatically, and nothing goes live until it's reviewed and merged.
+          The whole tree and all its data are openly available on <a
+            href="https://github.com/ribice/tree">GitHub</a
+          >.
         </p>
       </div>
     )

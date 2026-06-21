@@ -5,5 +5,5 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# Deploy previews for pull requests are enabled by default on Netlify,
-# so each contribution gets its own preview URL before it is merged.
+# Submissions from the "Add a person" form are captured by Netlify Forms;
+# enable form notifications in the Netlify dashboard to get an email per entry.

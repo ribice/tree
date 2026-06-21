@@ -1,8 +1,8 @@
 # Porodično stablo Ribića – Kifića
 
 Živi, git-zasnovan zapis o porodici Ribić – Kifić iz Jezera — od jezerskog
-kadije Avde »Avdikadije« (1775–1852) do danas. Svako može doprinijeti otvaranjem
-pull requesta.
+kadije Avde »Avdikadije« (1775–1852) do danas. Cijelo stablo i svi podaci
+otvoreno su dostupni u ovom repozitoriju.
 
 Stranicu pokreće [Astro](https://astro.build); svaka osoba je jedan Markdown
 fajl, a interaktivno stablo i profili se generišu iz tih fajlova.
@@ -13,9 +13,10 @@ stranici `/tree` i podržava sklapanje grana te razlikuje žive i preminule.
 
 ## Doprinos
 
-Pogledaj [CONTRIBUTING.md](./CONTRIBUTING.md) — ukratko: dodaj jedan `.md` fajl
-po osobi u `src/content/people/`, eventualno fotografiju u `public/photos/`, i
-otvori pull request.
+Najlakše je popuniti formu **„Dodaj osobu“** na stranici (`/add`) — podatak
+stiže nama na pregled i potom ga uvrstimo u stablo. Ko želi raditi direktno s
+podacima: svaka osoba je jedan `.md` fajl u `src/content/people/`, a fotografije
+idu u `public/photos/`.
 
 ## Pokretanje lokalno
 
@@ -39,7 +40,7 @@ npm run build      # izgradi statičku stranicu u dist/
 | `src/components/views/`         | Dijeljene stranice (početna, stablo, imenik, profil) |
 | `src/pages/` i `src/pages/en/`  | Bosanske i engleske rute                            |
 | `public/photos/`                | Fotografije                                         |
-| `scripts/validate.mjs`          | Provjera podataka (pokreće se i na svakom PR-u)     |
+| `scripts/validate.mjs`          | Provjera ispravnosti podataka (`npm run validate`) |
 
 Izvorna građa (originalni tekstovi i podaci iz starog programa GenDesigner)
 čuva se u folderu `tree/`.
