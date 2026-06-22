@@ -14,7 +14,7 @@ const person = (over: Partial<TreeNodePerson> & { id: string }): TreeNodePerson 
 });
 
 const data: TreeNodePerson[] = [
-  person({ id: "a", spouses: ["b"], spouseLinks: [{ id: "b", divorced: "1950" }] }),
+  person({ id: "a", spouses: ["b"], spouseLinks: [{ id: "b", married: "1940", divorced: "1950" }] }),
   person({ id: "b", spouses: ["a"], spouseLinks: [{ id: "a" }] }),
   person({ id: "c", parents: ["a", "b"] }),
   person({ id: "d", parents: ["a", "b"] }),
@@ -30,6 +30,8 @@ describe("computeLayout", () => {
     const lay = computeLayout(data);
     expect(lay.marriages).toHaveLength(1);
     expect(lay.marriages[0].divorced).toBe(true);
+    expect(lay.marriages[0].married).toBe("1940");
+    expect(lay.marriages[0].divorcedDate).toBe("1950");
   });
 
   it("connects parents to children", () => {

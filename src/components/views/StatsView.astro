@@ -1,16 +1,18 @@
 ---
-import { getPeople, birthYear, generation, isLiving } from "../../lib/people";
+import ViewModeToggle from "../ViewModeToggle.astro";
+import { getPeople, birthYear, generation, isLiving, type PeopleView } from "../../lib/people";
 import { useTranslations, type Locale } from "../../i18n/ui";
 import { collectDataQuality } from "../../lib/data-quality";
 import StatTile from "../ui/StatTile.astro";
 
 interface Props {
   lang: Locale;
+  view?: PeopleView;
 }
-const { lang } = Astro.props;
+const { lang, view = "core" } = Astro.props;
 const t = useTranslations(lang);
 
-const people = await getPeople();
+const people = await getPeople(view);
 const qualityGroups = collectDataQuality(people);
 const dataIssueCount = qualityGroups.reduce((sum, group) => sum + group.issues.length, 0);
 
@@ -138,6 +140,7 @@ const projectedPoints = mapPoints.map((point) => ({
         {t("stats.title")}
       </h1>
     </div>
+    <ViewModeToggle lang={lang} current={view} section="stats" />
   </div>
 
   <dl class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5">

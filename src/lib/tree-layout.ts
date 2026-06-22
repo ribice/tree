@@ -13,6 +13,8 @@ interface Unit {
   anchor: TreeNodePerson;
   spouse?: TreeNodePerson;
   divorced: boolean;
+  married?: string;
+  divorcedDate?: string;
   children: Unit[];
   /** has children in the full data (even when currently collapsed) */
   hasChildren: boolean;
@@ -42,6 +44,8 @@ export interface MarriageLink {
   x2: number;
   y: number;
   divorced: boolean;
+  married?: string;
+  divorcedDate?: string;
   aId: string;
   bId: string;
 }
@@ -121,16 +125,22 @@ function buildForest(people: TreeNodePerson[], collapsed: Set<string>): Unit[] {
     return n;
   };
 
-  const isDivorced = (a: TreeNodePerson, s: TreeNodePerson): boolean =>
-    Boolean(
-      a.spouseLinks.find((l) => l.id === s.id)?.divorced ||
-        s.spouseLinks.find((l) => l.id === a.id)?.divorced,
-    );
+  const spouseMeta = (a: TreeNodePerson, s: TreeNodePerson) => {
+    const links = [
+      ...a.spouseLinks.filter((l) => l.id === s.id),
+      ...s.spouseLinks.filter((l) => l.id === a.id),
+    ];
+    return {
+      married: links.find((l) => l.married)?.married,
+      divorcedDate: links.find((l) => l.divorced)?.divorced,
+      divorced: links.some((l) => Boolean(l.divorced)),
+    };
+  };
 
   function build(person: TreeNodePerson): Unit {
     visited.add(person.id);
     const spouse = pickSpouse(person);
-    const divorced = spouse ? isDivorced(person, spouse) : false;
+    const meta = spouse ? spouseMeta(person, spouse) : undefined;
     const kids = collectKids(person, spouse);
     const hasChildren = kids.length > 0;
 
@@ -140,7 +150,9 @@ function buildForest(people: TreeNodePerson[], collapsed: Set<string>): Unit[] {
       return {
         anchor: person,
         spouse,
-        divorced,
+        divorced: Boolean(meta?.divorced),
+        married: meta?.married,
+        divorcedDate: meta?.divorcedDate,
         children: [],
         hasChildren,
         collapsed: true,
@@ -151,7 +163,9 @@ function buildForest(people: TreeNodePerson[], collapsed: Set<string>): Unit[] {
     return {
       anchor: person,
       spouse,
-      divorced,
+      divorced: Boolean(meta?.divorced),
+      married: meta?.married,
+      divorcedDate: meta?.divorcedDate,
       children: kids.map(build),
       hasChildren,
       collapsed: false,
@@ -253,6 +267,8 @@ export function computeLayout(
         x2: spouseCx - BOX_W / 2,
         y: y + BOX_H / 2,
         divorced: node.data.divorced,
+        married: node.data.married,
+        divorcedDate: node.data.divorcedDate,
         aId: anchor.id,
         bId: spouse.id,
       });

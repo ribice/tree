@@ -3,6 +3,8 @@ name: "Adis Gradečak"
 sex: "m"
 birthplace: "Rotterdam"
 parents: [damir-gradecak, naida]
+spouses:
+  - adriana-lopez
 tagline: "Sin Damira i Naide"
 ---
 

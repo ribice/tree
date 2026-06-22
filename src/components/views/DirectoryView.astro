@@ -1,23 +1,26 @@
 ---
 import Avatar from "../Avatar.astro";
+import ViewModeToggle from "../ViewModeToggle.astro";
 import {
   getPeople,
   getTranslations,
   lifespan,
   initials,
+  type PeopleView,
 } from "../../lib/people";
 import { displayTaglineFor } from "../../lib/display";
 import { useTranslations, localize, type Locale } from "../../i18n/ui";
 
 interface Props {
   lang: Locale;
+  view?: PeopleView;
 }
-const { lang } = Astro.props;
+const { lang, view = "core" } = Astro.props;
 const t = useTranslations(lang);
 
-const people = await getPeople();
+const people = await getPeople(view);
 const translations = await getTranslations();
-const peoplePath = localize("/people", lang);
+const peoplePath = localize(view === "extended" ? "/extended/people" : "/people", lang);
 const locale = lang === "bs" ? "bs-BA" : "en-US";
 const groups = new Map<string, typeof people>();
 for (const person of people) {
@@ -40,27 +43,30 @@ const groupedPeople = [...groups.entries()].sort(([a], [b]) =>
       <p class="mt-2 max-w-2xl text-muted">{t("dir.subtitle")}</p>
     </div>
 
-    <form role="search" class="directory-search">
-      <label class="block">
-        <span class="sr-only">{t("dir.search")}</span>
-        <input
-          id="search"
-          name="q"
-          type="search"
-          placeholder={t("dir.search")}
-          autocomplete="off"
-          class="search-input"
-        />
-      </label>
-      <p
-        id="result-count"
-        data-template={t("dir.results", { n: "{n}" })}
-        class="mt-2 text-sm text-muted"
-        aria-live="polite"
-      >
-        {t("dir.results", { n: people.length })}
-      </p>
-    </form>
+    <div class="directory-actions">
+      <form role="search" class="directory-search">
+        <label class="block">
+          <span class="sr-only">{t("dir.search")}</span>
+          <input
+            id="search"
+            name="q"
+            type="search"
+            placeholder={t("dir.search")}
+            autocomplete="off"
+            class="search-input"
+          />
+        </label>
+        <p
+          id="result-count"
+          data-template={t("dir.results", { n: "{n}" })}
+          class="mt-2 text-sm text-muted"
+          aria-live="polite"
+        >
+          {t("dir.results", { n: people.length })}
+        </p>
+      </form>
+      <ViewModeToggle lang={lang} current={view} section="people" />
+    </div>
   </div>
 
   <nav class="letter-nav" aria-label={t("dir.jump")}>

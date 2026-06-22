@@ -1,0 +1,14 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DirectoryView from "../../../components/views/DirectoryView.astro";
+import { useTranslations } from "../../../i18n/ui";
+const t = useTranslations("bs");
+---
+
+<Layout
+  lang="bs"
+  title={`${t("dir.title")} · ${t("view.extended")} · ${t("site.title")}`}
+  description={t("meta.directory")}
+>
+  <DirectoryView lang="bs" view="extended" />
+</Layout>

@@ -1,7 +1,13 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import type { Locale } from "../i18n/ui";
 import { displayTaglineFor } from "./display";
-import { isLikelyLivingDateSpan, publicLifespan } from "./privacy";
+import {
+  filterPeopleForView,
+  filterRelationshipIds,
+  type PeopleView,
+} from "./people-visibility";
+import { isLikelyLivingDateSpan, publicDate, publicLifespan } from "./privacy";
+import { treeDisplayName } from "../components/tree/tree-person-details";
 
 export type Person = CollectionEntry<"people">;
 export type Translation = CollectionEntry<"translations">;
@@ -23,10 +29,17 @@ export function spouseIds(p: Person): string[] {
   return spouseLinks(p).map((s) => s.id);
 }
 
-/** All people, sorted by name. */
-export async function getPeople(): Promise<Person[]> {
+/** People for a public view, sorted by name. Defaults to the compact core tree. */
+export async function getPeople(view: PeopleView = "core"): Promise<Person[]> {
   const people = await getCollection("people");
-  return people.sort((a, b) => a.data.name.localeCompare(b.data.name));
+  return filterPeopleForView(people, view).sort((a, b) =>
+    a.data.name.localeCompare(b.data.name),
+  );
+}
+
+/** Every public profile, including records that only appear in extended views. */
+export async function getAllPeople(): Promise<Person[]> {
+  return getPeople("extended");
 }
 
 /** English translations keyed by person id. */
@@ -129,9 +142,13 @@ export function initials(name: string): string {
 export interface TreeNodePerson {
   id: string;
   name: string;
+  treeName?: string;
   sex?: "m" | "f";
   tagline?: string;
   lifespan: string;
+  birthDate?: string;
+  deathDate?: string;
+  birthplace?: string;
   photo?: string;
   initials: string;
   living: boolean;
@@ -145,17 +162,27 @@ export function toTreeData(
   translations: Map<string, Translation>,
   locale: Locale,
 ): TreeNodePerson[] {
-  return people.map((p) => ({
-    id: p.id,
-    name: p.data.name,
-    sex: p.data.sex,
-    tagline: displayTaglineFor(p, people, translations, locale),
-    lifespan: lifespan(p, locale),
-    photo: p.data.photo,
-    initials: initials(p.data.name),
-    living: isLiving(p),
-    parents: p.data.parents,
-    spouses: spouseIds(p),
-    spouseLinks: spouseLinks(p),
-  }));
+  const visibleIds = new Set(people.map((p) => p.id));
+  return people.map((p) => {
+    const living = isLiving(p);
+    return {
+      id: p.id,
+      name: p.data.name,
+      treeName: treeDisplayName(p.data.name, p.data.maidenName),
+      sex: p.data.sex,
+      tagline: displayTaglineFor(p, people, translations, locale),
+      lifespan: lifespan(p, locale),
+      birthDate: p.data.born ? publicDate(p.data.born, living) : undefined,
+      deathDate: p.data.died ? publicDate(p.data.died, false) : undefined,
+      birthplace: p.data.birthplace,
+      photo: p.data.photo,
+      initials: initials(p.data.name),
+      living,
+      parents: filterRelationshipIds(p.data.parents, visibleIds),
+      spouses: filterRelationshipIds(spouseIds(p), visibleIds),
+      spouseLinks: spouseLinks(p).filter((link) => visibleIds.has(link.id)),
+    };
+  });
 }
+
+export type { PeopleView } from "./people-visibility";

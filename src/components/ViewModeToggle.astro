@@ -1,0 +1,35 @@
+---
+import { localize, useTranslations, type Locale } from "../i18n/ui";
+import type { PeopleView } from "../lib/people";
+
+interface Props {
+  lang: Locale;
+  current: PeopleView;
+  section: "tree" | "people" | "stats";
+}
+
+const { lang, current, section } = Astro.props;
+const t = useTranslations(lang);
+const basePath = `/${section}`;
+const links = [
+  { view: "core" as const, href: localize(basePath, lang), label: t("view.core") },
+  {
+    view: "extended" as const,
+    href: localize(`/extended${basePath}`, lang),
+    label: t("view.extended"),
+  },
+];
+---
+
+<nav class="view-mode-toggle" aria-label={t("view.label")}>
+  {
+    links.map((link) => (
+      <a
+        href={link.href}
+        aria-current={current === link.view ? "page" : undefined}
+      >
+        {link.label}
+      </a>
+    ))
+  }
+</nav>

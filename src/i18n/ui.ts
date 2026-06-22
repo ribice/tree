@@ -68,6 +68,7 @@ export const ui = {
       "Poruka je poslana putem Netlify forme. Pregledat ćemo podatke i uvrstiti ih u stablo nakon provjere.",
 
     "home.eyebrow": "{n} članova porodice — i raste",
+    "home.kicker": "Porodična arhiva Ribić – Kifić",
     "home.title": "Stablo Rasima Ribića – Kifića",
     "home.intro":
       "Živi zapis o tome ko smo i odakle smo — od jezerskog kadije Avdikadije do danas, koji svi zajedno pišemo i dopunjavamo.",
@@ -117,6 +118,10 @@ export const ui = {
     "tree.loading": "Učitavanje stabla…",
     "tree.branchMode": "Prikazana grana: {name}",
     "tree.showAll": "Prikaži cijelo stablo",
+
+    "view.label": "Prikaz stabla",
+    "view.core": "Osnovno",
+    "view.extended": "Prošireno",
 
     "dir.title": "Imenik",
     "dir.subtitle": "Svi članovi stabla, po abecedi.",
@@ -270,6 +275,7 @@ export const ui = {
       "The message was submitted through Netlify Forms. We will review the details and add them to the tree after checking them.",
 
     "home.eyebrow": "{n} relatives — and growing",
+    "home.kicker": "The Ribić – Kifić family archive",
     "home.title": "The Ribić – Kifić Family Tree",
     "home.intro":
       "A living record of who we are and where we come from — from Avdo “Avdikadija”, the kadi of Jezero, down to today — written and kept up to date by all of us.",
@@ -319,6 +325,10 @@ export const ui = {
     "tree.loading": "Loading tree…",
     "tree.branchMode": "Showing branch: {name}",
     "tree.showAll": "Show full tree",
+
+    "view.label": "Tree view",
+    "view.core": "Core",
+    "view.extended": "Extended",
 
     "dir.title": "Directory",
     "dir.subtitle": "Everyone in the tree, A to Z.",

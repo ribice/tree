@@ -1,18 +1,24 @@
 import type { APIRoute } from "astro";
-import { getPeople } from "../lib/people";
+import { getAllPeople, getPeople } from "../lib/people";
 import { localize } from "../i18n/ui";
 import { ORIGIN } from "../lib/seo";
 
 export const GET: APIRoute = async () => {
   const people = await getPeople();
+  const allPeople = await getAllPeople();
+  const extendedOnlyPeople = allPeople.filter((person) => person.data.visibility === "extended");
   const basePaths = [
     "/",
     "/tree/",
+    "/extended/tree/",
     "/people/",
+    "/extended/people/",
     "/add/",
     "/stats/",
+    "/extended/stats/",
     "/changelog/",
     ...people.map((p) => `/people/${p.id}/`),
+    ...extendedOnlyPeople.map((p) => `/extended/people/${p.id}/`),
   ];
 
   const urls = basePaths

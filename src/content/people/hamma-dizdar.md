@@ -2,6 +2,8 @@
 name: "Hamma Dizdar"
 sex: "f"
 parents: [nepoznati-dizdar, bisera]
+spouses:
+  - nepoznati-boric
 tagline: "Kćerka Nepoznatog Dizdara i Bisere"
 ---
 

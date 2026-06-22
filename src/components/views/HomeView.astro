@@ -83,9 +83,9 @@ const stats = [
 ---
 
 <section class="heritage-band">
-  <div class="relative mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)] gap-10 px-5 pt-16 pb-12 sm:pt-20 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
+  <div class="relative mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)] gap-10 px-5 pt-16 pb-12 sm:pt-20 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-start">
     <div class="min-w-0">
-      <p class="eyebrow">{t("home.eyebrow", { n: people.length })}</p>
+      <p class="eyebrow">{t("home.kicker")}</p>
       <h1
         class="mt-4 max-w-4xl text-4xl font-semibold text-balance text-ink sm:text-6xl"
       >
@@ -145,17 +145,6 @@ const stats = [
           ))
         }
       </div>
-
-      <dl class="family-ledger-stats">
-        {
-          stats.slice(0, 3).map((s) => (
-            <div>
-              <dt>{s.label}</dt>
-              <dd>{s.value}</dd>
-            </div>
-          ))
-        }
-      </dl>
     </div>
 
     <div class="lineage-panel lg:col-span-2" aria-label={t("home.timeline")}>
@@ -165,7 +154,6 @@ const stats = [
           <h2>{t("home.timeline")}</h2>
         </div>
         <p>{t("home.lineageBody")}</p>
-        <span>{lineage.length} {t("home.statGenerations")}</span>
       </div>
       <ol class="lineage-track" style={`--lineage-count: ${lineage.length}`}>
         {

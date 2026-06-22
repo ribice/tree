@@ -2,6 +2,8 @@
 name: "Mujo Hasić"
 sex: "m"
 parents: [mehaga-hasic, pasa]
+spouses:
+  - bisera-mujina
 tagline: "Sin Paše i Mehage"
 ---
 

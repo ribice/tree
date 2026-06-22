@@ -1,9 +1,11 @@
 import { BOX_H, BOX_W, type PositionedPerson } from "../../lib/tree-layout";
+import { treePersonTooltip, type TreeTooltipLabels } from "./tree-person-details";
 
 interface TreePersonCardProps {
   node: PositionedPerson;
   basePath: string;
   livingLabel: string;
+  detailLabels: TreeTooltipLabels;
   highlighted: boolean;
   dim: number;
   onHoverChange: (hovering: boolean) => void;
@@ -13,11 +15,14 @@ export function TreePersonCard({
   node,
   basePath,
   livingLabel,
+  detailLabels,
   highlighted,
   dim,
   onHoverChange,
 }: TreePersonCardProps) {
   const person = node.person;
+  const displayName = person.treeName || person.name;
+  const tooltip = treePersonTooltip(person, detailLabels);
   const sexClass =
     person.sex === "f"
       ? "tree-person-female"
@@ -36,6 +41,7 @@ export function TreePersonCard({
     >
       <a
         href={`${basePath}/${person.id}`}
+        title={tooltip}
         onMouseEnter={() => onHoverChange(true)}
         onMouseLeave={() => onHoverChange(false)}
         className={`tree-person-card group relative flex h-full w-full items-center gap-3 rounded-lg border bg-surface px-3 py-2.5 shadow-sm transition duration-150 hover:-translate-y-0.5 hover:border-accent hover:shadow-lg ${sexClass} ${
@@ -66,7 +72,7 @@ export function TreePersonCard({
         </span>
         <span className="min-w-0 flex-1 leading-tight">
           <span className="block truncate pr-2 text-[15px] font-semibold text-ink group-hover:text-accent">
-            {person.name}
+            {displayName}
           </span>
           {person.lifespan && (
             <span className="mt-0.5 block truncate text-xs font-medium text-muted">

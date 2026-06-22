@@ -3,6 +3,7 @@ import { render } from "astro:content";
 import Avatar from "../Avatar.astro";
 import {
   getPeople,
+  getAllPeople,
   getTranslations,
   relationships,
   lifespan,
@@ -11,6 +12,7 @@ import {
   generation,
   spouseLinks,
   type Person,
+  type PeopleView,
 } from "../../lib/people";
 import { useTranslations, localize, type Locale } from "../../i18n/ui";
 import { publicDate } from "../../lib/privacy";
@@ -20,11 +22,13 @@ import PersonMiniCard from "../ui/PersonMiniCard.astro";
 interface Props {
   lang: Locale;
   person: Person;
+  view?: PeopleView;
 }
-const { lang, person } = Astro.props;
+const { lang, person, view = "core" } = Astro.props;
 const t = useTranslations(lang);
 
-const people = await getPeople();
+const isExtendedProfile = view === "extended";
+const people = isExtendedProfile ? await getAllPeople() : await getPeople();
 const translations = await getTranslations();
 const rels = relationships(person, people);
 
@@ -34,7 +38,7 @@ const bioEntry = lang === "en" && translation ? translation : person;
 const { Content } = await render(bioEntry as Person);
 
 const tagline = displayTaglineFor(person, people, translations, lang);
-const peoplePath = localize("/people", lang);
+const peoplePath = localize(isExtendedProfile ? "/extended/people" : "/people", lang);
 
 const sMeta = new Map(spouseLinks(person).map((l) => [l.id, l]));
 const marriageNote = (id: string): string | undefined => {
@@ -60,8 +64,9 @@ const span = lifespan(person, lang);
 const { data } = person;
 const living = isLiving(person);
 const gen = generation(person, people);
-const treeHref = `${localize("/tree", lang)}?focus=${person.id}`;
-const branchHref = `${localize("/tree", lang)}?branch=${person.id}`;
+const treeBasePath = localize(isExtendedProfile ? "/extended/tree" : "/tree", lang);
+const treeHref = `${treeBasePath}?focus=${person.id}`;
+const branchHref = `${treeBasePath}?branch=${person.id}`;
 const shownBorn = data.born ? publicDate(data.born, living) : undefined;
 const facts = [
   shownBorn && { label: t("person.born"), value: shownBorn },

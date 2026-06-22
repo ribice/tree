@@ -3,6 +3,7 @@ name: "Hafa Pekmez"
 sex: "f"
 born: "16.11.1948"
 spouses:
+  - refik-suman
   - mustafa-paldum
 tagline: "Majka Selme Ribić"
 ---

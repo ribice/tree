@@ -1,0 +1,49 @@
+---
+import Layout from "../../../../layouts/Layout.astro";
+import ProfileView from "../../../../components/views/ProfileView.astro";
+import { getAllPeople, getTranslations } from "../../../../lib/people";
+import { useTranslations } from "../../../../i18n/ui";
+import {
+  breadcrumbJsonLd,
+  canonicalUrl,
+  personDescription,
+  personJsonLd,
+} from "../../../../lib/seo";
+
+export async function getStaticPaths() {
+  const people = await getAllPeople();
+  return people.map((person) => ({ params: { id: person.id }, props: { person } }));
+}
+
+const { person } = Astro.props;
+const t = useTranslations("en");
+const people = await getAllPeople();
+const translations = await getTranslations();
+const canonical = canonicalUrl(Astro.url.pathname, "en");
+const description = personDescription(person, translations, "en");
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: t("site.short"), url: canonicalUrl("/", "en") },
+    { name: t("dir.title"), url: canonicalUrl("/extended/people/", "en") },
+    { name: person.data.name, url: canonical },
+  ]),
+  personJsonLd({
+    person,
+    people,
+    translations,
+    locale: "en",
+    url: canonical,
+  }),
+];
+---
+
+<Layout
+  lang="en"
+  title={`${person.data.name} · ${t("view.extended")} · ${t("site.title")}`}
+  description={description}
+  ogType="profile"
+  ogImagePath={`/og/${person.id}.png`}
+  jsonLd={jsonLd}
+>
+  <ProfileView lang="en" person={person} view="extended" />
+</Layout>

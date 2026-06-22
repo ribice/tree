@@ -39,6 +39,8 @@ const people = defineCollection({
       .default([]),
     // Path to a photo under /public, e.g. "/photos/jane-smith.jpg"
     photo: z.string().optional(),
+    // Extended people are public, but hidden from the default tree/list/stats views.
+    visibility: z.enum(["extended"]).optional(),
     // Short one-line descriptor shown under the name, e.g. "Carpenter, gardener"
     tagline: z.string().optional(),
   }),

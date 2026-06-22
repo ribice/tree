@@ -25,4 +25,9 @@ describe("FamilyTree structure", () => {
     expect(familyTree).not.toContain("function PersonCard(");
     expect(familyTree).not.toContain("function PillButton(");
   });
+
+  it("renders visible marriage date labels on marriage connectors", () => {
+    expect(familyTree).toContain("marriageLabel");
+    expect(familyTree).toContain("<text");
+  });
 });

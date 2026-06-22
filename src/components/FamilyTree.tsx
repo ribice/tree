@@ -25,6 +25,9 @@ export interface TreeLabels {
   collapseAll: string;
   living: string;
   deceased: string;
+  born: string;
+  died: string;
+  birthplace: string;
   female: string;
   male: string;
   search: string;
@@ -212,11 +215,15 @@ export default function FamilyTree({
   };
 
   const showMore = (n: number) => labels.showMore.replace("{n}", String(n));
+  const marriageLabel = (married?: string, divorced?: string) => {
+    if (married && divorced) return `${married} - ${divorced}`;
+    return married || divorced || "";
+  };
   const normalizedSearch = searchQuery.trim().toLocaleLowerCase();
   const searchResults = normalizedSearch
     ? treePeople
         .filter((p) =>
-          [p.name, p.tagline, p.lifespan]
+          [p.name, p.treeName, p.tagline, p.lifespan, p.birthplace]
             .filter(Boolean)
             .some((value) =>
               value!.toLocaleLowerCase().includes(normalizedSearch),
@@ -280,26 +287,48 @@ export default function FamilyTree({
               style={{ transition: "opacity 0.2s ease" }}
             />
           ))}
-          {layout.marriages.map((m, i) => (
-            <line
-              key={`m${i}`}
-              x1={m.x1}
-              y1={m.y}
-              x2={m.x2}
-              y2={m.y}
-              stroke="var(--color-branch)"
-              strokeWidth={2.5}
-              strokeDasharray={m.divorced ? "5 5" : undefined}
-              opacity={marriageDim(m.aId, m.bId)}
-              style={{ transition: "opacity 0.2s ease" }}
-            />
-          ))}
+          {layout.marriages.map((m, i) => {
+            const label = marriageLabel(m.married, m.divorcedDate);
+            const opacity = marriageDim(m.aId, m.bId);
+            return (
+              <g
+                key={`m${i}`}
+                opacity={opacity}
+                style={{ transition: "opacity 0.2s ease" }}
+              >
+                <line
+                  x1={m.x1}
+                  y1={m.y}
+                  x2={m.x2}
+                  y2={m.y}
+                  stroke="var(--color-branch)"
+                  strokeWidth={2.5}
+                  strokeDasharray={m.divorced ? "5 5" : undefined}
+                />
+                {label && (
+                  <text
+                    x={(m.x1 + m.x2) / 2}
+                    y={m.y - 8}
+                    textAnchor="middle"
+                    className="tree-marriage-label"
+                  >
+                    {label}
+                  </text>
+                )}
+              </g>
+            );
+          })}
           {layout.nodes.map((n) => (
             <TreePersonCard
               key={n.person.id}
               node={n}
               basePath={basePath}
               livingLabel={labels.living}
+              detailLabels={{
+                born: labels.born,
+                died: labels.died,
+                birthplace: labels.birthplace,
+              }}
               highlighted={highlight === n.person.id}
               dim={nodeDim(n.person.id)}
               onHoverChange={(on) => {
@@ -319,6 +348,7 @@ export default function FamilyTree({
                 <button
                   type="button"
                   aria-label={tg.collapsed ? showMore(tg.count) : labels.collapseAll}
+                  data-tree-control
                   onPointerDown={(e) => e.stopPropagation()}
                   onClick={() => toggle(tg.anchorId)}
                   className="pointer-events-auto flex items-center gap-0.5 rounded-full border border-line bg-surface px-2 py-0.5 text-[11px] font-semibold text-muted shadow-sm transition hover:border-accent hover:text-accent"

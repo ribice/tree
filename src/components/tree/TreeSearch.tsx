@@ -52,11 +52,12 @@ export function TreeSearch({
               <button
                 type="button"
                 key={person.id}
+                data-tree-control
                 onClick={() => onFocusPerson(person.id)}
                 className="tree-search-result"
               >
                 <span>
-                  <strong>{person.name}</strong>
+                  <strong>{person.treeName || person.name}</strong>
                   <small>
                     {[person.lifespan, person.tagline].filter(Boolean).join(" - ")}
                   </small>

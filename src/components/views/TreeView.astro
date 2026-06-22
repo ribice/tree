@@ -1,16 +1,19 @@
 ---
 import FamilyTree from "../FamilyTree.tsx";
-import { getPeople } from "../../lib/people";
+import ViewModeToggle from "../ViewModeToggle.astro";
+import { getPeople, type PeopleView } from "../../lib/people";
 import { useTranslations, localize, type Locale } from "../../i18n/ui";
 
 interface Props {
   lang: Locale;
+  view?: PeopleView;
 }
-const { lang } = Astro.props;
+const { lang, view = "core" } = Astro.props;
 const t = useTranslations(lang);
 
-const people = await getPeople();
-const dataUrl = localize("/tree-data.json", lang);
+const people = await getPeople(view);
+const dataUrl = localize(view === "extended" ? "/extended/tree-data.json" : "/tree-data.json", lang);
+const peoplePath = localize(view === "extended" ? "/extended/people" : "/people", lang);
 
 const labels = {
   hint: t("tree.hint"),
@@ -23,6 +26,9 @@ const labels = {
   collapseAll: t("tree.collapseAll"),
   living: t("tree.living"),
   deceased: t("tree.deceased"),
+  born: t("person.born"),
+  died: t("person.died"),
+  birthplace: t("person.birthplace"),
   female: t("tree.female"),
   male: t("tree.male"),
   showMore: t("tree.showMore"),
@@ -37,7 +43,7 @@ const labels = {
 ---
 
 <section
-  class="tree-topper mx-auto flex max-w-[1600px] flex-col gap-4 px-5 pt-10 pb-4 sm:flex-row sm:items-end sm:justify-between"
+  class="tree-topper mx-auto flex max-w-[1600px] flex-col gap-4 px-5 pt-10 pb-4 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between"
 >
   <div>
     <p class="eyebrow">{t("home.eyebrow", { n: people.length })}</p>
@@ -53,6 +59,7 @@ const labels = {
   >
     ↓ {t("tree.poster")}
   </a>
+  <ViewModeToggle lang={lang} current={view} section="tree" />
 </section>
 
 <section class="mx-auto max-w-[1600px] px-5 pb-12">
@@ -60,6 +67,6 @@ const labels = {
     client:load
     dataUrl={dataUrl}
     labels={labels}
-    basePath={localize("/people", lang)}
+    basePath={peoplePath}
   />
 </section>

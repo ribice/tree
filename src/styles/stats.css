@@ -1,5 +1,10 @@
 .stats-hero {
   position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .stats-hero {

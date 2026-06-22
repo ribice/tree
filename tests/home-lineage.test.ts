@@ -18,4 +18,12 @@ describe("home lineage timeline", () => {
     expect(styles).toContain(".lineage-panel");
     expect(styles).toContain(".lineage-card");
   });
+
+  it("keeps the headline stats only in the left hero area", () => {
+    expect(homeView).toContain("lg:items-start");
+    expect(homeView).toContain("home.kicker");
+    expect(homeView).not.toContain("family-ledger-stats");
+    expect(homeView).not.toContain("lineage.length} {t(\"home.statGenerations\")");
+    expect(styles).not.toContain(".family-ledger-stats");
+  });
 });

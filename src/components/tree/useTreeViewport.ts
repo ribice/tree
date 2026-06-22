@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { MouseEvent, PointerEvent, WheelEvent } from "react";
 import { BOX_H, BOX_W, type Layout } from "../../lib/tree-layout";
+import {
+  isInteractiveTreeTarget,
+  shouldSuppressTreeClick,
+} from "./tree-interactions";
 
 export interface Transform {
   x: number;
@@ -117,6 +121,7 @@ export function useTreeViewport(layout: Layout, fitKey: string) {
   };
 
   const onPointerDown = (event: PointerEvent) => {
+    if (isInteractiveTreeTarget(event.target)) return;
     (event.target as Element).setPointerCapture?.(event.pointerId);
     pointers.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
     if (pointers.current.size === 1) {
@@ -186,10 +191,11 @@ export function useTreeViewport(layout: Layout, fitKey: string) {
   };
 
   const onClickCapture = (event: MouseEvent) => {
-    if (drag.current.moved > 6) {
+    if (shouldSuppressTreeClick(drag.current.moved, event.target)) {
       event.preventDefault();
       event.stopPropagation();
     }
+    drag.current.moved = 0;
   };
 
   const zoomBy = (factor: number) => {
