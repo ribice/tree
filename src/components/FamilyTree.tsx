@@ -4,6 +4,7 @@ import {
   computeLayout,
   BOX_W,
   BOX_H,
+  type Layout,
   type PositionedPerson,
 } from "../lib/tree-layout";
 
@@ -24,12 +25,16 @@ export interface TreeLabels {
   searchPlaceholder: string;
   searchEmpty: string;
   center: string;
+  loading: string;
+  branchMode: string;
+  showAll: string;
   /** "+{n} more" / "još {n}" — {n} is replaced */
   showMore: string;
 }
 
 interface Props {
-  people: TreeNodePerson[];
+  people?: TreeNodePerson[];
+  dataUrl?: string;
   labels: TreeLabels;
   basePath: string; // "/people" (bs) or "/en/people" (en)
 }
@@ -82,21 +87,101 @@ const MAX_FIT_K = 1.05;
 const clamp = (v: number, lo: number, hi: number) =>
   Math.min(hi, Math.max(lo, v));
 
-export default function FamilyTree({ people, labels, basePath }: Props) {
+const EMPTY_LAYOUT: Layout = {
+  nodes: [],
+  marriages: [],
+  links: [],
+  toggles: [],
+  width: 1,
+  height: 1,
+};
+
+function updateBranchParam(id: string | null) {
+  try {
+    const url = new URL(window.location.href);
+    if (id) url.searchParams.set("branch", id);
+    else url.searchParams.delete("branch");
+    window.history.replaceState(null, "", url);
+  } catch {}
+}
+
+export default function FamilyTree({
+  people: initialPeople = [],
+  dataUrl,
+  labels,
+  basePath,
+}: Props) {
+  const [people, setPeople] = useState<TreeNodePerson[]>(initialPeople);
+  const [loading, setLoading] = useState(Boolean(dataUrl && !initialPeople.length));
+  const [branchTarget, setBranchTarget] = useState<string | null>(null);
   const [collapsed, setCollapsed] = useState<Set<string>>(
     () => new Set(DEFAULT_COLLAPSED),
   );
+  useEffect(() => {
+    if (!dataUrl) return;
+    let cancelled = false;
+    setLoading(true);
+    fetch(dataUrl)
+      .then((response) => {
+        if (!response.ok) throw new Error(`Tree data failed: ${response.status}`);
+        return response.json() as Promise<TreeNodePerson[]>;
+      })
+      .then((items) => {
+        if (!cancelled) setPeople(items);
+      })
+      .catch(() => {
+        if (!cancelled) setPeople(initialPeople);
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [dataUrl]);
+
+  useEffect(() => {
+    try {
+      setBranchTarget(new URLSearchParams(window.location.search).get("branch"));
+    } catch {}
+  }, []);
+
+  const branchSet = useMemo(() => {
+    if (!branchTarget || !people.some((p) => p.id === branchTarget)) return null;
+    const ids = new Set([
+      branchTarget,
+      ...ancestorsOf(branchTarget, people),
+      ...descendantsOf(branchTarget, people),
+    ]);
+    for (const person of people) {
+      if (ids.has(person.id)) {
+        for (const spouseId of person.spouses) ids.add(spouseId);
+      }
+    }
+    return ids;
+  }, [branchTarget, people]);
+
+  const treePeople = useMemo(
+    () => (branchSet ? people.filter((p) => branchSet.has(p.id)) : people),
+    [branchSet, people],
+  );
+  const branchPerson = branchTarget
+    ? people.find((person) => person.id === branchTarget)
+    : undefined;
   const layout = useMemo(
-    () => computeLayout(people, collapsed),
-    [people, collapsed],
+    () => (treePeople.length ? computeLayout(treePeople, collapsed) : EMPTY_LAYOUT),
+    [treePeople, collapsed],
   );
   const layoutRef = useRef(layout);
   layoutRef.current = layout;
 
   // anchor ids that can be collapsed (used by "collapse all")
   const allCollapsible = useMemo(
-    () => computeLayout(people, new Set()).toggles.map((t) => t.anchorId),
-    [people],
+    () =>
+      treePeople.length
+        ? computeLayout(treePeople, new Set()).toggles.map((t) => t.anchorId)
+        : [],
+    [treePeople],
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -111,6 +196,7 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
   const [hoverEnabled, setHoverEnabled] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const urlFocusHandled = useRef(false);
 
   // The hovered person's bloodline (ancestors + descendants + self), or null.
   const lineage = useMemo(() => {
@@ -132,6 +218,7 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
     const el = containerRef.current;
     if (!el) return;
     const lay = layoutRef.current;
+    if (!lay.nodes.length) return;
     const vw = el.clientWidth;
     const vh = el.clientHeight;
     if (vw < 640) {
@@ -164,6 +251,23 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
   useEffect(() => {
     fit();
     setReady(true);
+    const el = containerRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => fit());
+    ro.observe(el);
+    return () => ro.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (!treePeople.length) return;
+    fit();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [branchTarget, treePeople.length]);
+
+  useEffect(() => {
+    if (urlFocusHandled.current || !people.length) return;
+    urlFocusHandled.current = true;
     // Deep-link: ?focus=<id> reveals, centers and highlights a person.
     try {
       const id = new URLSearchParams(window.location.search).get("focus");
@@ -177,13 +281,7 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
         setFocusTarget(id);
       }
     } catch {}
-    const el = containerRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(() => fit());
-    ro.observe(el);
-    return () => ro.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [people]);
 
   useEffect(() => {
     const syncFullscreen = () => {
@@ -374,7 +472,7 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
   const showMore = (n: number) => labels.showMore.replace("{n}", String(n));
   const normalizedSearch = searchQuery.trim().toLocaleLowerCase();
   const searchResults = normalizedSearch
-    ? people
+    ? treePeople
         .filter((p) =>
           [p.name, p.tagline, p.lifespan]
             .filter(Boolean)
@@ -387,6 +485,14 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
   const selectFirstSearchResult = () => {
     if (searchResults[0]) focusPerson(searchResults[0].id);
   };
+  const branchLabel = branchPerson
+    ? labels.branchMode.replace("{name}", branchPerson.name)
+    : "";
+  const clearBranch = () => {
+    setBranchTarget(null);
+    setSearchQuery("");
+    updateBranchParam(null);
+  };
 
   return (
     <div
@@ -398,6 +504,12 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
         backgroundSize: "42px 42px, 42px 42px, 100% 100%",
       }}
     >
+      {loading && (
+        <div className="tree-loading" role="status">
+          {labels.loading}
+        </div>
+      )}
+
       <svg
         className="h-full w-full touch-none select-none"
         style={{
@@ -521,6 +633,15 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
           </div>
         )}
       </div>
+
+      {branchPerson && (
+        <div className="tree-branch-banner">
+          <span>{branchLabel}</span>
+          <button type="button" onClick={clearBranch}>
+            {labels.showAll}
+          </button>
+        </div>
+      )}
 
       {/* Legend */}
       <div className="tree-legend pointer-events-none absolute top-[7.35rem] left-4 flex flex-col gap-1.5 rounded-lg border border-line bg-surface/90 px-3 py-2 text-xs text-muted shadow-sm backdrop-blur">

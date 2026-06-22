@@ -9,12 +9,12 @@ import {
   initials,
   isLiving,
   generation,
-  taglineFor,
   spouseLinks,
   type Person,
 } from "../../lib/people";
 import { useTranslations, localize, type Locale } from "../../i18n/ui";
 import { publicDate } from "../../lib/privacy";
+import { displayTaglineFor } from "../../lib/display";
 
 interface Props {
   lang: Locale;
@@ -32,7 +32,7 @@ const translation = translations.get(person.id);
 const bioEntry = lang === "en" && translation ? translation : person;
 const { Content } = await render(bioEntry as Person);
 
-const tagline = taglineFor(person, translations, lang);
+const tagline = displayTaglineFor(person, people, translations, lang);
 const peoplePath = localize("/people", lang);
 
 const sMeta = new Map(spouseLinks(person).map((l) => [l.id, l]));
@@ -60,6 +60,7 @@ const { data } = person;
 const living = isLiving(person);
 const gen = generation(person, people);
 const treeHref = `${localize("/tree", lang)}?focus=${person.id}`;
+const branchHref = `${localize("/tree", lang)}?branch=${person.id}`;
 const shownBorn = data.born ? publicDate(data.born, living) : undefined;
 const facts = [
   shownBorn && { label: t("person.born"), value: shownBorn },
@@ -80,6 +81,12 @@ const snapshotCards = [
   { label: t("person.children"), value: String(rels.children.length) },
   { label: t("person.family"), value: t("person.generation", { n: gen }) },
 ];
+const miniMapGroups = [
+  { label: t("person.parents"), items: rels.parents.map((p) => ({ p })) },
+  { label: t("person.self"), items: [{ p: person, self: true }] },
+  { label: t("person.spouse"), items: rels.spouses.map((p) => ({ p })) },
+  { label: t("person.children"), items: rels.children.slice(0, 8).map((p) => ({ p })) },
+].filter((group) => group.items.length > 0);
 ---
 
 <article class="mx-auto max-w-6xl px-5 py-10">
@@ -87,9 +94,14 @@ const snapshotCards = [
     <a href={peoplePath} class="text-sm text-muted hover:text-accent">
       ← {t("person.back")}
     </a>
-    <a href={treeHref} class="text-sm font-medium text-accent hover:underline">
-      {t("person.viewInTree")}
-    </a>
+    <div class="flex flex-wrap justify-end gap-x-4 gap-y-2 text-sm font-medium">
+      <a href={treeHref} class="text-accent hover:underline">
+        {t("person.viewInTree")}
+      </a>
+      <a href={branchHref} class="text-accent hover:underline">
+        {t("person.openBranch")}
+      </a>
+    </div>
   </div>
 
   <header class="profile-hero mt-6" data-sex={data.sex}>
@@ -177,6 +189,60 @@ const snapshotCards = [
         ))
       }
     </dl>
+  </section>
+
+  <section class="family-mini-map mt-6" aria-label={t("person.familyMap")}>
+    <div class="family-mini-map-head">
+      <div>
+        <p class="eyebrow">{t("person.family")}</p>
+        <h2>{t("person.familyMap")}</h2>
+      </div>
+      <a href={branchHref}>{t("person.openBranch")}</a>
+    </div>
+    <div class="family-mini-map-grid">
+      {
+        miniMapGroups.map((group) => (
+          <div class="family-mini-map-group">
+            <h3>{group.label}</h3>
+            <ul>
+              {group.items.map(({ p: rel, self }) => (
+                <li>
+                  {
+                    self ? (
+                      <div class="family-mini-card family-mini-self" data-sex={rel.data.sex}>
+                        <Avatar
+                          name={rel.data.name}
+                          photo={rel.data.photo}
+                          initials={initials(rel.data.name)}
+                          sex={rel.data.sex}
+                          size="xs"
+                        />
+                        <span>{rel.data.name}</span>
+                      </div>
+                    ) : (
+                      <a
+                        href={`${peoplePath}/${rel.id}`}
+                        class="family-mini-card"
+                        data-sex={rel.data.sex}
+                      >
+                        <Avatar
+                          name={rel.data.name}
+                          photo={rel.data.photo}
+                          initials={initials(rel.data.name)}
+                          sex={rel.data.sex}
+                          size="xs"
+                        />
+                        <span>{rel.data.name}</span>
+                      </a>
+                    )
+                  }
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
   </section>
 
   <div class="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_19rem] lg:items-start">

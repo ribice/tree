@@ -3,13 +3,13 @@ import Avatar from "../Avatar.astro";
 import {
   getPeople,
   getTranslations,
-  taglineFor,
   lifespan,
   initials,
   birthYear,
   generation,
   isLiving,
 } from "../../lib/people";
+import { displayTaglineFor } from "../../lib/display";
 import { useTranslations, localize, type Locale } from "../../i18n/ui";
 
 interface Props {
@@ -190,7 +190,7 @@ const stats = [
                 </span>
                 <span class="lineage-card-name">{p.data.name}</span>
                 <span class="lineage-card-meta">
-                  {[lifespan(p, lang), taglineFor(p, translations, lang)]
+                  {[lifespan(p, lang), displayTaglineFor(p, people, translations, lang)]
                     .filter(Boolean)
                     .join(" · ")}
                 </span>
@@ -253,9 +253,9 @@ const stats = [
                     {p.data.name}
                   </span>
                   <span class="block truncate text-sm text-muted">
-                    {[lifespan(p, lang), taglineFor(p, translations, lang)]
-                      .filter(Boolean)
-                      .join(" · ")}
+                      {[lifespan(p, lang), displayTaglineFor(p, people, translations, lang)]
+                        .filter(Boolean)
+                        .join(" · ")}
                   </span>
                 </span>
               </a>

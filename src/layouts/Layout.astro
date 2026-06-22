@@ -106,20 +106,6 @@ const jsonLdItems = [
         <script type="application/ld+json" set:html={jsonLdScript(item)} />
       ))
     }
-    <script is:inline>
-      // Keep each domain on its language: stablo.* → Bosnian, tree.* → English.
-      (function () {
-        try {
-          var h = location.hostname,
-            p = location.pathname,
-            isEn = p === "/en" || p.indexOf("/en/") === 0;
-          if (h.indexOf("tree.") === 0 && !isEn)
-            location.replace("/en" + (p === "/" ? "/" : p) + location.hash);
-          else if (h.indexOf("stablo.") === 0 && isEn)
-            location.replace((p.replace(/^\/en/, "") || "/") + location.hash);
-        } catch (e) {}
-      })();
-    </script>
   </head>
   <body class="flex min-h-screen flex-col">
     <a class="skip-link" href="#content">{t("nav.skip")}</a>
@@ -224,6 +210,9 @@ const jsonLdItems = [
           >
           <a href={localize("/changelog", lang)} class="transition hover:text-accent"
             >{t("nav.changelog")}</a
+          >
+          <a href={localize("/quality", lang)} class="transition hover:text-accent"
+            >{t("quality.title")}</a
           >
         </nav>
         <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">

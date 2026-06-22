@@ -42,7 +42,17 @@ const opt = t("add.optional");
       <input id="name" name="name" required class="field" />
     </div>
 
-    <div class="grid gap-5 sm:grid-cols-2">
+    <div class="grid gap-5 sm:grid-cols-3">
+      <div>
+        <label class="lbl" for="sex">
+          {t("add.sex")} <span class="opt">({opt})</span>
+        </label>
+        <select id="sex" name="sex" class="field">
+          <option value="">{t("add.unknown")}</option>
+          <option value="m">{t("tree.male")}</option>
+          <option value="f">{t("tree.female")}</option>
+        </select>
+      </div>
       <div>
         <label class="lbl" for="maidenName">
           {t("add.maiden")} <span class="opt">({opt})</span>
@@ -55,6 +65,17 @@ const opt = t("add.optional");
         </label>
         <input id="nickname" name="nickname" class="field" />
       </div>
+    </div>
+
+    <div>
+      <label class="lbl" for="relationshipToFamily">
+        {t("add.relationshipToFamily")} <span class="opt">({opt})</span>
+      </label>
+      <input
+        id="relationshipToFamily"
+        name="relationshipToFamily"
+        class="field"
+      />
     </div>
 
     <div class="grid gap-5 sm:grid-cols-3">
@@ -114,6 +135,21 @@ const opt = t("add.optional");
 
     <div class="grid gap-5 sm:grid-cols-2">
       <div>
+        <label class="lbl" for="photoLink">
+          {t("add.photoLink")} <span class="opt">({opt})</span>
+        </label>
+        <input id="photoLink" name="photoLink" type="url" class="field" />
+      </div>
+      <div>
+        <label class="lbl" for="sourceNotes">
+          {t("add.sourceNotes")} <span class="opt">({opt})</span>
+        </label>
+        <textarea id="sourceNotes" name="sourceNotes" rows="3" class="field"></textarea>
+      </div>
+    </div>
+
+    <div class="grid gap-5 sm:grid-cols-2">
+      <div>
         <label class="lbl" for="submittedBy">{t("add.yourName")}</label>
         <input id="submittedBy" name="submittedBy" class="field" />
       </div>
@@ -122,6 +158,11 @@ const opt = t("add.optional");
         <input id="email" name="email" type="email" class="field" />
       </div>
     </div>
+
+    <label class="consent-check">
+      <input name="privacyConsent" type="checkbox" required />
+      <span>{t("add.privacyConsent")}</span>
+    </label>
 
     <button
       type="submit"
@@ -159,5 +200,17 @@ const opt = t("add.optional");
   .opt {
     font-weight: 400;
     color: var(--color-muted);
+  }
+  .consent-check {
+    display: flex;
+    gap: 0.65rem;
+    align-items: flex-start;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+  .consent-check input {
+    margin-top: 0.25rem;
+    accent-color: var(--color-accent);
   }
 </style>

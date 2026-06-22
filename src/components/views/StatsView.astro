@@ -1,6 +1,7 @@
 ---
 import { getPeople, birthYear, generation, isLiving } from "../../lib/people";
 import { useTranslations, type Locale } from "../../i18n/ui";
+import { collectDataQuality } from "../../lib/data-quality";
 
 interface Props {
   lang: Locale;
@@ -9,6 +10,8 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 
 const people = await getPeople();
+const qualityGroups = collectDataQuality(people);
+const dataIssueCount = qualityGroups.reduce((sum, group) => sum + group.issues.length, 0);
 
 const years: number[] = [];
 for (const p of people) {
@@ -38,6 +41,7 @@ const cards = [
   { label: t("stats.people"), value: String(people.length) },
   { label: t("stats.generations"), value: String(generations) },
   { label: t("stats.living"), value: String(livingCount) },
+  { label: t("stats.dataIssues"), value: String(dataIssueCount) },
   {
     label: t("stats.span"),
     value: minYear && maxYear ? `${minYear}–${maxYear}` : "—",
@@ -46,6 +50,58 @@ const cards = [
 
 const maxSurnameCount = surnames[0]?.[1] ?? 1;
 const maxPlaceCount = places[0]?.[1] ?? 1;
+const pct = (count: number) => Math.round((count / Math.max(people.length, 1)) * 100);
+const completenessCards = [
+  {
+    label: t("stats.withBirth"),
+    count: people.filter((p) => p.data.born).length,
+  },
+  {
+    label: t("stats.withBirthplace"),
+    count: people.filter((p) => p.data.birthplace).length,
+  },
+  {
+    label: t("stats.withParents"),
+    count: people.filter((p) => p.data.parents.length > 0).length,
+  },
+  {
+    label: t("stats.withBio"),
+    count: people.filter((p) => p.body?.trim()).length,
+  },
+  {
+    label: t("stats.withPhoto"),
+    count: people.filter((p) => p.data.photo).length,
+  },
+].map((item) => ({ ...item, percent: pct(item.count) }));
+
+const generationMap = new Map<number, number>();
+for (const person of people) {
+  const gen = generation(person, people);
+  generationMap.set(gen, (generationMap.get(gen) ?? 0) + 1);
+}
+const generationRows = [...generationMap.entries()]
+  .sort((a, b) => a[0] - b[0])
+  .map(([gen, count]) => ({
+    label: t("person.generation", { n: gen }),
+    count,
+    percent: pct(count),
+  }));
+
+const decadeMap = new Map<string, number>();
+for (const person of people) {
+  const year = birthYear(person);
+  if (!year) continue;
+  const decade = Math.floor(year / 10) * 10;
+  decadeMap.set(`${decade}s`, (decadeMap.get(`${decade}s`) ?? 0) + 1);
+}
+const maxDecadeCount = Math.max(...decadeMap.values(), 1);
+const decadeRows = [...decadeMap.entries()]
+  .sort((a, b) => Number(a[0].slice(0, 4)) - Number(b[0].slice(0, 4)))
+  .map(([label, count]) => ({
+    label,
+    count,
+    percent: Math.round((count / maxDecadeCount) * 100),
+  }));
 
 // Approximate coordinates for known birthplaces (others simply aren't plotted).
 const COORDS: Record<string, [number, number]> = {
@@ -83,7 +139,7 @@ const projectedPoints = mapPoints.map((point) => ({
     </div>
   </div>
 
-  <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+  <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
     {
       cards.map((c) => (
         <div class="stat-tile">
@@ -94,6 +150,60 @@ const projectedPoints = mapPoints.map((point) => ({
         </div>
       ))
     }
+  </div>
+
+  <div class="stats-insight-grid mt-10">
+    <section class="stats-insight-card">
+      <h2>{t("stats.completeness")}</h2>
+      <ul>
+        {
+          completenessCards.map((item) => (
+            <li>
+              <div>
+                <span>{item.label}</span>
+                <strong>{item.percent}%</strong>
+              </div>
+              <meter min="0" max="100" value={item.percent}>{item.percent}%</meter>
+              <small>{item.count}/{people.length}</small>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="stats-insight-card">
+      <h2>{t("stats.generationsChart")}</h2>
+      <ul>
+        {
+          generationRows.map((item) => (
+            <li>
+              <div>
+                <span>{item.label}</span>
+                <strong>{item.count}</strong>
+              </div>
+              <meter min="0" max="100" value={item.percent}>{item.percent}%</meter>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="stats-insight-card">
+      <h2>{t("stats.decades")}</h2>
+      <ul>
+        {
+          decadeRows.map((item) => (
+            <li>
+              <div>
+                <span>{item.label}</span>
+                <strong>{item.count}</strong>
+              </div>
+              <meter min="0" max="100" value={item.percent}>{item.percent}%</meter>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
   </div>
 
   <div class="mt-10 grid gap-8 sm:grid-cols-2">

@@ -3,10 +3,10 @@ import Avatar from "../Avatar.astro";
 import {
   getPeople,
   getTranslations,
-  taglineFor,
   lifespan,
   initials,
 } from "../../lib/people";
+import { displayTaglineFor } from "../../lib/display";
 import { useTranslations, localize, type Locale } from "../../i18n/ui";
 
 interface Props {
@@ -91,7 +91,7 @@ const groupedPeople = [...groups.entries()].sort(([a], [b]) =>
             {group.map((p) => (
               <li
                 class="person-item min-w-0"
-                data-name={`${p.data.name} ${p.data.maidenName ?? ""} ${p.data.nickname ?? ""} ${taglineFor(p, translations, lang) ?? ""} ${lifespan(p, lang)}`.toLowerCase()}
+                data-name={`${p.data.name} ${p.data.maidenName ?? ""} ${p.data.nickname ?? ""} ${displayTaglineFor(p, people, translations, lang) ?? ""} ${lifespan(p, lang)}`.toLowerCase()}
               >
                 <a
                   href={`${peoplePath}/${p.id}`}
@@ -109,7 +109,7 @@ const groupedPeople = [...groups.entries()].sort(([a], [b]) =>
                       {p.data.name}
                     </span>
                     <span class="mt-0.5 block truncate text-sm text-muted">
-                      {[lifespan(p, lang), taglineFor(p, translations, lang)]
+                      {[lifespan(p, lang), displayTaglineFor(p, people, translations, lang)]
                         .filter(Boolean)
                         .join(" · ")}
                     </span>

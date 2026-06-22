@@ -20,4 +20,16 @@ describe("Netlify add-person form", () => {
     expect(ui).toContain('"add.successTitle"');
     expect(ui).toContain('"add.successBody"');
   });
+
+  it("collects relationship context, source notes, sex, and photo links", () => {
+    expect(addView).toContain('name="sex"');
+    expect(addView).toContain('name="relationshipToFamily"');
+    expect(addView).toContain('name="sourceNotes"');
+    expect(addView).toContain('name="photoLink"');
+    expect(addView).toContain('name="privacyConsent"');
+
+    expect(ui).toContain('"add.sex"');
+    expect(ui).toContain('"add.sourceNotes"');
+    expect(ui).toContain('"add.photoLink"');
+  });
 });

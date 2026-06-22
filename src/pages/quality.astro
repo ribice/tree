@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+import DataQualityView from "../components/views/DataQualityView.astro";
+import { useTranslations } from "../i18n/ui";
+const t = useTranslations("bs");
+---
+
+<Layout
+  lang="bs"
+  title={`${t("quality.title")} · ${t("site.title")}`}
+  description={t("meta.quality")}
+  noindex
+>
+  <DataQualityView lang="bs" />
+</Layout>

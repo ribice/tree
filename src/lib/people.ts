@@ -1,5 +1,6 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import type { Locale } from "../i18n/ui";
+import { displayTaglineFor } from "./display";
 import { isLikelyLivingDateSpan, publicLifespan } from "./privacy";
 
 export type Person = CollectionEntry<"people">;
@@ -148,7 +149,7 @@ export function toTreeData(
     id: p.id,
     name: p.data.name,
     sex: p.data.sex,
-    tagline: taglineFor(p, translations, locale),
+    tagline: displayTaglineFor(p, people, translations, locale),
     lifespan: lifespan(p, locale),
     photo: p.data.photo,
     initials: initials(p.data.name),

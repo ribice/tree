@@ -1,0 +1,83 @@
+---
+import { getPeople, getTranslations } from "../../lib/people";
+import {
+  collectDataQuality,
+  type DataQualityKind,
+} from "../../lib/data-quality";
+import { useTranslations, localize, type Locale } from "../../i18n/ui";
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const people = await getPeople();
+const translations = await getTranslations();
+const groups = collectDataQuality(people, translations);
+const totalIssues = groups.reduce((sum, group) => sum + group.issues.length, 0);
+const peoplePath = localize("/people", lang);
+const labels: Record<DataQualityKind, string> = {
+  missingBirth: t("quality.missingBirth"),
+  missingBirthplace: t("quality.missingBirthplace"),
+  missingParents: t("quality.missingParents"),
+  missingBio: t("quality.missingBio"),
+  missingSex: t("quality.missingSex"),
+  missingPhoto: t("quality.missingPhoto"),
+  duplicateName: t("quality.duplicateName"),
+  oneWaySpouse: t("quality.oneWaySpouse"),
+  unknownPlaceholder: t("quality.unknownPlaceholder"),
+  suspiciousTagline: t("quality.suspiciousTagline"),
+};
+---
+
+<section class="mx-auto max-w-6xl px-5 py-10 sm:py-12">
+  <div class="quality-hero">
+    <p class="eyebrow">{t("quality.eyebrow")}</p>
+    <h1>{t("quality.title")}</h1>
+    <p>{t("quality.subtitle")}</p>
+  </div>
+
+  <div class="mt-6 grid gap-3 sm:grid-cols-3">
+    <div class="stat-tile">
+      <dt>{t("quality.totalIssues")}</dt>
+      <dd>{totalIssues}</dd>
+    </div>
+    <div class="stat-tile">
+      <dt>{t("quality.peopleChecked")}</dt>
+      <dd>{people.length}</dd>
+    </div>
+    <div class="stat-tile">
+      <dt>{t("quality.groups")}</dt>
+      <dd>{groups.length}</dd>
+    </div>
+  </div>
+
+  <div class="quality-grid mt-8">
+    {
+      groups.map((group) => (
+        <section class="quality-panel">
+          <header>
+            <h2>{labels[group.kind]}</h2>
+            <span>{group.issues.length}</span>
+          </header>
+          <ul>
+            {group.issues.slice(0, 24).map((issue) => (
+              <li>
+                <a href={`${peoplePath}/${issue.personId}`}>
+                  {issue.personName}
+                </a>
+                {issue.detail && <small>{issue.detail}</small>}
+              </li>
+            ))}
+          </ul>
+          {group.issues.length > 24 && (
+            <p class="quality-more">
+              {t("quality.more", { n: group.issues.length - 24 })}
+            </p>
+          )}
+        </section>
+      ))
+    }
+  </div>
+</section>

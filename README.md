@@ -18,6 +18,15 @@ stiže nama na pregled i potom ga uvrstimo u stablo. Ko želi raditi direktno s
 podacima: svaka osoba je jedan `.md` fajl u `src/content/people/`, a fotografije
 idu u `public/photos/`.
 
+Za fotografiju profila dodaj optimizovanu sliku u `public/photos/`, po mogućnosti
+imenovanu prema id-u osobe, npr. `public/photos/avdikadija.jpg`, pa u frontmatter
+osobe upiši `photo: "/photos/avdikadija.jpg"`. Ako slika dolazi kroz formu,
+pošalji link u polje za fotografiju i kratko napiši izvor.
+
+Urednički pregled nepotpunih zapisa nalazi se na `/quality`; tu se vide osobe
+kojima nedostaju datumi, mjesta, biografije, spol, fotografije ili veze za
+provjeru.
+
 ## Pokretanje lokalno
 
 ```bash

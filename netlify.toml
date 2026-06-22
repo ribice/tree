@@ -17,5 +17,119 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "https://tree.ribic.ba/add"
+  to = "https://tree.ribic.ba/en/add/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://tree.ribic.ba/changelog"
+  to = "https://tree.ribic.ba/en/changelog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://tree.ribic.ba/people"
+  to = "https://tree.ribic.ba/en/people/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://tree.ribic.ba/people/*"
+  to = "https://tree.ribic.ba/en/people/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://tree.ribic.ba/poster.svg"
+  to = "https://tree.ribic.ba/en/poster.svg"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://tree.ribic.ba/quality"
+  to = "https://tree.ribic.ba/en/quality/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://tree.ribic.ba/stats"
+  to = "https://tree.ribic.ba/en/stats/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://tree.ribic.ba/thanks"
+  to = "https://tree.ribic.ba/en/thanks/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://tree.ribic.ba/tree"
+  to = "https://tree.ribic.ba/en/tree/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://stablo.ribic.ba/en/"
+  to = "https://stablo.ribic.ba/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://stablo.ribic.ba/en/add"
+  to = "https://stablo.ribic.ba/add/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://stablo.ribic.ba/en/changelog"
+  to = "https://stablo.ribic.ba/changelog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://stablo.ribic.ba/en/people"
+  to = "https://stablo.ribic.ba/people/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://stablo.ribic.ba/en/people/*"
+  to = "https://stablo.ribic.ba/people/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://stablo.ribic.ba/en/poster.svg"
+  to = "https://stablo.ribic.ba/poster.svg"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://stablo.ribic.ba/en/quality"
+  to = "https://stablo.ribic.ba/quality/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://stablo.ribic.ba/en/stats"
+  to = "https://stablo.ribic.ba/stats/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://stablo.ribic.ba/en/thanks"
+  to = "https://stablo.ribic.ba/thanks/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://stablo.ribic.ba/en/tree"
+  to = "https://stablo.ribic.ba/tree/"
+  status = 301
+  force = true
+
 # Submissions from the "Add a person" form are captured by Netlify Forms;
 # enable form notifications in the Netlify dashboard to get an email per entry.
