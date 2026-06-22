@@ -2,6 +2,7 @@
 name: "Hafa Dizdar"
 sex: "f"
 born: "1936"
+died: "30.09.2020"
 birthplace: "Glamoč"
 parents: [dervis-dizdar, ciba-ciric]
 spouses:

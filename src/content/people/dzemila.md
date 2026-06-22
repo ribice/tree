@@ -1,7 +1,7 @@
 ---
 name: "Džemila Ribić"
 sex: "f"
-maidenName: "Keca"
+maidenName: "Bajrami"
 born: "20.11.1944"
 birthplace: "Gostivar, Makedonija"
 spouses:

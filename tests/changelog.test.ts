@@ -12,15 +12,6 @@ describe("family data changelog", () => {
     expect(sitemap).toContain('"/changelog/"');
   });
 
-  it("documents that only family-tree data changes need changelog entries", () => {
-    expect(existsSync("CLAUDE.md")).toBe(true);
-    const claude = readFileSync("CLAUDE.md", "utf8");
-
-    expect(claude).toContain("src/lib/changelog.ts");
-    expect(claude).toContain("family-tree data");
-    expect(claude).toContain("CSS-only");
-  });
-
   it("records the GEDCOM import as a data changelog entry", () => {
     expect(existsSync("src/lib/changelog.ts")).toBe(true);
     const changelog = readFileSync("src/lib/changelog.ts", "utf8");

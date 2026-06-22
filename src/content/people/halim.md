@@ -2,6 +2,7 @@
 name: "Halim Ribić"
 sex: "m"
 born: "1934"
+died: "15.12.2019"
 parents: [rasim, fahra]
 spouses:
   - hafa-dizdar
