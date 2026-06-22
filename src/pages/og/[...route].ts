@@ -12,10 +12,10 @@ const pages = Object.fromEntries(
     .map((f) => {
       const { data } = matter(readFileSync(join(DIR, f), "utf8"));
       const id = f.replace(/\.md$/, "");
-      const { born, died, tagline, name } = data;
+      const { born, died, tagline, name, photo } = data;
       const span = born && died ? `${born} – ${died}` : born ? `r. ${born}` : died ? `u. ${died}` : "";
       const description = [span, tagline].filter(Boolean).join(" · ");
-      return [`${id}.png`, { title: name, description }];
+      return [`${id}.png`, { title: name, description, photo }];
     }),
 );
 
@@ -25,6 +25,9 @@ export const { getStaticPaths, GET } = await OGImageRoute({
   getImageOptions: (_path, page) => ({
     title: page.title,
     description: page.description,
+    // Profile photo (when present) shown at the top of the card. Photos live
+    // under public/, so the frontmatter path maps to ./public/<path>.
+    ...(page.photo ? { logo: { path: `./public${page.photo}`, size: [240] } } : {}),
     bgGradient: [
       [15, 29, 58],
       [30, 58, 115],
