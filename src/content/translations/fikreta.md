@@ -1,5 +1,5 @@
 ---
-tagline: "Mehmed's child"
+tagline: "Mehmed's daughter"
 ---
 
-Mehmed's child.
+Mehmed's daughter.

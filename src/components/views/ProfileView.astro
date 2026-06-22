@@ -78,12 +78,13 @@ const heroFacts = facts.slice(0, 3);
     </a>
   </div>
 
-  <header class="profile-hero mt-6">
+  <header class="profile-hero mt-6" data-sex={data.sex}>
     <div class="profile-hero-main">
       <Avatar
         name={data.name}
         photo={data.photo}
         initials={initials(data.name)}
+        sex={data.sex}
         size="lg"
         class="profile-avatar"
       />
@@ -173,11 +174,13 @@ const heroFacts = facts.slice(0, 3);
                         <a
                           href={`${peoplePath}/${rel.id}`}
                           class="person-card flex items-center gap-2 p-2 text-sm"
+                          data-sex={rel.data.sex}
                         >
                           <Avatar
                             name={rel.data.name}
                             photo={rel.data.photo}
                             initials={initials(rel.data.name)}
+                            sex={rel.data.sex}
                             size="xs"
                           />
                           <span class="min-w-0">

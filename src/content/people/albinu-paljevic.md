@@ -1,0 +1,9 @@
+---
+name: "Albinu Paljevic"
+sex: "f"
+born: "12.02.1996"
+parents: [miroslav-paljevic, eldina-laletovic]
+tagline: "Kćerka Miroslava i Eldine"
+---
+
+Albinu je rođena 12.02.1996. Roditelji su Miroslav Paljevic i Eldina Laletovic.

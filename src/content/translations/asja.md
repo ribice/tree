@@ -1,5 +1,5 @@
 ---
-tagline: "Mersid's daughter"
+tagline: "Daughter of Mersid Ribić and Selma Ribić"
 ---
 
-Asja, daughter of Mersid and Selma, was born in 2005.
+Asja was born 13.02.2004 in Mortsel, Antwerpen, Belgium. Daughter of Mersid Ribić and Selma Ribić.

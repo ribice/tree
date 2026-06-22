@@ -2,7 +2,7 @@
 name: Zilha Ribić
 sex: f
 parents: [malic]
-tagline: Dijete Malićevo
+tagline: Kćerka Malićevo
 ---
 
-Dijete Malićevo.
+Kćerka Malićevo.

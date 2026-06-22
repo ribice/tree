@@ -1,7 +1,7 @@
 ---
-name: Enes Ribić
-sex: m
-tagline: Najstariji predak kojeg znamo po imenu
+name: "Enes Ribić"
+sex: "m"
+tagline: "Najstariji predak kojeg znamo po imenu"
 ---
 
 Naš pra-predak kojeg znamo po imenu bio je Enes. Njegov sin bio je Omer, a Omerov sin Avdo — popularno zvan Avdikadija.

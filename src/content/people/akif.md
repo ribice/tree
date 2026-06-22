@@ -1,13 +1,14 @@
 ---
-name: Akif Ribić — Kifo
-sex: m
-nickname: Kifo
+name: "Akif Ribić — Kifo"
+sex: "m"
+nickname: "Kifo"
 born: "1797"
 died: "1867"
-birthplace: Jezero
+birthplace: "Jezero"
 parents: [avdikadija]
-spouses: [hanumica]
-tagline: Po njemu su nas prozvali Kifići
+spouses:
+  - hanumica
+tagline: "Po njemu su nas prozvali Kifići"
 ---
 
 Akif, ili kako su ga zvali Kifo, bio je jedan od četiri sina Avdikadijina. Po njemu su potomci njegovih sinova Avde i Himze u Jezeru — zvanih Avdo Kifin i Himzo Kifin — prozvani Kifići.

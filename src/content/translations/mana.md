@@ -1,5 +1,5 @@
 ---
-tagline: "Mirza's child"
+tagline: "Daughter of Ilijaz Ribić and Mirza Ribić"
 ---
 
-Mirza's child.
+Nermina was born 10.11.1952. Daughter of Ilijaz Ribić and Mirza Ribić. Husband: Mumin Keljalić.

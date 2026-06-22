@@ -1,5 +1,5 @@
 ---
-tagline: "Mirza's child"
+tagline: "Daughter of Ilijaz Ribić and Mirza Ribić"
 ---
 
-Mirza's child.
+Nedžada was born 26.03.1957. Daughter of Ilijaz Ribić and Mirza Ribić. Husband: Vahdet Zejnilagić.

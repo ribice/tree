@@ -1,5 +1,5 @@
 ---
-tagline: "Nerko's child"
+tagline: "Daughter of Nermin Ribić and Azemina Seferović"
 ---
 
-Nerko's child.
+Amela was born 04.02.1982. Daughter of Nermin Ribić and Azemina Seferović. Husband: Salko Glamoćić.

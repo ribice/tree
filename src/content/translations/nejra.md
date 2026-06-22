@@ -1,5 +1,5 @@
 ---
-tagline: "Sajma's daughter"
+tagline: "Daughter of Senad Alić and Sajma Alić"
 ---
 
-Sajma's daughter.
+Nejra was born 2001. Daughter of Senad Alić and Sajma Alić.

@@ -1,5 +1,5 @@
 ---
-tagline: "Dževad's child"
+tagline: "Dževad's daughter"
 ---
 
-Dževad's child.
+Dževad's daughter.

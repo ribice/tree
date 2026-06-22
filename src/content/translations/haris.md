@@ -1,5 +1,5 @@
 ---
-tagline: "Naida's son"
+tagline: "Son of Damir Gradečak and Naida Gradečak"
 ---
 
-Naida's son.
+Haris was born 26.09.1998. Son of Damir Gradečak and Naida Gradečak.

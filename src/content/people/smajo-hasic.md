@@ -1,8 +1,8 @@
 ---
-name: Smajo Hasić
-sex: m
-parents: [mujo-hasic]
-tagline: Sin Mujin
+name: "Smajo Hasić"
+sex: "m"
+parents: [mujo-hasic, bisera-mujina]
+tagline: "Sin Muje i Bisere"
 ---
 
-Sin Mujin.
+Roditelji su Mujo Hasić i Bisera.

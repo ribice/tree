@@ -2,7 +2,7 @@
 name: Fahrija Šehić
 sex: f
 parents: [nazifa]
-tagline: Dijete Nazifino
+tagline: Kćerka Nazifino
 ---
 
-Dijete Nazifino.
+Kćerka Nazifino.

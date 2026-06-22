@@ -1,11 +1,11 @@
 ---
-name: Esed Ribić
-sex: m
+name: "Esed Ribić"
+sex: "m"
 born: "1892"
 died: "1942"
-birthplace: Jezero
+birthplace: "Jezero"
 parents: [avdo-kifin, hava]
-tagline: Pravnik, carinski službenik, strastveni planinar
+tagline: "Pravnik, carinski službenik, strastveni planinar"
 ---
 
 Esed, sin Avdin, rođen je u Jezeru 1892. Osnovnu školu završio je u Jezeru 1904, gimnaziju u Sarajevu, a potom se upisao na Pravni fakultet u Beču. Na drugoj godini, 1916, mobiliziran je u austrougarsku vojsku i upućen na Ruski front kao cugfirer (vodnik).

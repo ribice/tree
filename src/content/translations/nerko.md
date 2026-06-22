@@ -1,6 +1,5 @@
 ---
-tagline: Mirza's son
+tagline: "Son of Ilijaz Ribić and Mirza Ribić"
 ---
 
-Nermin, known as Nerko, Mirza's son.
-
+Nermin was born 1950. Son of Ilijaz Ribić and Mirza Ribić. Wife: Azemina Seferović.

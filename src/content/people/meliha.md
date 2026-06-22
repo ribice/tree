@@ -2,8 +2,8 @@
 name: Meliha
 sex: f
 parents: [magbula]
-tagline: Dijete Magbulino
+tagline: Kćerka Magbulino
 ---
 
-Dijete Magbulino.
+Kćerka Magbulino.
 

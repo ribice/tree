@@ -1,12 +1,12 @@
 ---
-name: Emina Musić
-sex: f
-maidenName: Ribić
-born: "1992"
+name: "Emina Musić"
+sex: "f"
+maidenName: "Ribić"
+born: "25.09.1988"
 parents: [esad, dzenana]
-spouses: [amir-music]
-tagline: Kćerka Esada i Dženane
+spouses:
+  - amir-music
+tagline: "Kćerka Esada i Dženane"
 ---
 
-Emina, kćerka Esada i Dženane, rođena je 1992. Udata je za Amira Musića; djeca su im Esma i Emin.
-
+Emina je rođena 25.09.1988. Roditelji su Esad Ribić i Dženana Ribić. Suprug: Amir Musić.

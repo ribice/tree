@@ -1,9 +1,11 @@
 ---
-name: Zerina Ribić
-sex: f
+name: "Zerina Ribić"
+sex: "f"
 born: "1995"
 parents: [nihad, nadira]
-tagline: Kćerka Nihadova
+spouses:
+  - kenan-hasic
+tagline: "Kćerka Nihada i Nadire"
 ---
 
 Zerina, kćerka Nihada i Nadire, rođena je 1995. godine.

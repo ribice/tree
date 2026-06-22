@@ -2,8 +2,8 @@
 name: Hajric
 sex: m
 parents: [hanumica-maliceva]
-tagline: Dijete Hanumicino
+tagline: Sin Hanumicino
 ---
 
-Dijete Hanumicino.
+Sin Hanumicino.
 

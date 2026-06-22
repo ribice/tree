@@ -1,10 +1,11 @@
 ---
-name: Himzo Ribić — Kifin
-sex: m
-nickname: Himzo Kifin
+name: "Himzo Ribić — Kifin"
+sex: "m"
+nickname: "Himzo Kifin"
 parents: [akif, hanumica]
-spouses: [niza]
-tagline: Terzija — krojač starobosanske nošnje
+spouses:
+  - niza
+tagline: "Terzija — krojač starobosanske nošnje"
 ---
 
 Himzo, mlađi sin Akifov, bio je terzija — krojač starinskih nošnji. Imao je ženu Nizu i troje djece: Omera, Jakuba i Nazifu. Nazifa se udala za Ahmeda Šehića u Mrkonjić Grad.

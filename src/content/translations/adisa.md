@@ -1,5 +1,5 @@
 ---
-tagline: "Nerko's child"
+tagline: "Daughter of Nermin Ribić and Azemina Seferović"
 ---
 
-Nerko's child.
+Adisa was born 30.11.1975. Daughter of Nermin Ribić and Azemina Seferović. Husband: Adnan Lunja.

@@ -1,5 +1,5 @@
 ---
-tagline: "Nazifa's child"
+tagline: "Nazifa's daughter"
 ---
 
-Nazifa's child.
+Nazifa's daughter.

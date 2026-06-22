@@ -136,6 +136,7 @@ export function initials(name: string): string {
 export interface TreeNodePerson {
   id: string;
   name: string;
+  sex?: "m" | "f";
   tagline?: string;
   lifespan: string;
   photo?: string;
@@ -154,6 +155,7 @@ export function toTreeData(
   return people.map((p) => ({
     id: p.id,
     name: p.data.name,
+    sex: p.data.sex,
     tagline: taglineFor(p, translations, locale),
     lifespan: lifespan(p, locale),
     photo: p.data.photo,

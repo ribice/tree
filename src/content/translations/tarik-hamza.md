@@ -1,5 +1,5 @@
 ---
-tagline: "Mersid's son"
+tagline: "Son of Mersid Ribić and Selma Ribić"
 ---
 
-Tarik Hamza, son of Mersid and Selma, was born in 2001.
+Tarik was born 2001 in Breda, Breda, Noord-Brabant, Netherlands. Son of Mersid Ribić and Selma Ribić.

@@ -1,8 +1,8 @@
 ---
-name: Hatiđa Hasić
-sex: f
+name: "Hatiđa Hasić"
+sex: "f"
 parents: [smajo-hasic]
-tagline: Dijete Smajino
+tagline: "Kćerka Smajino"
 ---
 
-Dijete Smajino.
+Kćerka Smajino.

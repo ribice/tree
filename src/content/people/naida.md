@@ -1,11 +1,12 @@
 ---
-name: Naida Gradečak
-sex: f
-maidenName: Ribić
-born: "1962"
-parents: [halim]
-spouses: [damir-gradecak]
-tagline: Kćerka Halimova
+name: "Naida Gradečak"
+sex: "f"
+maidenName: "Ribić"
+born: "1964"
+parents: [halim, hafa-dizdar]
+spouses:
+  - damir-gradecak
+tagline: "Kćerka Halima i Hafe"
 ---
 
-Naida, kćerka Halimova, rođena je 1962. godine. Udata je za Damira Gradečka.
+Naida je rođena 1964. Roditelji su Halim Ribić i Hafa Dizdar. Suprug: Damir Gradečak.

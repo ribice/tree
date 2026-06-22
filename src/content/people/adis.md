@@ -1,8 +1,10 @@
 ---
-name: Adis Gradečak
-sex: m
-parents: [naida, damir-gradecak]
-tagline: Sin Naidin
+name: "Adis Gradečak"
+sex: "m"
+parents: [damir-gradecak, naida]
+spouses:
+  - adriana-lopez
+tagline: "Sin Damira i Naide"
 ---
 
-Sin Naidin.
+Roditelji su Damir Gradečak i Naida Gradečak. Supruga: Adriana Lopez.

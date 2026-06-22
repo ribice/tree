@@ -1,9 +1,10 @@
 ---
-name: Asja Ribić
-sex: f
-born: "2005"
+name: "Asja Ribić"
+sex: "f"
+born: "13.02.2004"
+birthplace: "Mortsel, Antwerpen, Belgium"
 parents: [mersid, selma-paldum]
-tagline: Kćerka Mersidova
+tagline: "Kćerka Mersida i Selme"
 ---
 
-Asja, kćerka Mersida i Selme, rođena je 2005. godine.
+Asja je rođena 13.02.2004 u Mortsel, Antwerpen, Belgium. Roditelji su Mersid Ribić i Selma Ribić.

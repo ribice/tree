@@ -1,8 +1,11 @@
 ---
-name: Adisa Ribić
-sex: f
-parents: [nerko]
-tagline: Dijete Nerkovo
+name: "Adisa Ribić"
+sex: "f"
+born: "30.11.1975"
+parents: [nerko, azemina-seferovic]
+spouses:
+  - adnan-lunja
+tagline: "Kćerka Nermina i Azemine"
 ---
 
-Dijete Nerkovo.
+Adisa je rođena 30.11.1975. Roditelji su Nermin Ribić i Azemina Seferović. Suprug: Adnan Lunja.

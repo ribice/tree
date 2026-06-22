@@ -1,8 +1,8 @@
 ---
-name: Šefik Hasić
-sex: m
+name: "Šefik Hasić"
+sex: "m"
 parents: [smajo-hasic]
-tagline: Sin Smajin
+tagline: "Sin Smaje"
 ---
 
-Sin Smajin.
+Sin je Smaje.

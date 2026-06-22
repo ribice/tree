@@ -1,5 +1,5 @@
 ---
-tagline: "Nadža's child"
+tagline: "Son of Vahdet Zejnilagić and Nedžada Ribić"
 ---
 
-Nadža's child.
+Adnan was born 12.01.1983. Son of Vahdet Zejnilagić and Nedžada Ribić.

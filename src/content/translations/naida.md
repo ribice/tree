@@ -1,5 +1,5 @@
 ---
-tagline: "Halim's daughter"
+tagline: "Daughter of Halim Ribić and Hafa Dizdar"
 ---
 
-Naida, daughter of Halim, was born in 1962. She is married to Damir Gradečak.
+Naida was born 1964. Daughter of Halim Ribić and Hafa Dizdar. Husband: Damir Gradečak.

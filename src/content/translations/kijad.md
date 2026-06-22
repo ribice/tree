@@ -1,5 +1,5 @@
 ---
-tagline: "Smajo's child"
+tagline: "Son of Smajo Hasić"
 ---
 
-Smajo's child.
+Son of Smajo Hasić.

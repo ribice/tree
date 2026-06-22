@@ -1,8 +1,8 @@
 ---
-name: Malić Ribić
-sex: m
+name: "Malić Ribić"
+sex: "m"
 parents: [resid]
-tagline: Sin Rešidov
+tagline: "Sin Rešida"
 ---
 
 Malić je sin Rešidov. Nastavio je očevu djelatnost — proizvodnju trstike.

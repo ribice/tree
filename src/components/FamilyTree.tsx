@@ -18,6 +18,8 @@ export interface TreeLabels {
   collapseAll: string;
   living: string;
   deceased: string;
+  female: string;
+  male: string;
   /** "+{n} more" / "još {n}" — {n} is replaced */
   showMore: string;
 }
@@ -102,17 +104,18 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
   const [highlight, setHighlight] = useState<string | null>(null);
   const [focusTarget, setFocusTarget] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
+  const [hoverEnabled, setHoverEnabled] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   // The hovered person's bloodline (ancestors + descendants + self), or null.
   const lineage = useMemo(() => {
-    if (!hovered) return null;
+    if (!hoverEnabled || !hovered) return null;
     return new Set([
       hovered,
       ...ancestorsOf(hovered, people),
       ...descendantsOf(hovered, people),
     ]);
-  }, [hovered, people]);
+  }, [hoverEnabled, hovered, people]);
 
   const nodeDim = (id: string) => (lineage && !lineage.has(id) ? 0.22 : 1);
   const linkDim = (a: string, b: string) =>
@@ -126,6 +129,19 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
     const lay = layoutRef.current;
     const vw = el.clientWidth;
     const vh = el.clientHeight;
+    if (vw < 640) {
+      const rootNode =
+        lay.nodes.find((n) => n.person.id === "avdikadija") ?? lay.nodes[0];
+      if (rootNode) {
+        const k = clamp(Math.min(0.84, vw / (BOX_W * 1.18)), 0.55, 0.84);
+        setTransform({
+          k,
+          x: Math.max(16, (vw - BOX_W * k) / 2) - rootNode.x * k,
+          y: 156 - rootNode.y * k,
+        });
+        return;
+      }
+    }
     const k = clamp(
       Math.min(vw / lay.width, vh / lay.height) * 0.98,
       MIN_K,
@@ -172,6 +188,17 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
     syncFullscreen();
     return () =>
       document.removeEventListener("fullscreenchange", syncFullscreen);
+  }, []);
+
+  useEffect(() => {
+    const media = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const syncHover = () => {
+      setHoverEnabled(media.matches);
+      if (!media.matches) setHovered(null);
+    };
+    syncHover();
+    media.addEventListener("change", syncHover);
+    return () => media.removeEventListener("change", syncHover);
   }, []);
 
   // Center + highlight the focused node once the layout has revealed it.
@@ -391,7 +418,9 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
               livingLabel={labels.living}
               highlighted={highlight === n.person.id}
               dim={nodeDim(n.person.id)}
-              onHoverChange={(on) => setHovered(on ? n.person.id : null)}
+              onHoverChange={(on) => {
+                if (hoverEnabled) setHovered(on ? n.person.id : null);
+              }}
             />
           ))}
           {layout.toggles.map((tg) => (
@@ -419,19 +448,23 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
       </svg>
 
       {/* Legend */}
-      <div className="pointer-events-none absolute top-4 left-4 flex flex-col gap-1.5 rounded-lg border border-line bg-surface/90 px-3 py-2 text-xs text-muted shadow-sm backdrop-blur">
+      <div className="tree-legend pointer-events-none absolute top-4 left-4 flex flex-col gap-1.5 rounded-lg border border-line bg-surface/90 px-3 py-2 text-xs text-muted shadow-sm backdrop-blur">
+        <span className="flex items-center gap-2">
+          <span className="tree-legend-dot tree-legend-dot-female" />
+          {labels.female}
+        </span>
+        <span className="flex items-center gap-2">
+          <span className="tree-legend-dot tree-legend-dot-male" />
+          {labels.male}
+        </span>
         <span className="flex items-center gap-2">
           <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
           {labels.living}
         </span>
-        <span className="flex items-center gap-2">
-          <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
-          {labels.deceased}
-        </span>
       </div>
 
       {/* Expand / collapse */}
-      <div className="absolute top-4 right-4 flex gap-1.5">
+      <div className="tree-controls absolute top-4 right-4 flex gap-1.5">
         <PillButton onClick={expandAll}>{labels.expandAll}</PillButton>
         <PillButton onClick={collapseAll}>{labels.collapseAll}</PillButton>
         <PillButton onClick={toggleFullscreen}>
@@ -515,6 +548,12 @@ function PersonCard({
 }) {
   const p = node.person;
   const living = p.living;
+  const sexClass =
+    p.sex === "f"
+      ? "tree-person-female"
+      : p.sex === "m"
+        ? "tree-person-male"
+        : "";
   return (
     <foreignObject
       x={node.x}
@@ -528,7 +567,7 @@ function PersonCard({
         href={`${basePath}/${p.id}`}
         onMouseEnter={() => onHoverChange(true)}
         onMouseLeave={() => onHoverChange(false)}
-        className={`group relative flex h-full w-full items-center gap-3 rounded-lg border bg-surface px-3 py-2.5 shadow-sm transition duration-150 hover:-translate-y-0.5 hover:border-accent hover:shadow-lg ${
+        className={`tree-person-card group relative flex h-full w-full items-center gap-3 rounded-lg border bg-surface px-3 py-2.5 shadow-sm transition duration-150 hover:-translate-y-0.5 hover:border-accent hover:shadow-lg ${sexClass} ${
           highlighted
             ? "border-accent ring-2 ring-accent ring-offset-2 ring-offset-paper"
             : "border-line"
@@ -541,11 +580,7 @@ function PersonCard({
           />
         )}
         <span
-          className={`flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full text-base font-semibold ring-1 transition ${
-            living
-              ? "bg-emerald-50 text-emerald-700 ring-emerald-500/25 group-hover:ring-emerald-500/50"
-              : "bg-accent-soft text-accent ring-accent/15 group-hover:ring-accent/40"
-          }`}
+          className={`tree-person-avatar flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full text-base font-semibold ring-1 transition ${sexClass}`}
         >
           {p.photo ? (
             <img

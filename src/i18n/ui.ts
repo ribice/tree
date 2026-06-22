@@ -80,6 +80,8 @@ export const ui = {
     "tree.collapseAll": "Skupi grane",
     "tree.living": "Živi",
     "tree.deceased": "Preminuli",
+    "tree.female": "Žene",
+    "tree.male": "Muškarci",
     "tree.showMore": "još {n}",
     "tree.poster": "Preuzmi poster (SVG)",
 
@@ -198,6 +200,8 @@ export const ui = {
     "tree.collapseAll": "Collapse branches",
     "tree.living": "Living",
     "tree.deceased": "Deceased",
+    "tree.female": "Female",
+    "tree.male": "Male",
     "tree.showMore": "+{n} more",
     "tree.poster": "Download poster (SVG)",
 

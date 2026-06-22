@@ -2,7 +2,7 @@
 name: Seida Ribić
 sex: f
 parents: [asim]
-tagline: Dijete Asimovo
+tagline: Kćerka Asimovo
 ---
 
-Dijete Asimovo.
+Kćerka Asimovo.

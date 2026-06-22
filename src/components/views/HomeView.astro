@@ -69,8 +69,8 @@ const stats = [
 ---
 
 <section class="heritage-band">
-  <div class="relative mx-auto grid max-w-6xl gap-10 px-5 pt-16 pb-12 sm:pt-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-    <div>
+  <div class="relative mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)] gap-10 px-5 pt-16 pb-12 sm:pt-20 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
+    <div class="min-w-0">
       <p class="eyebrow">{t("home.eyebrow", { n: people.length })}</p>
       <h1
         class="mt-4 max-w-4xl text-4xl font-semibold text-balance text-ink sm:text-6xl"
@@ -80,7 +80,7 @@ const stats = [
       <p class="mt-5 max-w-3xl text-lg leading-8 text-pretty text-muted sm:text-xl">
         {t("home.intro")}
       </p>
-      <div class="mt-8 flex flex-wrap gap-3">
+      <div class="home-actions mt-8">
         <a href={treePath} class="button-primary">
           {t("home.ctaTree")} →
         </a>
@@ -101,19 +101,26 @@ const stats = [
       </dl>
     </div>
 
-    <div class="family-plate">
-      <div class="family-plate-mark">
-        <span>R</span>
-        <small>{minYear}–{maxYear}</small>
+    <div class="family-ledger" aria-label={t("home.timeline")}>
+      <div class="family-ledger-head">
+        <p>{t("home.timeline")}</p>
+        <h2>{t("site.short")}</h2>
+        <span>{minYear}–{maxYear}</span>
       </div>
-      <div class="family-plate-list">
+
+      <div class="family-ledger-list">
         {
           heroPeople.map((p) => (
-            <a href={`${peoplePath}/${p.id}`} class="family-plate-person">
+            <a
+              href={`${peoplePath}/${p.id}`}
+              class="family-ledger-person"
+              data-sex={p.data.sex}
+            >
               <Avatar
                 name={p.data.name}
                 photo={p.data.photo}
                 initials={initials(p.data.name)}
+                sex={p.data.sex}
                 size="xs"
               />
               <span>
@@ -124,6 +131,17 @@ const stats = [
           ))
         }
       </div>
+
+      <dl class="family-ledger-stats">
+        {
+          stats.slice(0, 3).map((s) => (
+            <div>
+              <dt>{s.label}</dt>
+              <dd>{s.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
     </div>
 
     <div class="surface-panel p-4 sm:p-5 lg:col-span-2" aria-label={t("home.timeline")}>
@@ -160,29 +178,33 @@ const stats = [
   </div>
 </section>
 
-<section class="mx-auto grid max-w-6xl gap-6 px-5 py-12 sm:grid-cols-2">
+<section
+  class="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)] gap-6 px-5 py-12 sm:grid-cols-2"
+>
   {
     rows.map((row) => (
-      <section class="surface-panel p-4 sm:p-5">
-        <div class="flex items-center justify-between gap-3">
-          <h2 class="text-sm font-semibold tracking-wide text-muted uppercase">
+      <section class="surface-panel min-w-0 p-4 sm:p-5">
+        <div class="flex min-w-0 items-center justify-between gap-3">
+          <h2 class="min-w-0 text-sm font-semibold tracking-wide text-muted uppercase">
             {row.title}
           </h2>
-          <span class="h-px flex-1 bg-line" />
+          <span class="h-px min-w-8 flex-1 bg-line" />
         </div>
-        <ul class="mt-4 grid gap-2">
+        <ul class="mt-4 grid grid-cols-[minmax(0,1fr)] gap-2">
           {row.people.map((p) => (
-            <li>
+            <li class="min-w-0">
               <a
                 href={`${peoplePath}/${p.id}`}
-                class="person-card person-card-quiet flex items-center gap-3 p-2.5"
+                class="person-card person-card-quiet flex w-full min-w-0 items-center gap-3 p-2.5"
+                data-sex={p.data.sex}
               >
                 <Avatar
                   name={p.data.name}
                   photo={p.data.photo}
                   initials={initials(p.data.name)}
+                  sex={p.data.sex}
                 />
-                <span class="min-w-0">
+                <span class="min-w-0 flex-1">
                   <span class="block truncate font-medium text-ink">
                     {p.data.name}
                   </span>

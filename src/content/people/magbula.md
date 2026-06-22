@@ -2,7 +2,7 @@
 name: Magbula Ribić
 sex: f
 parents: [jakub]
-tagline: Dijete Jakubovo
+tagline: Kćerka Jakubovo
 ---
 
-Dijete Jakubovo.
+Kćerka Jakubovo.

@@ -1,9 +1,9 @@
 ---
-name: Jasmin
-sex: m
-parents: [nadza]
-tagline: Dijete Nadžino
+name: "Jasmin Zejnilagić"
+sex: "m"
+born: "1981"
+parents: [vahdet-zejnilagic, nadza]
+tagline: "Sin Nadžino"
 ---
 
-Dijete Nadžino.
-
+Sin Nadžino.

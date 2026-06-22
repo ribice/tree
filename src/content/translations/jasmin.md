@@ -1,5 +1,5 @@
 ---
-tagline: "Nadža's child"
+tagline: "Son of Vahdet Zejnilagić and Nedžada Ribić"
 ---
 
-Nadža's child.
+Jasmin was born 1981. Son of Vahdet Zejnilagić and Nedžada Ribić.

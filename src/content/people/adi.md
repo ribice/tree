@@ -2,8 +2,8 @@
 name: Adi
 sex: m
 parents: [dzenisa]
-tagline: Dijete Dženisino
+tagline: Sin Dženisino
 ---
 
-Dijete Dženisino.
+Sin Dženisino.
 

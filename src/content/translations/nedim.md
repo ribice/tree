@@ -1,5 +1,5 @@
 ---
-tagline: "Sajma's son"
+tagline: "Son of Senad Alić and Sajma Alić"
 ---
 
-Sajma's son.
+Nedim was born 1996. Son of Senad Alić and Sajma Alić. Wife: Elma Civic.

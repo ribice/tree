@@ -40,13 +40,19 @@
   --color-accent-soft: oklch(0.95 0.035 160);
   --color-gold: oklch(0.72 0.13 82);
   --color-ember: oklch(0.52 0.13 36);
+  --color-female: oklch(0.56 0.16 350);
+  --color-female-soft: oklch(0.96 0.045 350);
+  --color-male: oklch(0.48 0.13 248);
+  --color-male-soft: oklch(0.95 0.04 248);
 }
 
 html {
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
 body {
+  overflow-x: hidden;
   font-family: var(--font-sans);
   background:
     linear-gradient(90deg, color-mix(in oklch, var(--color-line), transparent 72%) 1px, transparent 1px),
@@ -145,7 +151,20 @@ body {
   text-transform: uppercase;
 }
 
+.avatar[data-sex="f"] {
+  background: var(--color-female-soft);
+  color: var(--color-female);
+  --tw-ring-color: color-mix(in oklch, var(--color-female), transparent 72%);
+}
+
+.avatar[data-sex="m"] {
+  background: var(--color-male-soft);
+  color: var(--color-male);
+  --tw-ring-color: color-mix(in oklch, var(--color-male), transparent 72%);
+}
+
 .surface-panel {
+  min-width: 0;
   border: 1px solid var(--color-line);
   border-radius: 0.5rem;
   background: color-mix(in oklch, var(--color-surface) 94%, var(--color-paper));
@@ -181,9 +200,10 @@ body {
   font-weight: 760;
 }
 
-.family-plate {
+.family-ledger {
   position: relative;
-  min-height: 26rem;
+  min-width: 0;
+  overflow: hidden;
   border: 1px solid var(--color-line);
   border-radius: 0.5rem;
   background:
@@ -191,74 +211,78 @@ body {
     linear-gradient(180deg, color-mix(in oklch, var(--color-branch), transparent 84%) 1px, transparent 1px),
     color-mix(in oklch, var(--color-surface) 88%, var(--color-paper));
   background-size: 46px 46px, 46px 46px, auto;
+  padding: 1rem;
   box-shadow:
     0 1px 0 color-mix(in oklch, var(--color-surface), transparent 14%) inset,
     0 22px 46px color-mix(in oklch, var(--color-ink), transparent 90%);
 }
 
-.family-plate::before,
-.family-plate::after {
+.family-ledger::before,
+.family-ledger::after {
   content: "";
   position: absolute;
   pointer-events: none;
 }
 
-.family-plate::before {
-  inset: 2.2rem;
-  border: 1px solid color-mix(in oklch, var(--color-branch), transparent 52%);
+.family-ledger::before {
+  top: -3.25rem;
+  right: 0;
+  width: min(12rem, 56%);
+  height: 12rem;
+  border: 1px solid color-mix(in oklch, var(--color-gold), transparent 38%);
   border-radius: 999px;
+  background: color-mix(in oklch, var(--color-gold), transparent 92%);
 }
 
-.family-plate::after {
-  top: 50%;
-  right: 12%;
-  left: 12%;
+.family-ledger::after {
+  inset: auto 1rem 5.8rem 1rem;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--color-branch), transparent);
 }
 
-.family-plate-mark {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+.family-ledger-head {
+  position: relative;
   z-index: 1;
   display: grid;
-  width: 8.5rem;
-  height: 8.5rem;
-  transform: translate(-50%, -50%);
-  place-items: center;
-  border: 1px solid color-mix(in oklch, var(--color-gold), var(--color-line) 22%);
-  border-radius: 999px;
-  background:
-    linear-gradient(180deg, color-mix(in oklch, var(--color-surface), transparent 2%), color-mix(in oklch, var(--color-gold), var(--color-surface) 88%));
+  gap: 0.3rem;
+  border-bottom: 1px solid color-mix(in oklch, var(--color-line), transparent 12%);
+  padding: 0.15rem 0 1rem;
+}
+
+.family-ledger-head p {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.family-ledger-head h2 {
+  max-width: 100%;
   color: var(--color-ink);
-  box-shadow:
-    0 0 0 0.55rem color-mix(in oklch, var(--color-surface), transparent 18%),
-    0 18px 30px color-mix(in oklch, var(--color-ink), transparent 88%);
-}
-
-.family-plate-mark span {
-  font-size: 3rem;
+  font-size: clamp(2rem, 8vw, 3.35rem);
   font-weight: 820;
-  line-height: 1;
+  line-height: 0.98;
 }
 
-.family-plate-mark small {
-  margin-top: -1.4rem;
+.family-ledger-head span {
   color: var(--color-muted);
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   font-weight: 720;
 }
 
-.family-plate-list {
-  position: absolute;
-  inset: 1rem;
+.family-ledger-list {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1rem;
 }
 
-.family-plate-person {
-  position: absolute;
+.family-ledger-person {
+  position: relative;
   display: flex;
-  width: min(15rem, calc(100% - 2rem));
+  min-width: 0;
   align-items: center;
   gap: 0.65rem;
   border: 1px solid var(--color-line);
@@ -272,70 +296,130 @@ body {
     transform 0.15s ease;
 }
 
-.family-plate-person:hover {
+.family-ledger-person::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  flex: 0 0 auto;
+  order: 3;
+  border-radius: 999px;
+  background: var(--color-gold);
+  box-shadow: 0 0 0 0.28rem color-mix(in oklch, var(--color-gold), transparent 78%);
+}
+
+.family-ledger-person:hover {
   border-color: var(--color-accent);
   transform: translateY(-1px);
 }
 
-.family-plate-person strong,
-.family-plate-person small {
+.family-ledger-person[data-sex="f"] {
+  border-color: color-mix(in oklch, var(--color-female), var(--color-line) 72%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-female-soft), transparent 8%), transparent 50%),
+    color-mix(in oklch, var(--color-surface) 92%, transparent);
+}
+
+.family-ledger-person[data-sex="m"] {
+  border-color: color-mix(in oklch, var(--color-male), var(--color-line) 72%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-male-soft), transparent 8%), transparent 50%),
+    color-mix(in oklch, var(--color-surface) 92%, transparent);
+}
+
+.family-ledger-person[data-sex="f"]::before {
+  background: var(--color-female);
+  box-shadow: 0 0 0 0.28rem color-mix(in oklch, var(--color-female), transparent 80%);
+}
+
+.family-ledger-person[data-sex="m"]::before {
+  background: var(--color-male);
+  box-shadow: 0 0 0 0.28rem color-mix(in oklch, var(--color-male), transparent 80%);
+}
+
+.family-ledger-person strong,
+.family-ledger-person small {
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.family-plate-person strong {
+.family-ledger-person span {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.family-ledger-person strong {
   color: var(--color-ink);
   font-size: 0.86rem;
   font-weight: 720;
 }
 
-.family-plate-person small {
+.family-ledger-person small {
   margin-top: 0.1rem;
   color: var(--color-muted);
   font-size: 0.74rem;
 }
 
-.family-plate-person:nth-child(1) {
-  top: 1.2rem;
-  left: 1rem;
+.family-ledger-stats {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-top: 1rem;
 }
 
-.family-plate-person:nth-child(2) {
-  top: 5.9rem;
-  right: 1rem;
+.family-ledger-stats div {
+  min-width: 0;
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 14%);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 72%, transparent);
+  padding: 0.65rem;
 }
 
-.family-plate-person:nth-child(3) {
-  right: 2.2rem;
-  bottom: 5.5rem;
+.family-ledger-stats dt {
+  overflow: hidden;
+  color: var(--color-muted);
+  font-size: 0.64rem;
+  font-weight: 760;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: normal;
 }
 
-.family-plate-person:nth-child(4) {
-  bottom: 1.25rem;
-  left: 1.35rem;
-}
-
-.family-plate-person:nth-child(5) {
-  top: 50%;
-  left: 0.85rem;
+.family-ledger-stats dd {
+  margin-top: 0.15rem;
+  color: var(--color-ink);
+  font-size: 1.35rem;
+  font-weight: 780;
 }
 
 .button-primary,
 .button-secondary {
   display: inline-flex;
+  max-width: 100%;
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
   border-radius: 0.5rem;
   padding: 0.68rem 1rem;
+  text-align: center;
   font-weight: 750;
+  white-space: normal;
   transition:
     border-color 0.15s ease,
     color 0.15s ease,
     background-color 0.15s ease,
     transform 0.15s ease;
+}
+
+.home-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+  max-width: 100%;
 }
 
 .button-primary {
@@ -361,6 +445,7 @@ body {
 }
 
 .person-card {
+  min-width: 0;
   border: 1px solid var(--color-line);
   border-radius: 0.5rem;
   background: var(--color-surface);
@@ -375,6 +460,28 @@ body {
   border-color: color-mix(in oklch, var(--color-accent), var(--color-line) 30%);
   box-shadow: 0 14px 28px color-mix(in oklch, var(--color-ink), transparent 90%);
   transform: translateY(-1px);
+}
+
+.person-card[data-sex="f"] {
+  border-color: color-mix(in oklch, var(--color-female), var(--color-line) 70%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-female-soft), transparent 6%), transparent 48%),
+    var(--color-surface);
+}
+
+.person-card[data-sex="m"] {
+  border-color: color-mix(in oklch, var(--color-male), var(--color-line) 70%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-male-soft), transparent 6%), transparent 48%),
+    var(--color-surface);
+}
+
+.person-card[data-sex="f"]:hover {
+  border-color: var(--color-female);
+}
+
+.person-card[data-sex="m"]:hover {
+  border-color: var(--color-male);
 }
 
 .person-card-quiet {
@@ -481,6 +588,20 @@ body {
     0 18px 38px color-mix(in oklch, var(--color-ink), transparent 91%);
 }
 
+.profile-hero[data-sex="f"] {
+  border-color: color-mix(in oklch, var(--color-female), var(--color-line) 66%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-female-soft), transparent 16%), transparent 62%),
+    linear-gradient(180deg, var(--color-surface), color-mix(in oklch, var(--color-surface), var(--color-paper) 16%));
+}
+
+.profile-hero[data-sex="m"] {
+  border-color: color-mix(in oklch, var(--color-male), var(--color-line) 66%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-male-soft), transparent 16%), transparent 62%),
+    linear-gradient(180deg, var(--color-surface), color-mix(in oklch, var(--color-surface), var(--color-paper) 16%));
+}
+
 .profile-hero::after {
   content: "";
   position: absolute;
@@ -577,6 +698,46 @@ body {
     0 18px 40px color-mix(in oklch, var(--color-ink), transparent 91%);
 }
 
+.tree-person-card.tree-person-female {
+  border-color: color-mix(in oklch, var(--color-female), var(--color-line) 62%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-female-soft), transparent 7%), transparent 56%),
+    var(--color-surface);
+}
+
+.tree-person-card.tree-person-male {
+  border-color: color-mix(in oklch, var(--color-male), var(--color-line) 62%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-male-soft), transparent 7%), transparent 56%),
+    var(--color-surface);
+}
+
+.tree-person-avatar.tree-person-female {
+  background: var(--color-female-soft);
+  color: var(--color-female);
+  --tw-ring-color: color-mix(in oklch, var(--color-female), transparent 68%);
+}
+
+.tree-person-avatar.tree-person-male {
+  background: var(--color-male-soft);
+  color: var(--color-male);
+  --tw-ring-color: color-mix(in oklch, var(--color-male), transparent 68%);
+}
+
+.tree-legend-dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 999px;
+}
+
+.tree-legend-dot-female {
+  background: var(--color-female);
+}
+
+.tree-legend-dot-male {
+  background: var(--color-male);
+}
+
 .tree-shell:fullscreen {
   height: 100vh;
   min-height: 100vh;
@@ -592,6 +753,11 @@ body {
 }
 
 @media (min-width: 640px) {
+  .home-actions {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   .profile-hero-main {
     flex-direction: row;
     align-items: center;
@@ -599,6 +765,23 @@ body {
 
   .profile-ribbon {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  .tree-controls {
+    right: 1rem;
+    left: 1rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .tree-controls button {
+    padding-inline: 0.65rem;
+  }
+
+  .tree-legend {
+    top: 4.45rem;
   }
 }
 

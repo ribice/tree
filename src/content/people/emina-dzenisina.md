@@ -2,8 +2,8 @@
 name: Emina
 sex: f
 parents: [dzenisa]
-tagline: Dijete Dženisino
+tagline: Kćerka Dženisino
 ---
 
-Dijete Dženisino.
+Kćerka Dženisino.
 

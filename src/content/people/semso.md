@@ -1,8 +1,8 @@
 ---
-name: Šemso Ribić
-sex: m
+name: "Šemso Ribić"
+sex: "m"
 parents: [avdikadija]
-tagline: Najstariji sin Avdikadijin; odselio u Sarajevo
+tagline: "Najstariji sin Avdikadijin; odselio u Sarajevo"
 ---
 
 Šemso je bio najstariji od četiri sina Avdikadijina. Vjerovatno je doživio istu sudbinu kao i braća kada je Omer-paša Latas dao pohvatati sinove jezerskog kadije.

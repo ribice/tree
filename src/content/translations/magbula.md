@@ -1,5 +1,5 @@
 ---
-tagline: "Jakub's child"
+tagline: "Jakub's daughter"
 ---
 
-Jakub's child.
+Jakub's daughter.

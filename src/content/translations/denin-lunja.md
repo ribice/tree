@@ -1,5 +1,5 @@
 ---
-tagline: "Adisa's child"
+tagline: "Son of Adnan Lunja and Adisa Ribić"
 ---
 
-Adisa's child.
+Denin was born 09.06.2002. Son of Adnan Lunja and Adisa Ribić.

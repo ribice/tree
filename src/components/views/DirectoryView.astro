@@ -87,22 +87,24 @@ const groupedPeople = [...groups.entries()].sort(([a], [b]) =>
             <span class="h-px flex-1 bg-line" />
             <span class="text-sm text-muted">{group.length}</span>
           </div>
-          <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <ul class="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {group.map((p) => (
               <li
-                class="person-item"
+                class="person-item min-w-0"
                 data-name={`${p.data.name} ${p.data.maidenName ?? ""} ${p.data.nickname ?? ""} ${taglineFor(p, translations, lang) ?? ""} ${lifespan(p, lang)}`.toLowerCase()}
               >
                 <a
                   href={`${peoplePath}/${p.id}`}
-                  class="person-card person-card-quiet flex h-full items-center gap-3 p-3"
+                  class="person-card person-card-quiet flex h-full w-full min-w-0 items-center gap-3 p-3"
+                  data-sex={p.data.sex}
                 >
                   <Avatar
                     name={p.data.name}
                     photo={p.data.photo}
                     initials={initials(p.data.name)}
+                    sex={p.data.sex}
                   />
-                  <span class="min-w-0">
+                  <span class="min-w-0 flex-1">
                     <span class="block truncate font-semibold text-ink">
                       {p.data.name}
                     </span>

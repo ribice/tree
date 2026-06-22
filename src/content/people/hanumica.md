@@ -1,11 +1,13 @@
 ---
-name: Hanumica Ribić
-sex: f
-maidenName: Ganibegović
+name: "Hanumica Ribić"
+sex: "f"
+maidenName: "Ganibegović"
 died: "1906"
-birthplace: Vražić
-spouses: [akif]
-tagline: Žena Akifova; pamtila hapšenje Avdikadije
+birthplace: "Vražić"
+parents: [salih-beg-ganibegovic]
+spouses:
+  - akif
+tagline: "Kćerka Salih-Bega"
 ---
 
 Hanumica je bila jedna od četiri kćeri Salih-bega Ganibegovića iz Vražića, žena Akifa-Kife Ribića. Živjela je dugo poslije smrti svog muža — punih 39 godina — i umrla 1906. godine.

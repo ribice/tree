@@ -1,13 +1,14 @@
 ---
-name: Avdo Ribić — Kifin
-sex: m
-nickname: Avdo Kifin
+name: "Avdo Ribić — Kifin"
+sex: "m"
+nickname: "Avdo Kifin"
 born: "1848"
 died: "1919"
-birthplace: Jezero
+birthplace: "Jezero"
 parents: [akif, hanumica]
-spouses: [hava]
-tagline: Trgovac; vlasnik hana i mlina
+spouses:
+  - hava
+tagline: "Trgovac; vlasnik hana i mlina"
 ---
 
 Avdo, stariji sin Akifov, zvali su ga Avdo Kifin ili Kifić, pa su i njegove potomke zvali Kifići. Od oca je naslijedio veliku zemlju, imao je han, dvije trgovine i s bratom Himzom veliki mlin na Plivi sa 12 kamenova.

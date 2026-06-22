@@ -1,8 +1,9 @@
 ---
-name: Nafoza Hasić
-sex: f
+name: "Nazifa Hasić"
+sex: "f"
+nickname: "Nafoza"
 parents: [smajo-hasic]
-tagline: Dijete Smajino
+tagline: "Kćerka Smajino"
 ---
 
-Dijete Smajino.
+Kćerka Smajino.

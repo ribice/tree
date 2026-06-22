@@ -1,12 +1,12 @@
 ---
-name: Avdo Ribić — Avdikadija
-sex: m
-nickname: Avdikadija
+name: "Avdo Ribić — Avdikadija"
+sex: "m"
+nickname: "Avdikadija"
 born: "1775"
 died: "1852"
-birthplace: Jezero
+birthplace: "Jezero"
 parents: [omer]
-tagline: Jezerski kadija i pročelnik porodice
+tagline: "Jezerski kadija i pročelnik porodice"
 ---
 
 Avdo Ribić, sin Omerov a unuk Enesov, bio je kadija u jezerskom kadiluku. Popularno su ga zvali Avdikadija i pročelnik je u našem porodičnom stablu. Imao je četiri sina: Šemsu, Izu, Rešida i Akifa.

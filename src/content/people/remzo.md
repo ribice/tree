@@ -1,8 +1,8 @@
 ---
-name: Remzo Hasić
-sex: m
+name: "Remzo Hasić"
+sex: "m"
 parents: [smajo-hasic]
-tagline: Sin Smajin
+tagline: "Sin Smaje"
 ---
 
-Sin Smajin.
+Sin je Smaje.

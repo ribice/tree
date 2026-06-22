@@ -1,12 +1,14 @@
 ---
-name: Hava Ribić
-sex: f
-maidenName: Šuškić
+name: "Hava Ribić"
+sex: "f"
+maidenName: "Šuškić"
 born: "1868"
 died: "1927"
-birthplace: Duljci
-spouses: [avdo-kifin]
-tagline: Žena Avdina; rodom iz Duljaka
+birthplace: "Duljci"
+parents: [nepoznata-suskic-majka, nepoznati-suskic]
+spouses:
+  - avdo-kifin
+tagline: "Kćerka ? i Nepoznatia"
 ---
 
 Hava Šuškić Ribić, žena Avdina, rođena je u Duljcima 1868. godine, a umrla je 1927. Imala je braću Husu i Alu. S Avdom je imala dvoje djece: Eseda i Rasima.

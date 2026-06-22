@@ -1,5 +1,5 @@
 ---
-tagline: "Magbula's child"
+tagline: "Magbula's daughter"
 ---
 
-Magbula's child.
+Magbula's daughter.

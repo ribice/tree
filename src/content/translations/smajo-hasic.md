@@ -1,5 +1,5 @@
 ---
-tagline: "Mujo's son"
+tagline: "Son of Mujo Hasić and Bisera"
 ---
 
-Mujo's son.
+Son of Mujo Hasić and Bisera.

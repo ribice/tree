@@ -1,5 +1,5 @@
 ---
-tagline: "Malić's child"
+tagline: "Malić's daughter"
 ---
 
-Malić's child.
+Malić's daughter.

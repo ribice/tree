@@ -1,5 +1,5 @@
 ---
-tagline: "Hanumica's child"
+tagline: "Hanumica's daughter"
 ---
 
-Hanumica's child.
+Hanumica's daughter.

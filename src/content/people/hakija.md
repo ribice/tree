@@ -1,8 +1,8 @@
 ---
-name: Hakija Ribić
-sex: m
+name: "Hakija Ribić"
+sex: "m"
 parents: [izo-mladji]
-tagline: Sin Ize svjetskog putnika
+tagline: "Sin Ize"
 ---
 
 Hakija je stariji sin Ize »svjetskog putnika«.

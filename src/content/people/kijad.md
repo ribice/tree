@@ -1,8 +1,8 @@
 ---
-name: Kijad Hasić
-sex: m
+name: "Kijad Hasić"
+sex: "m"
 parents: [smajo-hasic]
-tagline: Dijete Smajino
+tagline: "Sin Smajino"
 ---
 
-Dijete Smajino.
+Sin Smajino.

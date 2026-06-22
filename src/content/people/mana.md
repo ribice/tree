@@ -1,8 +1,12 @@
 ---
-name: Mana Ribić
-sex: f
-parents: [mirza]
-tagline: Dijete Mirzino
+name: "Nermina Ribić"
+sex: "f"
+nickname: "Mana"
+born: "10.11.1952"
+parents: [ilijaz-ribic, mirza]
+spouses:
+  - mumin-keljalic
+tagline: "Kćerka Ilijaza i Mirze"
 ---
 
-Dijete Mirzino.
+Nermina je rođena 10.11.1952. Roditelji su Ilijaz Ribić i Mirza Ribić. Suprug: Mumin Keljalić.

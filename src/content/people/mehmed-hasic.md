@@ -1,9 +1,9 @@
 ---
-name: Mehmed Hasić — efendija
-sex: m
-nickname: Efendija
-parents: [pasa, mehaga-hasic]
-tagline: Učitelj i učevan čovjek
+name: "Mehmed Hasić — efendija"
+sex: "m"
+nickname: "Efendija"
+parents: [mehaga-hasic, pasa]
+tagline: "Učitelj i učevan čovjek"
 ---
 
 Mehmed, sin Paše, bio je učitelj — učevan čovjek. Predavao je u Jezeru i učio i Rasima Ribića. Za Drugog svjetskog rata stanovao je u Jajcu; ukopan je u Jezeru.

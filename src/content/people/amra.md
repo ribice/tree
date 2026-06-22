@@ -2,7 +2,7 @@
 name: Amra Ribić
 sex: f
 parents: [dzevad]
-tagline: Dijete Dževadovo
+tagline: Kćerka Dževadovo
 ---
 
-Dijete Dževadovo.
+Kćerka Dževadovo.

@@ -1,6 +1,5 @@
 ---
-tagline: Daughter of Esad and Dženana
+tagline: "Daughter of Esad Ribić and Dženana Ribić"
 ---
 
-Emina, daughter of Esad and Dženana, born 1992. Married to Amir Musić; their children are Esma and Emin.
-
+Emina was born 25.09.1988. Daughter of Esad Ribić and Dženana Ribić. Husband: Amir Musić.

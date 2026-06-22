@@ -2,8 +2,8 @@
 name: Safija
 sex: f
 parents: [hanumica-maliceva]
-tagline: Dijete Hanumicino
+tagline: Kćerka Hanumicino
 ---
 
-Dijete Hanumicino.
+Kćerka Hanumicino.
 

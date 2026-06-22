@@ -2,7 +2,7 @@
 name: Fikreta Ribić
 sex: f
 parents: [mehmed-malicev]
-tagline: Dijete Mehmedovo
+tagline: Kćerka Mehmedovo
 ---
 
-Dijete Mehmedovo.
+Kćerka Mehmedovo.

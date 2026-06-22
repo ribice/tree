@@ -1,5 +1,5 @@
 ---
-tagline: "Naida's son"
+tagline: "Son of Damir Gradečak and Naida Gradečak"
 ---
 
-Naida's son.
+Son of Damir Gradečak and Naida Gradečak. Wife: Adriana Lopez.

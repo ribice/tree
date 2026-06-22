@@ -1,10 +1,9 @@
 ---
-name: Jakub Ribić
-sex: m
-born: "2018"
+name: "Jakub Ribić"
+sex: "m"
+born: "10.12.2018"
 parents: [emir, nejra-cerenic]
-tagline: Sin Emirov
+tagline: "Sin Emira i Nejre"
 ---
 
-Jakub, sin Emira i Nejre, rođen je 2018. godine.
-
+Jakub, sin Emira i Nejre, rođen je 10.12.2018. godine.

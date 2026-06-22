@@ -1,8 +1,9 @@
 ---
-name: Denin Lunja
-sex: m
-parents: [adisa]
-tagline: Dijete Adisino
+name: "Denin Lunja"
+sex: "m"
+born: "09.06.2002"
+parents: [adnan-lunja, adisa]
+tagline: "Sin Adnana i Adise"
 ---
 
-Dijete Adisino.
+Denin je rođen 09.06.2002. Roditelji su Adnan Lunja i Adisa Ribić.

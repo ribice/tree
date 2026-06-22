@@ -1,8 +1,8 @@
 ---
-name: Šefika Hasić
-sex: f
+name: "Šefika Hasić"
+sex: "f"
 parents: [smajo-hasic]
-tagline: Kćerka Smajina
+tagline: "Kćerka Smaje"
 ---
 
-Kćerka Smajina.
+Kćerka je Smaje.
