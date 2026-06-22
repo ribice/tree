@@ -2,6 +2,7 @@
 name: "Enida Ribić"
 sex: "f"
 born: "06.10.2001"
+birthplace: "Zenica"
 parents: [nihad, nadira]
 tagline: "Kćerka Nihada i Nadire"
 ---

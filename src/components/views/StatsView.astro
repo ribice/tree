@@ -90,12 +90,15 @@ const generationRows = [...generationMap.entries()]
     percent: pct(count),
   }));
 
+// Decade labels read "1970s" in English but "1970-e" in Bosnian.
+const decadeSuffix = lang === "en" ? "s" : "-e";
 const decadeMap = new Map<string, number>();
 for (const person of people) {
   const year = birthYear(person);
   if (!year) continue;
   const decade = Math.floor(year / 10) * 10;
-  decadeMap.set(`${decade}s`, (decadeMap.get(`${decade}s`) ?? 0) + 1);
+  const key = `${decade}${decadeSuffix}`;
+  decadeMap.set(key, (decadeMap.get(key) ?? 0) + 1);
 }
 const maxDecadeCount = Math.max(...decadeMap.values(), 1);
 const decadeRows = [...decadeMap.entries()]
@@ -111,6 +114,7 @@ const COORDS: Record<string, [number, number]> = {
   Jezero: [44.2667, 17.2167],
   Jajce: [44.3419, 17.2706],
   Zenica: [44.2017, 17.9072],
+  Sarajevo: [43.8563, 18.4131],
   "Gostivar, Makedonija": [41.7967, 20.9089],
 };
 const mapPoints = places

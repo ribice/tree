@@ -3,7 +3,7 @@ name: "Selma Ribić"
 sex: "f"
 maidenName: "Paldum"
 born: "31.08.1978"
-birthplace: "Sarajevo, Bosna i Hercegovina"
+birthplace: "Sarajevo"
 parents: [mustafa-paldum, hafa-pekmez]
 spouses:
   - mersid

@@ -2,6 +2,7 @@
 name: "Emin Musić"
 sex: "m"
 born: "09.06.2021"
+birthplace: "Sarajevo"
 parents: [amir-music, emina]
 tagline: "Sin Amira i Emine"
 ---

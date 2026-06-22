@@ -3,7 +3,7 @@ name: "Šerif Ribić"
 sex: "m"
 born: "1900"
 died: "1949"
-birthplace: "Jezero, Bosna i Hercegovina"
+birthplace: "Jezero"
 spouses:
   - dziha-skopo
 tagline: "Muž Džihe"

@@ -108,17 +108,29 @@ function byBirth(a: Person, b: Person): number {
   return a.data.name.localeCompare(b.data.name);
 }
 
-/** 1-based generation depth, counting up to the earliest known ancestor. */
+/** 1-based generation depth: 1 + the depth of the deepest known parent line.
+ * Taking the deepest line (not the first-listed parent) keeps a person counted
+ * against their oldest traceable ancestor even when a married-in parent with no
+ * ancestry here is listed first — e.g. a child of [married-in father, Ribić
+ * mother] is placed by the mother's line, not stranded near the root. */
 export function generation(p: Person, people: Person[]): number {
   const byId = indexById(people);
-  let cur: Person | undefined = p;
-  let depth = 1;
-  let guard = 0;
-  while (cur && cur.data.parents.length && guard++ < 50) {
-    cur = cur.data.parents.map((id) => byId.get(id)).find(Boolean);
-    if (cur) depth++;
-  }
-  return depth;
+  const memo = new Map<string, number>();
+  const depthOf = (person: Person, seen: Set<string>): number => {
+    const cached = memo.get(person.id);
+    if (cached !== undefined) return cached;
+    if (seen.has(person.id)) return 1; // guard against parent cycles
+    seen.add(person.id);
+    let depth = 1;
+    for (const id of person.data.parents) {
+      const parent = byId.get(id);
+      if (parent) depth = Math.max(depth, depthOf(parent, seen) + 1);
+    }
+    seen.delete(person.id);
+    memo.set(person.id, depth);
+    return depth;
+  };
+  return depthOf(p, new Set());
 }
 
 /** Best-effort numeric birth year for sorting ("c. 1890" -> 1890). */

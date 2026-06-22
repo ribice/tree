@@ -3,6 +3,7 @@ name: "Emina Musić"
 sex: "f"
 maidenName: "Ribić"
 born: "25.09.1988"
+birthplace: "Jajce"
 parents: [esad, dzenana]
 spouses:
   - amir-music

@@ -2,7 +2,7 @@
 name: "Džiha Škopo"
 sex: "f"
 born: "1892"
-birthplace: "Jezero, Bosna i Hercegovina"
+birthplace: "Jezero"
 spouses:
   - serif-ribic
 tagline: "Žena Šerifa"

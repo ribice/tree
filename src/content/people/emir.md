@@ -2,6 +2,7 @@
 name: "Emir Ribić"
 sex: "m"
 born: "15.11.1991"
+birthplace: "Jajce"
 parents: [esad, dzenana]
 spouses:
   - id: nejra-cerenic

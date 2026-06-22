@@ -2,6 +2,7 @@
 name: "Džana Ribić"
 sex: "f"
 born: "27.08.1992"
+birthplace: "Zenica"
 parents: [nihad, nadira]
 spouses:
   - seid-mehic

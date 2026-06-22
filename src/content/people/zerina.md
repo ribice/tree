@@ -2,6 +2,7 @@
 name: "Zerina Ribić"
 sex: "f"
 born: "1995"
+birthplace: "Zenica"
 parents: [nihad, nadira]
 spouses:
   - kenan-hasic

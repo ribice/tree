@@ -2,6 +2,7 @@
 name: "Sumejja Ribić"
 sex: "f"
 born: "05.10.2015"
+birthplace: "Sarajevo"
 parents: [emir, nejra-cerenic]
 tagline: "Kćerka Emira i Nejre"
 ---
