@@ -12,6 +12,8 @@ export interface TreeLabels {
   zoomIn: string;
   zoomOut: string;
   reset: string;
+  fullscreen: string;
+  exitFullscreen: string;
   expandAll: string;
   collapseAll: string;
   living: string;
@@ -100,6 +102,7 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
   const [highlight, setHighlight] = useState<string | null>(null);
   const [focusTarget, setFocusTarget] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   // The hovered person's bloodline (ancestors + descendants + self), or null.
   const lineage = useMemo(() => {
@@ -159,6 +162,16 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
     ro.observe(el);
     return () => ro.disconnect();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const syncFullscreen = () => {
+      setIsFullscreen(document.fullscreenElement === containerRef.current);
+    };
+    document.addEventListener("fullscreenchange", syncFullscreen);
+    syncFullscreen();
+    return () =>
+      document.removeEventListener("fullscreenchange", syncFullscreen);
   }, []);
 
   // Center + highlight the focused node once the layout has revealed it.
@@ -304,12 +317,23 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
     setTransform({ k: nk, x: px - ((px - x) / k) * nk, y: py - ((py - y) / k) * nk });
   };
 
+  const toggleFullscreen = async () => {
+    const el = containerRef.current;
+    if (!el || !document.fullscreenEnabled) return;
+    try {
+      if (document.fullscreenElement === el) await document.exitFullscreen();
+      else await el.requestFullscreen();
+    } catch {
+      // Some browsers reject fullscreen without a direct user gesture.
+    }
+  };
+
   const showMore = (n: number) => labels.showMore.replace("{n}", String(n));
 
   return (
     <div
       ref={containerRef}
-      className="relative h-[84vh] min-h-[600px] w-full overflow-hidden rounded-lg border border-line bg-surface shadow-sm"
+      className="tree-shell relative h-[84vh] min-h-[600px] w-full overflow-hidden rounded-lg border border-line bg-surface shadow-sm"
       style={{
         backgroundImage:
           "linear-gradient(var(--color-line) 1px, transparent 1px), linear-gradient(90deg, var(--color-line) 1px, transparent 1px), radial-gradient(circle at 50% 0%, color-mix(in oklch, var(--color-accent-soft), transparent 28%), transparent 34%)",
@@ -410,6 +434,9 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
       <div className="absolute top-4 right-4 flex gap-1.5">
         <PillButton onClick={expandAll}>{labels.expandAll}</PillButton>
         <PillButton onClick={collapseAll}>{labels.collapseAll}</PillButton>
+        <PillButton onClick={toggleFullscreen}>
+          {isFullscreen ? labels.exitFullscreen : labels.fullscreen}
+        </PillButton>
       </div>
 
       {/* Zoom */}

@@ -49,8 +49,11 @@ html {
 body {
   font-family: var(--font-sans);
   background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-line), transparent 72%) 1px, transparent 1px),
+    linear-gradient(180deg, color-mix(in oklch, var(--color-line), transparent 78%) 1px, transparent 1px),
     linear-gradient(180deg, oklch(0.992 0.004 96), var(--color-paper) 42rem),
     var(--color-paper);
+  background-size: 56px 56px, 56px 56px, auto, auto;
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
 }
@@ -116,7 +119,8 @@ body {
   overflow: hidden;
   border-bottom: 1px solid var(--color-line);
   background:
-    linear-gradient(135deg, color-mix(in oklch, var(--color-accent-soft), white 60%), transparent 52%),
+    linear-gradient(135deg, color-mix(in oklch, var(--color-accent-soft), white 58%), transparent 52%),
+    linear-gradient(180deg, color-mix(in oklch, var(--color-gold), transparent 88%), transparent 20rem),
     linear-gradient(180deg, var(--color-surface), var(--color-paper));
 }
 
@@ -145,13 +149,177 @@ body {
   border: 1px solid var(--color-line);
   border-radius: 0.5rem;
   background: color-mix(in oklch, var(--color-surface) 94%, var(--color-paper));
-  box-shadow: 0 12px 30px color-mix(in oklch, var(--color-ink), transparent 92%);
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 18%) inset,
+    0 16px 34px color-mix(in oklch, var(--color-ink), transparent 92%);
 }
 
 .soft-panel {
   border: 1px solid color-mix(in oklch, var(--color-line), transparent 18%);
   border-radius: 0.5rem;
   background: color-mix(in oklch, var(--color-surface) 76%, transparent);
+}
+
+.stat-tile {
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 12%);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(180deg, color-mix(in oklch, var(--color-surface), transparent 5%), color-mix(in oklch, var(--color-surface), var(--color-paper) 12%));
+  padding: 0.8rem 0.95rem;
+  box-shadow: 0 10px 24px color-mix(in oklch, var(--color-ink), transparent 94%);
+}
+
+.stat-tile dt {
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+
+.stat-tile dd {
+  margin-top: 0.1rem;
+  color: var(--color-ink);
+  font-size: 1.65rem;
+  font-weight: 760;
+}
+
+.family-plate {
+  position: relative;
+  min-height: 26rem;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-branch), transparent 80%) 1px, transparent 1px),
+    linear-gradient(180deg, color-mix(in oklch, var(--color-branch), transparent 84%) 1px, transparent 1px),
+    color-mix(in oklch, var(--color-surface) 88%, var(--color-paper));
+  background-size: 46px 46px, 46px 46px, auto;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 14%) inset,
+    0 22px 46px color-mix(in oklch, var(--color-ink), transparent 90%);
+}
+
+.family-plate::before,
+.family-plate::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.family-plate::before {
+  inset: 2.2rem;
+  border: 1px solid color-mix(in oklch, var(--color-branch), transparent 52%);
+  border-radius: 999px;
+}
+
+.family-plate::after {
+  top: 50%;
+  right: 12%;
+  left: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-branch), transparent);
+}
+
+.family-plate-mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  display: grid;
+  width: 8.5rem;
+  height: 8.5rem;
+  transform: translate(-50%, -50%);
+  place-items: center;
+  border: 1px solid color-mix(in oklch, var(--color-gold), var(--color-line) 22%);
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, color-mix(in oklch, var(--color-surface), transparent 2%), color-mix(in oklch, var(--color-gold), var(--color-surface) 88%));
+  color: var(--color-ink);
+  box-shadow:
+    0 0 0 0.55rem color-mix(in oklch, var(--color-surface), transparent 18%),
+    0 18px 30px color-mix(in oklch, var(--color-ink), transparent 88%);
+}
+
+.family-plate-mark span {
+  font-size: 3rem;
+  font-weight: 820;
+  line-height: 1;
+}
+
+.family-plate-mark small {
+  margin-top: -1.4rem;
+  color: var(--color-muted);
+  font-size: 0.72rem;
+  font-weight: 720;
+}
+
+.family-plate-list {
+  position: absolute;
+  inset: 1rem;
+}
+
+.family-plate-person {
+  position: absolute;
+  display: flex;
+  width: min(15rem, calc(100% - 2rem));
+  align-items: center;
+  gap: 0.65rem;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 92%, transparent);
+  padding: 0.55rem;
+  box-shadow: 0 12px 26px color-mix(in oklch, var(--color-ink), transparent 91%);
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.family-plate-person:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.family-plate-person strong,
+.family-plate-person small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.family-plate-person strong {
+  color: var(--color-ink);
+  font-size: 0.86rem;
+  font-weight: 720;
+}
+
+.family-plate-person small {
+  margin-top: 0.1rem;
+  color: var(--color-muted);
+  font-size: 0.74rem;
+}
+
+.family-plate-person:nth-child(1) {
+  top: 1.2rem;
+  left: 1rem;
+}
+
+.family-plate-person:nth-child(2) {
+  top: 5.9rem;
+  right: 1rem;
+}
+
+.family-plate-person:nth-child(3) {
+  right: 2.2rem;
+  bottom: 5.5rem;
+}
+
+.family-plate-person:nth-child(4) {
+  bottom: 1.25rem;
+  left: 1.35rem;
+}
+
+.family-plate-person:nth-child(5) {
+  top: 50%;
+  left: 0.85rem;
 }
 
 .button-primary,
@@ -207,6 +375,242 @@ body {
   border-color: color-mix(in oklch, var(--color-accent), var(--color-line) 30%);
   box-shadow: 0 14px 28px color-mix(in oklch, var(--color-ink), transparent 90%);
   transform: translateY(-1px);
+}
+
+.person-card-quiet {
+  box-shadow: none;
+}
+
+.person-card-quiet:hover {
+  box-shadow: 0 10px 22px color-mix(in oklch, var(--color-ink), transparent 93%);
+}
+
+.directory-hero {
+  display: grid;
+  gap: 1.5rem;
+  align-items: end;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-accent-soft), transparent 22%), transparent 58%),
+    color-mix(in oklch, var(--color-surface) 88%, var(--color-paper));
+  padding: 1.25rem;
+  box-shadow: 0 14px 32px color-mix(in oklch, var(--color-ink), transparent 93%);
+}
+
+.directory-search {
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background: var(--color-surface);
+  padding: 0.82rem 0.95rem;
+  color: var(--color-ink);
+  outline: none;
+  box-shadow: 0 8px 18px color-mix(in oklch, var(--color-ink), transparent 95%);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.search-input:focus {
+  border-color: var(--color-accent);
+  box-shadow:
+    0 0 0 3px color-mix(in oklch, var(--color-accent-soft), transparent 20%),
+    0 12px 26px color-mix(in oklch, var(--color-ink), transparent 93%);
+}
+
+.letter-nav {
+  position: sticky;
+  top: 4.2rem;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1.25rem;
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 18%);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 88%, transparent);
+  padding: 0.55rem;
+  backdrop-filter: blur(14px);
+}
+
+.letter-link {
+  display: inline-flex;
+  min-width: 2rem;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  padding: 0.28rem 0.45rem;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  font-weight: 720;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.letter-link:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.letter-section-panel {
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 18%);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 72%, transparent);
+  padding: 1rem;
+}
+
+.profile-hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-accent-soft), transparent 18%), transparent 62%),
+    linear-gradient(180deg, var(--color-surface), color-mix(in oklch, var(--color-surface), var(--color-paper) 16%));
+  padding: 1.25rem;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 15%) inset,
+    0 18px 38px color-mix(in oklch, var(--color-ink), transparent 91%);
+}
+
+.profile-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 1.25rem 1.25rem 45%;
+  height: 5rem;
+  background-image:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-branch), transparent 58%) 1px, transparent 1px),
+    linear-gradient(180deg, color-mix(in oklch, var(--color-branch), transparent 70%) 1px, transparent 1px);
+  background-size: 1rem 1rem;
+  mask-image: linear-gradient(90deg, transparent, black 22%, black);
+  pointer-events: none;
+}
+
+.profile-hero-main {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.profile-avatar {
+  box-shadow:
+    0 0 0 0.45rem color-mix(in oklch, var(--color-surface), transparent 16%),
+    0 16px 30px color-mix(in oklch, var(--color-ink), transparent 89%);
+}
+
+.profile-ribbon {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1.3rem;
+}
+
+.profile-ribbon div {
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 12%);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 82%, transparent);
+  padding: 0.7rem 0.85rem;
+}
+
+.profile-ribbon dt {
+  color: var(--color-muted);
+  font-size: 0.72rem;
+  font-weight: 760;
+  text-transform: uppercase;
+}
+
+.profile-ribbon dd {
+  margin-top: 0.15rem;
+  color: var(--color-ink);
+  font-size: 0.95rem;
+  font-weight: 680;
+}
+
+.fact-panel,
+.kin-panel {
+  box-shadow: 0 10px 24px color-mix(in oklch, var(--color-ink), transparent 94%);
+}
+
+.stats-hero,
+.tree-topper {
+  position: relative;
+}
+
+.stats-hero {
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-gold), transparent 82%), transparent 48%),
+    color-mix(in oklch, var(--color-surface) 90%, var(--color-paper));
+  padding: 1.25rem;
+  box-shadow: 0 14px 32px color-mix(in oklch, var(--color-ink), transparent 93%);
+}
+
+.chart-panel {
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(180deg, color-mix(in oklch, var(--color-surface), transparent 4%), color-mix(in oklch, var(--color-surface), var(--color-paper) 12%));
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 16%) inset,
+    0 14px 30px color-mix(in oklch, var(--color-ink), transparent 93%);
+}
+
+.tree-topper {
+  border-bottom: 1px solid color-mix(in oklch, var(--color-line), transparent 20%);
+}
+
+.tree-shell {
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 15%) inset,
+    0 18px 40px color-mix(in oklch, var(--color-ink), transparent 91%);
+}
+
+.tree-shell:fullscreen {
+  height: 100vh;
+  min-height: 100vh;
+  border: 0;
+  border-radius: 0;
+}
+
+.tree-shell:-webkit-full-screen {
+  height: 100vh;
+  min-height: 100vh;
+  border: 0;
+  border-radius: 0;
+}
+
+@media (min-width: 640px) {
+  .profile-hero-main {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .profile-ribbon {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .directory-hero {
+    grid-template-columns: minmax(0, 1fr) 24rem;
+    padding: 1.5rem;
+  }
+
+  .directory-search {
+    justify-self: end;
+  }
 }
 
 /* Typographic defaults for rendered Markdown bios */

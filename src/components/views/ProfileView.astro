@@ -65,6 +65,7 @@ const facts = [
   data.birthplace && { label: t("person.birthplace"), value: data.birthplace },
   { label: t("person.family"), value: t("person.generation", { n: gen }) },
 ].filter(Boolean) as { label: string; value: string }[];
+const heroFacts = facts.slice(0, 3);
 ---
 
 <article class="mx-auto max-w-6xl px-5 py-10">
@@ -77,36 +78,52 @@ const facts = [
     </a>
   </div>
 
-  <header class="surface-panel mt-6 flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:p-7">
-    <Avatar
-      name={data.name}
-      photo={data.photo}
-      initials={initials(data.name)}
-      size="lg"
-    />
-    <div>
-      <div class="flex flex-wrap items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight text-ink">
-          {data.name}
-        </h1>
-        {
-          living && (
-            <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-700 ring-1 ring-emerald-500/20">
-              <span class="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              {t("person.living")}
-            </span>
-          )
-        }
+  <header class="profile-hero mt-6">
+    <div class="profile-hero-main">
+      <Avatar
+        name={data.name}
+        photo={data.photo}
+        initials={initials(data.name)}
+        size="lg"
+        class="profile-avatar"
+      />
+      <div class="min-w-0">
+        <div class="flex flex-wrap items-center gap-3">
+          <h1 class="text-3xl font-semibold text-ink">
+            {data.name}
+          </h1>
+          {
+            living && (
+              <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-700 ring-1 ring-emerald-500/20">
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                {t("person.living")}
+              </span>
+            )
+          }
+        </div>
+        {data.maidenName && <p class="text-muted">{t("person.nee")} {data.maidenName}</p>}
+        {data.nickname && <p class="text-muted">“{data.nickname}”</p>}
+        <p class="mt-1 flex flex-wrap gap-x-3 text-sm text-muted">
+          {span && <span>{span}</span>}
+          {data.birthplace && <span>{data.birthplace}</span>}
+          <span>{t("person.generation", { n: gen })}</span>
+        </p>
+        {tagline && <p class="mt-2 font-medium text-accent">{tagline}</p>}
       </div>
-      {data.maidenName && <p class="text-muted">{t("person.nee")} {data.maidenName}</p>}
-      {data.nickname && <p class="text-muted">“{data.nickname}”</p>}
-      <p class="mt-1 flex flex-wrap gap-x-3 text-sm text-muted">
-        {span && <span>{span}</span>}
-        {data.birthplace && <span>{data.birthplace}</span>}
-        <span>{t("person.generation", { n: gen })}</span>
-      </p>
-      {tagline && <p class="mt-2 font-medium text-accent">{tagline}</p>}
     </div>
+
+    {
+      heroFacts.length > 0 && (
+        <dl class="profile-ribbon">
+          {heroFacts.map((fact) => (
+            <div>
+              <dt>{fact.label}</dt>
+              <dd>{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )
+    }
   </header>
 
   <div class="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_19rem] lg:items-start">
@@ -120,7 +137,7 @@ const facts = [
     </div>
 
     <aside class="space-y-5 lg:sticky lg:top-24">
-      <section class="soft-panel p-4">
+      <section class="soft-panel fact-panel p-4">
         <h2 class="text-sm font-semibold tracking-wide text-muted uppercase">
           {t("person.facts")}
         </h2>
@@ -140,7 +157,7 @@ const facts = [
 
       {
         groups.length > 0 && (
-          <section class="soft-panel p-4">
+          <section class="soft-panel kin-panel p-4">
             <h2 class="text-sm font-semibold tracking-wide text-muted uppercase">
               {t("person.family")}
             </h2>

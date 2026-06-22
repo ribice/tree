@@ -63,23 +63,9 @@ export const ui = {
     "home.oldest": "Najstariji preci",
     "home.recent": "Najmlađa generacija",
     "home.timeline": "Loza kroz vrijeme",
-    "home.archive": "Porodična arhiva koja se može pretražiti",
-    "home.archiveTitle": "Od porodične priče do cijele grane",
-    "home.archiveBody":
-      "Svaki profil povezuje biografiju, roditelje, supružnike, djecu, generaciju i mjesto rođenja, pa se iz jedne priče može brzo doći do cijele grane.",
     "home.statPeople": "članova",
     "home.statGenerations": "koljena",
     "home.statYears": "godina zapisa",
-
-    "home.f1.title": "Svako može doprinijeti",
-    "home.f1.body":
-      "Dodaj rođaka, ispravi datum ili zapiši priču putem jednostavne forme „Dodaj osobu“. Nije potreban poseban pristup.",
-    "home.f2.title": "Jedan fajl po osobi",
-    "home.f2.body":
-      "Svaki član porodice je jednostavan tekstualni fajl s podacima i kratkom biografijom. Dodati nekoga znači dodati jedan fajl.",
-    "home.f3.title": "Uvijek usklađeno",
-    "home.f3.body":
-      "Stablo i svaki profil generišu se iz fajlova, pa stranica nikad ne zaostaje za zapisima.",
 
     "tree.title": "Porodično stablo",
     "tree.subtitle":
@@ -88,6 +74,8 @@ export const ui = {
     "tree.zoomIn": "Uvećaj",
     "tree.zoomOut": "Umanji",
     "tree.reset": "Vrati prikaz",
+    "tree.fullscreen": "Cijeli ekran",
+    "tree.exitFullscreen": "Izađi iz cijelog ekrana",
     "tree.expandAll": "Proširi sve",
     "tree.collapseAll": "Skupi grane",
     "tree.living": "Živi",
@@ -193,23 +181,9 @@ export const ui = {
     "home.oldest": "Oldest ancestors",
     "home.recent": "Youngest generation",
     "home.timeline": "The line through time",
-    "home.archive": "A searchable family archive",
-    "home.archiveTitle": "From one family story to a whole branch",
-    "home.archiveBody":
-      "Every profile connects a biography, parents, spouses, children, generation, and birthplace, so one story can lead quickly into a whole branch.",
     "home.statPeople": "relatives",
     "home.statGenerations": "generations",
     "home.statYears": "years recorded",
-
-    "home.f1.title": "Everyone can contribute",
-    "home.f1.body":
-      "Add a relative, fix a date, or write a story through the simple “Add a person” form. No special access needed.",
-    "home.f2.title": "One file per person",
-    "home.f2.body":
-      "Each relative is a simple text file with their details and a short bio. Adding someone is adding one file.",
-    "home.f3.title": "Always in sync",
-    "home.f3.body":
-      "The tree and every profile are generated from the files, so the site is never out of date with the records.",
 
     "tree.title": "Family tree",
     "tree.subtitle":
@@ -218,6 +192,8 @@ export const ui = {
     "tree.zoomIn": "Zoom in",
     "tree.zoomOut": "Zoom out",
     "tree.reset": "Reset view",
+    "tree.fullscreen": "Full screen",
+    "tree.exitFullscreen": "Exit full screen",
     "tree.expandAll": "Expand all",
     "tree.collapseAll": "Collapse branches",
     "tree.living": "Living",
