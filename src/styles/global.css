@@ -866,6 +866,93 @@ body {
   font-weight: 680;
 }
 
+.data-quality-badge,
+.data-quality-missing {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.25rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 760;
+}
+
+.data-quality-badge {
+  border: 1px solid color-mix(in oklch, var(--color-ember), transparent 36%);
+  background: color-mix(in oklch, var(--color-ember), transparent 90%);
+  color: var(--color-ember);
+}
+
+.data-quality-missing {
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 12%);
+  background: color-mix(in oklch, var(--color-surface) 72%, transparent);
+  color: var(--color-muted);
+}
+
+.profile-snapshot {
+  min-width: 0;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-accent-soft), transparent 10%), transparent 62%),
+    color-mix(in oklch, var(--color-surface) 90%, var(--color-paper));
+  padding: 1rem;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 16%) inset,
+    0 14px 30px color-mix(in oklch, var(--color-ink), transparent 93%);
+}
+
+.profile-snapshot-head {
+  display: grid;
+  min-width: 0;
+  gap: 0.65rem;
+  align-items: end;
+}
+
+.profile-snapshot-head h2 {
+  margin-top: 0.25rem;
+  color: var(--color-ink);
+  font-size: 1.45rem;
+  font-weight: 780;
+}
+
+.profile-snapshot-head p:not(.eyebrow) {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.profile-snapshot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+
+.profile-snapshot-grid div {
+  min-width: 0;
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 14%);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 78%, transparent);
+  padding: 0.75rem;
+}
+
+.profile-snapshot-grid dt {
+  color: var(--color-muted);
+  font-size: 0.7rem;
+  font-weight: 760;
+  text-transform: uppercase;
+}
+
+.profile-snapshot-grid dd {
+  margin-top: 0.2rem;
+  overflow: hidden;
+  color: var(--color-ink);
+  font-size: 1.25rem;
+  font-weight: 780;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .fact-panel,
 .kin-panel {
   box-shadow: 0 10px 24px color-mix(in oklch, var(--color-ink), transparent 94%);
@@ -992,8 +1079,148 @@ body {
   box-shadow: 0 0 0 0.25rem color-mix(in oklch, var(--color-gold), transparent 80%);
 }
 
+.thanks-panel {
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-accent-soft), transparent 8%), transparent 62%),
+    linear-gradient(180deg, color-mix(in oklch, var(--color-gold), transparent 88%), transparent 70%),
+    color-mix(in oklch, var(--color-surface) 92%, var(--color-paper));
+  padding: 1.25rem;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 16%) inset,
+    0 18px 40px color-mix(in oklch, var(--color-ink), transparent 91%);
+}
+
+.thanks-panel h1 {
+  margin-top: 0.35rem;
+  max-width: 42rem;
+  color: var(--color-ink);
+  font-size: clamp(2.2rem, 7vw, 4rem);
+  font-weight: 820;
+  line-height: 1;
+}
+
+.thanks-panel p:not(.eyebrow) {
+  margin-top: 1rem;
+  max-width: 42rem;
+  color: var(--color-muted);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
 .tree-topper {
   border-bottom: 1px solid color-mix(in oklch, var(--color-line), transparent 20%);
+}
+
+.tree-search-panel {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 4;
+  width: min(22rem, calc(100% - 2rem));
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 92%, transparent);
+  padding: 0.7rem;
+  box-shadow: 0 16px 32px color-mix(in oklch, var(--color-ink), transparent 90%);
+  backdrop-filter: blur(14px);
+}
+
+.tree-search-label {
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.7rem;
+  font-weight: 780;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tree-search-input {
+  margin-top: 0.35rem;
+  width: 100%;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background: var(--color-surface);
+  padding: 0.58rem 0.7rem;
+  color: var(--color-ink);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.tree-search-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-accent-soft), transparent 18%);
+}
+
+.tree-search-results {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.55rem;
+  max-height: 18rem;
+  overflow: auto;
+}
+
+.tree-search-result {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 18%);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 88%, transparent);
+  padding: 0.5rem 0.58rem;
+  text-align: left;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.tree-search-result:hover,
+.tree-search-result:focus-visible {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.tree-search-result span {
+  min-width: 0;
+}
+
+.tree-search-result strong,
+.tree-search-result small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tree-search-result strong {
+  color: var(--color-ink);
+  font-size: 0.82rem;
+  font-weight: 740;
+}
+
+.tree-search-result small {
+  margin-top: 0.1rem;
+  color: var(--color-muted);
+  font-size: 0.72rem;
+}
+
+.tree-search-result em {
+  flex: 0 0 auto;
+  color: var(--color-accent);
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 760;
+}
+
+.tree-search-empty {
+  border: 1px dashed var(--color-line);
+  border-radius: 0.5rem;
+  padding: 0.65rem;
+  color: var(--color-muted);
+  font-size: 0.82rem;
 }
 
 .tree-shell {
@@ -1080,10 +1307,23 @@ body {
   .profile-ribbon {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  .profile-snapshot {
+    padding: 1.25rem;
+  }
+
+  .profile-snapshot-head {
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+  }
+
+  .profile-snapshot-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 639px) {
   .tree-controls {
+    top: 7.1rem;
     right: 1rem;
     left: 1rem;
     flex-wrap: wrap;
@@ -1095,7 +1335,7 @@ body {
   }
 
   .tree-legend {
-    top: 4.45rem;
+    top: 11.2rem;
   }
 }
 

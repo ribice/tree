@@ -1,0 +1,26 @@
+---
+import { useTranslations, localize, type Locale } from "../../i18n/ui";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="mx-auto max-w-4xl px-5 py-12">
+  <div class="thanks-panel">
+    <p class="eyebrow">{t("add.successEyebrow")}</p>
+    <h1>{t("add.successTitle")}</h1>
+    <p>{t("add.successBody")}</p>
+    <div class="home-actions mt-7">
+      <a href={localize("/people", lang)} class="button-primary">
+        {t("home.ctaDirectory")}
+      </a>
+      <a href={localize("/", lang)} class="button-secondary">
+        {t("nav.home")}
+      </a>
+    </div>
+  </div>
+</section>

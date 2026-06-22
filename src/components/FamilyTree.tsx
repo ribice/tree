@@ -20,6 +20,10 @@ export interface TreeLabels {
   deceased: string;
   female: string;
   male: string;
+  search: string;
+  searchPlaceholder: string;
+  searchEmpty: string;
+  center: string;
   /** "+{n} more" / "još {n}" — {n} is replaced */
   showMore: string;
 }
@@ -106,6 +110,7 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
   const [hovered, setHovered] = useState<string | null>(null);
   const [hoverEnabled, setHoverEnabled] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // The hovered person's bloodline (ancestors + descendants + self), or null.
   const lineage = useMemo(() => {
@@ -200,6 +205,17 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
     media.addEventListener("change", syncHover);
     return () => media.removeEventListener("change", syncHover);
   }, []);
+
+  const focusPerson = (id: string) => {
+    const anc = ancestorsOf(id, people);
+    setCollapsed((prev) => {
+      const next = new Set(prev);
+      for (const a of anc) next.delete(a);
+      return next;
+    });
+    setFocusTarget(id);
+    setSearchQuery("");
+  };
 
   // Center + highlight the focused node once the layout has revealed it.
   useEffect(() => {
@@ -356,6 +372,21 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
   };
 
   const showMore = (n: number) => labels.showMore.replace("{n}", String(n));
+  const normalizedSearch = searchQuery.trim().toLocaleLowerCase();
+  const searchResults = normalizedSearch
+    ? people
+        .filter((p) =>
+          [p.name, p.tagline, p.lifespan]
+            .filter(Boolean)
+            .some((value) =>
+              value!.toLocaleLowerCase().includes(normalizedSearch),
+            ),
+        )
+        .slice(0, 7)
+    : [];
+  const selectFirstSearchResult = () => {
+    if (searchResults[0]) focusPerson(searchResults[0].id);
+  };
 
   return (
     <div
@@ -447,8 +478,52 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
         </g>
       </svg>
 
+      <div className="tree-search-panel">
+        <label htmlFor="tree-search" className="tree-search-label">
+          {labels.search}
+        </label>
+        <input
+          id="tree-search"
+          type="search"
+          value={searchQuery}
+          onChange={(event) => setSearchQuery(event.currentTarget.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              selectFirstSearchResult();
+            }
+          }}
+          placeholder={labels.searchPlaceholder}
+          className="tree-search-input"
+        />
+        {normalizedSearch && (
+          <div className="tree-search-results">
+            {searchResults.length ? (
+              searchResults.map((person) => (
+                <button
+                  type="button"
+                  key={person.id}
+                  onClick={() => focusPerson(person.id)}
+                  className="tree-search-result"
+                >
+                  <span>
+                    <strong>{person.name}</strong>
+                    <small>
+                      {[person.lifespan, person.tagline].filter(Boolean).join(" · ")}
+                    </small>
+                  </span>
+                  <em>{labels.center}</em>
+                </button>
+              ))
+            ) : (
+              <p className="tree-search-empty">{labels.searchEmpty}</p>
+            )}
+          </div>
+        )}
+      </div>
+
       {/* Legend */}
-      <div className="tree-legend pointer-events-none absolute top-4 left-4 flex flex-col gap-1.5 rounded-lg border border-line bg-surface/90 px-3 py-2 text-xs text-muted shadow-sm backdrop-blur">
+      <div className="tree-legend pointer-events-none absolute top-[7.35rem] left-4 flex flex-col gap-1.5 rounded-lg border border-line bg-surface/90 px-3 py-2 text-xs text-muted shadow-sm backdrop-blur">
         <span className="flex items-center gap-2">
           <span className="tree-legend-dot tree-legend-dot-female" />
           {labels.female}

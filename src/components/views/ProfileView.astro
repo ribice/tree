@@ -14,6 +14,7 @@ import {
   type Person,
 } from "../../lib/people";
 import { useTranslations, localize, type Locale } from "../../i18n/ui";
+import { publicDate } from "../../lib/privacy";
 
 interface Props {
   lang: Locale;
@@ -59,13 +60,26 @@ const { data } = person;
 const living = isLiving(person);
 const gen = generation(person, people);
 const treeHref = `${localize("/tree", lang)}?focus=${person.id}`;
+const shownBorn = data.born ? publicDate(data.born, living) : undefined;
 const facts = [
-  data.born && { label: t("person.born"), value: data.born },
+  shownBorn && { label: t("person.born"), value: shownBorn },
   data.died && { label: t("person.died"), value: data.died },
   data.birthplace && { label: t("person.birthplace"), value: data.birthplace },
   { label: t("person.family"), value: t("person.generation", { n: gen }) },
 ].filter(Boolean) as { label: string; value: string }[];
 const heroFacts = facts.slice(0, 3);
+const missingFacts = [
+  !data.born && t("person.unknownBirth"),
+  !data.birthplace && t("person.unknownBirthplace"),
+  data.parents.length === 0 && t("person.unknownParents"),
+  !person.body?.trim() && t("person.unknownBio"),
+].filter(Boolean) as string[];
+const snapshotCards = [
+  { label: t("person.parents"), value: String(rels.parents.length) },
+  { label: t("person.spouse"), value: String(rels.spouses.length) },
+  { label: t("person.children"), value: String(rels.children.length) },
+  { label: t("person.family"), value: t("person.generation", { n: gen }) },
+];
 ---
 
 <article class="mx-auto max-w-6xl px-5 py-10">
@@ -110,6 +124,16 @@ const heroFacts = facts.slice(0, 3);
           <span>{t("person.generation", { n: gen })}</span>
         </p>
         {tagline && <p class="mt-2 font-medium text-accent">{tagline}</p>}
+        {
+          missingFacts.length > 0 && (
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="data-quality-badge">{t("person.needsDetails")}</span>
+              {missingFacts.slice(0, 3).map((item) => (
+                <span class="data-quality-missing">{item}</span>
+              ))}
+            </div>
+          )
+        }
       </div>
     </div>
 
@@ -126,6 +150,34 @@ const heroFacts = facts.slice(0, 3);
       )
     }
   </header>
+
+  <section class="profile-snapshot mt-6" aria-label={t("person.snapshot")}>
+    <div class="profile-snapshot-head">
+      <div>
+        <p class="eyebrow">{t("person.knownData")}</p>
+        <h2>{t("person.snapshot")}</h2>
+      </div>
+      {
+        missingFacts.length > 0 ? (
+          <p>
+            {t("person.missingData")}: {missingFacts.join(", ")}
+          </p>
+        ) : (
+          <p>{t("person.knownData")}</p>
+        )
+      }
+    </div>
+    <dl class="profile-snapshot-grid">
+      {
+        snapshotCards.map((card) => (
+          <div>
+            <dt>{card.label}</dt>
+            <dd>{card.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
 
   <div class="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_19rem] lg:items-start">
     <div>

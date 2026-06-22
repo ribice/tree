@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ThanksView from "../components/views/ThanksView.astro";
+import { useTranslations } from "../i18n/ui";
+
+const t = useTranslations("bs");
+---
+
+<Layout
+  lang="bs"
+  title={`${t("add.successTitle")} · ${t("site.title")}`}
+  description={t("add.successBody")}
+  noindex
+>
+  <ThanksView lang="bs" />
+</Layout>

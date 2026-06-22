@@ -1,5 +1,6 @@
 import { localize, type Locale } from "../i18n/ui";
 import type { Person, Translation } from "./people";
+import { isLikelyLivingDateSpan, publicLifespan } from "./privacy";
 
 export const ORIGIN: Record<Locale, string> = {
   bs: "https://stablo.ribic.ba",
@@ -66,13 +67,8 @@ function localizedTagline(
 }
 
 function localizedLifespan(person: Person, locale: Locale): string {
-  const { born, died } = person.data;
-  const bornPrefix = locale === "en" ? "b. " : "r. ";
-  const diedPrefix = locale === "en" ? "d. " : "u. ";
-  if (born && died) return `${born} - ${died}`;
-  if (born) return `${bornPrefix}${born}`;
-  if (died) return `${diedPrefix}${died}`;
-  return "";
+  const living = isLikelyLivingDateSpan(person.data);
+  return publicLifespan(person.data, living, locale).replace(/\s+–\s+/g, " - ");
 }
 
 function spouseIds(person: Person): string[] {
@@ -169,7 +165,15 @@ export function personJsonLd({
     name: person.data.name,
     description: personDescription(person, translations, locale),
     url,
+    mainEntityOfPage: url,
   };
+
+  const alternateName = [person.data.nickname, person.data.maidenName].filter(
+    (value): value is string => Boolean(value),
+  );
+  if (alternateName.length) json.alternateName = alternateName;
+  if (person.data.sex === "m") json.gender = "Male";
+  if (person.data.sex === "f") json.gender = "Female";
 
   const birthDate = yearLike(person.data.born);
   const deathDate = yearLike(person.data.died);

@@ -10,7 +10,7 @@ const t = useTranslations(lang);
 
 const people = await getPeople();
 const options = people.map((p) => ({ id: p.id, name: p.data.name }));
-const action = localize("/add", lang);
+const action = localize("/thanks", lang);
 const opt = t("add.optional");
 ---
 
@@ -21,19 +21,12 @@ const opt = t("add.optional");
   </h1>
   <p class="mt-2 max-w-xl text-muted">{t("add.intro")}</p>
 
-  <div
-    id="form-success"
-    class="mt-6 hidden rounded-lg border border-emerald-500/30 bg-emerald-50 px-4 py-3 text-emerald-800"
-  >
-    {t("add.success")}
-  </div>
-
   <form
     name="add-person"
     method="POST"
     data-netlify="true"
     netlify-honeypot="bot-field"
-    action={`${action}?ok=1`}
+    action={action}
     class="surface-panel mt-8 space-y-5 p-5 sm:p-7"
   >
     <input type="hidden" name="form-name" value="add-person" />
@@ -168,14 +161,3 @@ const opt = t("add.optional");
     color: var(--color-muted);
   }
 </style>
-
-<script>
-  // Show the success banner after Netlify redirects back with ?ok=1.
-  if (new URLSearchParams(location.search).get("ok")) {
-    const el = document.getElementById("form-success");
-    if (el) {
-      el.classList.remove("hidden");
-      el.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }
-</script>

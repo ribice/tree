@@ -53,6 +53,10 @@ export const ui = {
     "add.none": "— odaberi —",
     "add.success":
       "Hvala! Tvoj prijedlog je poslan. Pregledat ćemo ga i uskoro dodati u stablo.",
+    "add.successEyebrow": "Prijedlog poslan",
+    "add.successTitle": "Hvala, prijedlog je zaprimljen",
+    "add.successBody":
+      "Poruka je poslana putem Netlify forme. Pregledat ćemo podatke i uvrstiti ih u stablo nakon provjere.",
 
     "home.eyebrow": "{n} članova porodice — i raste",
     "home.title": "Stablo Rasima Ribića – Kifića",
@@ -97,6 +101,10 @@ export const ui = {
     "tree.male": "Muškarci",
     "tree.showMore": "još {n}",
     "tree.poster": "Preuzmi poster (SVG)",
+    "tree.search": "Pronađi osobu",
+    "tree.searchPlaceholder": "Ime, prezime ili nadimak…",
+    "tree.searchEmpty": "Nema rezultata u stablu.",
+    "tree.center": "Centriraj",
 
     "dir.title": "Imenik",
     "dir.subtitle": "Svi članovi stabla, po abecedi.",
@@ -123,6 +131,14 @@ export const ui = {
     "person.born": "Rođen/a",
     "person.died": "Umro/la",
     "person.birthplace": "Mjesto rođenja",
+    "person.snapshot": "Kratki pregled",
+    "person.needsDetails": "Potrebna dopuna",
+    "person.knownData": "Zabilježeno",
+    "person.missingData": "Nedostaje",
+    "person.unknownBirth": "Datum rođenja",
+    "person.unknownBirthplace": "Mjesto rođenja",
+    "person.unknownParents": "Roditelji",
+    "person.unknownBio": "Biografija",
 
     "footer.tagline": "Porodicu zajedno bilježimo i dopunjavamo.",
     "footer.github": "Cijelo stablo i svi podaci dostupni su na GitHubu →",
@@ -190,6 +206,10 @@ export const ui = {
     "add.none": "— choose —",
     "add.success":
       "Thank you! Your suggestion has been sent. We'll review it and add it to the tree soon.",
+    "add.successEyebrow": "Suggestion sent",
+    "add.successTitle": "Thank you, your suggestion was received",
+    "add.successBody":
+      "The message was submitted through Netlify Forms. We will review the details and add them to the tree after checking them.",
 
     "home.eyebrow": "{n} relatives — and growing",
     "home.title": "The Ribić – Kifić Family Tree",
@@ -234,6 +254,10 @@ export const ui = {
     "tree.male": "Male",
     "tree.showMore": "+{n} more",
     "tree.poster": "Download poster (SVG)",
+    "tree.search": "Find a person",
+    "tree.searchPlaceholder": "Name, surname, or nickname…",
+    "tree.searchEmpty": "No results in the tree.",
+    "tree.center": "Center",
 
     "dir.title": "Directory",
     "dir.subtitle": "Everyone in the tree, A to Z.",
@@ -260,6 +284,14 @@ export const ui = {
     "person.born": "Born",
     "person.died": "Died",
     "person.birthplace": "Birthplace",
+    "person.snapshot": "Snapshot",
+    "person.needsDetails": "Needs details",
+    "person.knownData": "Recorded",
+    "person.missingData": "Missing",
+    "person.unknownBirth": "Birth date",
+    "person.unknownBirthplace": "Birthplace",
+    "person.unknownParents": "Parents",
+    "person.unknownBio": "Biography",
 
     "footer.tagline": "We record and grow the family together.",
     "footer.github": "The whole tree and all its data are on GitHub →",

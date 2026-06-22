@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "validate": "node scripts/validate.mjs",
+    "data:changes": "node scripts/report-data-changes.mjs",
     "test": "vitest run"
   },
   "dependencies": {

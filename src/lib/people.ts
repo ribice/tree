@@ -1,5 +1,6 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import type { Locale } from "../i18n/ui";
+import { isLikelyLivingDateSpan, publicLifespan } from "./privacy";
 
 export type Person = CollectionEntry<"people">;
 export type Translation = CollectionEntry<"translations">;
@@ -46,10 +47,7 @@ export function taglineFor(
 /** Whether the person is (probably) still living: no recorded death and born
  * within roughly the last century. Unknown birth → treated as historical. */
 export function isLiving(p: Person): boolean {
-  if (p.data.died) return false;
-  const y = birthYear(p);
-  if (y === null) return false;
-  return y >= new Date().getFullYear() - 105;
+  return isLikelyLivingDateSpan(p.data);
 }
 
 /** Lookup map keyed by person id (the file name without .md). */
@@ -116,13 +114,7 @@ export function birthYear(p: Person): number | null {
 
 /** Compact lifespan label, e.g. "1945 – 2018", "r. 1980" / "b. 1980". */
 export function lifespan(p: Person, locale: Locale = "bs"): string {
-  const { born, died } = p.data;
-  const bornPrefix = locale === "en" ? "b. " : "r. ";
-  const diedPrefix = locale === "en" ? "d. " : "u. ";
-  if (born && died) return `${born} – ${died}`;
-  if (born) return `${bornPrefix}${born}`;
-  if (died) return `${diedPrefix}${died}`;
-  return "";
+  return publicLifespan(p.data, isLiving(p), locale);
 }
 
 /** Initials for the monogram avatar fallback. */
