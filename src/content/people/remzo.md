@@ -1,8 +1,0 @@
----
-name: "Remzo Hasić"
-sex: "m"
-parents: [smajo-hasic]
-tagline: "Sin Smaje"
----
-
-Sin je Smaje.

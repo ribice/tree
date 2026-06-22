@@ -2,9 +2,7 @@
 name: "Hamma Dizdar"
 sex: "f"
 parents: [nepoznati-dizdar, bisera]
-spouses:
-  - nepoznati-boric
-tagline: "Kćerka Nepoznatia i Bisere"
+tagline: "Kćerka Nepoznatog Dizdara i Bisere"
 ---
 
-Roditelji su Nepoznati Dizdar i Bisera Dizdar. Suprug: Nepoznati Borić.
+Hamma je bila kćerka Nepoznatog Dizdara i Bisere Dizdar.

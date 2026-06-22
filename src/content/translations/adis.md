@@ -2,4 +2,4 @@
 tagline: "Son of Damir Gradečak and Naida Gradečak"
 ---
 
-Son of Damir Gradečak and Naida Gradečak. Wife: Adriana Lopez.
+Adis was born in Rotterdam. Son of Damir Gradečak and Naida Gradečak.
