@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ChangelogView from "../components/views/ChangelogView.astro";
+import { useTranslations } from "../i18n/ui";
+
+const t = useTranslations("bs");
+---
+
+<Layout
+  lang="bs"
+  title={`${t("changelog.title")} · ${t("site.title")}`}
+  description={t("meta.changelog")}
+>
+  <ChangelogView lang="bs" />
+</Layout>

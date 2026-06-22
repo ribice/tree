@@ -9,9 +9,9 @@ export const GET: APIRoute = async () => {
     "/",
     "/tree/",
     "/people/",
-    "/about/",
     "/add/",
     "/stats/",
+    "/changelog/",
     ...people.map((p) => `/people/${p.id}/`),
   ];
 

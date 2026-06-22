@@ -51,7 +51,6 @@ const nav = [
   { href: localize("/", lang), label: t("nav.home") },
   { href: localize("/tree", lang), label: t("nav.tree") },
   { href: localize("/people", lang), label: t("nav.directory") },
-  { href: localize("/about", lang), label: t("nav.about") },
 ];
 const currentPath = pathForLocale(Astro.url.pathname, lang);
 const isCurrent = (href: string) =>
@@ -223,8 +222,8 @@ const jsonLdItems = [
           <a href={localize("/stats", lang)} class="transition hover:text-accent"
             >{t("stats.title")}</a
           >
-          <a href={localize("/about", lang)} class="transition hover:text-accent"
-            >{t("nav.about")}</a
+          <a href={localize("/changelog", lang)} class="transition hover:text-accent"
+            >{t("nav.changelog")}</a
           >
         </nav>
         <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">

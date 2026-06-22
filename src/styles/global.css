@@ -396,6 +396,214 @@ body {
   font-weight: 780;
 }
 
+.lineage-panel {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-accent-soft), transparent 20%), transparent 64%),
+    linear-gradient(180deg, color-mix(in oklch, var(--color-gold), transparent 88%), transparent 54%),
+    color-mix(in oklch, var(--color-surface) 92%, var(--color-paper));
+  padding: 1rem;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 16%) inset,
+    0 18px 40px color-mix(in oklch, var(--color-ink), transparent 91%);
+}
+
+.lineage-intro {
+  display: grid;
+  min-width: 0;
+  gap: 0.85rem;
+  align-items: end;
+}
+
+.lineage-intro h2 {
+  margin-top: 0.3rem;
+  color: var(--color-ink);
+  font-size: clamp(2rem, 7vw, 3.1rem);
+  font-weight: 820;
+  line-height: 1;
+}
+
+.lineage-intro p:not(.eyebrow) {
+  max-width: 42rem;
+  color: var(--color-muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.lineage-intro > span {
+  width: max-content;
+  max-width: 100%;
+  border: 1px solid color-mix(in oklch, var(--color-accent), var(--color-line) 54%);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--color-surface) 78%, transparent);
+  padding: 0.45rem 0.7rem;
+  color: var(--color-accent);
+  font-size: 0.82rem;
+  font-weight: 760;
+}
+
+.lineage-track {
+  --lineage-count: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--lineage-count), minmax(11.5rem, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.15rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.35rem 0.15rem 0.75rem;
+  scrollbar-color: color-mix(in oklch, var(--color-accent), transparent 35%) transparent;
+}
+
+.lineage-item {
+  position: relative;
+  min-width: 0;
+}
+
+.lineage-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 2.35rem;
+  right: -0.75rem;
+  z-index: 0;
+  width: 0.75rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-branch), color-mix(in oklch, var(--color-gold), transparent 10%));
+}
+
+.lineage-card {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-height: 10.25rem;
+  min-width: 0;
+  align-content: start;
+  gap: 0.7rem;
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 8%);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 92%, transparent);
+  padding: 0.75rem;
+  box-shadow: 0 12px 28px color-mix(in oklch, var(--color-ink), transparent 93%);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.lineage-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 16px 32px color-mix(in oklch, var(--color-ink), transparent 89%);
+  transform: translateY(-1px);
+}
+
+.lineage-card[data-sex="f"] {
+  border-color: color-mix(in oklch, var(--color-female), var(--color-line) 68%);
+  background:
+    linear-gradient(135deg, color-mix(in oklch, var(--color-female-soft), transparent 8%), transparent 54%),
+    color-mix(in oklch, var(--color-surface) 92%, transparent);
+}
+
+.lineage-card[data-sex="m"] {
+  border-color: color-mix(in oklch, var(--color-male), var(--color-line) 68%);
+  background:
+    linear-gradient(135deg, color-mix(in oklch, var(--color-male-soft), transparent 8%), transparent 54%),
+    color-mix(in oklch, var(--color-surface) 92%, transparent);
+}
+
+.lineage-card-head {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.lineage-step {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 10%);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--color-surface) 78%, transparent);
+  padding: 0.22rem 0.5rem;
+  color: var(--color-muted);
+  font-size: 0.68rem;
+  font-weight: 780;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.lineage-card-name,
+.lineage-card-meta {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.lineage-card-name {
+  color: var(--color-ink);
+  font-size: 0.98rem;
+  font-weight: 760;
+  line-height: 1.25;
+}
+
+.lineage-card-meta {
+  display: -webkit-box;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.home-about {
+  display: grid;
+  min-width: 0;
+  gap: 1.25rem;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-gold), transparent 84%), transparent 42%),
+    linear-gradient(180deg, color-mix(in oklch, var(--color-accent-soft), transparent 12%), transparent 76%),
+    color-mix(in oklch, var(--color-surface) 92%, var(--color-paper));
+  padding: 1.1rem;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 16%) inset,
+    0 16px 36px color-mix(in oklch, var(--color-ink), transparent 92%);
+}
+
+.home-about-title {
+  min-width: 0;
+}
+
+.home-about-title h2 {
+  margin-top: 0.35rem;
+  max-width: 38rem;
+  color: var(--color-ink);
+  font-size: clamp(2rem, 7vw, 3.2rem);
+  font-weight: 820;
+  line-height: 1;
+}
+
+.home-about-copy {
+  display: grid;
+  min-width: 0;
+  gap: 0.9rem;
+}
+
+.home-about-copy p {
+  color: var(--color-ink);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.home-about-copy p:first-child {
+  color: var(--color-muted);
+  font-size: 1.08rem;
+}
+
 .button-primary,
 .button-secondary {
   display: inline-flex;
@@ -688,6 +896,102 @@ body {
     0 14px 30px color-mix(in oklch, var(--color-ink), transparent 93%);
 }
 
+.changelog-hero {
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-accent-soft), transparent 16%), transparent 58%),
+    linear-gradient(180deg, color-mix(in oklch, var(--color-gold), transparent 88%), transparent 72%),
+    color-mix(in oklch, var(--color-surface) 90%, var(--color-paper));
+  padding: 1.25rem;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 16%) inset,
+    0 14px 32px color-mix(in oklch, var(--color-ink), transparent 93%);
+}
+
+.changelog-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.changelog-entry {
+  display: grid;
+  min-width: 0;
+  gap: 1rem;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 92%, var(--color-paper));
+  padding: 1rem;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 16%) inset,
+    0 12px 28px color-mix(in oklch, var(--color-ink), transparent 94%);
+}
+
+.changelog-date {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--color-muted);
+  font-size: 0.86rem;
+  font-weight: 740;
+}
+
+.changelog-date span {
+  border: 1px solid color-mix(in oklch, var(--color-accent), var(--color-line) 52%);
+  border-radius: 999px;
+  background: var(--color-accent-soft);
+  padding: 0.18rem 0.55rem;
+  color: var(--color-accent);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.changelog-entry-body {
+  min-width: 0;
+}
+
+.changelog-entry-body h2 {
+  color: var(--color-ink);
+  font-size: 1.35rem;
+  font-weight: 760;
+  line-height: 1.2;
+}
+
+.changelog-entry-body p {
+  margin-top: 0.45rem;
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+
+.changelog-entry-body ul {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+}
+
+.changelog-entry-body li {
+  position: relative;
+  min-width: 0;
+  padding-left: 1.1rem;
+  color: var(--color-ink);
+  line-height: 1.6;
+}
+
+.changelog-entry-body li::before {
+  content: "";
+  position: absolute;
+  top: 0.68rem;
+  left: 0;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: var(--color-gold);
+  box-shadow: 0 0 0 0.25rem color-mix(in oklch, var(--color-gold), transparent 80%);
+}
+
 .tree-topper {
   border-bottom: 1px solid color-mix(in oklch, var(--color-line), transparent 20%);
 }
@@ -758,6 +1062,16 @@ body {
     flex-wrap: wrap;
   }
 
+  .lineage-panel,
+  .home-about,
+  .changelog-hero {
+    padding: 1.25rem;
+  }
+
+  .lineage-intro {
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1fr) auto;
+  }
+
   .profile-hero-main {
     flex-direction: row;
     align-items: center;
@@ -793,6 +1107,32 @@ body {
 
   .directory-search {
     justify-self: end;
+  }
+
+  .lineage-track {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    overflow: visible;
+    padding-bottom: 0.35rem;
+  }
+
+  .lineage-item:nth-child(5n)::after {
+    display: none;
+  }
+
+  .home-about {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    padding: 1.5rem;
+  }
+
+  .changelog-entry {
+    grid-template-columns: 12rem minmax(0, 1fr);
+    padding: 1.2rem;
+  }
+
+  .changelog-date {
+    align-content: start;
+    align-items: start;
+    flex-direction: column;
   }
 }
 

@@ -20,6 +20,22 @@ const t = useTranslations(lang);
 
 const people = await getPeople();
 const translations = await getTranslations();
+const peopleById = new Map(people.map((p) => [p.id, p]));
+const lineageIds = [
+  "enes-predak",
+  "omer",
+  "avdikadija",
+  "akif",
+  "avdo-kifin",
+  "rasim",
+  "halim",
+  "esad",
+  "emir",
+  "jakub-emirov",
+] as const;
+const lineage = lineageIds
+  .map((id) => peopleById.get(id))
+  .filter((p): p is (typeof people)[number] => Boolean(p));
 
 const byYearAsc = [...people].sort(
   (a, b) => (birthYear(a) ?? Infinity) - (birthYear(b) ?? Infinity),
@@ -35,6 +51,8 @@ const youngest = [...people]
 
 const peoplePath = localize("/people", lang);
 const treePath = localize("/tree", lang);
+const addPath = localize("/add", lang);
+const githubUrl = "https://github.com/ribice/tree";
 
 const years = people
   .flatMap((p) => [p.data.born, p.data.died])
@@ -47,11 +65,7 @@ const generationCount = Math.max(...people.map((p) => generation(p, people)));
 const livingCount = people.filter((p) => isLiving(p)).length;
 const recordedYears = maxYear - minYear + 1;
 
-const timeline = [...oldest.slice(0, 3), ...youngest.slice(0, 3)].filter(
-  (person, index, arr) => arr.findIndex((p) => p.id === person.id) === index,
-);
-
-const heroPeople = [...oldest.slice(0, 2), ...youngest.slice(0, 3)].filter(
+const heroPeople = [...lineage.slice(0, 3), ...lineage.slice(-2)].filter(
   (person, index, arr) => arr.findIndex((p) => p.id === person.id) === index,
 );
 
@@ -144,30 +158,41 @@ const stats = [
       </dl>
     </div>
 
-    <div class="surface-panel p-4 sm:p-5 lg:col-span-2" aria-label={t("home.timeline")}>
-      <div class="flex items-center justify-between gap-4">
-        <h2 class="text-sm font-semibold tracking-wide text-muted uppercase">
-          {t("home.timeline")}
-        </h2>
-        <span class="text-sm font-medium text-accent">{minYear}–{maxYear}</span>
+    <div class="lineage-panel lg:col-span-2" aria-label={t("home.timeline")}>
+      <div class="lineage-intro">
+        <div>
+          <p class="eyebrow">{t("home.lineageKicker")}</p>
+          <h2>{t("home.timeline")}</h2>
+        </div>
+        <p>{t("home.lineageBody")}</p>
+        <span>{lineage.length} {t("home.statGenerations")}</span>
       </div>
-      <ol class="relative mt-6 grid gap-4 sm:grid-cols-6">
-        <span
-          class="absolute top-[1.65rem] right-4 left-4 hidden h-px bg-branch sm:block"
-        ></span>
+      <ol class="lineage-track" style={`--lineage-count: ${lineage.length}`}>
         {
-          timeline.map((p) => (
-            <li class="relative">
+          lineage.map((p, index) => (
+            <li class="lineage-item">
               <a
                 href={`${peoplePath}/${p.id}`}
-                class="group block rounded-lg bg-surface/85 p-2 text-center transition hover:bg-accent-soft"
+                class="lineage-card"
+                data-sex={p.data.sex}
               >
-                <span class="mx-auto block h-3 w-3 rounded-full bg-gold ring-4 ring-surface transition group-hover:bg-accent" />
-                <span class="mt-3 block truncate text-sm font-semibold text-ink group-hover:text-accent">
-                  {p.data.name}
+                <span class="lineage-card-head">
+                  <span class="lineage-step">
+                    {t("home.lineageStep", { n: index + 1 })}
+                  </span>
+                  <Avatar
+                    name={p.data.name}
+                    photo={p.data.photo}
+                    initials={initials(p.data.name)}
+                    sex={p.data.sex}
+                    size="xs"
+                  />
                 </span>
-                <span class="mt-0.5 block truncate text-xs text-muted">
-                  {lifespan(p, lang)}
+                <span class="lineage-card-name">{p.data.name}</span>
+                <span class="lineage-card-meta">
+                  {[lifespan(p, lang), taglineFor(p, translations, lang)]
+                    .filter(Boolean)
+                    .join(" · ")}
                 </span>
               </a>
             </li>
@@ -178,8 +203,27 @@ const stats = [
   </div>
 </section>
 
+<section class="mx-auto max-w-6xl px-5 py-12">
+  <div class="home-about">
+    <div class="home-about-title">
+      <p class="eyebrow">{t("home.aboutKicker")}</p>
+      <h2>{t("home.aboutTitle")}</h2>
+    </div>
+    <div class="home-about-copy">
+      <p>{t("home.aboutP1")}</p>
+      <p>{t("home.aboutP2")}</p>
+      <p>{t("home.aboutP3")}</p>
+      <p>{t("home.aboutP4")}</p>
+      <div class="home-actions mt-6">
+        <a href={addPath} class="button-primary">{t("nav.add")}</a>
+        <a href={githubUrl} class="button-secondary">{t("footer.github")}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section
-  class="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)] gap-6 px-5 py-12 sm:grid-cols-2"
+  class="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)] gap-6 px-5 pb-12 sm:grid-cols-2"
 >
   {
     rows.map((row) => (

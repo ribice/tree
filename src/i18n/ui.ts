@@ -16,18 +16,18 @@ export const ui = {
       "Interaktivno porodično stablo Ribića – Kifića s generacijama, supružnicima, potomcima i istaknutim lozama.",
     "meta.directory":
       "Pretraži sve članove porodičnog stabla Ribića – Kifića po imenu, prezimenu, nadimku i kratkom opisu.",
-    "meta.about":
-      "Kako je nastalo porodično stablo Ribića – Kifića, od starih zapisa Rasima i Enesa Ribića do današnje digitalne arhive.",
     "meta.add":
       "Dodaj novu osobu, ispravi podatak ili pošalji porodičnu priču za porodično stablo Ribića – Kifića.",
     "meta.stats":
       "Brojke porodičnog stabla Ribića – Kifića: članovi, generacije, prezimena, godine i mjesta rođenja.",
+    "meta.changelog":
+      "Pregled promjena u podacima porodičnog stabla Ribića – Kifića: novi članovi, ispravke veza, datumi i izvori.",
 
     "nav.home": "Početna",
     "nav.tree": "Stablo",
     "nav.directory": "Imenik",
-    "nav.about": "O stablu",
     "nav.add": "Dodaj osobu",
+    "nav.changelog": "Promjene",
     "nav.langName": "English",
     "nav.skip": "Preskoči na sadržaj",
 
@@ -63,6 +63,19 @@ export const ui = {
     "home.oldest": "Najstariji preci",
     "home.recent": "Najmlađa generacija",
     "home.timeline": "Loza kroz vrijeme",
+    "home.lineageKicker": "Od prvog zapisanog imena",
+    "home.lineageBody":
+      "Najstarija poznata linija počinje s Enesom i Omerom, vodi do Avdikadije, a zatim preko Kifića do današnjih potomaka.",
+    "home.lineageStep": "{n}. koljeno",
+    "home.aboutKicker": "O stablu",
+    "home.aboutTitle": "Živi zapis porodice Ribić – Kifić",
+    "home.aboutP1":
+      "Ovo je živi zapis o porodici Ribić – Kifić iz Jezera, koji svi zajedno čuvamo. Loza seže od jezerskog kadije Avde »Avdikadije« (1775–1852) pa sve do danas.",
+    "home.aboutP2":
+      "Najveći dio ove građe zabilježili su Rasim Ribić i njegov sin Enes — tekstove o Avdikadiji, Akifu, Avdi Kifinu, amidži Esedu i drugima. Ovdje su sačuvani u izvornom obliku.",
+    "home.aboutP3":
+      "Ako znaš nešto što mi ne znamo — datum, priču, rođaka kojeg smo propustili — najlakše je popuniti formu Dodaj osobu. Pregledat ćemo i uvrstiti u stablo.",
+    "home.aboutP4": "Cijelo stablo i svi podaci dostupni su otvoreno na GitHubu.",
     "home.statPeople": "članova",
     "home.statGenerations": "koljena",
     "home.statYears": "godina zapisa",
@@ -114,7 +127,11 @@ export const ui = {
     "footer.tagline": "Porodicu zajedno bilježimo i dopunjavamo.",
     "footer.github": "Cijelo stablo i svi podaci dostupni su na GitHubu →",
 
-    "about.title": "O ovom stablu",
+    "changelog.title": "Promjene u stablu",
+    "changelog.eyebrow": "Dnevnik porodičnih podataka",
+    "changelog.subtitle":
+      "Ovdje se bilježe samo promjene u porodičnim podacima: nove osobe, veze, datumi, mjesta i veće ispravke. Vizuelne i tehničke izmjene nisu dio ovog dnevnika.",
+    "changelog.kindData": "Podaci",
 
     "stats.title": "Brojke",
     "stats.subtitle": "Stablo u brojkama.",
@@ -136,18 +153,18 @@ export const ui = {
       "Explore the interactive Ribić – Kifić family tree with generations, spouses, descendants, and highlighted bloodlines.",
     "meta.directory":
       "Search every person in the Ribić – Kifić family tree by name, surname, nickname, and short description.",
-    "meta.about":
-      "How the Ribić – Kifić family tree grew from Rasim and Enes Ribić's records into today's digital archive.",
     "meta.add":
       "Add a person, correct a detail, or send a family story for the Ribić – Kifić family tree.",
     "meta.stats":
       "Numbers behind the Ribić – Kifić family tree: relatives, generations, surnames, years, and birthplaces.",
+    "meta.changelog":
+      "A record of family-tree data changes in the Ribić – Kifić tree: new relatives, corrected relationships, dates, and sources.",
 
     "nav.home": "Home",
     "nav.tree": "Tree",
     "nav.directory": "Directory",
-    "nav.about": "About",
     "nav.add": "Add a person",
+    "nav.changelog": "Changes",
     "nav.langName": "Bosanski",
     "nav.skip": "Skip to content",
 
@@ -183,6 +200,19 @@ export const ui = {
     "home.oldest": "Oldest ancestors",
     "home.recent": "Youngest generation",
     "home.timeline": "The line through time",
+    "home.lineageKicker": "From the first recorded name",
+    "home.lineageBody":
+      "The oldest known line starts with Enes and Omer, reaches Avdikadija, and continues through the Kifić branch to today's descendants.",
+    "home.lineageStep": "Generation {n}",
+    "home.aboutKicker": "About the tree",
+    "home.aboutTitle": "A living record of the Ribić – Kifić family",
+    "home.aboutP1":
+      "This is a living record of the Ribić – Kifić family from Jezero, preserved by all of us together. The line runs from Avdo “Avdikadija” (1775–1852), the kadi of Jezero, to today.",
+    "home.aboutP2":
+      "Most of this material was recorded by Rasim Ribić and his son Enes: the texts about Avdikadija, Akif, Avdo Kifin, uncle Esed, and others. They are preserved here in their original form.",
+    "home.aboutP3":
+      "If you know something we do not — a date, a story, or a relative we missed — the easiest path is the Add a person form. We will review it and add it to the tree.",
+    "home.aboutP4": "The full tree and all data are openly available on GitHub.",
     "home.statPeople": "relatives",
     "home.statGenerations": "generations",
     "home.statYears": "years recorded",
@@ -234,7 +264,11 @@ export const ui = {
     "footer.tagline": "We record and grow the family together.",
     "footer.github": "The whole tree and all its data are on GitHub →",
 
-    "about.title": "About this tree",
+    "changelog.title": "Tree changes",
+    "changelog.eyebrow": "Family data log",
+    "changelog.subtitle":
+      "This page records family-data changes only: new people, relationships, dates, places, and major corrections. Visual and technical work is intentionally left out.",
+    "changelog.kindData": "Data",
 
     "stats.title": "By the numbers",
     "stats.subtitle": "The tree in numbers.",

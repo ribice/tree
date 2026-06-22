@@ -1,0 +1,51 @@
+---
+import { changelog } from "../../lib/changelog";
+import { useTranslations, type Locale } from "../../i18n/ui";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const dateFormatter = new Intl.DateTimeFormat(lang === "bs" ? "bs-BA" : "en-US", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+const formatDate = (date: string) => dateFormatter.format(new Date(`${date}T00:00:00`));
+---
+
+<section class="mx-auto max-w-6xl px-5 py-10 sm:py-12">
+  <div class="changelog-hero">
+    <p class="eyebrow">{t("changelog.eyebrow")}</p>
+    <h1 class="mt-3 max-w-3xl text-4xl font-semibold text-ink sm:text-5xl">
+      {t("changelog.title")}
+    </h1>
+    <p class="mt-4 max-w-3xl text-lg leading-8 text-muted">
+      {t("changelog.subtitle")}
+    </p>
+  </div>
+
+  <div class="changelog-list" aria-label={t("changelog.title")}>
+    {
+      changelog.map((entry) => (
+        <article class="changelog-entry">
+          <div class="changelog-date">
+            <time datetime={entry.date}>{formatDate(entry.date)}</time>
+            <span>{t("changelog.kindData")}</span>
+          </div>
+          <div class="changelog-entry-body">
+            <h2>{entry.title[lang]}</h2>
+            <p>{entry.summary[lang]}</p>
+            <ul>
+              {entry.changes[lang].map((change) => (
+                <li>{change}</li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
