@@ -76,8 +76,17 @@
   background: var(--color-accent-soft);
 }
 
+.tree-marriage-link:hover .tree-marriage-label {
+  opacity: 1;
+}
+
+.tree-marriage-hitbox {
+  pointer-events: stroke;
+}
+
 .tree-marriage-label {
   fill: var(--color-muted);
+  opacity: 0;
   paint-order: stroke;
   stroke: var(--color-surface);
   stroke-linejoin: round;
@@ -85,6 +94,7 @@
   font-size: 11px;
   font-weight: 760;
   pointer-events: none;
+  transition: opacity 0.16s ease;
 }
 
 .tree-search-result span {

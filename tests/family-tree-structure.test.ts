@@ -26,8 +26,14 @@ describe("FamilyTree structure", () => {
     expect(familyTree).not.toContain("function PillButton(");
   });
 
-  it("renders visible marriage date labels on marriage connectors", () => {
+  it("reveals marriage date labels only when the connector is hovered", () => {
+    const treeStyles = readFileSync("src/styles/tree.css", "utf8");
+
     expect(familyTree).toContain("marriageLabel");
+    expect(familyTree).toContain('className="tree-marriage-link"');
+    expect(familyTree).toContain('className="tree-marriage-hitbox"');
     expect(familyTree).toContain("<text");
+    expect(treeStyles).toContain(".tree-marriage-link:hover .tree-marriage-label");
+    expect(treeStyles).toContain("opacity: 0");
   });
 });

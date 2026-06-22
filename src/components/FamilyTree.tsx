@@ -293,9 +293,22 @@ export default function FamilyTree({
             return (
               <g
                 key={`m${i}`}
+                className="tree-marriage-link"
                 opacity={opacity}
                 style={{ transition: "opacity 0.2s ease" }}
               >
+                {label && <title>{label}</title>}
+                {label && (
+                  <line
+                    className="tree-marriage-hitbox"
+                    x1={m.x1}
+                    y1={m.y}
+                    x2={m.x2}
+                    y2={m.y}
+                    stroke="transparent"
+                    strokeWidth={24}
+                  />
+                )}
                 <line
                   x1={m.x1}
                   y1={m.y}
