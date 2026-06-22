@@ -1,5 +1,5 @@
 ---
-tagline: "Rasim's son"
+tagline: "Rasim's son; electrician"
 ---
 
-Halim, son of Rasim and brother of Enes. His children are Esad, Naida and Mersid.
+Halim, son of Rasim and brother of Enes, was born in 1932. He was an electrician. His children are Esad, Naida and Mersid.
