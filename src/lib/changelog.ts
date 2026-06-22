@@ -15,32 +15,6 @@ export const changelog: ChangelogEntry[] = [
     date: "2026-06-22",
     kind: "data",
     title: {
-      bs: "Skraćene sporedne porodične grane",
-      en: "Side family branches trimmed",
-    },
-    summary: {
-      bs: "Stablo je skraćeno na Ribić/Kifić liniju, supružnike, roditelje supružnika i prvu generaciju djece s drugim prezimenom.",
-      en: "The tree was trimmed to the Ribić/Kifić line, spouses, spouses' parents, and the first generation of children with another surname.",
-    },
-    changes: {
-      bs: [
-        "Pekmez/Paldum grana je uklonjena izvan Selme Ribić i njenih roditelja, Hafe Pekmez i Mustafe Palduma.",
-        "Uklonjene su preduboke sporedne grane preko Šuškić, Hasić, Dizdar/Borić, Gradečak, Zejnilagić, Alić i Krpo veza.",
-        "Zadržani su supružnici, roditelji supružnika i direktna djeca Ribić potomaka s drugim prezimenom; uklonjeni su njihovi dalji potomci i supružnici.",
-        "Dopunjena su mjesta rođenja: Hafa Dizdar je rođena u Glamoču, a Adis Gradečak u Rotterdamu.",
-      ],
-      en: [
-        "Removed the Pekmez/Paldum branch beyond Selma Ribić and her parents, Hafa Pekmez and Mustafa Paldum.",
-        "Removed overly deep side branches through the Šuškić, Hasić, Dizdar/Borić, Gradečak, Zejnilagić, Alić, and Krpo connections.",
-        "Kept spouses, spouses' parents, and direct children of Ribić descendants with another surname; removed their later descendants and spouses.",
-        "Added birthplaces: Hafa Dizdar was born in Glamoč, and Adis Gradečak in Rotterdam.",
-      ],
-    },
-  },
-  {
-    date: "2026-06-22",
-    kind: "data",
-    title: {
       bs: "Uvezeni GEDCOM podaci",
       en: "GEDCOM data imported",
     },
