@@ -7,6 +7,7 @@ birthplace: "Jezero"
 parents: [rasim, fahra]
 spouses:
   - dzemila
+photo: "/photos/enes.png"
 tagline: "Ljekar (primarius); zapisao porodičnu historiju"
 ---
 
