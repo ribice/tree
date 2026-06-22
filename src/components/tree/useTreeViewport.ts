@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { MouseEvent, PointerEvent, WheelEvent } from "react";
+import type { MouseEvent, PointerEvent } from "react";
 import { BOX_H, BOX_W, type Layout } from "../../lib/tree-layout";
 import {
   isInteractiveTreeTarget,
@@ -20,6 +20,7 @@ const clamp = (value: number, min: number, max: number) =>
 
 export function useTreeViewport(layout: Layout, fitKey: string) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const wheelTargetRef = useRef<SVGSVGElement>(null);
   const layoutRef = useRef(layout);
   layoutRef.current = layout;
 
@@ -104,7 +105,7 @@ export function useTreeViewport(layout: Layout, fitKey: string) {
     };
   };
 
-  const onWheel = (event: WheelEvent) => {
+  const onWheel = useCallback((event: WheelEvent) => {
     event.preventDefault();
     const el = containerRef.current!;
     const rect = el.getBoundingClientRect();
@@ -118,7 +119,14 @@ export function useTreeViewport(layout: Layout, fitKey: string) {
       x: px - ((px - x) / k) * nextK,
       y: py - ((py - y) / k) * nextK,
     });
-  };
+  }, []);
+
+  useEffect(() => {
+    const el = wheelTargetRef.current;
+    if (!el) return;
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, [onWheel]);
 
   const onPointerDown = (event: PointerEvent) => {
     if (isInteractiveTreeTarget(event.target)) return;
@@ -213,13 +221,13 @@ export function useTreeViewport(layout: Layout, fitKey: string) {
 
   return {
     containerRef,
+    wheelTargetRef,
     transform,
     setTransform,
     ready,
     isDragging,
     fit,
     zoomBy,
-    onWheel,
     onPointerDown,
     onPointerMove,
     onPointerUp,

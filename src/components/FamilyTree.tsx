@@ -97,7 +97,7 @@ export default function FamilyTree({
     isDragging,
     fit,
     zoomBy,
-    onWheel,
+    wheelTargetRef,
     onPointerDown,
     onPointerMove,
     onPointerUp,
@@ -259,13 +259,13 @@ export default function FamilyTree({
       )}
 
       <svg
+        ref={wheelTargetRef}
         className="h-full w-full touch-none select-none"
         style={{
           cursor: isDragging ? "grabbing" : "grab",
           opacity: ready ? 1 : 0,
           transition: "opacity 0.25s ease",
         }}
-        onWheel={onWheel}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
