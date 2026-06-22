@@ -5,6 +5,10 @@ import { useTranslations } from "../../i18n/ui";
 const t = useTranslations("en");
 ---
 
-<Layout lang="en" title={`${t("add.title")} · ${t("site.title")}`}>
+<Layout
+  lang="en"
+  title={`${t("add.title")} · ${t("site.title")}`}
+  description={t("meta.add")}
+>
   <AddPersonView lang="en" />
 </Layout>

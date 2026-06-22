@@ -1,17 +1,18 @@
 import type { APIRoute } from "astro";
 import { getPeople } from "../lib/people";
 import { localize } from "../i18n/ui";
-
-const ORIGIN = { bs: "https://stablo.ribic.ba", en: "https://tree.ribic.ba" };
+import { ORIGIN } from "../lib/seo";
 
 export const GET: APIRoute = async () => {
   const people = await getPeople();
   const basePaths = [
     "/",
-    "/tree",
-    "/people",
-    "/about",
-    ...people.map((p) => `/people/${p.id}`),
+    "/tree/",
+    "/people/",
+    "/about/",
+    "/add/",
+    "/stats/",
+    ...people.map((p) => `/people/${p.id}/`),
   ];
 
   const urls = basePaths

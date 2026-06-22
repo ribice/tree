@@ -1,8 +1,14 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
 import ProfileView from "../../../components/views/ProfileView.astro";
-import { getPeople, getTranslations, taglineFor } from "../../../lib/people";
+import { getPeople, getTranslations } from "../../../lib/people";
 import { useTranslations } from "../../../i18n/ui";
+import {
+  breadcrumbJsonLd,
+  canonicalUrl,
+  personDescription,
+  personJsonLd,
+} from "../../../lib/seo";
 
 export async function getStaticPaths() {
   const people = await getPeople();
@@ -11,14 +17,33 @@ export async function getStaticPaths() {
 
 const { person } = Astro.props;
 const t = useTranslations("en");
+const people = await getPeople();
 const translations = await getTranslations();
+const canonical = canonicalUrl(Astro.url.pathname, "en");
+const description = personDescription(person, translations, "en");
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: t("site.short"), url: canonicalUrl("/", "en") },
+    { name: t("dir.title"), url: canonicalUrl("/people/", "en") },
+    { name: person.data.name, url: canonical },
+  ]),
+  personJsonLd({
+    person,
+    people,
+    translations,
+    locale: "en",
+    url: canonical,
+  }),
+];
 ---
 
 <Layout
   lang="en"
   title={`${person.data.name} · ${t("site.title")}`}
-  description={taglineFor(person, translations, "en")}
+  description={description}
+  ogType="profile"
   ogImagePath={`/og/${person.id}.png`}
+  jsonLd={jsonLd}
 >
   <ProfileView lang="en" person={person} />
 </Layout>

@@ -10,7 +10,18 @@ export const ui = {
     "site.title": "Porodično stablo Ribića – Kifića",
     "site.short": "Ribić – Kifić",
     "site.description":
-      "Živi zapis o porodici Ribić – Kifić iz Jezera, koji zajedno održavamo.",
+      "Digitalno porodično stablo Ribića – Kifića iz Jezera: biografije, veze, mjesta i generacije od Avdikadije do danas.",
+
+    "meta.tree":
+      "Interaktivno porodično stablo Ribića – Kifića s generacijama, supružnicima, potomcima i istaknutim lozama.",
+    "meta.directory":
+      "Pretraži sve članove porodičnog stabla Ribića – Kifića po imenu, prezimenu, nadimku i kratkom opisu.",
+    "meta.about":
+      "Kako je nastalo porodično stablo Ribića – Kifića, od starih zapisa Rasima i Enesa Ribića do današnje digitalne arhive.",
+    "meta.add":
+      "Dodaj novu osobu, ispravi podatak ili pošalji porodičnu priču za porodično stablo Ribića – Kifića.",
+    "meta.stats":
+      "Brojke porodičnog stabla Ribića – Kifića: članovi, generacije, prezimena, godine i mjesta rođenja.",
 
     "nav.home": "Početna",
     "nav.tree": "Stablo",
@@ -18,6 +29,7 @@ export const ui = {
     "nav.about": "O stablu",
     "nav.add": "Dodaj osobu",
     "nav.langName": "English",
+    "nav.skip": "Preskoči na sadržaj",
 
     "add.title": "Dodaj osobu",
     "add.intro":
@@ -50,6 +62,14 @@ export const ui = {
     "home.ctaDirectory": "Pregledaj sve članove",
     "home.oldest": "Najstariji preci",
     "home.recent": "Najmlađa generacija",
+    "home.timeline": "Loza kroz vrijeme",
+    "home.archive": "Porodična arhiva koja se može pretražiti",
+    "home.archiveTitle": "Od porodične priče do cijele grane",
+    "home.archiveBody":
+      "Svaki profil povezuje biografiju, roditelje, supružnike, djecu, generaciju i mjesto rođenja, pa se iz jedne priče može brzo doći do cijele grane.",
+    "home.statPeople": "članova",
+    "home.statGenerations": "koljena",
+    "home.statYears": "godina zapisa",
 
     "home.f1.title": "Svako može doprinijeti",
     "home.f1.body":
@@ -79,6 +99,9 @@ export const ui = {
     "dir.subtitle": "Svi članovi stabla, po abecedi.",
     "dir.search": "Pretraži po imenu…",
     "dir.empty": "Niko ne odgovara pretrazi.",
+    "dir.count": "{n} osoba u imeniku",
+    "dir.results": "{n} rezultata",
+    "dir.jump": "Preskoči na slovo",
 
     "person.back": "Imenik",
     "person.nee": "rođ.",
@@ -91,6 +114,12 @@ export const ui = {
     "person.viewInTree": "Prikaži u stablu →",
     "person.married": "vjenč.",
     "person.divorced": "razv.",
+    "person.facts": "Podaci",
+    "person.bio": "Biografija",
+    "person.family": "Porodične veze",
+    "person.born": "Rođen/a",
+    "person.died": "Umro/la",
+    "person.birthplace": "Mjesto rođenja",
 
     "footer.tagline": "Porodicu zajedno bilježimo i dopunjavamo.",
     "footer.github": "Cijelo stablo i svi podaci dostupni su na GitHubu →",
@@ -111,7 +140,18 @@ export const ui = {
     "site.title": "Ribić – Kifić Family Tree",
     "site.short": "Ribić – Kifić",
     "site.description":
-      "A living record of the Ribić – Kifić family from Jezero, kept by all of us.",
+      "The digital Ribić – Kifić family tree from Jezero: biographies, relationships, places, and generations from Avdikadija to today.",
+
+    "meta.tree":
+      "Explore the interactive Ribić – Kifić family tree with generations, spouses, descendants, and highlighted bloodlines.",
+    "meta.directory":
+      "Search every person in the Ribić – Kifić family tree by name, surname, nickname, and short description.",
+    "meta.about":
+      "How the Ribić – Kifić family tree grew from Rasim and Enes Ribić's records into today's digital archive.",
+    "meta.add":
+      "Add a person, correct a detail, or send a family story for the Ribić – Kifić family tree.",
+    "meta.stats":
+      "Numbers behind the Ribić – Kifić family tree: relatives, generations, surnames, years, and birthplaces.",
 
     "nav.home": "Home",
     "nav.tree": "Tree",
@@ -119,6 +159,7 @@ export const ui = {
     "nav.about": "About",
     "nav.add": "Add a person",
     "nav.langName": "Bosanski",
+    "nav.skip": "Skip to content",
 
     "add.title": "Add a person",
     "add.intro":
@@ -151,6 +192,14 @@ export const ui = {
     "home.ctaDirectory": "Browse everyone",
     "home.oldest": "Oldest ancestors",
     "home.recent": "Youngest generation",
+    "home.timeline": "The line through time",
+    "home.archive": "A searchable family archive",
+    "home.archiveTitle": "From one family story to a whole branch",
+    "home.archiveBody":
+      "Every profile connects a biography, parents, spouses, children, generation, and birthplace, so one story can lead quickly into a whole branch.",
+    "home.statPeople": "relatives",
+    "home.statGenerations": "generations",
+    "home.statYears": "years recorded",
 
     "home.f1.title": "Everyone can contribute",
     "home.f1.body":
@@ -180,6 +229,9 @@ export const ui = {
     "dir.subtitle": "Everyone in the tree, A to Z.",
     "dir.search": "Search by name…",
     "dir.empty": "No one matches that.",
+    "dir.count": "{n} people in the directory",
+    "dir.results": "{n} results",
+    "dir.jump": "Jump to letter",
 
     "person.back": "Directory",
     "person.nee": "née",
@@ -192,6 +244,12 @@ export const ui = {
     "person.viewInTree": "Show in tree →",
     "person.married": "m.",
     "person.divorced": "div.",
+    "person.facts": "Facts",
+    "person.bio": "Biography",
+    "person.family": "Family links",
+    "person.born": "Born",
+    "person.died": "Died",
+    "person.birthplace": "Birthplace",
 
     "footer.tagline": "We record and grow the family together.",
     "footer.github": "The whole tree and all its data are on GitHub →",

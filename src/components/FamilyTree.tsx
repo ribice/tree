@@ -309,11 +309,11 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
   return (
     <div
       ref={containerRef}
-      className="relative h-[84vh] min-h-[600px] w-full overflow-hidden rounded-2xl border border-line bg-paper"
+      className="relative h-[84vh] min-h-[600px] w-full overflow-hidden rounded-lg border border-line bg-surface shadow-sm"
       style={{
         backgroundImage:
-          "radial-gradient(var(--color-line) 1.2px, transparent 1.2px)",
-        backgroundSize: "26px 26px",
+          "linear-gradient(var(--color-line) 1px, transparent 1px), linear-gradient(90deg, var(--color-line) 1px, transparent 1px), radial-gradient(circle at 50% 0%, color-mix(in oklch, var(--color-accent-soft), transparent 28%), transparent 34%)",
+        backgroundSize: "42px 42px, 42px 42px, 100% 100%",
       }}
     >
       <svg
@@ -395,7 +395,7 @@ export default function FamilyTree({ people, labels, basePath }: Props) {
       </svg>
 
       {/* Legend */}
-      <div className="pointer-events-none absolute top-4 left-4 flex flex-col gap-1.5 rounded-xl border border-line bg-surface/90 px-3 py-2 text-xs text-muted shadow-sm backdrop-blur">
+      <div className="pointer-events-none absolute top-4 left-4 flex flex-col gap-1.5 rounded-lg border border-line bg-surface/90 px-3 py-2 text-xs text-muted shadow-sm backdrop-blur">
         <span className="flex items-center gap-2">
           <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
           {labels.living}
@@ -501,7 +501,7 @@ function PersonCard({
         href={`${basePath}/${p.id}`}
         onMouseEnter={() => onHoverChange(true)}
         onMouseLeave={() => onHoverChange(false)}
-        className={`group relative flex h-full w-full items-center gap-3 rounded-2xl border bg-surface px-3 py-2.5 shadow-sm transition duration-150 hover:-translate-y-0.5 hover:border-accent hover:shadow-lg ${
+        className={`group relative flex h-full w-full items-center gap-3 rounded-lg border bg-surface px-3 py-2.5 shadow-sm transition duration-150 hover:-translate-y-0.5 hover:border-accent hover:shadow-lg ${
           highlighted
             ? "border-accent ring-2 ring-accent ring-offset-2 ring-offset-paper"
             : "border-line"

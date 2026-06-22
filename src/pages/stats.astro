@@ -5,6 +5,10 @@ import { useTranslations } from "../i18n/ui";
 const t = useTranslations("bs");
 ---
 
-<Layout lang="bs" title={`${t("stats.title")} · ${t("site.title")}`}>
+<Layout
+  lang="bs"
+  title={`${t("stats.title")} · ${t("site.title")}`}
+  description={t("meta.stats")}
+>
   <StatsView lang="bs" />
 </Layout>

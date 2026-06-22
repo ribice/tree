@@ -8,14 +8,15 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<article class="mx-auto max-w-2xl px-5 py-12">
-  <h1 class="text-3xl font-semibold tracking-tight text-ink">
+<article class="mx-auto max-w-4xl px-5 py-12">
+  <p class="eyebrow">{t("nav.about")}</p>
+  <h1 class="mt-3 text-4xl font-semibold tracking-tight text-ink">
     {t("about.title")}
   </h1>
 
   {
     lang === "bs" ? (
-      <div class="prose mt-6 max-w-none text-ink">
+      <div class="prose surface-panel mt-6 max-w-none p-5 text-ink sm:p-7">
         <p>
           Ovo je živi zapis o porodici Ribić – Kifić iz Jezera, koji svi zajedno
           čuvamo. Loza seže od jezerskog kadije Avde »Avdikadije« (1775–1852) pa
@@ -40,7 +41,7 @@ const t = useTranslations(lang);
         </p>
       </div>
     ) : (
-      <div class="prose mt-6 max-w-none text-ink">
+      <div class="prose surface-panel mt-6 max-w-none p-5 text-ink sm:p-7">
         <p>
           This is a living record of the Ribić – Kifić family from Jezero, kept
           by all of us. The line reaches from Avdo »Avdikadija«, the kadi of
