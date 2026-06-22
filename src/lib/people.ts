@@ -8,6 +8,7 @@ import {
 } from "./people-visibility";
 import { isLikelyLivingDateSpan, publicDate, publicLifespan } from "./privacy";
 import { treeDisplayName } from "../components/tree/tree-person-details";
+import { isRibicFamilyMember } from "./family-membership";
 
 export type Person = CollectionEntry<"people">;
 export type Translation = CollectionEntry<"translations">;
@@ -152,6 +153,7 @@ export interface TreeNodePerson {
   photo?: string;
   initials: string;
   living: boolean;
+  ribicFamily: boolean;
   parents: string[];
   spouses: string[];
   spouseLinks: SpouseLink[];
@@ -178,6 +180,7 @@ export function toTreeData(
       photo: p.data.photo,
       initials: initials(p.data.name),
       living,
+      ribicFamily: isRibicFamilyMember(p),
       parents: filterRelationshipIds(p.data.parents, visibleIds),
       spouses: filterRelationshipIds(spouseIds(p), visibleIds),
       spouseLinks: spouseLinks(p).filter((link) => visibleIds.has(link.id)),

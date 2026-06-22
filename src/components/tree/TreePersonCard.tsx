@@ -29,6 +29,9 @@ export function TreePersonCard({
       : person.sex === "m"
         ? "tree-person-male"
         : "";
+  const membershipClass = person.ribicFamily
+    ? "tree-person-ribic"
+    : "tree-person-married-in";
 
   return (
     <foreignObject
@@ -44,7 +47,7 @@ export function TreePersonCard({
         title={tooltip}
         onMouseEnter={() => onHoverChange(true)}
         onMouseLeave={() => onHoverChange(false)}
-        className={`tree-person-card group relative flex h-full w-full items-center gap-3 rounded-lg border bg-surface px-3 py-2.5 shadow-sm transition duration-150 hover:-translate-y-0.5 hover:border-accent hover:shadow-lg ${sexClass} ${
+        className={`tree-person-card group relative flex h-full w-full items-center gap-3 rounded-lg border bg-surface px-3 py-2.5 shadow-sm transition duration-150 hover:-translate-y-0.5 hover:border-accent hover:shadow-lg ${sexClass} ${membershipClass} ${
           highlighted
             ? "border-accent ring-2 ring-accent ring-offset-2 ring-offset-paper"
             : "border-line"
@@ -57,7 +60,7 @@ export function TreePersonCard({
           />
         )}
         <span
-          className={`tree-person-avatar flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full text-base font-semibold ring-1 transition ${sexClass}`}
+          className={`tree-person-avatar flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full text-base font-semibold ring-1 transition ${sexClass} ${membershipClass}`}
         >
           {person.photo ? (
             <img

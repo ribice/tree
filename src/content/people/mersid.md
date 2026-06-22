@@ -2,7 +2,7 @@
 name: "Mersid Ribić"
 sex: "m"
 born: "01.09.1966"
-birthplace: "Jezero, Serb Republic, Bosnia and Herzegovina"
+birthplace: "Jezero, Bosna i Hercegovina"
 parents: [halim, hafa-dizdar]
 spouses:
   - selma-paldum

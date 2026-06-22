@@ -90,6 +90,8 @@ export const ui = {
     "home.aboutP3":
       "Ako znaš nešto što mi ne znamo — datum, priču, rođaka kojeg smo propustili — najlakše je popuniti formu Dodaj osobu. Pregledat ćemo i uvrstiti u stablo.",
     "home.aboutP4": "Cijelo stablo i svi podaci dostupni su otvoreno na GitHubu.",
+    "home.statCorePeople": "Ribić/Kifić članova",
+    "home.statExtendedPeople": "osoba u proširenom",
     "home.statPeople": "članova",
     "home.statGenerations": "koljena",
     "home.statYears": "godina zapisa",
@@ -297,6 +299,8 @@ export const ui = {
     "home.aboutP3":
       "If you know something we do not — a date, a story, or a relative we missed — the easiest path is the Add a person form. We will review it and add it to the tree.",
     "home.aboutP4": "The full tree and all data are openly available on GitHub.",
+    "home.statCorePeople": "Ribić/Kifić relatives",
+    "home.statExtendedPeople": "extended people",
     "home.statPeople": "relatives",
     "home.statGenerations": "generations",
     "home.statYears": "years recorded",

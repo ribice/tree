@@ -221,6 +221,41 @@
   --tw-ring-color: color-mix(in oklch, var(--color-male), transparent 68%);
 }
 
+.tree-person-card.tree-person-married-in {
+  border-style: dashed;
+  box-shadow:
+    inset 3px 0 0 color-mix(in oklch, var(--color-gold), transparent 28%),
+    0 1px 2px color-mix(in oklch, var(--color-ink), transparent 94%);
+}
+
+.tree-person-card.tree-person-married-in.tree-person-female {
+  border-color: color-mix(in oklch, var(--color-female), var(--color-gold) 46%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-female-soft), var(--color-paper) 32%), transparent 54%),
+    linear-gradient(180deg, color-mix(in oklch, var(--color-gold), transparent 92%), transparent 72%),
+    var(--color-surface);
+}
+
+.tree-person-card.tree-person-married-in.tree-person-male {
+  border-color: color-mix(in oklch, var(--color-male), var(--color-gold) 44%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-male-soft), var(--color-paper) 34%), transparent 54%),
+    linear-gradient(180deg, color-mix(in oklch, var(--color-gold), transparent 92%), transparent 72%),
+    var(--color-surface);
+}
+
+.tree-person-avatar.tree-person-married-in.tree-person-female {
+  background: color-mix(in oklch, var(--color-female-soft), var(--color-paper) 42%);
+  color: color-mix(in oklch, var(--color-female), var(--color-muted) 24%);
+  --tw-ring-color: color-mix(in oklch, var(--color-gold), transparent 50%);
+}
+
+.tree-person-avatar.tree-person-married-in.tree-person-male {
+  background: color-mix(in oklch, var(--color-male-soft), var(--color-paper) 44%);
+  color: color-mix(in oklch, var(--color-male), var(--color-muted) 24%);
+  --tw-ring-color: color-mix(in oklch, var(--color-gold), transparent 50%);
+}
+
 .tree-legend-dot {
   width: 0.625rem;
   height: 0.625rem;

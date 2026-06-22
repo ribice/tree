@@ -1,7 +1,7 @@
 ---
 name: "Dr. Safet Šuškić"
 sex: "m"
-birthplace: "Travnik, Federation of Bosnia and Herzegovina, Bosnia and Herzegovina"
+birthplace: "Travnik, Bosna i Hercegovina"
 parents: [husnija-suskic, celfa-ganibegovic]
 spouses:
   - hafa-safetova
