@@ -5,5 +5,17 @@
 [build.environment]
   NODE_VERSION = "22"
 
+[[redirects]]
+  from = "https://tree.ribic.ba/"
+  to = "https://tree.ribic.ba/en/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://tree.ribic.ba/"
+  to = "https://tree.ribic.ba/en/"
+  status = 301
+  force = true
+
 # Submissions from the "Add a person" form are captured by Netlify Forms;
 # enable form notifications in the Netlify dashboard to get an email per entry.
