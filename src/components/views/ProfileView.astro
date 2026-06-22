@@ -10,12 +10,10 @@ import {
   initials,
   isLiving,
   generation,
-  spouseLinks,
   type Person,
   type PeopleView,
 } from "../../lib/people";
 import { useTranslations, localize, type Locale } from "../../i18n/ui";
-import { publicDate } from "../../lib/privacy";
 import { displayTaglineFor } from "../../lib/display";
 import PersonMiniCard from "../ui/PersonMiniCard.astro";
 
@@ -40,26 +38,6 @@ const { Content } = await render(bioEntry as Person);
 const tagline = displayTaglineFor(person, people, translations, lang);
 const peoplePath = localize(isExtendedProfile ? "/extended/people" : "/people", lang);
 
-const sMeta = new Map(spouseLinks(person).map((l) => [l.id, l]));
-const marriageNote = (id: string): string | undefined => {
-  const l = sMeta.get(id);
-  if (!l) return undefined;
-  const parts = [];
-  if (l.married) parts.push(`${t("person.married")} ${l.married}`);
-  if (l.divorced) parts.push(`${t("person.divorced")} ${l.divorced}`);
-  return parts.length ? parts.join(" · ") : undefined;
-};
-
-const groups = [
-  { label: t("person.parents"), items: rels.parents.map((p) => ({ p })) },
-  {
-    label: t("person.spouse"),
-    items: rels.spouses.map((p) => ({ p, note: marriageNote(p.id) })),
-  },
-  { label: t("person.children"), items: rels.children.map((p) => ({ p })) },
-  { label: t("person.siblings"), items: rels.siblings.map((p) => ({ p })) },
-].filter((g) => g.items.length > 0);
-
 const span = lifespan(person, lang);
 const { data } = person;
 const living = isLiving(person);
@@ -67,31 +45,23 @@ const gen = generation(person, people);
 const treeBasePath = localize(isExtendedProfile ? "/extended/tree" : "/tree", lang);
 const treeHref = `${treeBasePath}?focus=${person.id}`;
 const branchHref = `${treeBasePath}?branch=${person.id}`;
-const shownBorn = data.born ? publicDate(data.born, living) : undefined;
-const facts = [
-  shownBorn && { label: t("person.born"), value: shownBorn },
-  data.died && { label: t("person.died"), value: data.died },
-  data.birthplace && { label: t("person.birthplace"), value: data.birthplace },
-  { label: t("person.family"), value: t("person.generation", { n: gen }) },
-].filter(Boolean) as { label: string; value: string }[];
-const heroFacts = facts.slice(0, 3);
+const heroMeta = [
+  span && { icon: "📅", value: span },
+  data.birthplace && { icon: "📍", value: data.birthplace },
+  { value: t("person.generation", { n: gen }) },
+].filter(Boolean) as { icon?: string; value: string }[];
 const missingFacts = [
   !data.born && t("person.unknownBirth"),
   !data.birthplace && t("person.unknownBirthplace"),
   data.parents.length === 0 && t("person.unknownParents"),
   !person.body?.trim() && t("person.unknownBio"),
 ].filter(Boolean) as string[];
-const snapshotCards = [
-  { label: t("person.parents"), value: String(rels.parents.length) },
-  { label: t("person.spouse"), value: String(rels.spouses.length) },
-  { label: t("person.children"), value: String(rels.children.length) },
-  { label: t("person.family"), value: t("person.generation", { n: gen }) },
-];
 const miniMapGroups = [
   { label: t("person.parents"), items: rels.parents.map((p) => ({ p })) },
   { label: t("person.self"), items: [{ p: person, self: true }] },
   { label: t("person.spouse"), items: rels.spouses.map((p) => ({ p })) },
   { label: t("person.children"), items: rels.children.slice(0, 8).map((p) => ({ p })) },
+  { label: t("person.siblings"), items: rels.siblings.slice(0, 8).map((p) => ({ p })) },
 ].filter((group) => group.items.length > 0);
 ---
 
@@ -136,11 +106,22 @@ const miniMapGroups = [
         </div>
         {data.maidenName && <p class="text-muted">{t("person.nee")} {data.maidenName}</p>}
         {data.nickname && <p class="text-muted">“{data.nickname}”</p>}
-        <p class="mt-1 flex flex-wrap gap-x-3 text-sm text-muted">
-          {span && <span>{span}</span>}
-          {data.birthplace && <span>{data.birthplace}</span>}
-          <span>{t("person.generation", { n: gen })}</span>
-        </p>
+        <ul class="profile-meta-list" aria-label={t("person.facts")}>
+          {
+            heroMeta.map((meta) => (
+              <li>
+                {
+                  meta.icon && (
+                    <span class="profile-meta-icon" aria-hidden="true">
+                      {meta.icon}
+                    </span>
+                  )
+                }
+                <span>{meta.value}</span>
+              </li>
+            ))
+          }
+        </ul>
         {tagline && <p class="mt-2 font-medium text-accent">{tagline}</p>}
         {
           missingFacts.length > 0 && (
@@ -154,53 +135,20 @@ const miniMapGroups = [
         }
       </div>
     </div>
-
-    {
-      heroFacts.length > 0 && (
-        <dl class="profile-ribbon">
-          {heroFacts.map((fact) => (
-            <div>
-              <dt>{fact.label}</dt>
-              <dd>{fact.value}</dd>
-            </div>
-          ))}
-        </dl>
-      )
-    }
   </header>
 
-  <section class="profile-snapshot mt-6" aria-label={t("person.snapshot")}>
-    <div class="profile-snapshot-head">
-      <div>
-        <p class="eyebrow">{t("person.knownData")}</p>
-        <h2>{t("person.snapshot")}</h2>
-      </div>
-      {
-        missingFacts.length > 0 ? (
-          <p>
-            {t("person.missingData")}: {missingFacts.join(", ")}
-          </p>
-        ) : (
-          <p>{t("person.knownData")}</p>
-        )
-      }
+  <section class="profile-bio-section mt-8">
+    <h2 class="text-sm font-semibold tracking-wide text-muted uppercase">
+      {t("person.bio")}
+    </h2>
+    <div class="prose mt-4 max-w-none text-ink">
+      <Content />
     </div>
-    <dl class="profile-snapshot-grid">
-      {
-        snapshotCards.map((card) => (
-          <div>
-            <dt>{card.label}</dt>
-            <dd>{card.value}</dd>
-          </div>
-        ))
-      }
-    </dl>
   </section>
 
-  <section class="family-mini-map mt-6" aria-label={t("person.familyMap")}>
+  <section class="family-mini-map mt-8" aria-label={t("person.familyMap")}>
     <div class="family-mini-map-head">
       <div>
-        <p class="eyebrow">{t("person.family")}</p>
         <h2>{t("person.familyMap")}</h2>
       </div>
       <a href={branchHref}>{t("person.openBranch")}</a>
@@ -226,83 +174,4 @@ const miniMapGroups = [
       }
     </div>
   </section>
-
-  <div class="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_19rem] lg:items-start">
-    <div>
-      <h2 class="text-sm font-semibold tracking-wide text-muted uppercase">
-        {t("person.bio")}
-      </h2>
-      <div class="prose mt-4 max-w-none text-ink">
-        <Content />
-      </div>
-    </div>
-
-    <aside class="space-y-5 lg:sticky lg:top-24">
-      <section class="soft-panel fact-panel p-4">
-        <h2 class="text-sm font-semibold tracking-wide text-muted uppercase">
-          {t("person.facts")}
-        </h2>
-        <dl class="mt-3 space-y-3">
-          {
-            facts.map((fact) => (
-              <div class="border-t border-line pt-3 first:border-t-0 first:pt-0">
-                <dt class="text-xs font-semibold tracking-wide text-muted uppercase">
-                  {fact.label}
-                </dt>
-                <dd class="mt-0.5 text-sm font-medium text-ink">{fact.value}</dd>
-              </div>
-            ))
-          }
-        </dl>
-      </section>
-
-      {
-        groups.length > 0 && (
-          <section class="soft-panel kin-panel p-4">
-            <h2 class="text-sm font-semibold tracking-wide text-muted uppercase">
-              {t("person.family")}
-            </h2>
-            <div class="mt-4 space-y-5">
-              {groups.map((group) => (
-                <div>
-                  <h3 class="text-xs font-semibold tracking-wide text-muted uppercase">
-                    {group.label}
-                  </h3>
-                  <ul class="mt-2 flex flex-col gap-2">
-                    {group.items.map(({ p: rel, note }) => (
-                      <li>
-                        <a
-                          href={`${peoplePath}/${rel.id}`}
-                          class="person-card flex items-center gap-2 p-2 text-sm"
-                          data-sex={rel.data.sex}
-                        >
-                          <Avatar
-                            name={rel.data.name}
-                            photo={rel.data.photo}
-                            initials={initials(rel.data.name)}
-                            sex={rel.data.sex}
-                            size="xs"
-                          />
-                          <span class="min-w-0">
-                            <span class="block truncate font-medium text-ink">
-                              {rel.data.name}
-                            </span>
-                            {note && (
-                              <span class="block truncate text-xs text-muted">
-                                {note}
-                              </span>
-                            )}
-                          </span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </section>
-        )
-      }
-    </aside>
-  </div>
 </article>

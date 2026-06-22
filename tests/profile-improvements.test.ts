@@ -6,11 +6,17 @@ const ui = readFileSync("src/i18n/ui.ts", "utf8");
 const styles = readFileSync("src/styles/profile.css", "utf8");
 
 describe("profile improvements", () => {
-  it("renders a scannable family snapshot", () => {
-    expect(profileView).toContain("profile-snapshot");
-    expect(profileView).toContain("snapshotCards");
-    expect(ui).toContain('"person.snapshot"');
-    expect(styles).toContain(".profile-snapshot");
+  it("keeps core profile facts in one compact header row", () => {
+    expect(profileView).toContain("profile-meta-list");
+    expect(profileView).toContain("heroMeta");
+    expect(profileView).toContain("📅");
+    expect(profileView).toContain("📍");
+    expect(profileView).not.toContain("profile-ribbon");
+    expect(profileView).not.toContain("profile-snapshot");
+    expect(profileView).not.toContain("snapshotCards");
+    expect(profileView).not.toContain("fact-panel");
+    expect(styles).toContain(".profile-meta-list");
+    expect(styles).not.toContain(".profile-snapshot");
   });
 
   it("surfaces missing data without hiding the profile", () => {
@@ -18,5 +24,13 @@ describe("profile improvements", () => {
     expect(profileView).toContain("data-quality-badge");
     expect(ui).toContain('"person.needsDetails"');
     expect(ui).toContain('"person.unknownBirth"');
+  });
+
+  it("places biography before the family map", () => {
+    expect(profileView).toContain("profile-bio-section");
+    expect(profileView.indexOf("profile-bio-section")).toBeLessThan(
+      profileView.indexOf("family-mini-map"),
+    );
+    expect(profileView).not.toContain("kin-panel");
   });
 });
