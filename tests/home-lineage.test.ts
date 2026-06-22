@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 const homeView = readFileSync("src/components/views/HomeView.astro", "utf8");
-const styles = readFileSync("src/styles/global.css", "utf8");
+const styles = readFileSync("src/styles/home.css", "utf8");
 
 describe("home lineage timeline", () => {
   it("uses Avdikadija's named ancestor line", () => {

@@ -2,6 +2,7 @@
 import { getPeople, birthYear, generation, isLiving } from "../../lib/people";
 import { useTranslations, type Locale } from "../../i18n/ui";
 import { collectDataQuality } from "../../lib/data-quality";
+import StatTile from "../ui/StatTile.astro";
 
 interface Props {
   lang: Locale;
@@ -139,18 +140,13 @@ const projectedPoints = mapPoints.map((point) => ({
     </div>
   </div>
 
-  <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
+  <dl class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
     {
       cards.map((c) => (
-        <div class="stat-tile">
-          <div class="text-3xl font-semibold text-accent">
-            {c.value}
-          </div>
-          <div class="mt-1 text-sm text-muted">{c.label}</div>
-        </div>
+        <StatTile label={c.label} value={c.value} />
       ))
     }
-  </div>
+  </dl>
 
   <div class="stats-insight-grid mt-10">
     <section class="stats-insight-card">

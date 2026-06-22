@@ -1,14 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro";
 import StatsView from "../components/views/StatsView.astro";
-import { useTranslations } from "../i18n/ui";
-const t = useTranslations("bs");
+import PageShell from "../components/PageShell.astro";
 ---
 
-<Layout
+<PageShell
   lang="bs"
-  title={`${t("stats.title")} · ${t("site.title")}`}
-  description={t("meta.stats")}
+  titleKey="stats.title"
+  descriptionKey="meta.stats"
 >
   <StatsView lang="bs" />
-</Layout>
+</PageShell>

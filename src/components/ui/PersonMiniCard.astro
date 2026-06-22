@@ -1,0 +1,39 @@
+---
+import Avatar from "../Avatar.astro";
+import { initials, type Person } from "../../lib/people";
+
+interface Props {
+  person: Person;
+  href?: string;
+  self?: boolean;
+}
+
+const { person, href, self = false } = Astro.props;
+const classes = ["family-mini-card", self && "family-mini-self"].filter(Boolean);
+---
+
+{
+  href ? (
+    <a href={href} class:list={classes} data-sex={person.data.sex}>
+      <Avatar
+        name={person.data.name}
+        photo={person.data.photo}
+        initials={initials(person.data.name)}
+        sex={person.data.sex}
+        size="xs"
+      />
+      <span>{person.data.name}</span>
+    </a>
+  ) : (
+    <div class:list={classes} data-sex={person.data.sex}>
+      <Avatar
+        name={person.data.name}
+        photo={person.data.photo}
+        initials={initials(person.data.name)}
+        sex={person.data.sex}
+        size="xs"
+      />
+      <span>{person.data.name}</span>
+    </div>
+  )
+}

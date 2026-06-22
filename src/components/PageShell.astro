@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { useTranslations, type Locale, type UIKey } from "../i18n/ui";
+
+interface Props {
+  lang: Locale;
+  titleKey: UIKey;
+  descriptionKey: UIKey;
+  noindex?: boolean;
+}
+
+const { lang, titleKey, descriptionKey, noindex = false } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<Layout
+  lang={lang}
+  title={`${t(titleKey)} · ${t("site.title")}`}
+  description={t(descriptionKey)}
+  noindex={noindex}
+>
+  <slot />
+</Layout>

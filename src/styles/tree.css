@@ -1,0 +1,254 @@
+.tree-topper {
+  position: relative;
+}
+
+.tree-topper {
+  border-bottom: 1px solid color-mix(in oklch, var(--color-line), transparent 20%);
+}
+
+.tree-search-panel {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 4;
+  width: min(22rem, calc(100% - 2rem));
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 92%, transparent);
+  padding: 0.7rem;
+  box-shadow: 0 16px 32px color-mix(in oklch, var(--color-ink), transparent 90%);
+  backdrop-filter: blur(14px);
+}
+
+.tree-search-label {
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.7rem;
+  font-weight: 780;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tree-search-input {
+  margin-top: 0.35rem;
+  width: 100%;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background: var(--color-surface);
+  padding: 0.58rem 0.7rem;
+  color: var(--color-ink);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.tree-search-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-accent-soft), transparent 18%);
+}
+
+.tree-search-results {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.55rem;
+  max-height: 18rem;
+  overflow: auto;
+}
+
+.tree-search-result {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 18%);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 88%, transparent);
+  padding: 0.5rem 0.58rem;
+  text-align: left;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.tree-search-result:hover,
+.tree-search-result:focus-visible {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.tree-search-result span {
+  min-width: 0;
+}
+
+.tree-search-result strong,
+.tree-search-result small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tree-search-result strong {
+  color: var(--color-ink);
+  font-size: 0.82rem;
+  font-weight: 740;
+}
+
+.tree-search-result small {
+  margin-top: 0.1rem;
+  color: var(--color-muted);
+  font-size: 0.72rem;
+}
+
+.tree-search-result em {
+  flex: 0 0 auto;
+  color: var(--color-accent);
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 760;
+}
+
+.tree-search-empty {
+  border: 1px dashed var(--color-line);
+  border-radius: 0.5rem;
+  padding: 0.65rem;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+
+.tree-loading,
+.tree-branch-banner {
+  position: absolute;
+  z-index: 5;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 92%, transparent);
+  box-shadow: 0 14px 30px color-mix(in oklch, var(--color-ink), transparent 91%);
+  backdrop-filter: blur(14px);
+}
+
+.tree-loading {
+  top: 50%;
+  left: 50%;
+  padding: 0.7rem 0.9rem;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  font-weight: 720;
+  transform: translate(-50%, -50%);
+}
+
+.tree-branch-banner {
+  top: 4.55rem;
+  right: 1rem;
+  display: flex;
+  max-width: min(28rem, calc(100% - 2rem));
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.55rem 0.65rem;
+  color: var(--color-ink);
+  font-size: 0.84rem;
+  font-weight: 720;
+}
+
+.tree-branch-banner span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tree-branch-banner button {
+  flex: 0 0 auto;
+  border-radius: 0.5rem;
+  background: var(--color-accent);
+  padding: 0.38rem 0.55rem;
+  color: var(--color-surface);
+  font-size: 0.78rem;
+  font-weight: 760;
+}
+
+.tree-shell {
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 15%) inset,
+    0 18px 40px color-mix(in oklch, var(--color-ink), transparent 91%);
+}
+
+.tree-person-card.tree-person-female {
+  border-color: color-mix(in oklch, var(--color-female), var(--color-line) 62%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-female-soft), transparent 7%), transparent 56%),
+    var(--color-surface);
+}
+
+.tree-person-card.tree-person-male {
+  border-color: color-mix(in oklch, var(--color-male), var(--color-line) 62%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-male-soft), transparent 7%), transparent 56%),
+    var(--color-surface);
+}
+
+.tree-person-avatar.tree-person-female {
+  background: var(--color-female-soft);
+  color: var(--color-female);
+  --tw-ring-color: color-mix(in oklch, var(--color-female), transparent 68%);
+}
+
+.tree-person-avatar.tree-person-male {
+  background: var(--color-male-soft);
+  color: var(--color-male);
+  --tw-ring-color: color-mix(in oklch, var(--color-male), transparent 68%);
+}
+
+.tree-legend-dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 999px;
+}
+
+.tree-legend-dot-female {
+  background: var(--color-female);
+}
+
+.tree-legend-dot-male {
+  background: var(--color-male);
+}
+
+.tree-shell:fullscreen {
+  height: 100vh;
+  min-height: 100vh;
+  border: 0;
+  border-radius: 0;
+}
+
+.tree-shell:-webkit-full-screen {
+  height: 100vh;
+  min-height: 100vh;
+  border: 0;
+  border-radius: 0;
+}
+
+@media (max-width: 639px) {
+  .tree-controls {
+    top: 7.1rem;
+    right: 1rem;
+    left: 1rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .tree-controls button {
+    padding-inline: 0.65rem;
+  }
+
+  .tree-legend {
+    top: 11.2rem;
+  }
+
+  .tree-branch-banner {
+    top: auto;
+    right: 1rem;
+    bottom: 4rem;
+    left: 1rem;
+  }
+}

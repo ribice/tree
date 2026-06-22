@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 
 const profileView = readFileSync("src/components/views/ProfileView.astro", "utf8");
 const ui = readFileSync("src/i18n/ui.ts", "utf8");
-const styles = readFileSync("src/styles/global.css", "utf8");
+const styles = readFileSync("src/styles/profile.css", "utf8");
 
 describe("profile improvements", () => {
   it("renders a scannable family snapshot", () => {

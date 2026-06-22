@@ -1,0 +1,15 @@
+---
+interface Props {
+  label: string;
+  value: string | number;
+  class?: string;
+}
+
+const { label, value } = Astro.props;
+const className = Astro.props.class;
+---
+
+<div class:list={["stat-tile", className]}>
+  <dt>{label}</dt>
+  <dd>{value}</dd>
+</div>

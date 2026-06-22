@@ -2,9 +2,10 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 const familyTree = readFileSync("src/components/FamilyTree.tsx", "utf8");
+const treeSearch = readFileSync("src/components/tree/TreeSearch.tsx", "utf8");
 const treeView = readFileSync("src/components/views/TreeView.astro", "utf8");
 const ui = readFileSync("src/i18n/ui.ts", "utf8");
-const styles = readFileSync("src/styles/global.css", "utf8");
+const styles = readFileSync("src/styles/tree.css", "utf8");
 
 describe("tree search", () => {
   it("wires localized search labels into the React tree", () => {
@@ -20,7 +21,7 @@ describe("tree search", () => {
   it("can focus a selected person from the search UI", () => {
     expect(familyTree).toContain("searchQuery");
     expect(familyTree).toContain("focusPerson");
-    expect(familyTree).toContain("tree-search-panel");
+    expect(treeSearch).toContain("tree-search-panel");
     expect(styles).toContain(".tree-search-panel");
   });
 });

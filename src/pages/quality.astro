@@ -1,15 +1,13 @@
 ---
-import Layout from "../layouts/Layout.astro";
 import DataQualityView from "../components/views/DataQualityView.astro";
-import { useTranslations } from "../i18n/ui";
-const t = useTranslations("bs");
+import PageShell from "../components/PageShell.astro";
 ---
 
-<Layout
+<PageShell
   lang="bs"
-  title={`${t("quality.title")} · ${t("site.title")}`}
-  description={t("meta.quality")}
+  titleKey="quality.title"
+  descriptionKey="meta.quality"
   noindex
 >
   <DataQualityView lang="bs" />
-</Layout>
+</PageShell>

@@ -5,8 +5,14 @@ import {
   BOX_W,
   BOX_H,
   type Layout,
-  type PositionedPerson,
 } from "../lib/tree-layout";
+import { TreeControls, TreeZoomControls } from "./tree/TreeControls";
+import { TreePersonCard } from "./tree/TreePersonCard";
+import { TreeSearch } from "./tree/TreeSearch";
+import { ancestorsOf, descendantsOf } from "./tree/relationships";
+import { useBranchMode } from "./tree/useBranchMode";
+import { useTreeData } from "./tree/useTreeData";
+import { useTreeViewport } from "./tree/useTreeViewport";
 
 export interface TreeLabels {
   hint: string;
@@ -42,51 +48,6 @@ interface Props {
 // Side branches collapsed by default to keep the main lineage readable.
 const DEFAULT_COLLAPSED = ["izo-stariji", "resid", "himzo", "pasa"];
 
-/** All transitive ancestors of a person (to expand a path to a focused node). */
-function ancestorsOf(id: string, people: TreeNodePerson[]): string[] {
-  const byId = new Map(people.map((p) => [p.id, p]));
-  const out = new Set<string>();
-  const walk = (pid: string) => {
-    const p = byId.get(pid);
-    if (!p) return;
-    for (const parent of p.parents) {
-      if (!out.has(parent)) {
-        out.add(parent);
-        walk(parent);
-      }
-    }
-  };
-  walk(id);
-  return [...out];
-}
-
-/** All transitive descendants of a person. */
-function descendantsOf(id: string, people: TreeNodePerson[]): string[] {
-  const out = new Set<string>();
-  const walk = (pid: string) => {
-    for (const p of people) {
-      if (p.parents.includes(pid) && !out.has(p.id)) {
-        out.add(p.id);
-        walk(p.id);
-      }
-    }
-  };
-  walk(id);
-  return [...out];
-}
-
-interface Transform {
-  x: number;
-  y: number;
-  k: number;
-}
-
-const MIN_K = 0.25;
-const MAX_K = 2.5;
-const MAX_FIT_K = 1.05;
-const clamp = (v: number, lo: number, hi: number) =>
-  Math.min(hi, Math.max(lo, v));
-
 const EMPTY_LAYOUT: Layout = {
   nodes: [],
   marriages: [],
@@ -96,84 +57,22 @@ const EMPTY_LAYOUT: Layout = {
   height: 1,
 };
 
-function updateBranchParam(id: string | null) {
-  try {
-    const url = new URL(window.location.href);
-    if (id) url.searchParams.set("branch", id);
-    else url.searchParams.delete("branch");
-    window.history.replaceState(null, "", url);
-  } catch {}
-}
-
 export default function FamilyTree({
   people: initialPeople = [],
   dataUrl,
   labels,
   basePath,
 }: Props) {
-  const [people, setPeople] = useState<TreeNodePerson[]>(initialPeople);
-  const [loading, setLoading] = useState(Boolean(dataUrl && !initialPeople.length));
-  const [branchTarget, setBranchTarget] = useState<string | null>(null);
+  const { people, loading } = useTreeData(initialPeople, dataUrl);
+  const { branchTarget, branchSet, treePeople, branchPerson, clearBranch: clearBranchMode } =
+    useBranchMode(people);
   const [collapsed, setCollapsed] = useState<Set<string>>(
     () => new Set(DEFAULT_COLLAPSED),
   );
-  useEffect(() => {
-    if (!dataUrl) return;
-    let cancelled = false;
-    setLoading(true);
-    fetch(dataUrl)
-      .then((response) => {
-        if (!response.ok) throw new Error(`Tree data failed: ${response.status}`);
-        return response.json() as Promise<TreeNodePerson[]>;
-      })
-      .then((items) => {
-        if (!cancelled) setPeople(items);
-      })
-      .catch(() => {
-        if (!cancelled) setPeople(initialPeople);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [dataUrl]);
-
-  useEffect(() => {
-    try {
-      setBranchTarget(new URLSearchParams(window.location.search).get("branch"));
-    } catch {}
-  }, []);
-
-  const branchSet = useMemo(() => {
-    if (!branchTarget || !people.some((p) => p.id === branchTarget)) return null;
-    const ids = new Set([
-      branchTarget,
-      ...ancestorsOf(branchTarget, people),
-      ...descendantsOf(branchTarget, people),
-    ]);
-    for (const person of people) {
-      if (ids.has(person.id)) {
-        for (const spouseId of person.spouses) ids.add(spouseId);
-      }
-    }
-    return ids;
-  }, [branchTarget, people]);
-
-  const treePeople = useMemo(
-    () => (branchSet ? people.filter((p) => branchSet.has(p.id)) : people),
-    [branchSet, people],
-  );
-  const branchPerson = branchTarget
-    ? people.find((person) => person.id === branchTarget)
-    : undefined;
   const layout = useMemo(
     () => (treePeople.length ? computeLayout(treePeople, collapsed) : EMPTY_LAYOUT),
     [treePeople, collapsed],
   );
-  const layoutRef = useRef(layout);
-  layoutRef.current = layout;
 
   // anchor ids that can be collapsed (used by "collapse all")
   const allCollapsible = useMemo(
@@ -184,12 +83,23 @@ export default function FamilyTree({
     [treePeople],
   );
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [transform, setTransform] = useState<Transform>({ x: 0, y: 0, k: 1 });
-  const tRef = useRef(transform);
-  tRef.current = transform;
-
-  const [ready, setReady] = useState(false);
+  const viewportFitKey = branchSet
+    ? `${branchTarget}:${branchSet.size}`
+    : `all:${treePeople.length}`;
+  const {
+    containerRef,
+    transform,
+    setTransform,
+    ready,
+    isDragging,
+    fit,
+    zoomBy,
+    onWheel,
+    onPointerDown,
+    onPointerMove,
+    onPointerUp,
+    onClickCapture,
+  } = useTreeViewport(layout, viewportFitKey);
   const [highlight, setHighlight] = useState<string | null>(null);
   const [focusTarget, setFocusTarget] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
@@ -213,57 +123,6 @@ export default function FamilyTree({
     lineage && !(lineage.has(a) && lineage.has(b)) ? 0.12 : 1;
   const marriageDim = (a: string, b: string) =>
     lineage && !(lineage.has(a) || lineage.has(b)) ? 0.12 : 1;
-
-  const fit = () => {
-    const el = containerRef.current;
-    if (!el) return;
-    const lay = layoutRef.current;
-    if (!lay.nodes.length) return;
-    const vw = el.clientWidth;
-    const vh = el.clientHeight;
-    if (vw < 640) {
-      const rootNode =
-        lay.nodes.find((n) => n.person.id === "avdikadija") ?? lay.nodes[0];
-      if (rootNode) {
-        const k = clamp(Math.min(0.84, vw / (BOX_W * 1.18)), 0.55, 0.84);
-        setTransform({
-          k,
-          x: Math.max(16, (vw - BOX_W * k) / 2) - rootNode.x * k,
-          y: 156 - rootNode.y * k,
-        });
-        return;
-      }
-    }
-    const k = clamp(
-      Math.min(vw / lay.width, vh / lay.height) * 0.98,
-      MIN_K,
-      MAX_FIT_K,
-    );
-    setTransform({
-      k,
-      x: (vw - lay.width * k) / 2,
-      y: Math.max(24, (vh - lay.height * k) / 2),
-    });
-  };
-
-  // Fit on mount and on container resize only (not on collapse changes, so the
-  // view stays put when the user opens/closes a branch).
-  useEffect(() => {
-    fit();
-    setReady(true);
-    const el = containerRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(() => fit());
-    ro.observe(el);
-    return () => ro.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (!treePeople.length) return;
-    fit();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [branchTarget, treePeople.length]);
 
   useEffect(() => {
     if (urlFocusHandled.current || !people.length) return;
@@ -341,123 +200,6 @@ export default function FamilyTree({
   const collapseAll = () => setCollapsed(new Set(allCollapsible));
   const expandAll = () => setCollapsed(new Set());
 
-  const onWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
-    const el = containerRef.current!;
-    const rect = el.getBoundingClientRect();
-    const px = e.clientX - rect.left;
-    const py = e.clientY - rect.top;
-    const { x, y, k } = tRef.current;
-    const factor = Math.exp(-e.deltaY * 0.0012);
-    const nk = clamp(k * factor, MIN_K, MAX_K);
-    setTransform({ k: nk, x: px - ((px - x) / k) * nk, y: py - ((py - y) / k) * nk });
-  };
-
-  const drag = useRef({ active: false, sx: 0, sy: 0, ox: 0, oy: 0, moved: 0 });
-  const pointers = useRef(new Map<number, { x: number; y: number }>());
-  const pinch = useRef<{
-    dist: number;
-    k: number;
-    x: number;
-    y: number;
-    mx: number;
-    my: number;
-  } | null>(null);
-
-  const localPoint = (clientX: number, clientY: number) => {
-    const r = containerRef.current!.getBoundingClientRect();
-    return { x: clientX - r.left, y: clientY - r.top };
-  };
-
-  const onPointerDown = (e: React.PointerEvent) => {
-    (e.target as Element).setPointerCapture?.(e.pointerId);
-    pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    if (pointers.current.size === 1) {
-      drag.current = {
-        active: true,
-        sx: e.clientX,
-        sy: e.clientY,
-        ox: tRef.current.x,
-        oy: tRef.current.y,
-        moved: 0,
-      };
-    } else if (pointers.current.size === 2) {
-      drag.current.active = false;
-      startPinch();
-    }
-  };
-
-  const startPinch = () => {
-    const [p1, p2] = [...pointers.current.values()];
-    const mid = localPoint((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
-    pinch.current = {
-      dist: Math.hypot(p2.x - p1.x, p2.y - p1.y),
-      k: tRef.current.k,
-      x: tRef.current.x,
-      y: tRef.current.y,
-      mx: mid.x,
-      my: mid.y,
-    };
-  };
-
-  const onPointerMove = (e: React.PointerEvent) => {
-    if (pointers.current.has(e.pointerId))
-      pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
-
-    if (pointers.current.size >= 2 && pinch.current) {
-      const [p1, p2] = [...pointers.current.values()];
-      const dist = Math.hypot(p2.x - p1.x, p2.y - p1.y);
-      const mid = localPoint((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
-      const s = pinch.current;
-      const nk = clamp((s.k * dist) / s.dist, MIN_K, MAX_K);
-      const wx = (s.mx - s.x) / s.k;
-      const wy = (s.my - s.y) / s.k;
-      setTransform({ k: nk, x: mid.x - wx * nk, y: mid.y - wy * nk });
-      return;
-    }
-
-    const d = drag.current;
-    if (!d.active) return;
-    const dx = e.clientX - d.sx;
-    const dy = e.clientY - d.sy;
-    d.moved = Math.max(d.moved, Math.abs(dx) + Math.abs(dy));
-    setTransform((t) => ({ ...t, x: d.ox + dx, y: d.oy + dy }));
-  };
-
-  const onPointerUp = (e: React.PointerEvent) => {
-    pointers.current.delete(e.pointerId);
-    pinch.current = null;
-    if (pointers.current.size === 1) {
-      // resume single-finger pan from the remaining pointer
-      const [p] = [...pointers.current.values()];
-      drag.current = {
-        active: true,
-        sx: p.x,
-        sy: p.y,
-        ox: tRef.current.x,
-        oy: tRef.current.y,
-        moved: 999,
-      };
-    } else if (pointers.current.size === 0) {
-      drag.current.active = false;
-    }
-  };
-  const onClickCapture = (e: React.MouseEvent) => {
-    if (drag.current.moved > 6) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  };
-
-  const zoomBy = (factor: number) => {
-    const el = containerRef.current!;
-    const px = el.clientWidth / 2;
-    const py = el.clientHeight / 2;
-    const { x, y, k } = tRef.current;
-    const nk = clamp(k * factor, MIN_K, MAX_K);
-    setTransform({ k: nk, x: px - ((px - x) / k) * nk, y: py - ((py - y) / k) * nk });
-  };
-
   const toggleFullscreen = async () => {
     const el = containerRef.current;
     if (!el || !document.fullscreenEnabled) return;
@@ -489,9 +231,8 @@ export default function FamilyTree({
     ? labels.branchMode.replace("{name}", branchPerson.name)
     : "";
   const clearBranch = () => {
-    setBranchTarget(null);
+    clearBranchMode();
     setSearchQuery("");
-    updateBranchParam(null);
   };
 
   return (
@@ -513,7 +254,7 @@ export default function FamilyTree({
       <svg
         className="h-full w-full touch-none select-none"
         style={{
-          cursor: drag.current.active ? "grabbing" : "grab",
+          cursor: isDragging ? "grabbing" : "grab",
           opacity: ready ? 1 : 0,
           transition: "opacity 0.25s ease",
         }}
@@ -554,7 +295,7 @@ export default function FamilyTree({
             />
           ))}
           {layout.nodes.map((n) => (
-            <PersonCard
+            <TreePersonCard
               key={n.person.id}
               node={n}
               basePath={basePath}
@@ -582,7 +323,7 @@ export default function FamilyTree({
                   onClick={() => toggle(tg.anchorId)}
                   className="pointer-events-auto flex items-center gap-0.5 rounded-full border border-line bg-surface px-2 py-0.5 text-[11px] font-semibold text-muted shadow-sm transition hover:border-accent hover:text-accent"
                 >
-                  {tg.collapsed ? showMore(tg.count) : "–"}
+                  {tg.collapsed ? showMore(tg.count) : "-"}
                 </button>
               </div>
             </foreignObject>
@@ -590,49 +331,15 @@ export default function FamilyTree({
         </g>
       </svg>
 
-      <div className="tree-search-panel">
-        <label htmlFor="tree-search" className="tree-search-label">
-          {labels.search}
-        </label>
-        <input
-          id="tree-search"
-          type="search"
-          value={searchQuery}
-          onChange={(event) => setSearchQuery(event.currentTarget.value)}
-          onKeyDown={(event) => {
-            if (event.key === "Enter") {
-              event.preventDefault();
-              selectFirstSearchResult();
-            }
-          }}
-          placeholder={labels.searchPlaceholder}
-          className="tree-search-input"
-        />
-        {normalizedSearch && (
-          <div className="tree-search-results">
-            {searchResults.length ? (
-              searchResults.map((person) => (
-                <button
-                  type="button"
-                  key={person.id}
-                  onClick={() => focusPerson(person.id)}
-                  className="tree-search-result"
-                >
-                  <span>
-                    <strong>{person.name}</strong>
-                    <small>
-                      {[person.lifespan, person.tagline].filter(Boolean).join(" · ")}
-                    </small>
-                  </span>
-                  <em>{labels.center}</em>
-                </button>
-              ))
-            ) : (
-              <p className="tree-search-empty">{labels.searchEmpty}</p>
-            )}
-          </div>
-        )}
-      </div>
+      <TreeSearch
+        labels={labels}
+        query={searchQuery}
+        normalizedQuery={normalizedSearch}
+        results={searchResults}
+        onQueryChange={setSearchQuery}
+        onFocusPerson={focusPerson}
+        onSelectFirst={selectFirstSearchResult}
+      />
 
       {branchPerson && (
         <div className="tree-branch-banner">
@@ -659,153 +366,25 @@ export default function FamilyTree({
         </span>
       </div>
 
-      {/* Expand / collapse */}
-      <div className="tree-controls absolute top-4 right-4 flex gap-1.5">
-        <PillButton onClick={expandAll}>{labels.expandAll}</PillButton>
-        <PillButton onClick={collapseAll}>{labels.collapseAll}</PillButton>
-        <PillButton onClick={toggleFullscreen}>
-          {isFullscreen ? labels.exitFullscreen : labels.fullscreen}
-        </PillButton>
-      </div>
+      <TreeControls
+        labels={labels}
+        isFullscreen={isFullscreen}
+        onExpandAll={expandAll}
+        onCollapseAll={collapseAll}
+        onToggleFullscreen={toggleFullscreen}
+      />
 
-      {/* Zoom */}
-      <div className="absolute right-4 bottom-4 flex flex-col gap-1.5">
-        <ControlButton label={labels.zoomIn} onClick={() => zoomBy(1.25)}>
-          +
-        </ControlButton>
-        <ControlButton label={labels.zoomOut} onClick={() => zoomBy(0.8)}>
-          −
-        </ControlButton>
-        <ControlButton label={labels.reset} onClick={fit}>
-          ⤢
-        </ControlButton>
-      </div>
+      <TreeZoomControls
+        labels={labels}
+        onZoomIn={() => zoomBy(1.25)}
+        onZoomOut={() => zoomBy(0.8)}
+        onReset={fit}
+      />
 
       <p className="pointer-events-none absolute bottom-4 left-4 text-xs text-muted">
         {labels.hint}
       </p>
     </div>
-  );
-}
-
-function PillButton({
-  children,
-  onClick,
-}: {
-  children: React.ReactNode;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="rounded-lg border border-line bg-surface px-3 py-1.5 text-xs font-medium text-muted shadow-sm transition hover:border-accent hover:text-accent"
-    >
-      {children}
-    </button>
-  );
-}
-
-function ControlButton({
-  children,
-  label,
-  onClick,
-}: {
-  children: React.ReactNode;
-  label: string;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      aria-label={label}
-      onClick={onClick}
-      className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-surface text-lg text-ink shadow-sm transition hover:border-accent hover:text-accent"
-    >
-      {children}
-    </button>
-  );
-}
-
-function PersonCard({
-  node,
-  basePath,
-  livingLabel,
-  highlighted,
-  dim,
-  onHoverChange,
-}: {
-  node: PositionedPerson;
-  basePath: string;
-  livingLabel: string;
-  highlighted: boolean;
-  dim: number;
-  onHoverChange: (hovering: boolean) => void;
-}) {
-  const p = node.person;
-  const living = p.living;
-  const sexClass =
-    p.sex === "f"
-      ? "tree-person-female"
-      : p.sex === "m"
-        ? "tree-person-male"
-        : "";
-  return (
-    <foreignObject
-      x={node.x}
-      y={node.y}
-      width={BOX_W}
-      height={BOX_H}
-      opacity={dim}
-      style={{ transition: "opacity 0.2s ease" }}
-    >
-      <a
-        href={`${basePath}/${p.id}`}
-        onMouseEnter={() => onHoverChange(true)}
-        onMouseLeave={() => onHoverChange(false)}
-        className={`tree-person-card group relative flex h-full w-full items-center gap-3 rounded-lg border bg-surface px-3 py-2.5 shadow-sm transition duration-150 hover:-translate-y-0.5 hover:border-accent hover:shadow-lg ${sexClass} ${
-          highlighted
-            ? "border-accent ring-2 ring-accent ring-offset-2 ring-offset-paper"
-            : "border-line"
-        }`}
-      >
-        {living && (
-          <span
-            className="absolute top-2.5 right-2.5 h-2 w-2 rounded-full bg-emerald-500 ring-2 ring-surface"
-            title={livingLabel}
-          />
-        )}
-        <span
-          className={`tree-person-avatar flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full text-base font-semibold ring-1 transition ${sexClass}`}
-        >
-          {p.photo ? (
-            <img
-              src={p.photo}
-              alt=""
-              className="h-full w-full object-cover"
-              loading="lazy"
-            />
-          ) : (
-            p.initials
-          )}
-        </span>
-        <span className="min-w-0 flex-1 leading-tight">
-          <span className="block truncate pr-2 text-[15px] font-semibold text-ink group-hover:text-accent">
-            {p.name}
-          </span>
-          {p.lifespan && (
-            <span className="mt-0.5 block truncate text-xs font-medium text-muted">
-              {p.lifespan}
-            </span>
-          )}
-          {p.tagline && (
-            <span className="mt-0.5 block truncate text-[11px] text-muted">
-              {p.tagline}
-            </span>
-          )}
-        </span>
-      </a>
-    </foreignObject>
   );
 }
 

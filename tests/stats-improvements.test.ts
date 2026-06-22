@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 const statsView = readFileSync("src/components/views/StatsView.astro", "utf8");
-const styles = readFileSync("src/styles/global.css", "utf8");
+const styles = readFileSync("src/styles/stats.css", "utf8");
 const ui = readFileSync("src/i18n/ui.ts", "utf8");
 
 describe("stats improvements", () => {

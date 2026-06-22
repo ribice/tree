@@ -1,14 +1,12 @@
 ---
-import Layout from "../../layouts/Layout.astro";
 import AddPersonView from "../../components/views/AddPersonView.astro";
-import { useTranslations } from "../../i18n/ui";
-const t = useTranslations("en");
+import PageShell from "../../components/PageShell.astro";
 ---
 
-<Layout
+<PageShell
   lang="en"
-  title={`${t("add.title")} · ${t("site.title")}`}
-  description={t("meta.add")}
+  titleKey="add.title"
+  descriptionKey="meta.add"
 >
   <AddPersonView lang="en" />
-</Layout>
+</PageShell>

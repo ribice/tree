@@ -1,0 +1,316 @@
+.profile-hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-accent-soft), transparent 18%), transparent 62%),
+    linear-gradient(180deg, var(--color-surface), color-mix(in oklch, var(--color-surface), var(--color-paper) 16%));
+  padding: 1.25rem;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 15%) inset,
+    0 18px 38px color-mix(in oklch, var(--color-ink), transparent 91%);
+}
+
+.profile-hero[data-sex="f"] {
+  border-color: color-mix(in oklch, var(--color-female), var(--color-line) 66%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-female-soft), transparent 16%), transparent 62%),
+    linear-gradient(180deg, var(--color-surface), color-mix(in oklch, var(--color-surface), var(--color-paper) 16%));
+}
+
+.profile-hero[data-sex="m"] {
+  border-color: color-mix(in oklch, var(--color-male), var(--color-line) 66%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-male-soft), transparent 16%), transparent 62%),
+    linear-gradient(180deg, var(--color-surface), color-mix(in oklch, var(--color-surface), var(--color-paper) 16%));
+}
+
+.profile-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 1.25rem 1.25rem 45%;
+  height: 5rem;
+  background-image:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-branch), transparent 58%) 1px, transparent 1px),
+    linear-gradient(180deg, color-mix(in oklch, var(--color-branch), transparent 70%) 1px, transparent 1px);
+  background-size: 1rem 1rem;
+  mask-image: linear-gradient(90deg, transparent, black 22%, black);
+  pointer-events: none;
+}
+
+.profile-hero-main {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.profile-avatar {
+  box-shadow:
+    0 0 0 0.45rem color-mix(in oklch, var(--color-surface), transparent 16%),
+    0 16px 30px color-mix(in oklch, var(--color-ink), transparent 89%);
+}
+
+.profile-ribbon {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1.3rem;
+}
+
+.profile-ribbon div {
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 12%);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 82%, transparent);
+  padding: 0.7rem 0.85rem;
+}
+
+.profile-ribbon dt {
+  color: var(--color-muted);
+  font-size: 0.72rem;
+  font-weight: 760;
+  text-transform: uppercase;
+}
+
+.profile-ribbon dd {
+  margin-top: 0.15rem;
+  color: var(--color-ink);
+  font-size: 0.95rem;
+  font-weight: 680;
+}
+
+.data-quality-badge,
+.data-quality-missing {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.25rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 760;
+}
+
+.data-quality-badge {
+  border: 1px solid color-mix(in oklch, var(--color-ember), transparent 36%);
+  background: color-mix(in oklch, var(--color-ember), transparent 90%);
+  color: var(--color-ember);
+}
+
+.data-quality-missing {
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 12%);
+  background: color-mix(in oklch, var(--color-surface) 72%, transparent);
+  color: var(--color-muted);
+}
+
+.profile-snapshot {
+  min-width: 0;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-accent-soft), transparent 10%), transparent 62%),
+    color-mix(in oklch, var(--color-surface) 90%, var(--color-paper));
+  padding: 1rem;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 16%) inset,
+    0 14px 30px color-mix(in oklch, var(--color-ink), transparent 93%);
+}
+
+.profile-snapshot-head {
+  display: grid;
+  min-width: 0;
+  gap: 0.65rem;
+  align-items: end;
+}
+
+.profile-snapshot-head h2 {
+  margin-top: 0.25rem;
+  color: var(--color-ink);
+  font-size: 1.45rem;
+  font-weight: 780;
+}
+
+.profile-snapshot-head p:not(.eyebrow) {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.profile-snapshot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+
+.profile-snapshot-grid div {
+  min-width: 0;
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 14%);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 78%, transparent);
+  padding: 0.75rem;
+}
+
+.profile-snapshot-grid dt {
+  color: var(--color-muted);
+  font-size: 0.7rem;
+  font-weight: 760;
+  text-transform: uppercase;
+}
+
+.profile-snapshot-grid dd {
+  margin-top: 0.2rem;
+  overflow: hidden;
+  color: var(--color-ink);
+  font-size: 1.25rem;
+  font-weight: 780;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.family-mini-map {
+  min-width: 0;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-gold), transparent 86%), transparent 52%),
+    color-mix(in oklch, var(--color-surface) 90%, var(--color-paper));
+  padding: 1rem;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 16%) inset,
+    0 14px 30px color-mix(in oklch, var(--color-ink), transparent 93%);
+}
+
+.family-mini-map-head {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.family-mini-map-head h2 {
+  margin-top: 0.25rem;
+  color: var(--color-ink);
+  font-size: 1.45rem;
+  font-weight: 780;
+}
+
+.family-mini-map-head a {
+  color: var(--color-accent);
+  font-size: 0.9rem;
+  font-weight: 760;
+}
+
+.family-mini-map-grid {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.family-mini-map-group {
+  min-width: 0;
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 14%);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 76%, transparent);
+  padding: 0.75rem;
+}
+
+.family-mini-map-group h3 {
+  color: var(--color-muted);
+  font-size: 0.7rem;
+  font-weight: 780;
+  text-transform: uppercase;
+}
+
+.family-mini-map-group ul {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 0.55rem;
+}
+
+.family-mini-card {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background: var(--color-surface);
+  padding: 0.45rem;
+  color: var(--color-ink);
+  font-size: 0.86rem;
+  font-weight: 680;
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.family-mini-card span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+a.family-mini-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.family-mini-card[data-sex="f"] {
+  border-color: color-mix(in oklch, var(--color-female), var(--color-line) 70%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-female-soft), transparent 6%), transparent 52%),
+    var(--color-surface);
+}
+
+.family-mini-card[data-sex="m"] {
+  border-color: color-mix(in oklch, var(--color-male), var(--color-line) 70%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-male-soft), transparent 6%), transparent 52%),
+    var(--color-surface);
+}
+
+.family-mini-self {
+  box-shadow: inset 0 0 0 2px color-mix(in oklch, var(--color-accent), transparent 76%);
+}
+
+.fact-panel,
+.kin-panel {
+  box-shadow: 0 10px 24px color-mix(in oklch, var(--color-ink), transparent 94%);
+}
+
+
+@media (min-width: 640px) {
+  .profile-hero-main {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .profile-ribbon {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .profile-snapshot {
+    padding: 1.25rem;
+  }
+
+  .profile-snapshot-head {
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+  }
+
+  .profile-snapshot-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .family-mini-map {
+    padding: 1.25rem;
+  }
+
+  .family-mini-map-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

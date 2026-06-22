@@ -1,0 +1,460 @@
+.heritage-band {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-line);
+  background:
+    linear-gradient(135deg, color-mix(in oklch, var(--color-accent-soft), white 58%), transparent 52%),
+    linear-gradient(180deg, color-mix(in oklch, var(--color-gold), transparent 88%), transparent 20rem),
+    linear-gradient(180deg, var(--color-surface), var(--color-paper));
+}
+
+.heritage-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(color-mix(in oklch, var(--color-branch), transparent 72%) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--color-branch), transparent 78%) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(90deg, transparent, black 18%, black 82%, transparent);
+  opacity: 0.34;
+}
+
+.family-ledger {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-branch), transparent 80%) 1px, transparent 1px),
+    linear-gradient(180deg, color-mix(in oklch, var(--color-branch), transparent 84%) 1px, transparent 1px),
+    color-mix(in oklch, var(--color-surface) 88%, var(--color-paper));
+  background-size: 46px 46px, 46px 46px, auto;
+  padding: 1rem;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 14%) inset,
+    0 22px 46px color-mix(in oklch, var(--color-ink), transparent 90%);
+}
+
+.family-ledger::before,
+.family-ledger::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.family-ledger::before {
+  top: -3.25rem;
+  right: 0;
+  width: min(12rem, 56%);
+  height: 12rem;
+  border: 1px solid color-mix(in oklch, var(--color-gold), transparent 38%);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--color-gold), transparent 92%);
+}
+
+.family-ledger::after {
+  inset: auto 1rem 5.8rem 1rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-branch), transparent);
+}
+
+.family-ledger-head {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.3rem;
+  border-bottom: 1px solid color-mix(in oklch, var(--color-line), transparent 12%);
+  padding: 0.15rem 0 1rem;
+}
+
+.family-ledger-head p {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.family-ledger-head h2 {
+  max-width: 100%;
+  color: var(--color-ink);
+  font-size: clamp(2rem, 8vw, 3.35rem);
+  font-weight: 820;
+  line-height: 0.98;
+}
+
+.family-ledger-head span {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  font-weight: 720;
+}
+
+.family-ledger-list {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+
+.family-ledger-person {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.65rem;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 92%, transparent);
+  padding: 0.55rem;
+  box-shadow: 0 12px 26px color-mix(in oklch, var(--color-ink), transparent 91%);
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.family-ledger-person::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  flex: 0 0 auto;
+  order: 3;
+  border-radius: 999px;
+  background: var(--color-gold);
+  box-shadow: 0 0 0 0.28rem color-mix(in oklch, var(--color-gold), transparent 78%);
+}
+
+.family-ledger-person:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.family-ledger-person[data-sex="f"] {
+  border-color: color-mix(in oklch, var(--color-female), var(--color-line) 72%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-female-soft), transparent 8%), transparent 50%),
+    color-mix(in oklch, var(--color-surface) 92%, transparent);
+}
+
+.family-ledger-person[data-sex="m"] {
+  border-color: color-mix(in oklch, var(--color-male), var(--color-line) 72%);
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-male-soft), transparent 8%), transparent 50%),
+    color-mix(in oklch, var(--color-surface) 92%, transparent);
+}
+
+.family-ledger-person[data-sex="f"]::before {
+  background: var(--color-female);
+  box-shadow: 0 0 0 0.28rem color-mix(in oklch, var(--color-female), transparent 80%);
+}
+
+.family-ledger-person[data-sex="m"]::before {
+  background: var(--color-male);
+  box-shadow: 0 0 0 0.28rem color-mix(in oklch, var(--color-male), transparent 80%);
+}
+
+.family-ledger-person strong,
+.family-ledger-person small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.family-ledger-person span {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.family-ledger-person strong {
+  color: var(--color-ink);
+  font-size: 0.86rem;
+  font-weight: 720;
+}
+
+.family-ledger-person small {
+  margin-top: 0.1rem;
+  color: var(--color-muted);
+  font-size: 0.74rem;
+}
+
+.family-ledger-stats {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+
+.family-ledger-stats div {
+  min-width: 0;
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 14%);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 72%, transparent);
+  padding: 0.65rem;
+}
+
+.family-ledger-stats dt {
+  overflow: hidden;
+  color: var(--color-muted);
+  font-size: 0.64rem;
+  font-weight: 760;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: normal;
+}
+
+.family-ledger-stats dd {
+  margin-top: 0.15rem;
+  color: var(--color-ink);
+  font-size: 1.35rem;
+  font-weight: 780;
+}
+
+.lineage-panel {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-accent-soft), transparent 20%), transparent 64%),
+    linear-gradient(180deg, color-mix(in oklch, var(--color-gold), transparent 88%), transparent 54%),
+    color-mix(in oklch, var(--color-surface) 92%, var(--color-paper));
+  padding: 1rem;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 16%) inset,
+    0 18px 40px color-mix(in oklch, var(--color-ink), transparent 91%);
+}
+
+.lineage-intro {
+  display: grid;
+  min-width: 0;
+  gap: 0.85rem;
+  align-items: end;
+}
+
+.lineage-intro h2 {
+  margin-top: 0.3rem;
+  color: var(--color-ink);
+  font-size: clamp(2rem, 7vw, 3.1rem);
+  font-weight: 820;
+  line-height: 1;
+}
+
+.lineage-intro p:not(.eyebrow) {
+  max-width: 42rem;
+  color: var(--color-muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.lineage-intro > span {
+  width: max-content;
+  max-width: 100%;
+  border: 1px solid color-mix(in oklch, var(--color-accent), var(--color-line) 54%);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--color-surface) 78%, transparent);
+  padding: 0.45rem 0.7rem;
+  color: var(--color-accent);
+  font-size: 0.82rem;
+  font-weight: 760;
+}
+
+.lineage-track {
+  --lineage-count: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--lineage-count), minmax(11.5rem, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.15rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.35rem 0.15rem 0.75rem;
+  scrollbar-color: color-mix(in oklch, var(--color-accent), transparent 35%) transparent;
+}
+
+.lineage-item {
+  position: relative;
+  min-width: 0;
+}
+
+.lineage-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 2.35rem;
+  right: -0.75rem;
+  z-index: 0;
+  width: 0.75rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-branch), color-mix(in oklch, var(--color-gold), transparent 10%));
+}
+
+.lineage-card {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-height: 10.25rem;
+  min-width: 0;
+  align-content: start;
+  gap: 0.7rem;
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 8%);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 92%, transparent);
+  padding: 0.75rem;
+  box-shadow: 0 12px 28px color-mix(in oklch, var(--color-ink), transparent 93%);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.lineage-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 16px 32px color-mix(in oklch, var(--color-ink), transparent 89%);
+  transform: translateY(-1px);
+}
+
+.lineage-card[data-sex="f"] {
+  border-color: color-mix(in oklch, var(--color-female), var(--color-line) 68%);
+  background:
+    linear-gradient(135deg, color-mix(in oklch, var(--color-female-soft), transparent 8%), transparent 54%),
+    color-mix(in oklch, var(--color-surface) 92%, transparent);
+}
+
+.lineage-card[data-sex="m"] {
+  border-color: color-mix(in oklch, var(--color-male), var(--color-line) 68%);
+  background:
+    linear-gradient(135deg, color-mix(in oklch, var(--color-male-soft), transparent 8%), transparent 54%),
+    color-mix(in oklch, var(--color-surface) 92%, transparent);
+}
+
+.lineage-card-head {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.lineage-step {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 10%);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--color-surface) 78%, transparent);
+  padding: 0.22rem 0.5rem;
+  color: var(--color-muted);
+  font-size: 0.68rem;
+  font-weight: 780;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.lineage-card-name,
+.lineage-card-meta {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.lineage-card-name {
+  color: var(--color-ink);
+  font-size: 0.98rem;
+  font-weight: 760;
+  line-height: 1.25;
+}
+
+.lineage-card-meta {
+  display: -webkit-box;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.home-about {
+  display: grid;
+  min-width: 0;
+  gap: 1.25rem;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-gold), transparent 84%), transparent 42%),
+    linear-gradient(180deg, color-mix(in oklch, var(--color-accent-soft), transparent 12%), transparent 76%),
+    color-mix(in oklch, var(--color-surface) 92%, var(--color-paper));
+  padding: 1.1rem;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 16%) inset,
+    0 16px 36px color-mix(in oklch, var(--color-ink), transparent 92%);
+}
+
+.home-about-title {
+  min-width: 0;
+}
+
+.home-about-title h2 {
+  margin-top: 0.35rem;
+  max-width: 38rem;
+  color: var(--color-ink);
+  font-size: clamp(2rem, 7vw, 3.2rem);
+  font-weight: 820;
+  line-height: 1;
+}
+
+.home-about-copy {
+  display: grid;
+  min-width: 0;
+  gap: 0.9rem;
+}
+
+.home-about-copy p {
+  color: var(--color-ink);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.home-about-copy p:first-child {
+  color: var(--color-muted);
+  font-size: 1.08rem;
+}
+
+
+@media (min-width: 640px) {
+  .home-actions {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .lineage-panel,
+  .home-about {
+    padding: 1.25rem;
+  }
+
+  .lineage-intro {
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1fr) auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lineage-track {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    overflow: visible;
+    padding-bottom: 0.35rem;
+  }
+
+  .lineage-item:nth-child(5n)::after {
+    display: none;
+  }
+
+  .home-about {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    padding: 1.5rem;
+  }
+}

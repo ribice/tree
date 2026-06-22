@@ -1,0 +1,106 @@
+.stats-hero {
+  position: relative;
+}
+
+.stats-hero {
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-gold), transparent 82%), transparent 48%),
+    color-mix(in oklch, var(--color-surface) 90%, var(--color-paper));
+  padding: 1.25rem;
+  box-shadow: 0 14px 32px color-mix(in oklch, var(--color-ink), transparent 93%);
+}
+
+.chart-panel {
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(180deg, color-mix(in oklch, var(--color-surface), transparent 4%), color-mix(in oklch, var(--color-surface), var(--color-paper) 12%));
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 16%) inset,
+    0 14px 30px color-mix(in oklch, var(--color-ink), transparent 93%);
+}
+
+.stats-insight-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.stats-insight-card {
+  min-width: 0;
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(180deg, color-mix(in oklch, var(--color-surface), transparent 4%), color-mix(in oklch, var(--color-surface), var(--color-paper) 12%));
+  padding: 1rem;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 16%) inset,
+    0 14px 30px color-mix(in oklch, var(--color-ink), transparent 93%);
+}
+
+.stats-insight-card h2 {
+  color: var(--color-ink);
+  font-size: 1rem;
+  font-weight: 780;
+}
+
+.stats-insight-card ul {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 0.9rem;
+}
+
+.stats-insight-card li {
+  min-width: 0;
+}
+
+.stats-insight-card li div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  color: var(--color-muted);
+  font-size: 0.86rem;
+}
+
+.stats-insight-card strong {
+  color: var(--color-ink);
+}
+
+.stats-insight-card small {
+  display: block;
+  margin-top: 0.18rem;
+  color: var(--color-muted);
+  font-size: 0.75rem;
+}
+
+.stats-insight-card meter {
+  display: block;
+  width: 100%;
+  height: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.stats-insight-card meter::-webkit-meter-bar {
+  border: 0;
+  border-radius: 999px;
+  background: var(--color-accent-soft);
+}
+
+.stats-insight-card meter::-webkit-meter-optimum-value {
+  border-radius: 999px;
+  background: var(--color-accent);
+}
+
+.stats-insight-card meter::-moz-meter-bar {
+  border-radius: 999px;
+  background: var(--color-accent);
+}
+
+
+@media (min-width: 640px) {
+  .stats-insight-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

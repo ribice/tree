@@ -15,6 +15,7 @@ import {
 import { useTranslations, localize, type Locale } from "../../i18n/ui";
 import { publicDate } from "../../lib/privacy";
 import { displayTaglineFor } from "../../lib/display";
+import PersonMiniCard from "../ui/PersonMiniCard.astro";
 
 interface Props {
   lang: Locale;
@@ -207,35 +208,11 @@ const miniMapGroups = [
             <ul>
               {group.items.map(({ p: rel, self }) => (
                 <li>
-                  {
-                    self ? (
-                      <div class="family-mini-card family-mini-self" data-sex={rel.data.sex}>
-                        <Avatar
-                          name={rel.data.name}
-                          photo={rel.data.photo}
-                          initials={initials(rel.data.name)}
-                          sex={rel.data.sex}
-                          size="xs"
-                        />
-                        <span>{rel.data.name}</span>
-                      </div>
-                    ) : (
-                      <a
-                        href={`${peoplePath}/${rel.id}`}
-                        class="family-mini-card"
-                        data-sex={rel.data.sex}
-                      >
-                        <Avatar
-                          name={rel.data.name}
-                          photo={rel.data.photo}
-                          initials={initials(rel.data.name)}
-                          sex={rel.data.sex}
-                          size="xs"
-                        />
-                        <span>{rel.data.name}</span>
-                      </a>
-                    )
-                  }
+                  <PersonMiniCard
+                    person={rel}
+                    href={self ? undefined : `${peoplePath}/${rel.id}`}
+                    self={self}
+                  />
                 </li>
               ))}
             </ul>

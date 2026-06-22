@@ -2,9 +2,12 @@
 import { getPeople, getTranslations } from "../../lib/people";
 import {
   collectDataQuality,
+  type DataQualityGroup,
   type DataQualityKind,
 } from "../../lib/data-quality";
 import { useTranslations, localize, type Locale } from "../../i18n/ui";
+import Panel from "../ui/Panel.astro";
+import StatTile from "../ui/StatTile.astro";
 
 interface Props {
   lang: Locale;
@@ -17,6 +20,8 @@ const translations = await getTranslations();
 const groups = collectDataQuality(people, translations);
 const totalIssues = groups.reduce((sum, group) => sum + group.issues.length, 0);
 const peoplePath = localize("/people", lang);
+const githubEditUrl = (personId: string) =>
+  `https://github.com/ribice/tree/edit/master/src/content/people/${personId}.md`;
 const labels: Record<DataQualityKind, string> = {
   missingBirth: t("quality.missingBirth"),
   missingBirthplace: t("quality.missingBirthplace"),
@@ -29,6 +34,53 @@ const labels: Record<DataQualityKind, string> = {
   unknownPlaceholder: t("quality.unknownPlaceholder"),
   suspiciousTagline: t("quality.suspiciousTagline"),
 };
+const groupsByKind = new Map<DataQualityKind, DataQualityGroup>(
+  groups.map((group) => [group.kind, group]),
+);
+const qualityCategories = [
+  {
+    id: "critical",
+    label: t("quality.categoryCritical"),
+    kinds: ["unknownPlaceholder", "duplicateName"] as DataQualityKind[],
+  },
+  {
+    id: "basics",
+    label: t("quality.categoryBasics"),
+    kinds: [
+      "missingBirth",
+      "missingBirthplace",
+      "missingParents",
+      "missingBio",
+      "missingSex",
+    ] as DataQualityKind[],
+  },
+  {
+    id: "photos",
+    label: t("quality.categoryPhotos"),
+    kinds: ["missingPhoto"] as DataQualityKind[],
+  },
+  {
+    id: "relationships",
+    label: t("quality.categoryRelationships"),
+    kinds: ["oneWaySpouse"] as DataQualityKind[],
+  },
+  {
+    id: "wording",
+    label: t("quality.categoryWording"),
+    kinds: ["suspiciousTagline"] as DataQualityKind[],
+  },
+]
+  .map((category) => {
+    const categoryGroups = category.kinds
+      .map((kind) => groupsByKind.get(kind))
+      .filter(Boolean) as DataQualityGroup[];
+    return {
+      ...category,
+      groups: categoryGroups,
+      count: categoryGroups.reduce((sum, group) => sum + group.issues.length, 0),
+    };
+  })
+  .filter((category) => category.count > 0);
 ---
 
 <section class="mx-auto max-w-6xl px-5 py-10 sm:py-12">
@@ -38,44 +90,65 @@ const labels: Record<DataQualityKind, string> = {
     <p>{t("quality.subtitle")}</p>
   </div>
 
-  <div class="mt-6 grid gap-3 sm:grid-cols-3">
-    <div class="stat-tile">
-      <dt>{t("quality.totalIssues")}</dt>
-      <dd>{totalIssues}</dd>
-    </div>
-    <div class="stat-tile">
-      <dt>{t("quality.peopleChecked")}</dt>
-      <dd>{people.length}</dd>
-    </div>
-    <div class="stat-tile">
-      <dt>{t("quality.groups")}</dt>
-      <dd>{groups.length}</dd>
-    </div>
-  </div>
+  <dl class="mt-6 grid gap-3 sm:grid-cols-3">
+    <StatTile label={t("quality.totalIssues")} value={totalIssues} />
+    <StatTile label={t("quality.peopleChecked")} value={people.length} />
+    <StatTile label={t("quality.groups")} value={groups.length} />
+  </dl>
 
-  <div class="quality-grid mt-8">
+  <nav class="quality-filter-nav" aria-label={t("quality.title")}>
     {
-      groups.map((group) => (
-        <section class="quality-panel">
-          <header>
-            <h2>{labels[group.kind]}</h2>
-            <span>{group.issues.length}</span>
-          </header>
-          <ul>
-            {group.issues.slice(0, 24).map((issue) => (
-              <li>
-                <a href={`${peoplePath}/${issue.personId}`}>
-                  {issue.personName}
-                </a>
-                {issue.detail && <small>{issue.detail}</small>}
-              </li>
+      qualityCategories.map((category) => (
+        <a href={`#quality-${category.id}`}>
+          {category.label}
+          <span>{category.count}</span>
+        </a>
+      ))
+    }
+  </nav>
+
+  <div class="mt-8 grid gap-8">
+    {
+      qualityCategories.map((category) => (
+        <section class="quality-category" id={`quality-${category.id}`}>
+          <div class="quality-category-head">
+            <h2>{category.label}</h2>
+            <p>{category.count} {t("quality.totalIssues").toLocaleLowerCase()}</p>
+          </div>
+          <div class="quality-grid">
+            {category.groups.map((group) => (
+              <Panel class="quality-panel">
+                <header>
+                  <h3>{labels[group.kind]}</h3>
+                  <span>{group.issues.length}</span>
+                </header>
+                <ul>
+                  {group.issues.slice(0, 24).map((issue) => (
+                    <li>
+                      <a href={`${peoplePath}/${issue.personId}`}>
+                        {issue.personName}
+                      </a>
+                      {issue.detail && <small>{issue.detail}</small>}
+                      <div class="quality-issue-actions">
+                        <a
+                          href={githubEditUrl(issue.personId)}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {t("quality.openFile")}
+                        </a>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                {group.issues.length > 24 && (
+                  <p class="quality-more">
+                    {t("quality.more", { n: group.issues.length - 24 })}
+                  </p>
+                )}
+              </Panel>
             ))}
-          </ul>
-          {group.issues.length > 24 && (
-            <p class="quality-more">
-              {t("quality.more", { n: group.issues.length - 24 })}
-            </p>
-          )}
+          </div>
         </section>
       ))
     }
