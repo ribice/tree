@@ -48,9 +48,8 @@
 }
 
 .profile-avatar {
-  /* Let the circular photo spill past the card's top-left edge. */
-  align-self: flex-start;
-  margin-top: -1.75rem;
+  /* Stay vertically centered with the text; spill out past the left edge. */
+  align-self: center;
   margin-left: -1.75rem;
   box-shadow:
     0 0 0 0.4rem var(--color-surface),
