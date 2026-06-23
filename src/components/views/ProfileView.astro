@@ -1,6 +1,7 @@
 ---
 import { render } from "astro:content";
 import Avatar from "../Avatar.astro";
+import Lightbox from "../Lightbox.astro";
 import {
   getPeople,
   getAllPeople,
@@ -88,6 +89,7 @@ const miniMapGroups = [
         initials={initials(data.name)}
         sex={data.sex}
         size="lg"
+        lightbox
         class="profile-avatar"
       />
       <div class="min-w-0">
@@ -136,6 +138,8 @@ const miniMapGroups = [
       </div>
     </div>
   </header>
+
+  {data.photo && <Lightbox />}
 
   <section class="profile-bio-section mt-8">
     <h2 class="text-sm font-semibold tracking-wide text-muted uppercase">
