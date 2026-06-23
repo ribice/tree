@@ -12,20 +12,22 @@ const { name, photo, initials, sex, size = "sm", class: klass = "" } = Astro.pro
 const sizes = {
   xs: "h-7 w-7 text-xs",
   sm: "h-12 w-12 text-base",
-  lg: "h-40 w-40 text-3xl",
+  lg: "h-24 w-24 text-2xl",
 };
 const pixels = {
   xs: 28,
   sm: 48,
-  lg: 160,
+  lg: 96,
 };
 const dims = sizes[size];
 const px = pixels[size];
+// On the profile (lg) avatar, let the photo spill slightly past its box.
+const bleed = size === "lg" && Boolean(photo);
 ---
 
 <span
   data-sex={sex}
-  class={`avatar flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent-soft font-semibold text-accent ring-1 ring-accent/15 ${dims} ${klass}`}
+  class={`avatar ${bleed ? "relative overflow-visible" : "overflow-hidden"} flex shrink-0 items-center justify-center rounded-full bg-accent-soft font-semibold text-accent ring-1 ring-accent/15 ${dims} ${klass}`}
 >
   {
     photo ? (
@@ -36,7 +38,11 @@ const px = pixels[size];
         height={px}
         loading={size === "lg" ? "eager" : "lazy"}
         decoding="async"
-        class="h-full w-full object-cover"
+        class={
+          bleed
+            ? "absolute left-1/2 top-1/2 h-[128%] w-[128%] -translate-x-1/2 -translate-y-1/2 rounded-full object-cover ring-1 ring-accent/15"
+            : "h-full w-full object-cover"
+        }
       />
     ) : (
       initials
