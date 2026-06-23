@@ -21,6 +21,62 @@
   opacity: 0.34;
 }
 
+.home-hero-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.home-hero-main {
+  display: grid;
+  align-content: start;
+}
+
+.home-hero-main h1 {
+  letter-spacing: 0;
+}
+
+.home-stat-strip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 2.35rem;
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 12%);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(90deg, color-mix(in oklch, var(--color-surface), transparent 6%), transparent),
+    color-mix(in oklch, var(--color-paper) 76%, var(--color-surface));
+  padding: 0.65rem;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 12%) inset,
+    0 18px 36px color-mix(in oklch, var(--color-ink), transparent 93%);
+}
+
+.home-stat-card {
+  min-width: 0;
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 18%);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(180deg, color-mix(in oklch, var(--color-surface), transparent 4%), color-mix(in oklch, var(--color-surface), var(--color-paper) 14%));
+  padding: 0.8rem;
+}
+
+.home-stat-card dt {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--color-muted);
+  font-size: 0.76rem;
+  font-weight: 680;
+  line-height: 1.25;
+}
+
+.home-stat-card dd {
+  margin-top: 0.22rem;
+  color: var(--color-ink);
+  font-size: clamp(1.55rem, 6vw, 2.18rem);
+  font-weight: 820;
+  line-height: 0.95;
+}
+
 .family-ledger {
   position: relative;
   min-width: 0;
@@ -378,6 +434,111 @@
   font-size: 1.08rem;
 }
 
+.home-featured-people {
+  align-items: stretch;
+}
+
+.home-person-section {
+  display: grid;
+  align-content: start;
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 10%);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(135deg, color-mix(in oklch, var(--color-accent-soft), transparent 26%), transparent 46%),
+    color-mix(in oklch, var(--color-surface) 92%, var(--color-paper));
+  padding: 1rem;
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-surface), transparent 16%) inset,
+    0 16px 34px color-mix(in oklch, var(--color-ink), transparent 93%);
+}
+
+.home-person-section-head {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.home-person-section-head h2 {
+  min-width: 0;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+  font-weight: 820;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.home-person-section-head span {
+  height: 1px;
+  min-width: 2rem;
+  flex: 1 1 auto;
+  background: linear-gradient(90deg, var(--color-line), transparent);
+}
+
+.home-person-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.home-person-card {
+  display: flex;
+  min-width: 0;
+  width: 100%;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid color-mix(in oklch, var(--color-line), transparent 14%);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--color-surface) 90%, transparent);
+  padding: 0.68rem;
+  box-shadow: 0 10px 22px color-mix(in oklch, var(--color-ink), transparent 94%);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.home-person-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 14px 28px color-mix(in oklch, var(--color-ink), transparent 91%);
+  transform: translateY(-1px);
+}
+
+.home-person-card[data-sex="f"] {
+  border-color: color-mix(in oklch, var(--color-female), var(--color-line) 74%);
+}
+
+.home-person-card[data-sex="m"] {
+  border-color: color-mix(in oklch, var(--color-male), var(--color-line) 74%);
+}
+
+.home-person-card > span {
+  display: grid;
+  min-width: 0;
+  gap: 0.15rem;
+  flex: 1 1 auto;
+}
+
+.home-person-card > span > span,
+.home-person-card small {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-person-card > span > span {
+  color: var(--color-ink);
+  font-weight: 720;
+}
+
+.home-person-card small {
+  color: var(--color-muted);
+  font-size: 0.84rem;
+}
+
 
 @media (min-width: 640px) {
   .home-actions {
@@ -392,6 +553,10 @@
 
   .lineage-intro {
     grid-template-columns: minmax(0, 0.72fr) minmax(0, 1fr);
+  }
+
+  .home-stat-strip {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 

@@ -85,8 +85,8 @@ const stats = [
 ---
 
 <section class="heritage-band">
-  <div class="relative mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)] gap-10 px-5 pt-16 pb-12 sm:pt-20 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-start">
-    <div class="min-w-0">
+  <div class="home-hero-grid relative mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)] gap-10 px-5 pt-16 pb-12 sm:pt-20 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-start">
+    <div class="home-hero-main min-w-0">
       <p class="eyebrow">{t("home.kicker")}</p>
       <h1
         class="mt-4 max-w-4xl text-4xl font-semibold text-balance text-ink sm:text-6xl"
@@ -105,10 +105,10 @@ const stats = [
         </a>
       </div>
 
-      <dl class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <dl class="home-stat-strip">
         {
           stats.map((s) => (
-            <div class="stat-tile">
+            <div class="home-stat-card">
               <dt>{s.label}</dt>
               <dd>{s.value}</dd>
             </div>
@@ -213,23 +213,23 @@ const stats = [
 </section>
 
 <section
-  class="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)] gap-6 px-5 pb-12 sm:grid-cols-2"
+  class="home-featured-people mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)] gap-6 px-5 pb-12 sm:grid-cols-2"
 >
   {
     rows.map((row) => (
-      <section class="surface-panel min-w-0 p-4 sm:p-5">
-        <div class="flex min-w-0 items-center justify-between gap-3">
-          <h2 class="min-w-0 text-sm font-semibold tracking-wide text-muted uppercase">
+      <section class="home-person-section min-w-0">
+        <div class="home-person-section-head">
+          <h2>
             {row.title}
           </h2>
-          <span class="h-px min-w-8 flex-1 bg-line" />
+          <span aria-hidden="true" />
         </div>
-        <ul class="mt-4 grid grid-cols-[minmax(0,1fr)] gap-2">
+        <ul class="home-person-list">
           {row.people.map((p) => (
             <li class="min-w-0">
               <a
                 href={`${peoplePath}/${p.id}`}
-                class="person-card person-card-quiet flex w-full min-w-0 items-center gap-3 p-2.5"
+                class="home-person-card"
                 data-sex={p.data.sex}
               >
                 <Avatar
@@ -238,15 +238,15 @@ const stats = [
                   initials={initials(p.data.name)}
                   sex={p.data.sex}
                 />
-                <span class="min-w-0 flex-1">
-                  <span class="block truncate font-medium text-ink">
+                <span>
+                  <span>
                     {p.data.name}
                   </span>
-                  <span class="block truncate text-sm text-muted">
+                  <small>
                       {[lifespan(p, lang), displayTaglineFor(p, people, translations, lang)]
                         .filter(Boolean)
                         .join(" · ")}
-                  </span>
+                  </small>
                 </span>
               </a>
             </li>
