@@ -83,13 +83,15 @@
 
 .profile-avatar[data-sex="m"] {
   box-shadow:
-    0 0 0 0.4rem color-mix(in oklch, var(--color-male), var(--color-surface) 78%),
+    0 0 0 0.28rem var(--color-surface),
+    0 0 0 0.55rem color-mix(in oklch, var(--color-male), var(--color-surface) 35%),
     0 16px 30px color-mix(in oklch, var(--color-ink), transparent 86%);
 }
 
 .profile-avatar[data-sex="f"] {
   box-shadow:
-    0 0 0 0.4rem color-mix(in oklch, var(--color-female), var(--color-surface) 78%),
+    0 0 0 0.28rem var(--color-surface),
+    0 0 0 0.55rem color-mix(in oklch, var(--color-female), var(--color-surface) 35%),
     0 16px 30px color-mix(in oklch, var(--color-ink), transparent 86%);
 }
 
