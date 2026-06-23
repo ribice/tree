@@ -8,7 +8,9 @@ import {
 } from "./people-visibility";
 import { isLikelyLivingDateSpan, publicDate, publicLifespan } from "./privacy";
 import { treeDisplayName } from "../components/tree/tree-person-details";
-import { isRibicFamilyMember } from "./family-membership";
+import { isRibicFamilyMember, bloodlineIds } from "./family-membership";
+
+export { bloodlineIds };
 
 export type Person = CollectionEntry<"people">;
 export type Translation = CollectionEntry<"translations">;

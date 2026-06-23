@@ -1,6 +1,14 @@
 ---
 import ViewModeToggle from "../ViewModeToggle.astro";
-import { getPeople, birthYear, generation, isLiving, type PeopleView } from "../../lib/people";
+import {
+  getPeople,
+  getAllPeople,
+  bloodlineIds,
+  birthYear,
+  generation,
+  isLiving,
+  type PeopleView,
+} from "../../lib/people";
 import { useTranslations, type Locale } from "../../i18n/ui";
 import { collectDataQuality } from "../../lib/data-quality";
 import StatTile from "../ui/StatTile.astro";
@@ -29,6 +37,9 @@ const maxYear = years.length ? Math.max(...years) : null;
 const generations = Math.max(...people.map((p) => generation(p, people)));
 const livingCount = people.filter((p) => isLiving(p)).length;
 
+// Blood Ribić/Kifić count — whole family, independent of the active view.
+const bloodlineCount = bloodlineIds(await getAllPeople()).size;
+
 const surname = (name: string) =>
   name.split("—")[0].trim().split(/\s+/).pop() ?? "";
 const tally = (vals: (string | undefined)[]) => {
@@ -42,6 +53,7 @@ const places = tally(people.map((p) => p.data.birthplace));
 
 const cards = [
   { label: t("stats.people"), value: String(people.length) },
+  { label: t("stats.bloodline"), value: String(bloodlineCount) },
   { label: t("stats.generations"), value: String(generations) },
   { label: t("stats.living"), value: String(livingCount) },
   { label: t("stats.dataIssues"), value: String(dataIssueCount) },
@@ -147,7 +159,7 @@ const projectedPoints = mapPoints.map((point) => ({
     <ViewModeToggle lang={lang} current={view} section="stats" />
   </div>
 
-  <dl class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
+  <dl class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
     {
       cards.map((c) => (
         <StatTile label={c.label} value={c.value} />
