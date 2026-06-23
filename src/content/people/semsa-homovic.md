@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Žena Smaila"
 ---
 
-Suprug: Smail Paldum.
+Suprug: [Smail](/people/smail-paldum) Paldum.

@@ -8,4 +8,4 @@ visibility: "extended"
 tagline: "Sin Avdijaa i Mejre"
 ---
 
-Roditelji su Avdija Pekmez i Mejra Alatovic. Supruga: Lala.
+Roditelji su [Avdija](/people/avdija-pekmez) Pekmez i [Mejra](/people/mejra-alatovic) Alatovic. Supruga: [Lala](/people/lala).

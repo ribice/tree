@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Sajda"
 ---
 
-Sin je Sajda.
+Sin je [Sajda](/people/sajd-hasic).

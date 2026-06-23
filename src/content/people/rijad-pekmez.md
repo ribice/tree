@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Sin Eldina i Sane"
 ---
 
-Rijad je rođen 12.02.1996. Roditelji su Eldin Pekmez i Sana.
+Rijad je rođen 12.02.1996. Roditelji su [Eldin](/people/eldin-pekmez) Pekmez i [Sana](/people/sana).

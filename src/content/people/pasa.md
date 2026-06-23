@@ -10,4 +10,4 @@ spouses:
 tagline: "Kćerka Akifa i Hanumice"
 ---
 
-Paša, kćerka Akifova, udala se u Jezeru za Mehagu Hasića. Rodila je troje djece: Muju, Mehmeda i Sajda. Po njoj smo u srodstvu s jezerskom porodicom Hasić.
+Paša, kćerka [Akifova](/people/akif), udala se u Jezeru za Mehagu Hasića. Rodila je troje djece: [Muju](/people/mujo-hasic), Mehmeda i [Sajda](/people/sajd-hasic). Po njoj smo u srodstvu s jezerskom porodicom Hasić.

@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Aiše"
 ---
 
-Sin je Aiše.
+Sin je [Aiše](/people/aisa-hasic).

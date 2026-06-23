@@ -5,4 +5,4 @@ parents: [resid-malicev]
 tagline: Sin Rešidov
 ---
 
-Sin Rešidov.
+Sin [Rešidov](/people/resid-malicev).

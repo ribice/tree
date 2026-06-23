@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Kćerka Sajda"
 ---
 
-Kćerka je Sajda.
+Kćerka je [Sajda](/people/sajd-hasic).

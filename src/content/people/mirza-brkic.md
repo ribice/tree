@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Muradifa i Hanku"
 ---
 
-Roditelji su Muradif Brkić i Hanku Paldum.
+Roditelji su [Muradif](/people/muradif-brkic) Brkić i [Hanku](/people/hanku-paldum) Paldum.

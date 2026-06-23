@@ -9,4 +9,4 @@ spouses:
 tagline: "Sin Ilijaza i Mirze"
 ---
 
-Nermin je rođen 1950. Roditelji su Ilijaz Ribić i Mirza Ribić. Supruga: Azemina Seferović.
+Nermin je rođen 1950. Roditelji su [Ilijaz](/people/ilijaz-ribic) Ribić i [Mirza](/people/mirza) Ribić. Supruga: [Azemina](/people/azemina-seferovic) Seferović.

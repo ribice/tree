@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Žena Adisa"
 ---
 
-Suprug: Adis Gradečak.
+Suprug: [Adis](/people/adis) Gradečak.

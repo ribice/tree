@@ -7,4 +7,4 @@ parents: [emir, nejra-cerenic]
 tagline: "Kćerka Emira i Nejre"
 ---
 
-Sumejja, kćerka Emira i Nejre, rođena je 05.10.2015. godine.
+Sumejja, kćerka [Emira](/people/emir) i [Nejre](/people/nejra-cerenic), rođena je 05.10.2015. godine.

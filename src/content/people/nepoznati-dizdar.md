@@ -6,4 +6,4 @@ spouses:
 tagline: "Muž Bisere"
 ---
 
-Supruga: Bisera Dizdar.
+Supruga: [Bisera](/people/bisera) Dizdar.

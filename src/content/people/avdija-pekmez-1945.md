@@ -10,4 +10,4 @@ visibility: "extended"
 tagline: "Sin Edhema i Vezire"
 ---
 
-Avdija je rođen 1945. Preminuo je 02.05.2012. Roditelji su Edhem Pekmez i Vezira Jesenkovic. Supruga: Mevlida Durakovic.
+Avdija je rođen 1945. Preminuo je 02.05.2012. Roditelji su [Edhem](/people/edhem-pekmez) Pekmez i [Vezira](/people/vezira-jesenkovic) Jesenkovic. Supruga: [Mevlida](/people/mevlida-durakovic) Durakovic.

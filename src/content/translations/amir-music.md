@@ -2,5 +2,5 @@
 tagline: Emina's husband
 ---
 
-Amir Musić, Emina's husband and father of Esma and Emin.
+Amir Musić, [Emina's](/en/people/emina) husband and father of [Esma](/en/people/esma) and [Emin](/en/people/emin).
 

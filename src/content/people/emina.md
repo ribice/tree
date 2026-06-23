@@ -10,4 +10,4 @@ spouses:
 tagline: "Kćerka Esada i Dženane"
 ---
 
-Emina je rođena 25.09.1988. Roditelji su Esad Ribić i Dženana Ribić. Suprug: Amir Musić.
+Emina je rođena 25.09.1988. Roditelji su [Esad](/people/esad) Ribić i [Dženana](/people/dzenana) Ribić. Suprug: [Amir](/people/amir-music) Musić.

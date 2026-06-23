@@ -6,4 +6,4 @@ spouses:
 tagline: "Muž Cerime"
 ---
 
-Supruga: Cerima Custovic.
+Supruga: [Cerima](/people/cerima-custovic) Custovic.

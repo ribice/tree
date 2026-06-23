@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Žena Nedima"
 ---
 
-Suprug: Nedim Alić.
+Suprug: [Nedim](/people/nedim) Alić.

@@ -8,4 +8,4 @@ spouses:
 tagline: "Sin Senada i Sajme"
 ---
 
-Nedim je rođen 1996. Roditelji su Senad Alić i Sajma Alić.
+Nedim je rođen 1996. Roditelji su [Senad](/people/senad-alic) Alić i [Sajma](/people/sajma) Alić.

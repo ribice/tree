@@ -5,4 +5,4 @@ parents: [nazifa]
 tagline: Sin Nazifin
 ---
 
-Sin Nazifin.
+Sin [Nazifin](/people/nazifa).

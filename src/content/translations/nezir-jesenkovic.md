@@ -2,4 +2,4 @@
 tagline: "Husband of Hafa"
 ---
 
-Wife: Hafa.
+Wife: [Hafa](/en/people/hafa).

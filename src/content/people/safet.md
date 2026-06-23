@@ -5,4 +5,4 @@ parents: [omer-himzin]
 tagline: Sin Omerov
 ---
 
-Sin Omerov.
+Sin [Omerov](/people/omer-himzin).

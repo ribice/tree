@@ -10,4 +10,4 @@ spouses:
 tagline: "Kćerka Derviša i Čibe"
 ---
 
-Hafa je rođena 1936. u Glamoču. Roditelji su Derviš Dizdar i Čiba Čirić. Suprug: Halim Ribić.
+Hafa je rođena 1936. u Glamoču. Roditelji su [Derviš](/people/dervis-dizdar) Dizdar i [Čiba](/people/ciba-ciric) Čirić. Suprug: [Halim](/people/halim) Ribić.

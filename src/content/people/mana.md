@@ -9,4 +9,4 @@ spouses:
 tagline: "Kćerka Ilijaza i Mirze"
 ---
 
-Nermina je rođena 10.11.1952. Roditelji su Ilijaz Ribić i Mirza Ribić. Suprug: Mumin Keljalić.
+Nermina je rođena 10.11.1952. Roditelji su [Ilijaz](/people/ilijaz-ribic) Ribić i [Mirza](/people/mirza) Ribić. Suprug: [Mumin](/people/mumin-keljalic) Keljalić.

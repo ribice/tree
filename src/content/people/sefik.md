@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Smaje"
 ---
 
-Sin je Smaje.
+Sin je [Smaje](/people/smajo-hasic).

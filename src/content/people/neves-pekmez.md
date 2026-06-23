@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Kćerka Zijada i Sonje"
 ---
 
-Roditelji su Zijad Pekmez i Sonja.
+Roditelji su [Zijad](/people/zijad-pekmez) Pekmez i [Sonja](/people/sonja).

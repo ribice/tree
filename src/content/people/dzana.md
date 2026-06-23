@@ -9,4 +9,4 @@ spouses:
 tagline: "Kćerka Nihada i Nadire"
 ---
 
-Džana, kćerka Nihada i Nadire, rođena je 27. augusta 1992. Prva je unuka Enesova.
+Džana, kćerka [Nihada](/people/nihad) i [Nadire](/people/nadira), rođena je 27. augusta 1992. Prva je unuka Enesova.

@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Mehmeda"
 ---
 
-Sin je Mehmeda.
+Sin je [Mehmeda](/people/mehmed-hasic).

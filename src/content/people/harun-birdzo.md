@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Sakiba i Mirele"
 ---
 
-Roditelji su Sakib Birdžo i Mirela Birdžo.
+Roditelji su [Sakib](/people/sakib-birdzo) Birdžo i [Mirela](/people/mirela-birdzo) Birdžo.

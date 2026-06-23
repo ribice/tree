@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Muž Eldine"
 ---
 
-Supruga: Eldina Laletovic.
+Supruga: [Eldina](/people/eldina-laletovic) Laletovic.

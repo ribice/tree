@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Žena Muje"
 ---
 
-Suprug: Mujo Paldum.
+Suprug: [Mujo](/people/mujo-paldum) Paldum.

@@ -9,4 +9,4 @@ spouses:
 tagline: "Kćerka Rasima i Fahre"
 ---
 
-Mirza je rođena 1928. Preminula je 1983. Roditelji su Rasim Ribić — Kifić i Fahra Ribić. Suprug: Ilijaz Ribić.
+Mirza je rođena 1928. Preminula je 1983. Roditelji su [Rasim](/people/rasim) Ribić — Kifić i [Fahra](/people/fahra) Ribić. Suprug: [Ilijaz](/people/ilijaz-ribic) Ribić.

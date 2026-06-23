@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Muž Hamme"
 ---
 
-Supruga: Hamma Dizdar.
+Supruga: [Hamma](/people/hamma-dizdar) Dizdar.

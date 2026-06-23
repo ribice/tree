@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Žena Kasima"
 ---
 
-Suprug: Kasim Pekmez.
+Suprug: [Kasim](/people/kasim-pekmez) Pekmez.

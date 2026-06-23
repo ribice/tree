@@ -6,4 +6,4 @@ parents: [adnan-lunja, adisa]
 tagline: "Sin Adnana i Adise"
 ---
 
-Denin je rođen 09.06.2002. Roditelji su Adnan Lunja i Adisa Ribić.
+Denin je rođen 09.06.2002. Roditelji su [Adnan](/people/adnan-lunja) Lunja i [Adisa](/people/adisa) Ribić.

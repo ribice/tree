@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Muž Pembu"
 ---
 
-Supruga: Pembu Džihanić.
+Supruga: [Pembu](/people/pembu-dzihanic) Džihanić.

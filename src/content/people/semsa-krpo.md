@@ -8,4 +8,4 @@ visibility: "extended"
 tagline: "Kćerka Izeta"
 ---
 
-Kćerka je Izeta. Suprug: Enes Hasić.
+Kćerka je [Izeta](/people/izet-krpo). Suprug: [Enes](/people/enes-hasic) Hasić.

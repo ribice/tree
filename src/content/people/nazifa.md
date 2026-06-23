@@ -8,4 +8,4 @@ spouses:
 tagline: "Kćerka Himze i Nize"
 ---
 
-Nazifa, kćerka Himze i Nize, udala se za Ahmeda Šehića u Riku, u Mrkonjić Gradu.
+Nazifa, kćerka [Himze](/people/himzo) i [Nize](/people/niza), udala se za [Ahmeda](/people/ahmed-sehic) Šehića u Riku, u Mrkonjić Gradu.

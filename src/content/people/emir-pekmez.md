@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Avdijaa i Mevlide"
 ---
 
-Roditelji su Avdija Pekmez i Mevlida Durakovic.
+Roditelji su [Avdija](/people/avdija-pekmez-1945) Pekmez i [Mevlida](/people/mevlida-durakovic) Durakovic.

@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Žena Muje"
 ---
 
-Suprug: Mujo Hasić.
+Suprug: [Mujo](/people/mujo-hasic) Hasić.

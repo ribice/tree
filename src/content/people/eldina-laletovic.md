@@ -9,4 +9,4 @@ visibility: "extended"
 tagline: "Kćerka Mustafaa i Izete"
 ---
 
-Eldina je rođena 06.04.1966. Roditelji su Mustafa Laletovic i Izeta Pekmez. Suprug: Miroslav Paljevic.
+Eldina je rođena 06.04.1966. Roditelji su [Mustafa](/people/mustafa-laletovic) Laletovic i [Izeta](/people/izeta-pekmez) Pekmez. Suprug: [Miroslav](/people/miroslav-paljevic) Paljevic.

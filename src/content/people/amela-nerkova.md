@@ -8,4 +8,4 @@ spouses:
 tagline: "Kćerka Nermina i Azemine"
 ---
 
-Amela je rođena 04.02.1982. Roditelji su Nermin Ribić i Azemina Seferović. Suprug: Salko Glamoćić.
+Amela je rođena 04.02.1982. Roditelji su [Nermin](/people/nerko) Ribić i [Azemina](/people/azemina-seferovic) Seferović. Suprug: [Salko](/people/salko-glamocic) Glamoćić.

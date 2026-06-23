@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Paše"
 ---
 
-Sin je Paše.
+Sin je [Paše](/people/pasa-hasic).

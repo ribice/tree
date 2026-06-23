@@ -9,4 +9,4 @@ spouses:
 tagline: "Kćerka Nihada i Nadire"
 ---
 
-Zerina, kćerka Nihada i Nadire, rođena je 1995. godine.
+Zerina, kćerka [Nihada](/people/nihad) i [Nadire](/people/nadira), rođena je 1995. godine.

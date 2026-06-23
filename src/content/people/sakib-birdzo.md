@@ -8,4 +8,4 @@ visibility: "extended"
 tagline: "Sin Bakira i Raze"
 ---
 
-Roditelji su Bakir Birdžo i Raza Paldum. Supruga: Mirela Birdžo.
+Roditelji su [Bakir](/people/bakir-birdzo) Birdžo i [Raza](/people/raza-paldum) Paldum. Supruga: [Mirela](/people/mirela-birdzo) Birdžo.

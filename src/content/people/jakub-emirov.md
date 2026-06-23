@@ -7,4 +7,4 @@ parents: [emir, nejra-cerenic]
 tagline: "Sin Emira i Nejre"
 ---
 
-Jakub, sin Emira i Nejre, rođen je 10.12.2018. godine.
+Jakub, sin [Emira](/people/emir) i [Nejre](/people/nejra-cerenic), rođen je 10.12.2018. godine.

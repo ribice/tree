@@ -6,4 +6,4 @@ spouses:
 tagline: "Muž Nazife"
 ---
 
-Supruga: Nazifa Šehić.
+Supruga: [Nazifa](/people/nazifa) Šehić.

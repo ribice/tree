@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Izeta"
 ---
 
-Sin je Izeta.
+Sin je [Izeta](/people/izet-krpo).

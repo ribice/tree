@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: Sin Adnanov
 ---
 
-Sin Adnanov.
+Sin [Adnanov](/people/adnan).

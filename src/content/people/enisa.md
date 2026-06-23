@@ -5,4 +5,4 @@ parents: [nazifa]
 tagline: Kćerka Nazifina
 ---
 
-Kćerka Nazifina.
+Kćerka [Nazifina](/people/nazifa).

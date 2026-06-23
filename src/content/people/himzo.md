@@ -8,7 +8,7 @@ spouses:
 tagline: "Terzija — krojač starobosanske nošnje"
 ---
 
-Himzo, mlađi sin Akifov, bio je terzija — krojač starinskih nošnji. Imao je ženu Nizu i troje djece: Omera, Jakuba i Nazifu. Nazifa se udala za Ahmeda Šehića u Mrkonjić Grad.
+Himzo, mlađi sin [Akifov](/people/akif), bio je terzija — krojač starinskih nošnji. Imao je ženu [Nizu](/people/niza) i troje djece: [Omera](/people/omer-himzin), [Jakuba](/people/jakub) i [Nazifu](/people/nazifa). Nazifa se udala za Ahmeda Šehića u Mrkonjić Grad.
 
 Pamti se kao starina koji je, iako preko devedeset godina, išao uspravno uz štap, s bradom i u staroj bosanskoj odori. Bio je izbjeglica (muhadžir) u Jajcu za vrijeme rata, kod sina Jakuba i nevjeste Šefke.
 

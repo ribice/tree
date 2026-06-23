@@ -5,4 +5,4 @@ parents: [safet]
 tagline: Sin Safetov
 ---
 
-Sin Safetov.
+Sin [Safetov](/people/safet).

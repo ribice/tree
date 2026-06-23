@@ -7,4 +7,4 @@ parents: [nihad, nadira]
 tagline: "Kćerka Nihada i Nadire"
 ---
 
-Enida, kćerka Nihada i Nadire, rođena je 6. oktobra 2001.
+Enida, kćerka [Nihada](/people/nihad) i [Nadire](/people/nadira), rođena je 6. oktobra 2001.

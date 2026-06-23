@@ -5,4 +5,4 @@ parents: [omer-himzin]
 tagline: Kćerka Omerova
 ---
 
-Kćerka Omerova.
+Kćerka [Omerova](/people/omer-himzin).

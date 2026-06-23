@@ -8,4 +8,4 @@ visibility: "extended"
 tagline: "Sin Age"
 ---
 
-Sin je Age. Supruga: Ćelfa Ganibegović.
+Sin je [Age](/people/ago-suskic). Supruga: [Ćelfa](/people/celfa-ganibegovic) Ganibegović.

@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Muž Hafe"
 ---
 
-Supruga: Hafa.
+Supruga: [Hafa](/people/hafa).

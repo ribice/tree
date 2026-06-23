@@ -8,4 +8,4 @@ spouses:
 tagline: "Kćerka Nermina i Azemine"
 ---
 
-Adisa je rođena 30.11.1975. Roditelji su Nermin Ribić i Azemina Seferović. Suprug: Adnan Lunja.
+Adisa je rođena 30.11.1975. Roditelji su [Nermin](/people/nerko) Ribić i [Azemina](/people/azemina-seferovic) Seferović. Suprug: [Adnan](/people/adnan-lunja) Lunja.

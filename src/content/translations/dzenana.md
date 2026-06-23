@@ -2,4 +2,4 @@
 tagline: "Esad's wife"
 ---
 
-Dženana, Esad's wife and mother of Emir and Emina.
+Dženana, [Esad's](/en/people/esad) wife and mother of [Emir](/en/people/emir) and [Emina](/en/people/emina).

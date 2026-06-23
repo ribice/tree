@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Žena Avdijaa"
 ---
 
-Suprug: Avdija Pekmez.
+Suprug: [Avdija](/people/avdija-pekmez) Pekmez.

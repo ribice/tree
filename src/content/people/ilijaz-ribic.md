@@ -9,4 +9,4 @@ spouses:
 tagline: "Sin Šerifa i Džihe"
 ---
 
-Ilijaz je rođen 1928. Preminuo je 2014. Roditelji su Šerif Ribić i Džiha Škopo. Supruga: Mirza Ribić.
+Ilijaz je rođen 1928. Preminuo je 2014. Roditelji su [Šerif](/people/serif-ribic) Ribić i [Džiha](/people/dziha-skopo) Škopo. Supruga: [Mirza](/people/mirza) Ribić.

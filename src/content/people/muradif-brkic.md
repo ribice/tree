@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Muž Hanku"
 ---
 
-Supruga: Hanku Paldum.
+Supruga: [Hanku](/people/hanku-paldum) Paldum.

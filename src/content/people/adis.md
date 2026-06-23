@@ -9,4 +9,4 @@ spouses:
 tagline: "Sin Damira i Naide"
 ---
 
-Adis je rođen 17.12.1995. u Rotterdamu. Roditelji su Damir Gradečak i Naida Gradečak.
+Adis je rođen 17.12.1995. u Rotterdamu. Roditelji su [Damir](/people/damir-gradecak) Gradečak i [Naida](/people/naida) Gradečak.

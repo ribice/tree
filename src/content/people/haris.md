@@ -6,4 +6,4 @@ parents: [damir-gradecak, naida]
 tagline: "Sin Damira i Naide"
 ---
 
-Haris je rođen 26.09.1998. Roditelji su Damir Gradečak i Naida Gradečak.
+Haris je rođen 26.09.1998. Roditelji su [Damir](/people/damir-gradecak) Gradečak i [Naida](/people/naida) Gradečak.

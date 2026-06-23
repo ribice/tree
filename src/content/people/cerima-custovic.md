@@ -6,4 +6,4 @@ spouses:
 tagline: "Žena Safeta"
 ---
 
-Suprug: Safet Basic.
+Suprug: [Safet](/people/safet-basic) Basic.

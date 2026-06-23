@@ -8,4 +8,4 @@ visibility: "extended"
 tagline: "Sin Avdijaa i Mevlide"
 ---
 
-Roditelji su Avdija Pekmez i Mevlida Durakovic. Supruga: Sonja.
+Roditelji su [Avdija](/people/avdija-pekmez-1945) Pekmez i [Mevlida](/people/mevlida-durakovic) Durakovic. Supruga: [Sonja](/people/sonja).

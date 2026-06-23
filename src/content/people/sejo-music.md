@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Muž Raseme"
 ---
 
-Supruga: Rasema Paldum.
+Supruga: [Rasema](/people/rasema-paldum) Paldum.

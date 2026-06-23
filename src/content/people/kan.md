@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Amine"
 ---
 
-Sin je Amine.
+Sin je [Amine](/people/amina-birdzo).

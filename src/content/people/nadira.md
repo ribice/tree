@@ -9,4 +9,4 @@ spouses:
 tagline: "Žena Nihada"
 ---
 
-Nadira, rođena Šaranović, žena je Nihada Ribića. Rođena je 1971. u Trepči kod Tešnja i nastavnica je bosanskog jezika. S Nihadom ima tri kćeri: Džanu, Zerinu i Enidu.
+Nadira, rođena Šaranović, žena je [Nihada](/people/nihad) Ribića. Rođena je 1971. u Trepči kod Tešnja i nastavnica je bosanskog jezika. S Nihadom ima tri kćeri: [Džanu](/people/dzana), [Zerinu](/people/zerina) i [Enidu](/people/enida).

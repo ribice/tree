@@ -9,4 +9,4 @@ spouses:
 tagline: "Muž Džihe"
 ---
 
-Šerif je rođen 1900. godine u Jezeru, Bosni i Hercegovini. Preminuo je 1949. Supruga: Džiha Škopo.
+Šerif je rođen 1900. godine u Jezeru, Bosni i Hercegovini. Preminuo je 1949. Supruga: [Džiha](/people/dziha-skopo) Škopo.

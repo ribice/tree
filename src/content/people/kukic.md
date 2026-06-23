@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Muž Alme"
 ---
 
-Supruga: Alma Šuman.
+Supruga: [Alma](/people/alma-suman) Šuman.

@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Izeta i Lale"
 ---
 
-Roditelji su Izet Pekmez i Lala.
+Roditelji su [Izet](/people/izet-pekmez) Pekmez i [Lala](/people/lala).

@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Safeta i Hafe"
 ---
 
-Roditelji su Dr. Safet Šuškić i Hafa.
+Roditelji su Dr. [Safet](/people/safet-suskic) Šuškić i [Hafa](/people/hafa-safetova).

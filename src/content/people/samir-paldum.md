@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Smaila i Šemse"
 ---
 
-Roditelji su Smail Paldum i Šemsa Homović.
+Roditelji su [Smail](/people/smail-paldum) Paldum i [Šemsa](/people/semsa-homovic) Homović.

@@ -5,4 +5,4 @@ parents: [safet]
 tagline: Kćerka Safetova
 ---
 
-Kćerka Safetova.
+Kćerka [Safetova](/people/safet).

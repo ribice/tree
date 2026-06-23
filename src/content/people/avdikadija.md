@@ -9,7 +9,7 @@ parents: [omer]
 tagline: "Jezerski kadija i pročelnik porodice"
 ---
 
-Avdo Ribić, sin Omerov a unuk Enesov, bio je kadija u jezerskom kadiluku. Popularno su ga zvali Avdikadija i pročelnik je u našem porodičnom stablu. Imao je četiri sina: Šemsu, Izu, Rešida i Akifa.
+Avdo Ribić, sin [Omerov](/people/omer) a unuk Enesov, bio je kadija u jezerskom kadiluku. Popularno su ga zvali Avdikadija i pročelnik je u našem porodičnom stablu. Imao je četiri sina: [Šemsu](/people/semso), [Izu](/people/izo-stariji), [Rešida](/people/resid) i [Akifa](/people/akif).
 
 Istorijska je ličnost jer je učestvovao u ustanku Bošnjaka protiv Turske u vrijeme sultana Abdul Medžida. Sultan je, između ostalih reformi, uveo Tanzimat — zakon o obavezi služenja vojske. Bosanci su se pokušali oduprijeti, a jačao je i pokret za autonomijom. Avdikadija se pridružio tom pokretu.
 

@@ -7,4 +7,4 @@ spouses:
 tagline: "Sin Paše i Mehage"
 ---
 
-Mujo je bio sin Paše Ribić i Mehage Hasića.
+Mujo je bio sin [Paše](/people/pasa) Ribić i Mehage Hasića.

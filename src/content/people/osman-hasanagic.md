@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Muž Kaseme"
 ---
 
-Supruga: Kasema Pekmez.
+Supruga: [Kasema](/people/kasema-pekmez-1940) Pekmez.

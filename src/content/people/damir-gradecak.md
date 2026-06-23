@@ -7,4 +7,4 @@ spouses:
 tagline: "Muž Naidin"
 ---
 
-Damir Gradečak, muž Naidin.
+Damir Gradečak, muž [Naidin](/people/naida).

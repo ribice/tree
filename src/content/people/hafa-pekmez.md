@@ -8,4 +8,4 @@ spouses:
 tagline: "Majka Selme Ribić"
 ---
 
-Hafa je rođena 16.11.1948. Suprug: Mustafa Paldum. Majka Selme Ribić.
+Hafa je rođena 16.11.1948. Suprug: [Mustafa](/people/mustafa-paldum) Paldum. Majka [Selme](/people/selma-paldum) Ribić.

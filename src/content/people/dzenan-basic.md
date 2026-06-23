@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Safeta i Cerime"
 ---
 
-Roditelji su Safet Basic i Cerima Custovic.
+Roditelji su [Safet](/people/safet-basic) Basic i [Cerima](/people/cerima-custovic) Custovic.

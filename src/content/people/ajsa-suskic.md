@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Kćerka Age"
 ---
 
-Kćerka je Age.
+Kćerka je [Age](/people/ago-suskic).

@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Kćerka Mehmeda"
 ---
 
-Kćerka je Mehmeda.
+Kćerka je [Mehmeda](/people/mehmed-hasic).

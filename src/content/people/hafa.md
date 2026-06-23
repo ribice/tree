@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Žena Nezira"
 ---
 
-Suprug: Nezir Jesenkovic.
+Suprug: [Nezir](/people/nezir-jesenkovic) Jesenkovic.

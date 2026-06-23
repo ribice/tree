@@ -9,4 +9,4 @@ spouses:
 tagline: "Bivša supruga Emirova"
 ---
 
-Nejra Čerenić, bivša supruga Emirova (brak 2014–2024). Majka Sumejje i Jakuba.
+Nejra Čerenić, bivša supruga Emirova (brak 2014–2024). Majka [Sumejje](/people/sumejja) i [Jakuba](/people/jakub-emirov).

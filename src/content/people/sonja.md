@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Žena Zijada"
 ---
 
-Suprug: Zijad Pekmez.
+Suprug: [Zijad](/people/zijad-pekmez) Pekmez.

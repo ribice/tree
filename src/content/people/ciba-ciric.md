@@ -6,4 +6,4 @@ spouses:
 tagline: "Žena Derviša"
 ---
 
-Suprug: Derviš Dizdar.
+Suprug: [Derviš](/people/dervis-dizdar) Dizdar.

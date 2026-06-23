@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Žena Sakiba"
 ---
 
-Suprug: Sakib Birdžo.
+Suprug: [Sakib](/people/sakib-birdzo) Birdžo.

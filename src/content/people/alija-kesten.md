@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Muž Hatiðe"
 ---
 
-Supruga: Hatiða Šuškić.
+Supruga: [Hatiða](/people/hatida-suskic) Šuškić.

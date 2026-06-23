@@ -5,4 +5,4 @@ parents: [malic]
 tagline: Sin Malićev
 ---
 
-Sin Malićev.
+Sin [Malićev](/people/malic).

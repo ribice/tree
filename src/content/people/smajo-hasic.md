@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Muje i Bisere"
 ---
 
-Roditelji su Mujo Hasić i Bisera.
+Roditelji su [Mujo](/people/mujo-hasic) Hasić i [Bisera](/people/bisera-mujina).

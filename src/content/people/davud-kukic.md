@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Sin Kukica i Alme"
 ---
 
-Davud je rođen 11.02.1997. Roditelji su Kukic i Alma Šuman.
+Davud je rođen 11.02.1997. Roditelji su [Kukic](/people/kukic) i [Alma](/people/alma-suman) Šuman.

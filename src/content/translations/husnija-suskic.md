@@ -2,4 +2,4 @@
 tagline: "Son of Ago Šuškić"
 ---
 
-Son of Ago Šuškić. Wife: Ćelfa Ganibegović.
+Son of [Ago](/en/people/ago-suskic) Šuškić. Wife: [Ćelfa](/en/people/celfa-ganibegovic) Ganibegović.

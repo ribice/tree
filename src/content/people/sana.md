@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Žena Eldina"
 ---
 
-Suprug: Eldin Pekmez.
+Suprug: [Eldin](/people/eldin-pekmez) Pekmez.

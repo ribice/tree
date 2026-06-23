@@ -2,7 +2,7 @@
 tagline: The kadi of Jezero and head of the family
 ---
 
-Avdo Ribić, son of Omer and grandson of Enes, was the kadi (judge) of the Jezero district. People called him Avdikadija, and he is the head of our family tree. He had four sons: Šemso, Izo, Rešid and Akif.
+Avdo Ribić, son of [Omer](/en/people/omer) and grandson of Enes, was the kadi (judge) of the Jezero district. People called him Avdikadija, and he is the head of our family tree. He had four sons: [Šemso](/en/people/semso), [Izo](/en/people/izo-stariji), [Rešid](/en/people/resid) and [Akif](/en/people/akif).
 
 He is a historical figure, having taken part in the Bosniak uprising against the Ottomans during the reign of Sultan Abdülmecid. Among other reforms, the sultan introduced the Tanzimat — a law on compulsory military service. Bosnians tried to resist it, and a movement for autonomy was growing. Avdikadija joined that movement.
 

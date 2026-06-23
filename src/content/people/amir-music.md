@@ -7,4 +7,4 @@ spouses:
 tagline: "Muž Eminin"
 ---
 
-Amir Musić, muž Eminin; otac Esme i Emina.
+Amir Musić, muž [Eminin](/people/emina); otac [Esme](/people/esma) i [Emina](/people/emin).

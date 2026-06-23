@@ -5,4 +5,4 @@ parents: [jakub]
 tagline: Sin Jakubov
 ---
 
-Sin Jakubov.
+Sin [Jakubov](/people/jakub).

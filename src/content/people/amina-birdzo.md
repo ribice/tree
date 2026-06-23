@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Kćerka Bakira i Raze"
 ---
 
-Roditelji su Bakir Birdžo i Raza Paldum.
+Roditelji su [Bakir](/people/bakir-birdzo) Birdžo i [Raza](/people/raza-paldum) Paldum.

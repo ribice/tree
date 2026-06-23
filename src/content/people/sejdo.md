@@ -5,4 +5,4 @@ parents: [asim]
 tagline: Sin Asimov
 ---
 
-Sin Asimov.
+Sin [Asimov](/people/asim).

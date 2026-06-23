@@ -9,4 +9,4 @@ spouses:
 tagline: "Domaćica; rodom iz Gostivara"
 ---
 
-Džemila, žena Enesova, rođena je 20. novembra 1944. u Gostivaru, u Makedoniji. Domaćica.
+Džemila, žena [Enesova](/people/enes), rođena je 20. novembra 1944. u Gostivaru, u Makedoniji. Domaćica.

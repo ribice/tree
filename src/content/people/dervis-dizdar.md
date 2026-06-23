@@ -6,4 +6,4 @@ spouses:
 tagline: "Muž Čibe"
 ---
 
-Supruga: Čiba Čirić.
+Supruga: [Čiba](/people/ciba-ciric) Čirić.

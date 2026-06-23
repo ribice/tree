@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Muž Hafe"
 ---
 
-Supruga: Hafa Pekmez.
+Supruga: [Hafa](/people/hafa-pekmez) Pekmez.

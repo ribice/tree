@@ -5,4 +5,4 @@ parents: [izo-mladji]
 tagline: "Sin Ize"
 ---
 
-Hakija je stariji sin Ize »svjetskog putnika«.
+Hakija je stariji sin [Ize](/people/izo-mladji) »svjetskog putnika«.

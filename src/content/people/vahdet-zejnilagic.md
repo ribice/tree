@@ -7,4 +7,4 @@ spouses:
 tagline: "Muž Nedžade"
 ---
 
-Vahdet je rođen 1954. Supruga: Nedžada Ribić.
+Vahdet je rođen 1954. Supruga: [Nedžada](/people/nadza) Ribić.

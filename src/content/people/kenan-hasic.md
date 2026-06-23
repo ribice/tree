@@ -6,4 +6,4 @@ spouses:
 tagline: "Muž Zerine"
 ---
 
-Supruga: Zerina Ribić.
+Supruga: [Zerina](/people/zerina) Ribić.

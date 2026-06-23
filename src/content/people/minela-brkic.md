@@ -8,4 +8,4 @@ visibility: "extended"
 tagline: "Kćerka Muradifa i Hanku"
 ---
 
-Roditelji su Muradif Brkić i Hanku Paldum. Suprug: Elvis Jašar.
+Roditelji su [Muradif](/people/muradif-brkic) Brkić i [Hanku](/people/hanku-paldum) Paldum. Suprug: [Elvis](/people/elvis-jasar) Jašar.

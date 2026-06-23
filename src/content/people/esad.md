@@ -9,4 +9,4 @@ spouses:
 tagline: "Sin Halima i Hafe"
 ---
 
-Esad, sin Halimov, rođen je 1958., a preminuo 9. augusta 1992. Sa ženom Dženanom imao je sina Emira i kćerku Eminu.
+Esad, sin [Halimov](/people/halim), rođen je 1958., a preminuo 9. augusta 1992. Sa ženom [Dženanom](/people/dzenana) imao je sina [Emira](/people/emir) i kćerku [Eminu](/people/emina).

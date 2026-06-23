@@ -8,4 +8,4 @@ visibility: "extended"
 tagline: "Kćerka Osmana i Kaseme"
 ---
 
-Dzenana je rođena 16.11.1964. Preminula je 17.10.2016. Roditelji su Osman Hasanagic i Kasema Pekmez.
+Dzenana je rođena 16.11.1964. Preminula je 17.10.2016. Roditelji su [Osman](/people/osman-hasanagic) Hasanagic i [Kasema](/people/kasema-pekmez-1940) Pekmez.

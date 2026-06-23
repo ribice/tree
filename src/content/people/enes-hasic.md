@@ -8,4 +8,4 @@ visibility: "extended"
 tagline: "Sin Mehmeda"
 ---
 
-Sin je Mehmeda. Supruga: Šemsa Krpo.
+Sin je [Mehmeda](/people/mehmed-hasic). Supruga: [Šemsa](/people/semsa-krpo) Krpo.

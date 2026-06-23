@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Muž Raze"
 ---
 
-Supruga: Raza Paldum.
+Supruga: [Raza](/people/raza-paldum) Paldum.

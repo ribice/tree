@@ -7,4 +7,4 @@ spouses:
 tagline: "Žena Nermina"
 ---
 
-Azemina je rođena 1957. Suprug: Nermin Ribić.
+Azemina je rođena 1957. Suprug: [Nermin](/people/nerko) Ribić.

@@ -9,4 +9,4 @@ spouses:
 tagline: "Sin Rasima i Fahre"
 ---
 
-Halim, sin Rasimov i brat Enesov, rođen je 1934. godine. Bio je električar. Njegova djeca su Esad, Naida i Mersid.
+Halim, sin [Rasimov](/people/rasim) i brat [Enesov](/people/enes), rođen je 1934. godine. Bio je električar. Njegova djeca su [Esad](/people/esad), [Naida](/people/naida) i [Mersid](/people/mersid).

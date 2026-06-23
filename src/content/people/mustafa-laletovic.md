@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Muž Izete"
 ---
 
-Supruga: Izeta Pekmez.
+Supruga: [Izeta](/people/izeta-pekmez) Pekmez.

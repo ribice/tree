@@ -9,4 +9,4 @@ visibility: "extended"
 tagline: "Kćerka Edhema i Vezire"
 ---
 
-Izeta je rođena 01.08.1942. Roditelji su Edhem Pekmez i Vezira Jesenkovic. Suprug: Mustafa Laletovic.
+Izeta je rođena 01.08.1942. Roditelji su [Edhem](/people/edhem-pekmez) Pekmez i [Vezira](/people/vezira-jesenkovic) Jesenkovic. Suprug: [Mustafa](/people/mustafa-laletovic) Laletovic.

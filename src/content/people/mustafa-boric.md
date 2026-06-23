@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Nepoznatia i Hamme"
 ---
 
-Roditelji su Nepoznati Borić i Hamma Dizdar.
+Roditelji su Nepoznati Borić i [Hamma](/people/hamma-dizdar) Dizdar.

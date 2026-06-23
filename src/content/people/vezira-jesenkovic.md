@@ -9,4 +9,4 @@ visibility: "extended"
 tagline: "Kćerka Nezira i Hafe"
 ---
 
-Preminula je 14.04.2000. Roditelji su Nezir Jesenkovic i Hafa. Suprug: Edhem Pekmez.
+Preminula je 14.04.2000. Roditelji su [Nezir](/people/nezir-jesenkovic) Jesenkovic i [Hafa](/people/hafa). Suprug: [Edhem](/people/edhem-pekmez) Pekmez.

@@ -7,4 +7,4 @@ parents: [amir-music, emina]
 tagline: "Kćerka Amira i Emine"
 ---
 
-Esma, kćerka Emine i Amira, rođena je 28.03.2018. godine.
+Esma, kćerka [Emine](/people/emina) i [Amira](/people/amir-music), rođena je 28.03.2018. godine.

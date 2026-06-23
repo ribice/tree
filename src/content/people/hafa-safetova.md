@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Žena Safeta"
 ---
 
-Suprug: Dr. Safet Šuškić.
+Suprug: Dr. [Safet](/people/safet-suskic) Šuškić.

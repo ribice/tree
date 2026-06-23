@@ -11,4 +11,4 @@ spouses:
 tagline: "Sin Esada i Dženane"
 ---
 
-Emir, sin Esada i Dženane, rođen je 15.11.1991.; ima sestru Eminu. Iz braka sa Nejrom Čerenić (2014–2024) ima kćerku Sumejju (2015) i sina Jakuba (2018). Praunuk je Rasima Ribića i postavio je ovo porodično stablo na internet kako bi ga cijela porodica zajedno čuvala i dopunjavala.
+Emir, sin [Esada](/people/esad) i [Dženane](/people/dzenana), rođen je 15.11.1991.; ima sestru [Eminu](/people/emina). Iz braka sa Nejrom Čerenić (2014–2024) ima kćerku [Sumejju](/people/sumejja) (2015) i sina [Jakuba](/people/jakub-emirov) (2018). Praunuk je Rasima Ribića i postavio je ovo porodično stablo na internet kako bi ga cijela porodica zajedno čuvala i dopunjavala.

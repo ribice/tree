@@ -9,4 +9,4 @@ spouses:
 tagline: "Kćerka Enesa i Džemile"
 ---
 
-Sajma, kćerka Enesa i Džemile i sestra Nihadova. Bila je udata za Senada Alića.
+Sajma, kćerka [Enesa](/people/enes) i [Džemile](/people/dzemila) i sestra [Nihadova](/people/nihad). Bila je udata za [Senada](/people/senad-alic) Alića.

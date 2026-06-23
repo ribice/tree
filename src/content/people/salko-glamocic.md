@@ -7,4 +7,4 @@ spouses:
 tagline: "Muž Amele"
 ---
 
-Salko je rođen 24.10.1984. Supruga: Amela Ribić.
+Salko je rođen 24.10.1984. Supruga: [Amela](/people/amela-nerkova) Ribić.

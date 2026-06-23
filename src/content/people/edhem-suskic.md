@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Husnijaa i Ćelfe"
 ---
 
-Roditelji su Husnija Šuškić i Ćelfa Ganibegović.
+Roditelji su [Husnija](/people/husnija-suskic) Šuškić i [Ćelfa](/people/celfa-ganibegovic) Ganibegović.

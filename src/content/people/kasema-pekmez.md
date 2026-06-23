@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Kćerka Avdijaa i Mejre"
 ---
 
-Roditelji su Avdija Pekmez i Mejra Alatovic.
+Roditelji su [Avdija](/people/avdija-pekmez) Pekmez i [Mejra](/people/mejra-alatovic) Alatovic.

@@ -7,4 +7,4 @@ parents: [amir-music, emina]
 tagline: "Sin Amira i Emine"
 ---
 
-Emin, sin Emine i Amira, rođen je 09.06.2021. godine.
+Emin, sin Emine i [Amira](/people/amir-music), rođen je 09.06.2021. godine.

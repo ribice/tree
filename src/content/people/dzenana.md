@@ -9,4 +9,4 @@ spouses:
 tagline: "Kćerka Safeta i Cerime"
 ---
 
-Dženana, žena Esadova; majka Emira i Emine.
+Dženana, žena [Esadova](/people/esad); majka [Emira](/people/emir) i [Emine](/people/emina).

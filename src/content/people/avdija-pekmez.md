@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Muž Mejre"
 ---
 
-Supruga: Mejra Alatovic.
+Supruga: [Mejra](/people/mejra-alatovic) Alatovic.

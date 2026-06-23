@@ -9,4 +9,4 @@ spouses:
 tagline: "Kćerka Halima i Hafe"
 ---
 
-Naida je rođena 1964. Roditelji su Halim Ribić i Hafa Dizdar. Suprug: Damir Gradečak.
+Naida je rođena 1964. Roditelji su [Halim](/people/halim) Ribić i [Hafa](/people/hafa-dizdar) Dizdar. Suprug: [Damir](/people/damir-gradecak) Gradečak.

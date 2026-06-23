@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Kćerka Aiše"
 ---
 
-Kćerka je Aiše.
+Kćerka je [Aiše](/people/aisa-hasic).

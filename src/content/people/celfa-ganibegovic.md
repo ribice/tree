@@ -8,4 +8,4 @@ visibility: "extended"
 tagline: "Kćerka Mehmed-Bega"
 ---
 
-Kćerka je Mehmed-Bega. Suprug: Husnija Šuškić.
+Kćerka je [Mehmed-Bega](/people/mehmed-beg-ganibegovic). Suprug: [Husnija](/people/husnija-suskic) Šuškić.

@@ -6,4 +6,4 @@ spouses:
 tagline: "Muž Džane"
 ---
 
-Supruga: Džana Ribić.
+Supruga: [Džana](/people/dzana) Ribić.

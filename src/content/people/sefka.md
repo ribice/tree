@@ -6,4 +6,4 @@ spouses:
 tagline: "Žena Jakuba"
 ---
 
-Šefka, žena Jakubova, brinula je o svekru Himzi u njegovim poznim godinama.
+Šefka, žena [Jakubova](/people/jakub), brinula je o svekru Himzi u njegovim poznim godinama.

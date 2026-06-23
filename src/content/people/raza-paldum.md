@@ -8,4 +8,4 @@ visibility: "extended"
 tagline: "Kćerka Muje i Pembu"
 ---
 
-Roditelji su Mujo Paldum i Pembu Džihanić. Suprug: Bakir Birdžo.
+Roditelji su [Mujo](/people/mujo-paldum) Paldum i [Pembu](/people/pembu-dzihanic) Džihanić. Suprug: [Bakir](/people/bakir-birdzo) Birdžo.

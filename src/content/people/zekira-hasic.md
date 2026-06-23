@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Kćerka Smaje"
 ---
 
-Kćerka je Smaje.
+Kćerka je [Smaje](/people/smajo-hasic).

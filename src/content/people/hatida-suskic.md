@@ -8,4 +8,4 @@ visibility: "extended"
 tagline: "Kćerka Husnijaa"
 ---
 
-Kćerka je Husnijaa. Suprug: Alija Kesten.
+Kćerka je Husnijaa. Suprug: [Alija](/people/alija-kesten) Kesten.

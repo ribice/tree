@@ -8,4 +8,4 @@ visibility: "extended"
 tagline: "Sin Muje i Pembu"
 ---
 
-Roditelji su Mujo Paldum i Pembu Džihanić. Supruga: Šemsa Homović.
+Roditelji su [Mujo](/people/mujo-paldum) Paldum i [Pembu](/people/pembu-dzihanic) Džihanić. Supruga: [Šemsa](/people/semsa-homovic) Homović.

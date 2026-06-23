@@ -7,4 +7,4 @@ visibility: "extended"
 tagline: "Muž Minele"
 ---
 
-Supruga: Minela Brkić.
+Supruga: [Minela](/people/minela-brkic) Brkić.

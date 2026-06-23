@@ -2,5 +2,5 @@
 tagline: Emir's son
 ---
 
-Jakub, son of Emir and Nejra, was born in 2018.
+Jakub, son of [Emir](/en/people/emir) and [Nejra](/en/people/nejra-cerenic), was born in 2018.
 

@@ -7,4 +7,4 @@ parents: [mersid, selma-paldum]
 tagline: "Sin Mersida i Selme"
 ---
 
-Tarik je rođen 2001. godine u Bredi, Noord-Brabant, Nizozemskoj. Roditelji su Mersid Ribić i Selma Ribić.
+Tarik je rođen 2001. godine u Bredi, Noord-Brabant, Nizozemskoj. Roditelji su [Mersid](/people/mersid) Ribić i [Selma](/people/selma-paldum) Ribić.

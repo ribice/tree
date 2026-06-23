@@ -6,4 +6,4 @@ visibility: "extended"
 tagline: "Sin Adisa i Adriane"
 ---
 
-Roditelji su Adis Gradečak i Adriana Lopez.
+Roditelji su [Adis](/people/adis) Gradečak i [Adriana](/people/adriana-lopez) Lopez.

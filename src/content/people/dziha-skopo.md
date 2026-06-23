@@ -8,4 +8,4 @@ spouses:
 tagline: "Žena Šerifa"
 ---
 
-Džiha je rođena 1892. godine u Jezeru, Bosni i Hercegovini. Suprug: Šerif Ribić.
+Džiha je rođena 1892. godine u Jezeru, Bosni i Hercegovini. Suprug: [Šerif](/people/serif-ribic) Ribić.
