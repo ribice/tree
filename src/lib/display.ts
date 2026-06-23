@@ -2,6 +2,7 @@ import type { Locale } from "../i18n/ui";
 import type { Person, Translation } from "./people";
 
 type PersonLike = Pick<Person, "id" | "data">;
+type DisplayNameFor = (person: PersonLike) => string;
 
 const childStarts = /^(sin|kćerka|kcerka|daughter|son|child)(?=\s|:|$)/i;
 const spouseStarts = /^(muž|muz|žena|zena|supruga|suprug|wife|husband|spouse)(?=\s|:|$)/i;
@@ -69,6 +70,7 @@ export function displayTaglineFor(
   people: PersonLike[],
   translations: Map<string, Translation>,
   locale: Locale,
+  displayNameFor: DisplayNameFor = (p) => p.data.name,
 ): string | undefined {
   const raw = localizedRawTagline(person, translations, locale);
   if (!raw) return undefined;
@@ -76,14 +78,18 @@ export function displayTaglineFor(
   const byId = new Map(people.map((p) => [p.id, p]));
   if (childStarts.test(raw) && person.data.parents?.length) {
     const names = person.data.parents
-      .map((id) => byId.get(id)?.data.name)
+      .map((id) => byId.get(id))
+      .filter((parent): parent is PersonLike => Boolean(parent))
+      .map(displayNameFor)
       .filter((name): name is string => Boolean(name));
     if (names.length) return `${childLabel(person, locale, raw)}: ${joinNames(names, locale)}`;
   }
 
   if (spouseStarts.test(raw) && spouseIds(person).length) {
     const names = spouseIds(person)
-      .map((id) => byId.get(id)?.data.name)
+      .map((id) => byId.get(id))
+      .filter((spouse): spouse is PersonLike => Boolean(spouse))
+      .map(displayNameFor)
       .filter((name): name is string => Boolean(name));
     if (names.length) return `${spouseLabel(person, locale, raw)}: ${joinNames(names, locale)}`;
   }

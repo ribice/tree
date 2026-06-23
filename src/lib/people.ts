@@ -179,14 +179,18 @@ export function toTreeData(
   locale: Locale,
 ): TreeNodePerson[] {
   const visibleIds = new Set(people.map((p) => p.id));
+  const treeNameFor = (person: Person) =>
+    treeDisplayName(person.data.name, person.data.maidenName);
+
   return people.map((p) => {
     const living = isLiving(p);
+    const treeName = treeNameFor(p);
     return {
       id: p.id,
       name: p.data.name,
-      treeName: treeDisplayName(p.data.name, p.data.maidenName),
+      treeName,
       sex: p.data.sex,
-      tagline: displayTaglineFor(p, people, translations, locale),
+      tagline: displayTaglineFor(p, people, translations, locale, treeNameFor),
       lifespan: lifespan(p, locale),
       birthDate: p.data.born ? publicDate(p.data.born, living) : undefined,
       deathDate: p.data.died ? publicDate(p.data.died, false) : undefined,

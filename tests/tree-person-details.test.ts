@@ -11,6 +11,12 @@ describe("tree person details", () => {
     expect(treeDisplayName("Rasim Ribić — Kifić", undefined)).toBe("Rasim Ribić — Kifić");
   });
 
+  it("shows maiden surnames on tree cards for married-in women", () => {
+    expect(treeDisplayName("Selma Ribić", "Paldum")).toBe("Selma Paldum");
+    expect(treeDisplayName("Dženana Ribić", "Bašić")).toBe("Dženana Bašić");
+    expect(treeDisplayName("Fahra Ribić", "Bosnić")).toBe("Fahra Bosnić");
+  });
+
   it("builds a hover tooltip from public vital facts", () => {
     expect(
       treePersonTooltip(

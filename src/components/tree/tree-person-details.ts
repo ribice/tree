@@ -13,14 +13,10 @@ export interface TreeTooltipLabels {
   birthplace: string;
 }
 
-function isRibicSurname(value: string | undefined): boolean {
-  return Boolean(value?.trim().toLocaleLowerCase().match(/^ribić$|^ribic$/));
-}
-
 export function treeDisplayName(name: string, maidenName: string | undefined): string {
   const maiden = maidenName?.trim();
-  if (!isRibicSurname(maiden)) return name;
-  if (name.toLocaleLowerCase().includes(maiden!.toLocaleLowerCase())) return name;
+  if (!maiden) return name;
+  if (name.toLocaleLowerCase().includes(maiden.toLocaleLowerCase())) return name;
   return name.trim().includes(" ")
     ? name.trim().replace(/\s+\S+$/, ` ${maiden}`)
     : `${name.trim()} ${maiden}`;

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { displayTaglineFor } from "../src/lib/display";
+import { treeDisplayName } from "../src/components/tree/tree-person-details";
 
 const person = (over: Record<string, unknown>) =>
   ({
@@ -31,6 +32,30 @@ describe("displayTaglineFor", () => {
     expect(displayTaglineFor(child, people, new Map(), "bs")).toBe(
       "Sin: Husnija Šuškić i Hafa Ribić",
     );
+  });
+
+  it("can resolve generated child wording with tree display names", () => {
+    const child = person({
+      id: "child",
+      name: "Dijete",
+      parents: ["father", "mother"],
+      tagline: "Kćerka roditelja",
+    });
+    const people = [
+      child,
+      person({ id: "father", name: "Mersid Ribić" }),
+      person({
+        id: "mother",
+        name: "Selma Ribić",
+        data: { maidenName: "Paldum" },
+      }),
+    ];
+
+    expect(
+      displayTaglineFor(child, people, new Map(), "bs", (p) =>
+        treeDisplayName(p.data.name, p.data.maidenName),
+      ),
+    ).toBe("Kćerka: Mersid Ribić i Selma Paldum");
   });
 
   it("replaces generated spouse wording with resolved spouse names", () => {
