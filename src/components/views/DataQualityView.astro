@@ -19,6 +19,7 @@ const people = await getPeople();
 const translations = await getTranslations();
 const groups = collectDataQuality(people, translations);
 const totalIssues = groups.reduce((sum, group) => sum + group.issues.length, 0);
+const issueRate = people.length ? (totalIssues / people.length).toFixed(1) : "0";
 const peoplePath = localize("/people", lang);
 const githubEditUrl = (personId: string) =>
   `https://github.com/ribice/tree/edit/master/src/content/people/${personId}.md`;
@@ -85,9 +86,16 @@ const qualityCategories = [
 
 <section class="mx-auto max-w-6xl px-5 py-10 sm:py-12">
   <div class="quality-hero">
-    <p class="eyebrow">{t("quality.eyebrow")}</p>
-    <h1>{t("quality.title")}</h1>
-    <p>{t("quality.subtitle")}</p>
+    <div>
+      <p class="eyebrow">{t("quality.eyebrow")}</p>
+      <h1>{t("quality.title")}</h1>
+      <p>{t("quality.subtitle")}</p>
+    </div>
+    <div class="quality-hero-meter" aria-label={t("quality.totalIssues")}>
+      <strong>{totalIssues}</strong>
+      <span>{t("quality.totalIssues")}</span>
+      <small>{issueRate} {t("quality.issueRate")}</small>
+    </div>
   </div>
 
   <dl class="mt-6 grid gap-3 sm:grid-cols-3">

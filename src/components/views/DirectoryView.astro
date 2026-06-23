@@ -31,6 +31,7 @@ for (const person of people) {
 const groupedPeople = [...groups.entries()].sort(([a], [b]) =>
   a.localeCompare(b, locale),
 );
+const letterCount = groupedPeople.length;
 ---
 
 <section class="mx-auto max-w-6xl px-5 py-10 sm:py-12">
@@ -41,6 +42,12 @@ const groupedPeople = [...groups.entries()].sort(([a], [b]) =>
         {t("dir.title")}
       </h1>
       <p class="mt-2 max-w-2xl text-muted">{t("dir.subtitle")}</p>
+      <div class="directory-summary-strip" aria-label={t("dir.count", { n: people.length })}>
+        <span class="directory-count-badge">{people.length}</span>
+        <span>{t("dir.count", { n: people.length })}</span>
+        <span class="directory-count-badge">{letterCount}</span>
+        <span>{t("dir.letters")}</span>
+      </div>
     </div>
 
     <div class="directory-actions">
@@ -86,12 +93,11 @@ const groupedPeople = [...groups.entries()].sort(([a], [b]) =>
     {
       groupedPeople.map(([letter, group]) => (
         <section class="letter-section letter-section-panel scroll-mt-24" id={`letter-${letter}`}>
-          <div class="mb-3 flex items-center gap-3">
-            <h2 class="text-2xl font-semibold text-ink">
+          <div class="letter-section-head">
+            <h2>
               {letter}
             </h2>
-            <span class="h-px flex-1 bg-line" />
-            <span class="text-sm text-muted">{group.length}</span>
+            <span class="directory-count-badge">{group.length}</span>
           </div>
           <ul class="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {group.map((p) => (

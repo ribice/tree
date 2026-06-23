@@ -18,13 +18,18 @@ const formatDate = (date: string) => dateFormatter.format(new Date(`${date}T00:0
 
 <section class="mx-auto max-w-6xl px-5 py-10 sm:py-12">
   <div class="changelog-hero">
-    <p class="eyebrow">{t("changelog.eyebrow")}</p>
-    <h1 class="mt-3 max-w-3xl text-4xl font-semibold text-ink sm:text-5xl">
-      {t("changelog.title")}
-    </h1>
-    <p class="mt-4 max-w-3xl text-lg leading-8 text-muted">
-      {t("changelog.subtitle")}
-    </p>
+    <div>
+      <p class="eyebrow">{t("changelog.eyebrow")}</p>
+      <h1 class="mt-3 max-w-3xl text-4xl font-semibold text-ink sm:text-5xl">
+        {t("changelog.title")}
+      </h1>
+      <p class="mt-4 max-w-3xl text-lg leading-8 text-muted">
+        {t("changelog.subtitle")}
+      </p>
+    </div>
+    <span class="changelog-count">
+      {t("changelog.entries", { n: changelog.length })}
+    </span>
   </div>
 
   <div class="changelog-list" aria-label={t("changelog.title")}>

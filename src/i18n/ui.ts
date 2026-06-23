@@ -132,6 +132,7 @@ export const ui = {
     "dir.count": "{n} osoba u imeniku",
     "dir.results": "{n} rezultata",
     "dir.jump": "Preskoči na slovo",
+    "dir.letters": "slova",
 
     "person.back": "Imenik",
     "person.nee": "rođ.",
@@ -170,6 +171,7 @@ export const ui = {
     "changelog.subtitle":
       "Ovdje se bilježe samo promjene u porodičnim podacima: nove osobe, veze, datumi, mjesta i veće ispravke. Vizuelne i tehničke izmjene nisu dio ovog dnevnika.",
     "changelog.kindData": "Podaci",
+    "changelog.entries": "{n} zapisa",
 
     "quality.title": "Kvalitet podataka",
     "quality.eyebrow": "Urednički pregled",
@@ -178,6 +180,7 @@ export const ui = {
     "quality.totalIssues": "Stavki",
     "quality.peopleChecked": "Osoba pregledano",
     "quality.groups": "Grupa",
+    "quality.issueRate": "stavki po osobi",
     "quality.more": "Još {n} stavki",
     "quality.missingBirth": "Nedostaje rođenje",
     "quality.missingBirthplace": "Nedostaje mjesto rođenja",
@@ -342,6 +345,7 @@ export const ui = {
     "dir.count": "{n} people in the directory",
     "dir.results": "{n} results",
     "dir.jump": "Jump to letter",
+    "dir.letters": "letters",
 
     "person.back": "Directory",
     "person.nee": "née",
@@ -380,6 +384,7 @@ export const ui = {
     "changelog.subtitle":
       "This page records family-data changes only: new people, relationships, dates, places, and major corrections. Visual and technical work is intentionally left out.",
     "changelog.kindData": "Data",
+    "changelog.entries": "{n} entries",
 
     "quality.title": "Data quality",
     "quality.eyebrow": "Editorial review",
@@ -388,6 +393,7 @@ export const ui = {
     "quality.totalIssues": "Items",
     "quality.peopleChecked": "People checked",
     "quality.groups": "Groups",
+    "quality.issueRate": "items per person",
     "quality.more": "{n} more items",
     "quality.missingBirth": "Missing birth",
     "quality.missingBirthplace": "Missing birthplace",

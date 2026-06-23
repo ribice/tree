@@ -15,11 +15,11 @@ const opt = t("add.optional");
 ---
 
 <section class="mx-auto max-w-4xl px-5 py-12">
-  <p class="eyebrow">{t("nav.add")}</p>
-  <h1 class="mt-3 text-4xl font-semibold text-ink">
-    {t("add.title")}
-  </h1>
-  <p class="mt-2 max-w-xl text-muted">{t("add.intro")}</p>
+  <div class="add-hero">
+    <p class="eyebrow">{t("nav.add")}</p>
+    <h1>{t("add.title")}</h1>
+    <p>{t("add.intro")}</p>
+  </div>
 
   <form
     name="add-person"
@@ -27,7 +27,7 @@ const opt = t("add.optional");
     data-netlify="true"
     netlify-honeypot="bot-field"
     action={action}
-    class="surface-panel mt-8 space-y-5 p-5 sm:p-7"
+    class="add-form-shell mt-8"
   >
     <input type="hidden" name="form-name" value="add-person" />
     <input type="hidden" name="lang" value={lang} />
@@ -35,140 +35,172 @@ const opt = t("add.optional");
       <label>Don't fill this out: <input name="bot-field" /></label>
     </p>
 
-    <div>
-      <label class="mb-1 block text-sm font-medium text-ink" for="name">
-        {t("add.name")}
-      </label>
-      <input id="name" name="name" required class="field" />
-    </div>
+    <fieldset class="form-section">
+      <legend class="form-section-head">
+        <span>{t("person.facts")}</span>
+      </legend>
+      <div class="form-section-body">
+        <div>
+          <label class="mb-1 block text-sm font-medium text-ink" for="name">
+            {t("add.name")}
+          </label>
+          <input id="name" name="name" required class="field" />
+        </div>
 
-    <div class="grid gap-5 sm:grid-cols-3">
-      <div>
-        <label class="lbl" for="sex">
-          {t("add.sex")} <span class="opt">({opt})</span>
+        <div class="grid gap-5 sm:grid-cols-3">
+          <div>
+            <label class="lbl" for="sex">
+              {t("add.sex")} <span class="opt">({opt})</span>
+            </label>
+            <select id="sex" name="sex" class="field">
+              <option value="">{t("add.unknown")}</option>
+              <option value="m">{t("tree.male")}</option>
+              <option value="f">{t("tree.female")}</option>
+            </select>
+          </div>
+          <div>
+            <label class="lbl" for="maidenName">
+              {t("add.maiden")} <span class="opt">({opt})</span>
+            </label>
+            <input id="maidenName" name="maidenName" class="field" />
+          </div>
+          <div>
+            <label class="lbl" for="nickname">
+              {t("add.nickname")} <span class="opt">({opt})</span>
+            </label>
+            <input id="nickname" name="nickname" class="field" />
+          </div>
+        </div>
+
+        <div>
+          <label class="lbl" for="relationshipToFamily">
+            {t("add.relationshipToFamily")} <span class="opt">({opt})</span>
+          </label>
+          <input
+            id="relationshipToFamily"
+            name="relationshipToFamily"
+            class="field"
+          />
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-3">
+          <div>
+            <label class="lbl" for="born">{t("add.born")} <span class="opt">({opt})</span></label>
+            <input id="born" name="born" inputmode="numeric" placeholder="1950" class="field" />
+          </div>
+          <div>
+            <label class="lbl" for="died">{t("add.died")} <span class="opt">({opt})</span></label>
+            <input id="died" name="died" inputmode="numeric" class="field" />
+          </div>
+          <div>
+            <label class="lbl" for="birthplace">{t("add.birthplace")} <span class="opt">({opt})</span></label>
+            <input id="birthplace" name="birthplace" class="field" />
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-section">
+      <legend class="form-section-head">
+        <span>{t("person.family")}</span>
+        <small>{opt}</small>
+      </legend>
+      <div class="form-section-body">
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label class="lbl" for="parent1">{t("add.parent1")} <span class="opt">({opt})</span></label>
+            <select id="parent1" name="parent1" class="field">
+              <option value="">{t("add.none")}</option>
+              {options.map((o) => <option value={o.id}>{o.name}</option>)}
+            </select>
+          </div>
+          <div>
+            <label class="lbl" for="parent2">{t("add.parent2")} <span class="opt">({opt})</span></label>
+            <select id="parent2" name="parent2" class="field">
+              <option value="">{t("add.none")}</option>
+              {options.map((o) => <option value={o.id}>{o.name}</option>)}
+            </select>
+          </div>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-3">
+          <div>
+            <label class="lbl" for="spouse">{t("add.spouse")} <span class="opt">({opt})</span></label>
+            <select id="spouse" name="spouse" class="field">
+              <option value="">{t("add.none")}</option>
+              {options.map((o) => <option value={o.id}>{o.name}</option>)}
+            </select>
+          </div>
+          <div>
+            <label class="lbl" for="married">{t("add.married")} <span class="opt">({opt})</span></label>
+            <input id="married" name="married" inputmode="numeric" class="field" />
+          </div>
+          <div>
+            <label class="lbl" for="divorced">{t("add.divorced")} <span class="opt">({opt})</span></label>
+            <input id="divorced" name="divorced" inputmode="numeric" class="field" />
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-section">
+      <legend class="form-section-head">
+        <span>{t("add.bio")}</span>
+        <small>{opt}</small>
+      </legend>
+      <div class="form-section-body">
+        <div>
+          <label class="lbl" for="bio">{t("add.bio")} <span class="opt">({opt})</span></label>
+          <textarea id="bio" name="bio" rows="6" class="field"></textarea>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label class="lbl" for="photoLink">
+              {t("add.photoLink")} <span class="opt">({opt})</span>
+            </label>
+            <input id="photoLink" name="photoLink" type="url" class="field" />
+          </div>
+          <div>
+            <label class="lbl" for="sourceNotes">
+              {t("add.sourceNotes")} <span class="opt">({opt})</span>
+            </label>
+            <textarea id="sourceNotes" name="sourceNotes" rows="3" class="field"></textarea>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-section">
+      <legend class="form-section-head">
+        <span>{t("add.yourName")}</span>
+      </legend>
+      <div class="form-section-body">
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label class="lbl" for="submittedBy">{t("add.yourName")}</label>
+            <input id="submittedBy" name="submittedBy" class="field" />
+          </div>
+          <div>
+            <label class="lbl" for="email">{t("add.yourEmail")}</label>
+            <input id="email" name="email" type="email" class="field" />
+          </div>
+        </div>
+
+        <label class="consent-check">
+          <input name="privacyConsent" type="checkbox" required />
+          <span>{t("add.privacyConsent")}</span>
         </label>
-        <select id="sex" name="sex" class="field">
-          <option value="">{t("add.unknown")}</option>
-          <option value="m">{t("tree.male")}</option>
-          <option value="f">{t("tree.female")}</option>
-        </select>
       </div>
-      <div>
-        <label class="lbl" for="maidenName">
-          {t("add.maiden")} <span class="opt">({opt})</span>
-        </label>
-        <input id="maidenName" name="maidenName" class="field" />
-      </div>
-      <div>
-        <label class="lbl" for="nickname">
-          {t("add.nickname")} <span class="opt">({opt})</span>
-        </label>
-        <input id="nickname" name="nickname" class="field" />
-      </div>
+    </fieldset>
+
+    <div class="add-form-actions">
+      <button
+        type="submit"
+        class="button-primary"
+      >
+        {t("add.submit")}
+      </button>
     </div>
-
-    <div>
-      <label class="lbl" for="relationshipToFamily">
-        {t("add.relationshipToFamily")} <span class="opt">({opt})</span>
-      </label>
-      <input
-        id="relationshipToFamily"
-        name="relationshipToFamily"
-        class="field"
-      />
-    </div>
-
-    <div class="grid gap-5 sm:grid-cols-3">
-      <div>
-        <label class="lbl" for="born">{t("add.born")} <span class="opt">({opt})</span></label>
-        <input id="born" name="born" inputmode="numeric" placeholder="1950" class="field" />
-      </div>
-      <div>
-        <label class="lbl" for="died">{t("add.died")} <span class="opt">({opt})</span></label>
-        <input id="died" name="died" inputmode="numeric" class="field" />
-      </div>
-      <div>
-        <label class="lbl" for="birthplace">{t("add.birthplace")} <span class="opt">({opt})</span></label>
-        <input id="birthplace" name="birthplace" class="field" />
-      </div>
-    </div>
-
-    <div class="grid gap-5 sm:grid-cols-2">
-      <div>
-        <label class="lbl" for="parent1">{t("add.parent1")} <span class="opt">({opt})</span></label>
-        <select id="parent1" name="parent1" class="field">
-          <option value="">{t("add.none")}</option>
-          {options.map((o) => <option value={o.id}>{o.name}</option>)}
-        </select>
-      </div>
-      <div>
-        <label class="lbl" for="parent2">{t("add.parent2")} <span class="opt">({opt})</span></label>
-        <select id="parent2" name="parent2" class="field">
-          <option value="">{t("add.none")}</option>
-          {options.map((o) => <option value={o.id}>{o.name}</option>)}
-        </select>
-      </div>
-    </div>
-
-    <div class="grid gap-5 sm:grid-cols-3">
-      <div>
-        <label class="lbl" for="spouse">{t("add.spouse")} <span class="opt">({opt})</span></label>
-        <select id="spouse" name="spouse" class="field">
-          <option value="">{t("add.none")}</option>
-          {options.map((o) => <option value={o.id}>{o.name}</option>)}
-        </select>
-      </div>
-      <div>
-        <label class="lbl" for="married">{t("add.married")} <span class="opt">({opt})</span></label>
-        <input id="married" name="married" inputmode="numeric" class="field" />
-      </div>
-      <div>
-        <label class="lbl" for="divorced">{t("add.divorced")} <span class="opt">({opt})</span></label>
-        <input id="divorced" name="divorced" inputmode="numeric" class="field" />
-      </div>
-    </div>
-
-    <div>
-      <label class="lbl" for="bio">{t("add.bio")} <span class="opt">({opt})</span></label>
-      <textarea id="bio" name="bio" rows="6" class="field"></textarea>
-    </div>
-
-    <div class="grid gap-5 sm:grid-cols-2">
-      <div>
-        <label class="lbl" for="photoLink">
-          {t("add.photoLink")} <span class="opt">({opt})</span>
-        </label>
-        <input id="photoLink" name="photoLink" type="url" class="field" />
-      </div>
-      <div>
-        <label class="lbl" for="sourceNotes">
-          {t("add.sourceNotes")} <span class="opt">({opt})</span>
-        </label>
-        <textarea id="sourceNotes" name="sourceNotes" rows="3" class="field"></textarea>
-      </div>
-    </div>
-
-    <div class="grid gap-5 sm:grid-cols-2">
-      <div>
-        <label class="lbl" for="submittedBy">{t("add.yourName")}</label>
-        <input id="submittedBy" name="submittedBy" class="field" />
-      </div>
-      <div>
-        <label class="lbl" for="email">{t("add.yourEmail")}</label>
-        <input id="email" name="email" type="email" class="field" />
-      </div>
-    </div>
-
-    <label class="consent-check">
-      <input name="privacyConsent" type="checkbox" required />
-      <span>{t("add.privacyConsent")}</span>
-    </label>
-
-    <button
-      type="submit"
-      class="button-primary"
-    >
-      {t("add.submit")}
-    </button>
   </form>
 </section>
