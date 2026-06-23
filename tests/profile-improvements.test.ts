@@ -37,4 +37,21 @@ describe("profile improvements", () => {
     expect(profileView).not.toContain("family-mini-map-head");
     expect(profileView).not.toContain("kin-panel");
   });
+
+  it("adds clearer visual hierarchy to the profile header and relatives", () => {
+    expect(profileView).toContain("profile-title-stack");
+    expect(profileView).toContain("profile-relatives-header");
+    expect(profileView).toContain("profile-relatives-count");
+    expect(styles).toContain(".profile-title-stack");
+    expect(styles).toContain(".profile-relatives-header");
+    expect(styles).toContain(".profile-relatives-count");
+  });
+
+  it("marks capped relative groups instead of silently hiding people", () => {
+    expect(profileView).toContain("visibleItems");
+    expect(profileView).toContain("remaining");
+    expect(profileView).toContain("profile-mini-overflow");
+    expect(profileView).toContain('t("tree.showMore"');
+    expect(styles).toContain(".profile-mini-overflow");
+  });
 });

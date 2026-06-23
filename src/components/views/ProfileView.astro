@@ -79,12 +79,24 @@ const missingFacts = [
   data.parents.length === 0 && t("person.unknownParents"),
   !person.body?.trim() && t("person.unknownBio"),
 ].filter(Boolean) as string[];
+const relativeLimit = 8;
 const miniMapGroups = [
-  { label: t("person.parents"), items: rels.parents.map((p) => ({ p })) },
-  { label: t("person.spouse"), items: rels.spouses.map((p) => ({ p })) },
-  { label: t("person.children"), items: rels.children.slice(0, 8).map((p) => ({ p })) },
-  { label: t("person.siblings"), items: rels.siblings.slice(0, 8).map((p) => ({ p })) },
-].filter((group) => group.items.length > 0);
+  { label: t("person.parents"), people: rels.parents },
+  { label: t("person.spouse"), people: rels.spouses },
+  { label: t("person.children"), people: rels.children },
+  { label: t("person.siblings"), people: rels.siblings },
+]
+  .map((group) => {
+    const visiblePeople = group.people.slice(0, relativeLimit);
+    return {
+      label: group.label,
+      total: group.people.length,
+      visibleItems: visiblePeople.map((p) => ({ p })),
+      remaining: Math.max(group.people.length - visiblePeople.length, 0),
+    };
+  })
+  .filter((group) => group.visibleItems.length > 0);
+const relativeCount = miniMapGroups.reduce((sum, group) => sum + group.total, 0);
 ---
 
 <article class="mx-auto max-w-6xl px-5 py-10">
@@ -96,85 +108,111 @@ const miniMapGroups = [
 
   <header class="profile-hero mt-6" data-sex={data.sex}>
     <div class="profile-hero-grid">
-    <div class="profile-hero-main">
-      <Avatar
-        name={data.name}
-        photo={data.photo}
-        initials={initials(data.name)}
-        sex={data.sex}
-        size="lg"
-        lightbox
-        class="profile-avatar"
-      />
-      <div class="min-w-0">
-        <div class="flex flex-wrap items-center gap-3">
-          <h1 class="text-4xl font-semibold text-ink">
-            {data.name}
-          </h1>
+      <div class="profile-hero-main">
+        <Avatar
+          name={data.name}
+          photo={data.photo}
+          initials={initials(data.name)}
+          sex={data.sex}
+          size="lg"
+          lightbox
+          class="profile-avatar"
+        />
+        <div class="profile-identity min-w-0">
+          <div class="profile-title-stack">
+            <div class="profile-title-row">
+              <h1 class="profile-name">
+                {data.name}
+              </h1>
+              {
+                living && (
+                  <span class="profile-living-badge">
+                    <span aria-hidden="true" />
+                    {t("person.living")}
+                  </span>
+                )
+              }
+            </div>
+            {
+              (data.maidenName || data.nickname) && (
+                <div class="profile-name-notes">
+                  {data.maidenName && <p>{t("person.nee")} {data.maidenName}</p>}
+                  {data.nickname && <p>“{data.nickname}”</p>}
+                </div>
+              )
+            }
+          </div>
+          <ul class="profile-meta-list" aria-label={t("person.facts")}>
+            {
+              heroMeta.map((meta) => (
+                <li>
+                  {
+                    meta.icon && (
+                      <span class="profile-meta-icon" aria-hidden="true">
+                        {meta.icon}
+                      </span>
+                    )
+                  }
+                  <span>{meta.value}</span>
+                </li>
+              ))
+            }
+          </ul>
+          {tagline && <p class="profile-tagline">{tagline}</p>}
           {
-            living && (
-              <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-700 ring-1 ring-emerald-500/20">
-                <span class="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                {t("person.living")}
-              </span>
+            missingFacts.length > 0 && (
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="data-quality-badge">{t("person.needsDetails")}</span>
+                {missingFacts.slice(0, 3).map((item) => (
+                  <span class="data-quality-missing">{item}</span>
+                ))}
+              </div>
             )
           }
-        </div>
-        {data.maidenName && <p class="text-muted">{t("person.nee")} {data.maidenName}</p>}
-        {data.nickname && <p class="text-muted">“{data.nickname}”</p>}
-        <ul class="profile-meta-list" aria-label={t("person.facts")}>
-          {
-            heroMeta.map((meta) => (
-              <li>
-                {
-                  meta.icon && (
-                    <span class="profile-meta-icon" aria-hidden="true">
-                      {meta.icon}
-                    </span>
-                  )
-                }
-                <span>{meta.value}</span>
-              </li>
-            ))
-          }
-        </ul>
-        {tagline && <p class="mt-2 font-medium text-accent">{tagline}</p>}
-        {
-          missingFacts.length > 0 && (
-            <div class="mt-3 flex flex-wrap gap-2">
-              <span class="data-quality-badge">{t("person.needsDetails")}</span>
-              {missingFacts.slice(0, 3).map((item) => (
-                <span class="data-quality-missing">{item}</span>
-              ))}
-            </div>
-          )
-        }
-        <div class="profile-hero-actions">
-          <a href={treeHref} class="profile-action">{t("person.viewInTree")}</a>
-          <a href={branchHref} class="profile-action profile-action--ghost">
-            {t("person.openBranch")}
-          </a>
+          <div class="profile-hero-actions">
+            <a href={treeHref} class="profile-action">{t("person.viewInTree")}</a>
+            <a href={branchHref} class="profile-action profile-action--ghost">
+              {t("person.openBranch")}
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-    {
-      miniMapGroups.length > 0 && (
-        <div class="profile-hero-relatives" aria-label={t("person.familyMap")}>
-          {miniMapGroups.map((group) => (
-            <div class="family-mini-map-group">
-              <h3>{group.label}</h3>
-              <ul>
-                {group.items.map(({ p: rel }) => (
-                  <li>
-                    <PersonMiniCard person={rel} href={`${peoplePath}/${rel.id}`} />
-                  </li>
-                ))}
-              </ul>
+      {
+        miniMapGroups.length > 0 && (
+          <aside class="profile-relatives-panel" aria-label={t("person.familyMap")}>
+            <div class="profile-relatives-header">
+              <h2>{t("person.familyMap")}</h2>
+              <span class="profile-relatives-count">{relativeCount}</span>
             </div>
-          ))}
-        </div>
-      )
-    }
+            <div class="profile-hero-relatives">
+              {miniMapGroups.map((group) => (
+                <div class="family-mini-map-group">
+                  <h3>
+                    <span>{group.label}</span>
+                    <span class="family-mini-count">{group.total}</span>
+                  </h3>
+                  <ul>
+                    {group.visibleItems.map(({ p: rel }) => (
+                      <li>
+                        <PersonMiniCard person={rel} href={`${peoplePath}/${rel.id}`} />
+                      </li>
+                    ))}
+                    {
+                      group.remaining > 0 && (
+                        <li>
+                          <span class="profile-mini-overflow">
+                            {t("tree.showMore", { n: group.remaining })}
+                          </span>
+                        </li>
+                      )
+                    }
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </aside>
+        )
+      }
     </div>
   </header>
 
