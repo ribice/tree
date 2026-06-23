@@ -26,13 +26,15 @@ describe("profile improvements", () => {
     expect(ui).toContain('"person.unknownBirth"');
   });
 
-  it("shows the family map beside the hero, above the biography", () => {
-    expect(profileView).toContain("profile-top");
+  it("shows the relatives inside the hero, above the biography", () => {
+    expect(profileView).toContain("profile-hero-relatives");
     expect(profileView).toContain("profile-bio-section");
-    // Family map now sits in the top grid next to the hero, before the bio.
-    expect(profileView.indexOf("family-mini-map")).toBeLessThan(
+    // Relatives live inside the hero box now, ahead of the bio.
+    expect(profileView.indexOf("profile-hero-relatives")).toBeLessThan(
       profileView.indexOf("profile-bio-section"),
     );
+    // No separate family-map card heading/link anymore.
+    expect(profileView).not.toContain("family-mini-map-head");
     expect(profileView).not.toContain("kin-panel");
   });
 });

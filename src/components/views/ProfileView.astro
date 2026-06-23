@@ -77,8 +77,8 @@ const miniMapGroups = [
     </div>
   </div>
 
-  <div class="profile-top mt-6">
-    <header class="profile-hero" data-sex={data.sex}>
+  <header class="profile-hero mt-6" data-sex={data.sex}>
+    <div class="profile-hero-grid">
     <div class="profile-hero-main">
       <Avatar
         name={data.name}
@@ -134,35 +134,26 @@ const miniMapGroups = [
         }
       </div>
     </div>
-    </header>
-
     {
       miniMapGroups.length > 0 && (
-        <section class="family-mini-map" aria-label={t("person.familyMap")}>
-          <div class="family-mini-map-head">
-            <div>
-              <h2>{t("person.familyMap")}</h2>
+        <div class="profile-hero-relatives" aria-label={t("person.familyMap")}>
+          {miniMapGroups.map((group) => (
+            <div class="family-mini-map-group">
+              <h3>{group.label}</h3>
+              <ul>
+                {group.items.map(({ p: rel }) => (
+                  <li>
+                    <PersonMiniCard person={rel} href={`${peoplePath}/${rel.id}`} />
+                  </li>
+                ))}
+              </ul>
             </div>
-            <a href={branchHref}>{t("person.openBranch")}</a>
-          </div>
-          <div class="family-mini-map-grid">
-            {miniMapGroups.map((group) => (
-              <div class="family-mini-map-group">
-                <h3>{group.label}</h3>
-                <ul>
-                  {group.items.map(({ p: rel }) => (
-                    <li>
-                      <PersonMiniCard person={rel} href={`${peoplePath}/${rel.id}`} />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
+          ))}
+        </div>
       )
     }
-  </div>
+    </div>
+  </header>
 
   {data.photo && <Lightbox />}
 

@@ -1,13 +1,29 @@
-.profile-top {
+.profile-hero-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 @media (min-width: 1024px) {
-  .profile-top {
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-    align-items: start;
+  .profile-hero-grid {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    align-items: center;
   }
+}
+
+.profile-hero-relatives {
+  display: grid;
+  gap: 0.8rem 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  align-content: start;
+}
+
+/* Inside the hero the groups blend in — only the person pills keep a card. */
+.profile-hero-relatives .family-mini-map-group {
+  border: none;
+  background: none;
+  padding: 0;
 }
 
 .profile-hero {
@@ -36,19 +52,6 @@
   background:
     linear-gradient(90deg, color-mix(in oklch, var(--color-male-soft), transparent 16%), transparent 62%),
     linear-gradient(180deg, var(--color-surface), color-mix(in oklch, var(--color-surface), var(--color-paper) 16%));
-}
-
-.profile-hero::after {
-  content: "";
-  position: absolute;
-  inset: auto 1.25rem 1.25rem 45%;
-  height: 5rem;
-  background-image:
-    linear-gradient(90deg, color-mix(in oklch, var(--color-branch), transparent 58%) 1px, transparent 1px),
-    linear-gradient(180deg, color-mix(in oklch, var(--color-branch), transparent 70%) 1px, transparent 1px);
-  background-size: 1rem 1rem;
-  mask-image: linear-gradient(90deg, transparent, black 22%, black);
-  pointer-events: none;
 }
 
 .profile-hero-main {
