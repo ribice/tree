@@ -5,4 +5,4 @@ parents: [resid]
 tagline: "Sin Rešida"
 ---
 
-Malić je sin Rešidov. Nastavio je očevu djelatnost — proizvodnju trstike.
+Malić je sin [Rešidov](/people/resid). Nastavio je očevu djelatnost — proizvodnju trstike.

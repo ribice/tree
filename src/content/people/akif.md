@@ -11,7 +11,7 @@ spouses:
 tagline: "Po njemu su nas prozvali Kifići"
 ---
 
-Akif, ili kako su ga zvali Kifo, bio je jedan od četiri sina Avdikadijina. Po njemu su potomci njegovih sinova Avde i [Himze](/people/himzo) u Jezeru — zvanih Avdo Kifin i Himzo Kifin — prozvani Kifići.
+Akif, ili kako su ga zvali Kifo, bio je jedan od četiri sina [Avdikadijina](/people/avdikadija). Po njemu su potomci njegovih sinova [Avde](/people/avdo-kifin) i [Himze](/people/himzo) u Jezeru — zvanih Avdo Kifin i Himzo Kifin — prozvani Kifići.
 
 Bio je oženjen [Hanumicom](/people/hanumica), jednom od četiri kćeri Smailbega Ganibegovića iz Vražića. S njom je imao četvoro djece: sinove Avdu i Himzu te kćeri [Biseru](/people/bisera) i [Pašu](/people/pasa). Na njihovom mezaru piše da je Avdo bio stariji od brata Himze.
 
