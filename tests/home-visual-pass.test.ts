@@ -17,6 +17,12 @@ describe("home page visual pass", () => {
     expect(styles).toContain(".home-stat-card");
   });
 
+  it("keeps homepage stat values centered and bottom-aligned", () => {
+    expect(styles).toContain("grid-template-rows: minmax(0, 1fr) auto");
+    expect(styles).toContain("align-items: end");
+    expect(styles).toContain("text-align: center");
+  });
+
   it("gives the lower people lists a richer home-specific treatment", () => {
     expect(homeView).toContain("home-featured-people");
     expect(homeView).toContain("home-person-section");

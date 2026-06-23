@@ -52,12 +52,16 @@
 }
 
 .home-stat-card {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
   min-width: 0;
+  align-items: end;
   border: 1px solid color-mix(in oklch, var(--color-line), transparent 18%);
   border-radius: 0.5rem;
   background:
     linear-gradient(180deg, color-mix(in oklch, var(--color-surface), transparent 4%), color-mix(in oklch, var(--color-surface), var(--color-paper) 14%));
   padding: 0.8rem;
+  text-align: center;
 }
 
 .home-stat-card dt {
