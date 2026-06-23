@@ -1,6 +1,7 @@
 ---
 name: "Denin Lunja"
 sex: "m"
+visibility: "extended"
 born: "09.06.2002"
 parents: [adnan-lunja, adisa]
 tagline: "Sin Adnana i Adise"

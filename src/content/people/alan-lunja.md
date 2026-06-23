@@ -1,6 +1,7 @@
 ---
 name: "Alan Lunja"
 sex: "m"
+visibility: "extended"
 born: "09.12.2003"
 parents: [adnan-lunja, adisa]
 tagline: "Sin Adnana i Adise"

@@ -1,6 +1,7 @@
 ---
 name: "Adnan Lunja"
 sex: "m"
+visibility: "extended"
 born: "28.01.1974"
 spouses:
   - adisa

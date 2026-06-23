@@ -1,6 +1,7 @@
 ---
 name: "Amela Ribić"
 sex: "f"
+visibility: "extended"
 born: "04.02.1982"
 parents: [nerko, azemina-seferovic]
 spouses:

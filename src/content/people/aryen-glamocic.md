@@ -1,6 +1,7 @@
 ---
 name: "Aryen Glamoćić"
 sex: "m"
+visibility: "extended"
 born: "2017"
 parents: [salko-glamocic, amela-nerkova]
 tagline: "Sin Salke i Amele"

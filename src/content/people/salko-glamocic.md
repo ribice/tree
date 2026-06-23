@@ -1,6 +1,7 @@
 ---
 name: "Salko Glamoćić"
 sex: "m"
+visibility: "extended"
 born: "24.10.1984"
 spouses:
   - amela-nerkova
