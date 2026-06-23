@@ -10,7 +10,6 @@ import {
   lifespan,
   initials,
   isLiving,
-  generation,
   type Person,
   type PeopleView,
 } from "../../lib/people";
@@ -42,14 +41,12 @@ const peoplePath = localize(isExtendedProfile ? "/extended/people" : "/people", 
 const span = lifespan(person, lang);
 const { data } = person;
 const living = isLiving(person);
-const gen = generation(person, people);
 const treeBasePath = localize(isExtendedProfile ? "/extended/tree" : "/tree", lang);
 const treeHref = `${treeBasePath}?focus=${person.id}`;
 const branchHref = `${treeBasePath}?branch=${person.id}`;
 const heroMeta = [
   span && { icon: "📅", value: span },
   data.birthplace && { icon: "📍", value: data.birthplace },
-  { value: t("person.generation", { n: gen }) },
 ].filter(Boolean) as { icon?: string; value: string }[];
 const missingFacts = [
   !data.born && t("person.unknownBirth"),
@@ -59,7 +56,6 @@ const missingFacts = [
 ].filter(Boolean) as string[];
 const miniMapGroups = [
   { label: t("person.parents"), items: rels.parents.map((p) => ({ p })) },
-  { label: t("person.self"), items: [{ p: person, self: true }] },
   { label: t("person.spouse"), items: rels.spouses.map((p) => ({ p })) },
   { label: t("person.children"), items: rels.children.slice(0, 8).map((p) => ({ p })) },
   { label: t("person.siblings"), items: rels.siblings.slice(0, 8).map((p) => ({ p })) },
@@ -81,7 +77,8 @@ const miniMapGroups = [
     </div>
   </div>
 
-  <header class="profile-hero mt-6" data-sex={data.sex}>
+  <div class="profile-top mt-6">
+    <header class="profile-hero" data-sex={data.sex}>
     <div class="profile-hero-main">
       <Avatar
         name={data.name}
@@ -137,7 +134,35 @@ const miniMapGroups = [
         }
       </div>
     </div>
-  </header>
+    </header>
+
+    {
+      miniMapGroups.length > 0 && (
+        <section class="family-mini-map" aria-label={t("person.familyMap")}>
+          <div class="family-mini-map-head">
+            <div>
+              <h2>{t("person.familyMap")}</h2>
+            </div>
+            <a href={branchHref}>{t("person.openBranch")}</a>
+          </div>
+          <div class="family-mini-map-grid">
+            {miniMapGroups.map((group) => (
+              <div class="family-mini-map-group">
+                <h3>{group.label}</h3>
+                <ul>
+                  {group.items.map(({ p: rel }) => (
+                    <li>
+                      <PersonMiniCard person={rel} href={`${peoplePath}/${rel.id}`} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </div>
 
   {data.photo && <Lightbox />}
 
@@ -147,35 +172,6 @@ const miniMapGroups = [
     </h2>
     <div class="prose mt-4 max-w-none text-ink">
       <Content />
-    </div>
-  </section>
-
-  <section class="family-mini-map mt-8" aria-label={t("person.familyMap")}>
-    <div class="family-mini-map-head">
-      <div>
-        <h2>{t("person.familyMap")}</h2>
-      </div>
-      <a href={branchHref}>{t("person.openBranch")}</a>
-    </div>
-    <div class="family-mini-map-grid">
-      {
-        miniMapGroups.map((group) => (
-          <div class="family-mini-map-group">
-            <h3>{group.label}</h3>
-            <ul>
-              {group.items.map(({ p: rel, self }) => (
-                <li>
-                  <PersonMiniCard
-                    person={rel}
-                    href={self ? undefined : `${peoplePath}/${rel.id}`}
-                    self={self}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))
-      }
     </div>
   </section>
 </article>

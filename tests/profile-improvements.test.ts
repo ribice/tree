@@ -26,10 +26,12 @@ describe("profile improvements", () => {
     expect(ui).toContain('"person.unknownBirth"');
   });
 
-  it("places biography before the family map", () => {
+  it("shows the family map beside the hero, above the biography", () => {
+    expect(profileView).toContain("profile-top");
     expect(profileView).toContain("profile-bio-section");
-    expect(profileView.indexOf("profile-bio-section")).toBeLessThan(
-      profileView.indexOf("family-mini-map"),
+    // Family map now sits in the top grid next to the hero, before the bio.
+    expect(profileView.indexOf("family-mini-map")).toBeLessThan(
+      profileView.indexOf("profile-bio-section"),
     );
     expect(profileView).not.toContain("kin-panel");
   });

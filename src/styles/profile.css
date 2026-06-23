@@ -1,3 +1,15 @@
+.profile-top {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .profile-top {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
 .profile-hero {
   position: relative;
   overflow: visible;
@@ -117,6 +129,7 @@
   display: grid;
   gap: 0.8rem;
   margin-top: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
 }
 
 .family-mini-map-group {
@@ -233,9 +246,5 @@ a.family-mini-card:hover {
 
   .family-mini-map {
     padding: 1.25rem;
-  }
-
-  .family-mini-map-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
