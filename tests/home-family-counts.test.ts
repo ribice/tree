@@ -6,18 +6,18 @@ const treeView = readFileSync("src/components/views/TreeView.astro", "utf8");
 const ui = readFileSync("src/i18n/ui.ts", "utf8");
 
 describe("family member counts", () => {
-  it("uses Ribic-Kific counts instead of raw people totals on the home page", () => {
-    expect(homeView).toContain("isRibicFamilyMember");
+  it("leads with the Ribić/Kifić blood-line count, not raw people totals", () => {
+    expect(homeView).toContain("bloodlineIds");
     expect(homeView).toContain('getPeople("extended")');
-    expect(homeView).toContain("coreFamilyCount");
+    expect(homeView).toContain("bloodlineCount");
     expect(homeView).toContain("extendedPeopleCount");
     expect(homeView).not.toContain("String(people.length)");
   });
 
-  it("has separate localized labels for core and extended family counts", () => {
-    expect(ui).toContain('"home.statCorePeople"');
+  it("labels the blood-line and extended family counts", () => {
+    expect(ui).toContain('"stats.bloodline"');
     expect(ui).toContain('"home.statExtendedPeople"');
-    expect(homeView).toContain('t("home.statCorePeople")');
+    expect(homeView).toContain('t("stats.bloodline")');
     expect(homeView).toContain('t("home.statExtendedPeople")');
   });
 
