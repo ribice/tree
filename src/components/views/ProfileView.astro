@@ -88,18 +88,10 @@ const miniMapGroups = [
 ---
 
 <article class="mx-auto max-w-6xl px-5 py-10">
-  <div class="flex items-center justify-between gap-3">
+  <div class="flex items-center gap-3">
     <a href={peoplePath} class="text-sm text-muted hover:text-accent">
       ← {t("person.back")}
     </a>
-    <div class="flex flex-wrap justify-end gap-x-4 gap-y-2 text-sm font-medium">
-      <a href={treeHref} class="text-accent hover:underline">
-        {t("person.viewInTree")}
-      </a>
-      <a href={branchHref} class="text-accent hover:underline">
-        {t("person.openBranch")}
-      </a>
-    </div>
   </div>
 
   <header class="profile-hero mt-6" data-sex={data.sex}>
@@ -157,6 +149,12 @@ const miniMapGroups = [
             </div>
           )
         }
+        <div class="profile-hero-actions">
+          <a href={treeHref} class="profile-action">{t("person.viewInTree")}</a>
+          <a href={branchHref} class="profile-action profile-action--ghost">
+            {t("person.openBranch")}
+          </a>
+        </div>
       </div>
     </div>
     {

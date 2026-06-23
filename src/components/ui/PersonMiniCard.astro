@@ -10,30 +10,25 @@ interface Props {
 
 const { person, href, self = false } = Astro.props;
 const classes = ["family-mini-card", self && "family-mini-self"].filter(Boolean);
+
+// Compact, language-neutral life span: "1900–1986", "* 1937", or "† 1986".
+const b = person.data.born?.match(/\d{4}/)?.[0];
+const d = person.data.died?.match(/\d{4}/)?.[0];
+const years = b && d ? `${b}–${d}` : b ? `* ${b}` : d ? `† ${d}` : "";
+
+const Tag = href ? "a" : "div";
 ---
 
-{
-  href ? (
-    <a href={href} class:list={classes} data-sex={person.data.sex}>
-      <Avatar
-        name={person.data.name}
-        photo={person.data.photo}
-        initials={initials(person.data.name)}
-        sex={person.data.sex}
-        size="xs"
-      />
-      <span>{person.data.name}</span>
-    </a>
-  ) : (
-    <div class:list={classes} data-sex={person.data.sex}>
-      <Avatar
-        name={person.data.name}
-        photo={person.data.photo}
-        initials={initials(person.data.name)}
-        sex={person.data.sex}
-        size="xs"
-      />
-      <span>{person.data.name}</span>
-    </div>
-  )
-}
+<Tag href={href} class:list={classes} data-sex={person.data.sex}>
+  <Avatar
+    name={person.data.name}
+    photo={person.data.photo}
+    initials={initials(person.data.name)}
+    sex={person.data.sex}
+    size="xs"
+  />
+  <span class="mini-card-text">
+    <span class="mini-card-name">{person.data.name}</span>
+    {years && <span class="mini-card-years">{years}</span>}
+  </span>
+</Tag>
