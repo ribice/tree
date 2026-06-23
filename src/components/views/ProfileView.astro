@@ -41,11 +41,36 @@ const peoplePath = localize(isExtendedProfile ? "/extended/people" : "/people", 
 const span = lifespan(person, lang);
 const { data } = person;
 const living = isLiving(person);
+
+// Age at death — only for deceased with known, non-estimated dates.
+const parseDMY = (s?: string) => {
+  if (!s || /c\./.test(s)) return null;
+  const full = s.match(/(\d{1,2})\.(\d{1,2})\.(\d{4})/);
+  if (full) return { d: +full[1], m: +full[2], y: +full[3] };
+  const y = s.match(/\d{4}/);
+  return y ? { d: 0, m: 0, y: +y[0] } : null;
+};
+const bornDMY = parseDMY(data.born);
+const diedDMY = parseDMY(data.died);
+let ageLabel = "";
+if (bornDMY && diedDMY) {
+  let a = diedDMY.y - bornDMY.y;
+  if (
+    bornDMY.m &&
+    diedDMY.m &&
+    (diedDMY.m < bornDMY.m || (diedDMY.m === bornDMY.m && diedDMY.d < bornDMY.d))
+  ) {
+    a--;
+  }
+  if (a >= 0 && a < 130) ageLabel = lang === "en" ? `${a} yrs` : `${a} god.`;
+}
+const spanWithAge = span && ageLabel ? `${span} · ${ageLabel}` : span;
+
 const treeBasePath = localize(isExtendedProfile ? "/extended/tree" : "/tree", lang);
 const treeHref = `${treeBasePath}?focus=${person.id}`;
 const branchHref = `${treeBasePath}?branch=${person.id}`;
 const heroMeta = [
-  span && { icon: "📅", value: span },
+  span && { icon: "📅", value: spanWithAge },
   data.birthplace && { icon: "📍", value: data.birthplace },
 ].filter(Boolean) as { icon?: string; value: string }[];
 const missingFacts = [

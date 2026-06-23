@@ -8,7 +8,17 @@
 @media (min-width: 1024px) {
   .profile-hero-grid {
     grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-    align-items: center;
+    align-items: start;
+    column-gap: 0;
+  }
+
+  .profile-hero-grid > .profile-hero-main {
+    padding-right: 2rem;
+  }
+
+  .profile-hero-relatives {
+    border-left: 1px solid color-mix(in oklch, var(--color-line), transparent 6%);
+    padding-left: 2rem;
   }
 }
 
@@ -68,6 +78,18 @@
   margin-left: -1.75rem;
   box-shadow:
     0 0 0 0.4rem var(--color-surface),
+    0 16px 30px color-mix(in oklch, var(--color-ink), transparent 86%);
+}
+
+.profile-avatar[data-sex="m"] {
+  box-shadow:
+    0 0 0 0.4rem color-mix(in oklch, var(--color-male), var(--color-surface) 78%),
+    0 16px 30px color-mix(in oklch, var(--color-ink), transparent 86%);
+}
+
+.profile-avatar[data-sex="f"] {
+  box-shadow:
+    0 0 0 0.4rem color-mix(in oklch, var(--color-female), var(--color-surface) 78%),
     0 16px 30px color-mix(in oklch, var(--color-ink), transparent 86%);
 }
 
