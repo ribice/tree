@@ -74,7 +74,7 @@ export const ui = {
     "add.successBody":
       "Poruka je poslana putem Netlify forme. Pregledat ćemo podatke i uvrstiti ih u stablo nakon provjere.",
 
-    "home.eyebrow": "{n} članova porodice — i raste",
+    "home.eyebrow": "{n} Ribića i Kifića — i raste",
     "home.kicker": "Porodična arhiva Ribić – Kifić",
     "home.title": "Stablo Rasima Ribića – Kifića",
     "home.intro":
@@ -298,7 +298,7 @@ export const ui = {
     "add.successBody":
       "The message was submitted through Netlify Forms. We will review the details and add them to the tree after checking them.",
 
-    "home.eyebrow": "{n} relatives — and growing",
+    "home.eyebrow": "{n} Ribićs and Kifićs — and growing",
     "home.kicker": "The Ribić – Kifić family archive",
     "home.title": "The Ribić – Kifić Family Tree",
     "home.intro":

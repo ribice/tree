@@ -3,15 +3,13 @@ import { describe, expect, it } from "vitest";
 
 const homeView = readFileSync("src/components/views/HomeView.astro", "utf8");
 const layout = readFileSync("src/layouts/Layout.astro", "utf8");
-const sitemap = readFileSync("src/pages/sitemap.xml.ts", "utf8");
 const ui = readFileSync("src/i18n/ui.ts", "utf8");
 
 describe("about content on the home page", () => {
-  it("removes the standalone about route from navigation and sitemap", () => {
+  it("removes the standalone about route from navigation", () => {
     expect(existsSync("src/pages/about.astro")).toBe(false);
     expect(existsSync("src/pages/en/about.astro")).toBe(false);
     expect(layout).not.toContain('localize("/about", lang)');
-    expect(sitemap).not.toContain('"/about/"');
   });
 
   it("shows the family story on the home page without implementation details", () => {

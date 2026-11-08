@@ -1,5 +1,5 @@
+# This site should stay out of search results: every page and file is sent
+# with noindex. Crawling stays allowed because a crawler has to fetch a page to
+# see that, which is also how anything already indexed gets removed.
 User-agent: *
 Allow: /
-
-Sitemap: https://stablo.ribic.ba/sitemap.xml
-Sitemap: https://tree.ribic.ba/sitemap.xml

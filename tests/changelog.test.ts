@@ -2,14 +2,12 @@ import { existsSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 const layout = readFileSync("src/layouts/Layout.astro", "utf8");
-const sitemap = readFileSync("src/pages/sitemap.xml.ts", "utf8");
 
 describe("family data changelog", () => {
-  it("has localized pages linked from the footer and sitemap", () => {
+  it("has localized pages linked from the footer", () => {
     expect(existsSync("src/pages/changelog.astro")).toBe(true);
     expect(existsSync("src/pages/en/changelog.astro")).toBe(true);
     expect(layout).toContain('localize("/changelog", lang)');
-    expect(sitemap).toContain('"/changelog/"');
   });
 
   it("records the GEDCOM import as a data changelog entry", () => {

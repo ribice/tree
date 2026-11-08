@@ -21,7 +21,6 @@ interface Props {
   ogImagePath?: string;
   ogType?: string;
   jsonLd?: unknown | unknown[];
-  noindex?: boolean;
 }
 
 const {
@@ -31,7 +30,6 @@ const {
   ogImagePath,
   ogType = "website",
   jsonLd,
-  noindex = false,
 } = Astro.props;
 const t = useTranslations(lang);
 
@@ -76,7 +74,7 @@ const jsonLdItems = [
     <meta name="description" content={pageDesc} />
     <meta name="theme-color" content="#f7f9fb" />
     <meta name="color-scheme" content="light" />
-    {noindex && <meta name="robots" content="noindex,follow" />}
+    <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonical} />
     {

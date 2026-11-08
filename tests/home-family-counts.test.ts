@@ -21,8 +21,8 @@ describe("family member counts", () => {
     expect(homeView).toContain('t("home.statExtendedPeople")');
   });
 
-  it("keeps tree page eyebrow counts aligned with family membership", () => {
-    expect(treeView).toContain("isRibicFamilyMember");
+  it("uses the same blood-line count on the tree page as on the home page", () => {
+    expect(treeView).toContain('bloodlineIds(await getPeople("extended"))');
     expect(treeView).toContain("familyCount");
     expect(treeView).toContain('t("home.eyebrow", { n: familyCount })');
   });
