@@ -1,5 +1,6 @@
 import { localize, type Locale } from "../i18n/ui";
 import type { Person, Translation } from "./people";
+import { isExtendedPerson } from "./people-visibility";
 import { isLikelyLivingDateSpan, publicLifespan } from "./privacy";
 
 export const ORIGIN: Record<Locale, string> = {
@@ -128,8 +129,9 @@ export function websiteJsonLd({
   };
 }
 
-function personUrl(locale: Locale, id: string): string {
-  return `${ORIGIN[locale]}${localize(`/people/${id}/`, locale)}`;
+function personUrl(locale: Locale, person: Person): string {
+  const section = isExtendedPerson(person) ? "/extended/people" : "/people";
+  return `${ORIGIN[locale]}${localize(`${section}/${person.id}/`, locale)}`;
 }
 
 export function breadcrumbJsonLd(items: BreadcrumbItem[]) {
@@ -188,21 +190,21 @@ export function personJsonLd({
     json.parent = rels.parents.map((p) => ({
       "@type": "Person",
       name: p.data.name,
-      url: personUrl(locale, p.id),
+      url: personUrl(locale, p),
     }));
   }
   if (rels.spouses.length) {
     json.spouse = rels.spouses.map((p) => ({
       "@type": "Person",
       name: p.data.name,
-      url: personUrl(locale, p.id),
+      url: personUrl(locale, p),
     }));
   }
   if (rels.children.length) {
     json.children = rels.children.map((p) => ({
       "@type": "Person",
       name: p.data.name,
-      url: personUrl(locale, p.id),
+      url: personUrl(locale, p),
     }));
   }
 

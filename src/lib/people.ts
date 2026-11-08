@@ -158,6 +158,7 @@ export interface TreeNodePerson {
   id: string;
   name: string;
   treeName?: string;
+  nickname?: string;
   sex?: "m" | "f";
   tagline?: string;
   lifespan: string;
@@ -189,6 +190,7 @@ export function toTreeData(
       id: p.id,
       name: p.data.name,
       treeName,
+      nickname: p.data.nickname,
       sex: p.data.sex,
       tagline: displayTaglineFor(p, people, translations, locale, treeNameFor),
       lifespan: lifespan(p, locale),

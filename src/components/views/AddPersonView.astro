@@ -204,3 +204,10 @@ const opt = t("add.optional");
     </div>
   </form>
 </section>
+
+<script define:vars={{ correctionFor: t("add.correctionFor") }}>
+  // Profile pages link here with ?about=<name> to suggest a correction.
+  const about = new URLSearchParams(location.search).get("about");
+  const notes = document.getElementById("sourceNotes");
+  if (about && notes && !notes.value) notes.value = `${correctionFor}: ${about}\n`;
+</script>

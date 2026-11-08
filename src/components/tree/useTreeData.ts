@@ -7,6 +7,7 @@ export function useTreeData(
 ) {
   const [people, setPeople] = useState<TreeNodePerson[]>(initialPeople);
   const [loading, setLoading] = useState(Boolean(dataUrl && !initialPeople.length));
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     if (!dataUrl) return;
@@ -21,7 +22,9 @@ export function useTreeData(
         if (!cancelled) setPeople(items);
       })
       .catch(() => {
-        if (!cancelled) setPeople(initialPeople);
+        if (cancelled) return;
+        setPeople(initialPeople);
+        setFailed(!initialPeople.length);
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -33,5 +36,5 @@ export function useTreeData(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataUrl]);
 
-  return { people, loading };
+  return { people, loading, failed };
 }

@@ -9,6 +9,7 @@ import {
   type PeopleView,
 } from "../../lib/people";
 import { displayTaglineFor } from "../../lib/display";
+import { foldSearchText } from "../../lib/search";
 import { useTranslations, localize, type Locale } from "../../i18n/ui";
 
 interface Props {
@@ -103,7 +104,7 @@ const letterCount = groupedPeople.length;
             {group.map((p) => (
               <li
                 class="person-item min-w-0"
-                data-name={`${p.data.name} ${p.data.maidenName ?? ""} ${p.data.nickname ?? ""} ${displayTaglineFor(p, people, translations, lang) ?? ""} ${lifespan(p, lang)}`.toLowerCase()}
+                data-name={foldSearchText(`${p.data.name} ${p.data.maidenName ?? ""} ${p.data.nickname ?? ""} ${displayTaglineFor(p, people, translations, lang) ?? ""} ${lifespan(p, lang)}`)}
               >
                 <a
                   href={`${peoplePath}/${p.id}`}
@@ -139,6 +140,8 @@ const letterCount = groupedPeople.length;
 </section>
 
 <script>
+  import { foldSearchText } from "../../lib/search";
+
   const input = document.getElementById("search") as HTMLInputElement;
   const items = Array.from(
     document.querySelectorAll<HTMLElement>(".person-item"),
@@ -146,12 +149,18 @@ const letterCount = groupedPeople.length;
   const sections = Array.from(
     document.querySelectorAll<HTMLElement>(".letter-section"),
   );
+  const letterLinks = new Map(
+    Array.from(document.querySelectorAll<HTMLAnchorElement>(".letter-link")).map(
+      (link) => [link.hash.slice(1) && decodeURIComponent(link.hash.slice(1)), link] as const,
+    ),
+  );
   const empty = document.getElementById("no-results")!;
   const count = document.getElementById("result-count")!;
   const template = count.dataset.template ?? "{n}";
 
   const filter = () => {
-    const q = input.value.trim().toLowerCase();
+    const raw = input.value.trim();
+    const q = foldSearchText(raw);
     let shown = 0;
     for (const item of items) {
       const match = (item.dataset.name ?? "").includes(q);
@@ -161,12 +170,14 @@ const letterCount = groupedPeople.length;
     for (const section of sections) {
       const visible = section.querySelectorAll(".person-item:not([hidden])").length;
       section.hidden = visible === 0;
+      const link = letterLinks.get(section.id);
+      if (link) link.hidden = visible === 0;
     }
     empty.classList.toggle("hidden", shown !== 0);
     count.textContent = template.replace("{n}", String(shown));
 
     const url = new URL(location.href);
-    if (q) url.searchParams.set("q", q);
+    if (raw) url.searchParams.set("q", raw);
     else url.searchParams.delete("q");
     history.replaceState(null, "", url);
   };

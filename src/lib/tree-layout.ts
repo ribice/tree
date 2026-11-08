@@ -8,10 +8,19 @@ export const COUPLE_GAP = 22; // gap between two spouses in a couple
 export const GEN_GAP = 196; // vertical distance between generations
 const SIBLING_MARGIN = 32; // extra space between adjacent units
 
+interface ExtraPartner {
+  person: TreeNodePerson;
+  divorced: boolean;
+  married?: string;
+  divorcedDate?: string;
+}
+
 /** A couple (or single parent) plus the units descending from them. */
 interface Unit {
   anchor: TreeNodePerson;
   spouse?: TreeNodePerson;
+  /** further partners the anchor had children with, placed to the anchor's left */
+  extraPartners?: ExtraPartner[];
   divorced: boolean;
   married?: string;
   divorcedDate?: string;
@@ -98,13 +107,28 @@ function buildForest(people: TreeNodePerson[], collapsed: Set<string>): Unit[] {
     return undefined;
   };
 
+  // Run after pickSpouse: any partner still free who shares a child with the
+  // person has to be shown too, or that child would read as the first couple's.
+  const pickExtraPartners = (person: TreeNodePerson): TreeNodePerson[] => {
+    const extras: TreeNodePerson[] = [];
+    for (const sid of person.spouses) {
+      const s = byId.get(sid);
+      if (!s || visited.has(s.id)) continue;
+      if (!childrenOf(person.id).some((c) => c.parents.includes(s.id))) continue;
+      visited.add(s.id);
+      extras.push(s);
+    }
+    return extras;
+  };
+
   const collectKids = (
     person: TreeNodePerson,
     spouse: TreeNodePerson | undefined,
+    extras: TreeNodePerson[] = [],
   ): TreeNodePerson[] => {
     const seen = new Set<string>();
     const kids: TreeNodePerson[] = [];
-    for (const pid of [person.id, spouse?.id].filter(Boolean) as string[]) {
+    for (const pid of [person.id, spouse?.id, ...extras.map((e) => e.id)].filter(Boolean) as string[]) {
       for (const c of childrenOf(pid)) {
         if (!visited.has(c.id) && !seen.has(c.id)) {
           seen.add(c.id);
@@ -120,8 +144,9 @@ function buildForest(people: TreeNodePerson[], collapsed: Set<string>): Unit[] {
   const swallow = (person: TreeNodePerson): number => {
     visited.add(person.id);
     const spouse = pickSpouse(person);
+    const extras = pickExtraPartners(person);
     let n = 1;
-    for (const c of collectKids(person, spouse)) n += swallow(c);
+    for (const c of collectKids(person, spouse, extras)) n += swallow(c);
     return n;
   };
 
@@ -141,7 +166,9 @@ function buildForest(people: TreeNodePerson[], collapsed: Set<string>): Unit[] {
     visited.add(person.id);
     const spouse = pickSpouse(person);
     const meta = spouse ? spouseMeta(person, spouse) : undefined;
-    const kids = collectKids(person, spouse);
+    const extras = pickExtraPartners(person);
+    const extraPartners = extras.map((s) => ({ person: s, ...spouseMeta(person, s) }));
+    const kids = collectKids(person, spouse, extras);
     const hasChildren = kids.length > 0;
 
     if (hasChildren && collapsed.has(person.id)) {
@@ -150,6 +177,7 @@ function buildForest(people: TreeNodePerson[], collapsed: Set<string>): Unit[] {
       return {
         anchor: person,
         spouse,
+        extraPartners,
         divorced: Boolean(meta?.divorced),
         married: meta?.married,
         divorcedDate: meta?.divorcedDate,
@@ -163,6 +191,7 @@ function buildForest(people: TreeNodePerson[], collapsed: Set<string>): Unit[] {
     return {
       anchor: person,
       spouse,
+      extraPartners,
       divorced: Boolean(meta?.divorced),
       married: meta?.married,
       divorcedDate: meta?.divorcedDate,
@@ -203,8 +232,11 @@ function buildForest(people: TreeNodePerson[], collapsed: Set<string>): Unit[] {
   return roots;
 }
 
+const COUPLE_STEP = BOX_W + COUPLE_GAP;
+
 const unitHalfWidth = (u: Unit) =>
-  u.spouse ? BOX_W + COUPLE_GAP / 2 : BOX_W / 2;
+  (u.spouse ? BOX_W + COUPLE_GAP / 2 : BOX_W / 2) +
+  (u.extraPartners?.length ?? 0) * COUPLE_STEP;
 
 /** Compute positioned boxes and links for the whole forest. */
 export function computeLayout(
@@ -246,6 +278,8 @@ export function computeLayout(
     const ux = centerX(node);
     const y = rowY(node.depth);
     const { anchor, spouse } = node.data;
+    const extras = node.data.extraPartners ?? [];
+    const anchorCx = ux - COUPLE_STEP / 2;
 
     if (node.data.hasChildren) {
       toggles.push({
@@ -258,8 +292,7 @@ export function computeLayout(
     }
 
     if (spouse) {
-      const anchorCx = ux - (BOX_W + COUPLE_GAP) / 2;
-      const spouseCx = ux + (BOX_W + COUPLE_GAP) / 2;
+      const spouseCx = ux + COUPLE_STEP / 2;
       nodes.push({ person: anchor, x: anchorCx - BOX_W / 2, y });
       nodes.push({ person: spouse, x: spouseCx - BOX_W / 2, y });
       marriages.push({
@@ -272,13 +305,33 @@ export function computeLayout(
         aId: anchor.id,
         bId: spouse.id,
       });
+      extras.forEach((partner, index) => {
+        const partnerCx = anchorCx - (index + 1) * COUPLE_STEP;
+        nodes.push({ person: partner.person, x: partnerCx - BOX_W / 2, y });
+        marriages.push({
+          x1: partnerCx + BOX_W / 2,
+          x2: anchorCx - BOX_W / 2,
+          y: y + BOX_H / 2,
+          divorced: partner.divorced,
+          married: partner.married,
+          divorcedDate: partner.divorcedDate,
+          aId: partner.person.id,
+          bId: anchor.id,
+        });
+      });
     } else {
       nodes.push({ person: anchor, x: ux - BOX_W / 2, y });
     }
 
     for (const child of node.children ?? []) {
+      const partnerIndex = extras.findIndex((partner) =>
+        child.data.anchor.parents.includes(partner.person.id),
+      );
       links.push({
-        parentX: ux,
+        parentX:
+          partnerIndex >= 0
+            ? anchorCx - (partnerIndex + 0.5) * COUPLE_STEP
+            : ux,
         parentY: y + BOX_H,
         childX: centerX(child),
         childY: rowY(child.depth),

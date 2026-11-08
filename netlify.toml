@@ -30,6 +30,12 @@
   force = true
 
 [[redirects]]
+  from = "https://tree.ribic.ba/extended/*"
+  to = "https://tree.ribic.ba/en/extended/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "https://tree.ribic.ba/people"
   to = "https://tree.ribic.ba/en/people/"
   status = 301
@@ -90,6 +96,12 @@
   force = true
 
 [[redirects]]
+  from = "https://stablo.ribic.ba/en/extended/*"
+  to = "https://stablo.ribic.ba/extended/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "https://stablo.ribic.ba/en/people"
   to = "https://stablo.ribic.ba/people/"
   status = 301
@@ -133,3 +145,17 @@
 
 # Submissions from the "Add a person" form are captured by Netlify Forms;
 # enable form notifications in the Netlify dashboard to get an email per entry.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Build output under /_astro has content-hashed names, so it can be cached forever.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

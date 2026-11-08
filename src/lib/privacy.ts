@@ -14,16 +14,22 @@ export function isLikelyLivingDateSpan(
   span: DateSpan,
   nowYear = new Date().getFullYear(),
 ): boolean {
-  if (span.died) return false;
+  if (span.died || !span.born) return false;
   const born = yearFrom(span.born);
-  if (born === null) return false;
+  // A birth value with no readable year cannot be shown to be historical.
+  if (born === null) return true;
   return born >= nowYear - 105;
 }
 
 export function publicDate(value: string | undefined, living: boolean): string {
   if (!value) return "";
   if (!living) return value;
-  return value.match(/\d{4}/)?.[0] ?? value;
+  return value.match(/\d{4}/)?.[0] ?? "";
+}
+
+/** Lifespan for a raw date span, reduced to the birth year for living people. */
+export function publicLifespanFor(span: DateSpan, locale: Locale = "bs"): string {
+  return publicLifespan(span, isLikelyLivingDateSpan(span), locale);
 }
 
 export function publicLifespan(

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { BOX_H, BOX_W, type PositionedPerson } from "../../lib/tree-layout";
 import { treePersonTooltip, type TreeTooltipLabels } from "./tree-person-details";
 
@@ -8,10 +9,12 @@ interface TreePersonCardProps {
   detailLabels: TreeTooltipLabels;
   highlighted: boolean;
   dim: number;
-  onHoverChange: (hovering: boolean) => void;
+  onHoverChange: (id: string, hovering: boolean) => void;
 }
 
-export function TreePersonCard({
+// Memoized: panning re-renders the tree on every pointer move, and the cards
+// themselves only change when the layout or the highlighted lineage does.
+export const TreePersonCard = memo(function TreePersonCard({
   node,
   basePath,
   livingLabel,
@@ -45,8 +48,8 @@ export function TreePersonCard({
       <a
         href={`${basePath}/${person.id}`}
         title={tooltip}
-        onMouseEnter={() => onHoverChange(true)}
-        onMouseLeave={() => onHoverChange(false)}
+        onMouseEnter={() => onHoverChange(person.id, true)}
+        onMouseLeave={() => onHoverChange(person.id, false)}
         className={`tree-person-card group relative flex h-full w-full items-center gap-3 rounded-lg border bg-surface px-3 py-2.5 shadow-sm transition duration-150 hover:-translate-y-0.5 hover:border-accent hover:shadow-lg ${sexClass} ${membershipClass} ${
           highlighted
             ? "border-accent ring-2 ring-accent ring-offset-2 ring-offset-paper"
@@ -91,4 +94,4 @@ export function TreePersonCard({
       </a>
     </foreignObject>
   );
-}
+});

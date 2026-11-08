@@ -3,14 +3,14 @@ import type { TreeNodePerson } from "./people";
 
 // Standalone SVG can't use CSS variables, so colors are inlined here.
 const C = {
-  paper: "#fafafb",
+  paper: "#fbfaf6",
   surface: "#ffffff",
-  ink: "#23272f",
-  muted: "#6b7280",
-  line: "#e5e7eb",
-  branch: "#cbd2dc",
-  accent: "#4f6bd0",
-  accentSoft: "#eef1fb",
+  ink: "#0e1a26",
+  muted: "#57616f",
+  line: "#e3e0d6",
+  branch: "#9db6a4",
+  accent: "#005f43",
+  accentSoft: "#dcf5e9",
 };
 
 const esc = (s: string) =>

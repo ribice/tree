@@ -69,6 +69,7 @@ const spanWithAge = span && ageLabel ? `${span} · ${ageLabel}` : span;
 const treeBasePath = localize(isExtendedProfile ? "/extended/tree" : "/tree", lang);
 const treeHref = `${treeBasePath}?focus=${person.id}`;
 const branchHref = `${treeBasePath}?branch=${person.id}`;
+const suggestHref = `${localize("/add", lang)}?about=${encodeURIComponent(data.name)}`;
 const heroMeta = [
   span && { icon: "📅", value: spanWithAge },
   data.birthplace && { icon: "📍", value: data.birthplace },
@@ -174,6 +175,9 @@ const relativeCount = miniMapGroups.reduce((sum, group) => sum + group.total, 0)
             <a href={branchHref} class="profile-action profile-action--ghost">
               {t("person.openBranch")}
             </a>
+            <a href={suggestHref} class="profile-action profile-action--ghost">
+              {t("person.suggest")}
+            </a>
           </div>
         </div>
       </div>
@@ -216,7 +220,7 @@ const relativeCount = miniMapGroups.reduce((sum, group) => sum + group.total, 0)
     </div>
   </header>
 
-  {data.photo && <Lightbox />}
+  {data.photo && <Lightbox closeLabel={t("common.close")} />}
 
   <section class="profile-bio-section mt-8">
     <h2 class="text-sm font-semibold tracking-wide text-muted uppercase">

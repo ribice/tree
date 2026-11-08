@@ -46,7 +46,7 @@ export function TreeSearch({
         className="tree-search-input"
       />
       {normalizedQuery && (
-        <div className="tree-search-results">
+        <div className="tree-search-results" aria-live="polite">
           {results.length ? (
             results.map((person) => (
               <button

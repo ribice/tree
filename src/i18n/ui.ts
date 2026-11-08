@@ -32,6 +32,13 @@ export const ui = {
     "nav.changelog": "Promjene",
     "nav.langName": "English",
     "nav.skip": "Preskoči na sadržaj",
+    "nav.menu": "Meni",
+    "nav.main": "Glavna navigacija",
+    "nav.footer": "Dodatne stranice",
+    "common.close": "Zatvori",
+    "home.githubCta": "Pogledaj na GitHubu →",
+    "person.suggest": "Predloži ispravku",
+    "add.correctionFor": "Ispravka za",
 
     "add.title": "Dodaj osobu",
     "add.intro":
@@ -118,6 +125,10 @@ export const ui = {
     "tree.searchEmpty": "Nema rezultata u stablu.",
     "tree.center": "Centriraj",
     "tree.loading": "Učitavanje stabla…",
+    "tree.loadError": "Stablo se nije moglo učitati. Osvježi stranicu ili otvori imenik.",
+    "tree.otherSurname": "Drugo prezime",
+    "tree.region": "Interaktivno porodično stablo",
+    "tree.keyboardHelp": "Strelice pomjeraju prikaz, plus i minus zumiraju, nula vraća početni prikaz. Isti podaci dostupni su kao popis u imeniku.",
     "tree.branchMode": "Prikazana grana: {name}",
     "tree.showAll": "Prikaži cijelo stablo",
 
@@ -245,6 +256,13 @@ export const ui = {
     "nav.changelog": "Changes",
     "nav.langName": "Bosanski",
     "nav.skip": "Skip to content",
+    "nav.menu": "Menu",
+    "nav.main": "Main navigation",
+    "nav.footer": "More pages",
+    "common.close": "Close",
+    "home.githubCta": "View on GitHub →",
+    "person.suggest": "Suggest a correction",
+    "add.correctionFor": "Correction for",
 
     "add.title": "Add a person",
     "add.intro":
@@ -331,6 +349,10 @@ export const ui = {
     "tree.searchEmpty": "No results in the tree.",
     "tree.center": "Center",
     "tree.loading": "Loading tree…",
+    "tree.loadError": "The tree could not be loaded. Refresh the page or open the directory.",
+    "tree.otherSurname": "Other surname",
+    "tree.region": "Interactive family tree",
+    "tree.keyboardHelp": "Arrow keys move the view, plus and minus zoom, zero resets it. The same people are listed in the directory.",
     "tree.branchMode": "Showing branch: {name}",
     "tree.showAll": "Show full tree",
 

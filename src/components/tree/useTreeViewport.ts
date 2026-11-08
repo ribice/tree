@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { MouseEvent, PointerEvent } from "react";
-import { BOX_H, BOX_W, type Layout } from "../../lib/tree-layout";
+import type { KeyboardEvent, MouseEvent, PointerEvent } from "react";
+import { BOX_W, type Layout } from "../../lib/tree-layout";
 import {
   isInteractiveTreeTarget,
   shouldSuppressTreeClick,
@@ -15,6 +15,9 @@ export interface Transform {
 const MIN_K = 0.25;
 const MAX_K = 2.5;
 const MAX_FIT_K = 1.05;
+const KEY_PAN_STEP = 80;
+const REVEAL_MARGIN = 32;
+const OVERLAY_SELECTOR = ".tree-search-panel, .tree-legend, .tree-branch-banner";
 const clamp = (value: number, min: number, max: number) =>
   Math.min(max, Math.max(min, value));
 
@@ -24,9 +27,17 @@ export function useTreeViewport(layout: Layout, fitKey: string) {
   const layoutRef = useRef(layout);
   layoutRef.current = layout;
 
-  const [transform, setTransform] = useState<Transform>({ x: 0, y: 0, k: 1 });
+  const [transform, setTransformState] = useState<Transform>({ x: 0, y: 0, k: 1 });
   const transformRef = useRef(transform);
   transformRef.current = transform;
+
+  // Once the visitor has moved the view, resizing must not throw it away.
+  const userMovedRef = useRef(false);
+  const lastSizeRef = useRef({ width: 0, height: 0 });
+  const setTransform: typeof setTransformState = useCallback((next) => {
+    userMovedRef.current = true;
+    setTransformState(next);
+  }, []);
 
   const [ready, setReady] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -46,6 +57,7 @@ export function useTreeViewport(layout: Layout, fitKey: string) {
     if (!el) return;
     const lay = layoutRef.current;
     if (!lay.nodes.length) return;
+    userMovedRef.current = false;
     const vw = el.clientWidth;
     const vh = el.clientHeight;
     if (vw < 640) {
@@ -53,10 +65,17 @@ export function useTreeViewport(layout: Layout, fitKey: string) {
         lay.nodes.find((node) => node.person.id === "avdikadija") ?? lay.nodes[0];
       if (rootNode) {
         const k = clamp(Math.min(0.84, vw / (BOX_W * 1.18)), 0.55, 0.84);
-        setTransform({
+        const shellTop = el.getBoundingClientRect().top;
+        const overlayBottom = Math.max(
+          0,
+          ...[...el.querySelectorAll(OVERLAY_SELECTOR)].map(
+            (overlay) => overlay.getBoundingClientRect().bottom - shellTop,
+          ),
+        );
+        setTransformState({
           k,
           x: Math.max(16, (vw - BOX_W * k) / 2) - rootNode.x * k,
-          y: 156 - rootNode.y * k,
+          y: overlayBottom + 16 - rootNode.y * k,
         });
         return;
       }
@@ -66,7 +85,7 @@ export function useTreeViewport(layout: Layout, fitKey: string) {
       MIN_K,
       MAX_FIT_K,
     );
-    setTransform({
+    setTransformState({
       k,
       x: (vw - lay.width * k) / 2,
       y: Math.max(24, (vh - lay.height * k) / 2),
@@ -78,7 +97,23 @@ export function useTreeViewport(layout: Layout, fitKey: string) {
     setReady(true);
     const el = containerRef.current;
     if (!el) return;
-    const resizeObserver = new ResizeObserver(() => fit());
+    lastSizeRef.current = { width: el.clientWidth, height: el.clientHeight };
+    const resizeObserver = new ResizeObserver(() => {
+      const { width, height } = lastSizeRef.current;
+      const nextWidth = el.clientWidth;
+      const nextHeight = el.clientHeight;
+      lastSizeRef.current = { width: nextWidth, height: nextHeight };
+      if (!userMovedRef.current) {
+        fit();
+        return;
+      }
+      // Keep whatever the visitor was looking at in the middle of the view.
+      setTransformState((current) => ({
+        ...current,
+        x: current.x + (nextWidth - width) / 2,
+        y: current.y + (nextHeight - height) / 2,
+      }));
+    });
     resizeObserver.observe(el);
     return () => resizeObserver.disconnect();
   }, [fit]);
@@ -119,7 +154,7 @@ export function useTreeViewport(layout: Layout, fitKey: string) {
       x: px - ((px - x) / k) * nextK,
       y: py - ((py - y) / k) * nextK,
     });
-  }, []);
+  }, [setTransform]);
 
   useEffect(() => {
     const el = wheelTargetRef.current;
@@ -219,6 +254,61 @@ export function useTreeViewport(layout: Layout, fitKey: string) {
     });
   };
 
+  const onKeyDown = (event: KeyboardEvent) => {
+    if (event.altKey || event.ctrlKey || event.metaKey) return;
+    const target = event.target as Element;
+    if (target.closest("input, textarea, select")) return;
+    const pan = (dx: number, dy: number) =>
+      setTransform((current) => ({
+        ...current,
+        x: current.x + dx,
+        y: current.y + dy,
+      }));
+    switch (event.key) {
+      case "ArrowLeft":
+        pan(KEY_PAN_STEP, 0);
+        break;
+      case "ArrowRight":
+        pan(-KEY_PAN_STEP, 0);
+        break;
+      case "ArrowUp":
+        pan(0, KEY_PAN_STEP);
+        break;
+      case "ArrowDown":
+        pan(0, -KEY_PAN_STEP);
+        break;
+      case "+":
+      case "=":
+        zoomBy(1.25);
+        break;
+      case "-":
+        zoomBy(0.8);
+        break;
+      case "0":
+        fit();
+        break;
+      default:
+        return;
+    }
+    event.preventDefault();
+  };
+
+  /** Pans just enough to bring a keyboard-focused card fully into view. */
+  const revealElement = (element: Element) => {
+    const shell = containerRef.current;
+    if (!shell) return;
+    const view = shell.getBoundingClientRect();
+    const rect = element.getBoundingClientRect();
+    const overflowRight = rect.right + REVEAL_MARGIN - view.right;
+    const overflowLeft = view.left + REVEAL_MARGIN - rect.left;
+    const overflowBottom = rect.bottom + REVEAL_MARGIN - view.bottom;
+    const overflowTop = view.top + REVEAL_MARGIN - rect.top;
+    const dx = overflowLeft > 0 ? overflowLeft : overflowRight > 0 ? -overflowRight : 0;
+    const dy = overflowTop > 0 ? overflowTop : overflowBottom > 0 ? -overflowBottom : 0;
+    if (!dx && !dy) return;
+    setTransform((current) => ({ ...current, x: current.x + dx, y: current.y + dy }));
+  };
+
   return {
     containerRef,
     wheelTargetRef,
@@ -228,6 +318,8 @@ export function useTreeViewport(layout: Layout, fitKey: string) {
     isDragging,
     fit,
     zoomBy,
+    onKeyDown,
+    revealElement,
     onPointerDown,
     onPointerMove,
     onPointerUp,

@@ -3,6 +3,7 @@ import {
   isLikelyLivingDateSpan,
   publicDate,
   publicLifespan,
+  publicLifespanFor,
 } from "../src/lib/privacy";
 
 describe("public date formatting", () => {
@@ -23,5 +24,24 @@ describe("public date formatting", () => {
     expect(isLikelyLivingDateSpan({ born: "1775" }, 2026)).toBe(false);
     expect(isLikelyLivingDateSpan({ born: "1930" }, 2026)).toBe(true);
     expect(isLikelyLivingDateSpan({ born: "1930", died: "2010" }, 2026)).toBe(false);
+  });
+});
+
+describe("publicLifespanFor", () => {
+  it("keeps only the birth year for a living person", () => {
+    expect(publicLifespanFor({ born: "12.03.1990" }, "bs")).toBe("r. 1990");
+  });
+
+  it("keeps full dates for someone who has died", () => {
+    expect(publicLifespanFor({ born: "12.03.1900", died: "01.02.1980" }, "en")).toBe(
+      "12.03.1900 – 01.02.1980",
+    );
+  });
+});
+
+describe("birth values without a readable year", () => {
+  it("are treated as possibly living and never published", () => {
+    expect(isLikelyLivingDateSpan({ born: "15.11" })).toBe(true);
+    expect(publicDate("15.11", true)).toBe("");
   });
 });

@@ -54,3 +54,36 @@ describe("computeLayout", () => {
     expect(lay.height).toBeGreaterThan(0);
   });
 });
+
+describe("computeLayout with two partners", () => {
+  const family: TreeNodePerson[] = [
+    person({ id: "a", spouses: ["b", "c"] }),
+    person({ id: "b", spouses: ["a"] }),
+    person({ id: "c", spouses: ["a"] }),
+    person({ id: "first", parents: ["a", "b"] }),
+    person({ id: "second", parents: ["a", "c"] }),
+  ];
+
+  it("draws both partnerships and places everyone once", () => {
+    const lay = computeLayout(family);
+    expect(lay.nodes.map((n) => n.person.id).sort()).toEqual(["a", "b", "c", "first", "second"]);
+    expect(lay.marriages.map((m) => [m.aId, m.bId].sort().join("-")).sort()).toEqual(["a-b", "a-c"]);
+  });
+
+  it("hangs each child from the partnership they belong to", () => {
+    const lay = computeLayout(family);
+    const midpoint = (id: string) => {
+      const m = lay.marriages.find((x) => x.aId === id || x.bId === id)!;
+      return (m.x1 + m.x2) / 2;
+    };
+    const linkTo = (id: string) => lay.links.find((l) => l.toId === id)!;
+    expect(linkTo("first").parentX).toBeCloseTo(midpoint("b"));
+    expect(linkTo("second").parentX).toBeCloseTo(midpoint("c"));
+  });
+
+  it("does not place cards on top of each other", () => {
+    const lay = computeLayout(family);
+    const xs = lay.nodes.filter((n) => n.y === lay.nodes[0]!.y).map((n) => n.x).sort((p, q) => p - q);
+    for (let i = 1; i < xs.length; i++) expect(xs[i]! - xs[i - 1]!).toBeGreaterThanOrEqual(216);
+  });
+});

@@ -106,10 +106,10 @@
 }
 
 .family-ledger::before {
-  top: -3.25rem;
-  right: 0;
-  width: min(12rem, 56%);
-  height: 12rem;
+  top: -5.5rem;
+  right: -4rem;
+  width: 11rem;
+  height: 11rem;
   border: 1px solid color-mix(in oklch, var(--color-gold), transparent 38%);
   border-radius: 999px;
   background: color-mix(in oklch, var(--color-gold), transparent 92%);
@@ -225,7 +225,7 @@
   white-space: nowrap;
 }
 
-.family-ledger-person span {
+.family-ledger-person > span:not(.avatar) {
   min-width: 0;
   flex: 1 1 auto;
 }
@@ -518,7 +518,7 @@
   border-color: color-mix(in oklch, var(--color-male), var(--color-line) 74%);
 }
 
-.home-person-card > span {
+.home-person-card > span:not(.avatar) {
   display: grid;
   min-width: 0;
   gap: 0.15rem;

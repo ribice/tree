@@ -2,6 +2,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import matter from "gray-matter";
 import { OGImageRoute } from "astro-og-canvas";
+import { publicLifespanFor } from "../../lib/privacy";
 
 // Read person frontmatter synchronously (no top-level await, which Astro's
 // route validation rejects). Runs in Node at build time.
@@ -13,7 +14,7 @@ const pages = Object.fromEntries(
       const { data } = matter(readFileSync(join(DIR, f), "utf8"));
       const id = f.replace(/\.md$/, "");
       const { born, died, tagline, name, photo } = data;
-      const span = born && died ? `${born} – ${died}` : born ? `r. ${born}` : died ? `u. ${died}` : "";
+      const span = publicLifespanFor({ born, died });
       const description = [span, tagline].filter(Boolean).join(" · ");
       return [`${id}.png`, { title: name, description, photo }];
     }),
@@ -29,10 +30,10 @@ export const { getStaticPaths, GET } = await OGImageRoute({
     // under public/, so the frontmatter path maps to ./public/<path>.
     ...(page.photo ? { logo: { path: `./public${page.photo}`, size: [240] } } : {}),
     bgGradient: [
-      [15, 29, 58],
-      [30, 58, 115],
+      [4, 52, 39],
+      [0, 95, 67],
     ],
-    border: { color: [79, 107, 208], width: 12, side: "inline-start" },
+    border: { color: [201, 160, 60], width: 12, side: "inline-start" },
     padding: 80,
     // Vendored DejaVu Sans — full Bosnian coverage (č, š, ž, đ) in one file per
     // weight, so no build-time network dependency or glyph-fallback gaps.

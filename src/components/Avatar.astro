@@ -49,6 +49,8 @@ const zoomable = lightbox && Boolean(photo);
         class={`h-full w-full object-cover${zoomable ? " cursor-zoom-in" : ""}`}
         data-lightbox-src={zoomable ? photo : undefined}
         data-lightbox-alt={zoomable ? name : undefined}
+        role={zoomable ? "button" : undefined}
+        tabindex={zoomable ? 0 : undefined}
       />
     ) : (
       initials

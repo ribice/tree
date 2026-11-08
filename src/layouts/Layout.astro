@@ -122,7 +122,7 @@ const jsonLdItems = [
           <span>{t("site.short")}</span>
         </a>
 
-        <nav class="hidden items-center gap-1 text-sm sm:flex">
+        <nav class="hidden items-center gap-1 text-sm sm:flex" aria-label={t("nav.main")}>
           {
             nav.map((item) => (
               <a
@@ -154,7 +154,7 @@ const jsonLdItems = [
         <button
           id="menu-btn"
           type="button"
-          aria-label="Menu"
+          aria-label={t("nav.menu")}
           aria-expanded="false"
           aria-controls="mobile-menu"
           class="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-surface text-ink shadow-sm sm:hidden"
@@ -165,6 +165,7 @@ const jsonLdItems = [
 
       <nav
         id="mobile-menu"
+        aria-label={t("nav.main")}
         class="hidden flex-col gap-1 border-t border-line px-5 py-3 text-sm sm:hidden"
       >
         {
@@ -204,7 +205,7 @@ const jsonLdItems = [
       <div
         class="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-6 text-sm text-muted"
       >
-        <nav class="flex flex-wrap gap-x-5 gap-y-2">
+        <nav class="flex flex-wrap gap-x-5 gap-y-2" aria-label={t("nav.footer")}>
           <a href={localize("/stats", lang)} class="transition hover:text-accent"
             >{t("stats.title")}</a
           >
@@ -232,27 +233,42 @@ const jsonLdItems = [
       (function () {
         var btn = document.getElementById("menu-btn");
         var menu = document.getElementById("mobile-menu");
-        if (btn && menu)
-          btn.addEventListener("click", function () {
-            var open = menu.classList.toggle("hidden") === false;
-            menu.classList.toggle("flex", open);
-            btn.setAttribute("aria-expanded", String(open));
-          });
+        if (!btn || !menu) return;
+        function setOpen(open) {
+          menu.classList.toggle("hidden", !open);
+          menu.classList.toggle("flex", open);
+          btn.setAttribute("aria-expanded", String(open));
+        }
+        btn.addEventListener("click", function () {
+          setOpen(menu.classList.contains("hidden"));
+        });
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape" && !menu.classList.contains("hidden")) {
+            setOpen(false);
+            btn.focus();
+          }
+        });
       })();
 
       // Single-language domains: the switcher hops domains (path-based on localhost).
       (function () {
         var h = location.hostname;
+        var state = location.search + location.hash;
         var to =
           h === "stablo.ribic.ba"
             ? "https://tree.ribic.ba"
             : h === "tree.ribic.ba"
               ? "https://stablo.ribic.ba"
               : null;
-        if (!to) return;
+        if (!to) {
+          document.querySelectorAll(".lang-switch").forEach(function (el) {
+            el.href = el.getAttribute("href") + state;
+          });
+          return;
+        }
         var attr = h === "stablo.ribic.ba" ? "data-en" : "data-bs";
         document.querySelectorAll(".lang-switch").forEach(function (el) {
-          el.href = to + el.getAttribute(attr);
+          el.href = to + el.getAttribute(attr) + state;
         });
       })();
     </script>
